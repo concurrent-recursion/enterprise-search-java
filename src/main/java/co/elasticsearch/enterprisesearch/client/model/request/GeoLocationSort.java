@@ -1,5 +1,6 @@
-package co.elasticsearch.enterprisesearch.client.model;
+package co.elasticsearch.enterprisesearch.client.model.request;
 
+import co.elasticsearch.enterprisesearch.client.model.Sort;
 import com.fasterxml.jackson.annotation.JsonInclude;
 
 import java.math.BigDecimal;

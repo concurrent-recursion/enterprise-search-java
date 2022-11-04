@@ -37,11 +37,11 @@ public class Range {
     public Object getTo(){
         return to;
     }
-    public Range setTo(int to){
+    public Range setTo(BigDecimal to){
         this.to = to;
         return this;
     }
-    public Range setFrom(int from){
+    public Range setFrom(BigDecimal from){
         this.from = from;
         return this;
     }

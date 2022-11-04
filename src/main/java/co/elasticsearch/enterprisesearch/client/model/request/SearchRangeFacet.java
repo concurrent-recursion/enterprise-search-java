@@ -1,4 +1,6 @@
-package co.elasticsearch.enterprisesearch.client.model;
+package co.elasticsearch.enterprisesearch.client.model.request;
+
+import co.elasticsearch.enterprisesearch.client.model.GeoLocation;
 
 import com.fasterxml.jackson.annotation.JsonGetter;
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -12,7 +14,7 @@ import java.util.List;
 @Data
 @Accessors(chain = true)
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
-public class SearchRangeFacet {
+public class SearchRangeFacet implements Facet{
     private final String type = "range";
     private String name;
     private GeoLocation center;
