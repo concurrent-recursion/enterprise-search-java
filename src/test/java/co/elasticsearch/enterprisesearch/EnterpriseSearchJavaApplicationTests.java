@@ -195,7 +195,7 @@ class EnterpriseSearchJavaApplicationTests {
         String json = writeValueAsString(request);
         Assertions.assertEquals("{\"record_analytics\":true}",json);
     }
-    
+
 
     @Test
     @Disabled

@@ -1,0 +1,55 @@
+{
+  "meta": {
+    "warnings": [],
+    "request_id": "2992570ab570b581ac6c457bddf68835",
+    "page": {
+      "total_pages": 1,
+      "size": 10,
+      "current": 1,
+      "total_results": 3
+    },
+    "alerts": []
+  },
+  "results": [
+    {
+      "world_heritage_site": {
+        "raw": "true"
+      },
+      "states": {
+        "raw": [
+          "Florida"
+        ]
+      },
+      "location": {
+        "raw": "25.32,-80.93"
+      },
+      "nps_link": {
+        "raw": "https://www.nps.gov/ever/index.htm"
+      },
+      "acres": {
+        "raw": 1508968.1
+      },
+      "date_established": {
+        "raw": "1934-05-30T05:00:00+00:00"
+      },
+      "title": {
+        "raw": "Everglades"
+      },
+      "visitors": {
+        "raw": 930907
+      },
+      "square_km": {
+        "raw": 6106.6
+      },
+      "description": {
+        "raw": "The Everglades are the largest tropical wilderness in the United States. This mangrove and tropical rainforest ecosystem and marine estuary is home to 36 protected species, including the Florida panther, American crocodile, and West Indian manatee. Some areas have been drained and developed; restoration projects aim to restore the ecology."
+      },
+      "_meta": {
+        "score": 1396363.1
+      },
+      "id": {
+        "raw": "park_everglades"
+      }
+    }
+  ]
+}

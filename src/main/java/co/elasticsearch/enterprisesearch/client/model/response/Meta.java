@@ -1,6 +1,7 @@
 package co.elasticsearch.enterprisesearch.client.model.response;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
@@ -9,6 +10,7 @@ import java.util.List;
 
 @Data
 @Accessors(chain = true)
+@JsonPropertyOrder({"warnings","request_id","page","alerts"})
 public class Meta {
     /**
      * String ID representing the request. Guaranteed to be unique.

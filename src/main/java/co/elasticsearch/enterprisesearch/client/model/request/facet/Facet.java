@@ -6,5 +6,6 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
 public interface Facet {
 
-
+    //TODO: any, all, none
+    //TODO: Nested
 }

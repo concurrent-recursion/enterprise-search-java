@@ -9,6 +9,7 @@ import java.util.List;
 
 @Data
 @Accessors(chain = true)
+@JsonInclude(JsonInclude.Include.NON_EMPTY)
 public class SearchApiResponse<T> {
     @JsonInclude(value = JsonInclude.Include.CUSTOM, valueFilter = Meta.class)
     private Meta meta = new Meta();
