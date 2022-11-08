@@ -11,10 +11,10 @@ import java.time.OffsetDateTime;
 @Setter
 @Accessors(chain = true)
 public class DateRange implements Range {
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ssXXX")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss[.SS]XXX")
     private OffsetDateTime from;
 
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ssXXX")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss[.SS]XXX")
     private OffsetDateTime to;
     /**
      * Name given to the range

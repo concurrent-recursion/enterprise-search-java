@@ -1,4 +1,4 @@
-package co.elasticsearch.enterprisesearch.client.model.request;
+package co.elasticsearch.enterprisesearch.client.model.request.facet;
 
 import lombok.Getter;
 import lombok.Setter;

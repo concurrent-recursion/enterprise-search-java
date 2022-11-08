@@ -1,16 +1,19 @@
 package co.elasticsearch.enterprisesearch.client.model.request;
 
-import co.elasticsearch.enterprisesearch.client.model.*;
-import com.fasterxml.jackson.annotation.*;
-import com.fasterxml.jackson.databind.node.ArrayNode;
-import com.fasterxml.jackson.databind.node.JsonNodeFactory;
+import co.elasticsearch.enterprisesearch.client.model.Sort;
+import co.elasticsearch.enterprisesearch.client.model.request.facet.Facet;
+import co.elasticsearch.enterprisesearch.client.model.request.filter.Filter;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 import lombok.experimental.Accessors;
-import org.springframework.lang.NonNull;
 
-import java.math.BigDecimal;
-import java.util.*;
-import java.util.stream.Collectors;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
 
 @Data
 @Accessors(chain = true)
@@ -26,24 +29,33 @@ public class SearchApiRequest {
      *     <li><tt>+</tt> and <tt>-</tt></li>
      *     <li><tt>AND</tt>, <tt>OR</tt>, <tt>NOT</tt></li>
      * </ul>
-     * @param query String or number to match
      *
+     * @param query String or number to match
      */
     private String query;
 
     /**
      * Object to delimit the pagination parameters.
+     *
      * @param page The page parameters
      */
     @JsonInclude(value = JsonInclude.Include.CUSTOM, valueFilter = Page.class)
     private Page page = new Page();
 
+    /**
+     * Sort your results in an order other than document score.
+     * Using sort will override the default relevance scoring method.
+     * A special sorting field name is available, _score, to order by relevance.
+     *
+     * @param sort The fields to sort the results
+     */
     private List<Sort> sort = new ArrayList<>();
 
     /**
      * Grouped results based on shared fields. The most relevant document will have a _group key.
      * The key includes all other documents that share an identical value within the grouped field.
      * Documents in the _group key will not appear anywhere else in the search response.
+     *
      * @param group The group parameters
      */
     @JsonInclude(value = JsonInclude.Include.CUSTOM, valueFilter = Group.class)
@@ -51,44 +63,65 @@ public class SearchApiRequest {
 
     /**
      * Value and Range facets for the query
-     * @param facets The facets to apply to the search
+     *
+     * @param facets The facets to build on the search results
      */
+    private Map<String, List<Facet>> facets = new LinkedHashMap<>();
 
-    private Map<String, List<Facet>> facets = new HashMap<>();
+    /**
+     * Apply conditions to field values to filter results.
+     *
+     * @param filters The filters to apply to the search
+     */
+    private Map<String, Filter> filters = new LinkedHashMap<>();
 
-
-    private Map<String,List<?>> filters = new HashMap<>();
+    /**
+     * Use the precision parameter of the search API to tune precision and recall for a query. Learn more in Precision tuning (beta).<br>
+     * The range of values represents a sliding scale that manages the inherent tradeoff between precision and recall.
+     *
+     * @param precision A value between 1 and 11, inclusive. Lower values favor recall, while higher values favor precision.
+     */
+    @Min(1)
+    @Max(11)
     private Integer precision;
-    private List<Boost> boosts = new ArrayList<>();
 
-    private List<String> searchFields = new ArrayList<>();
-    private List<String> resultFields = new ArrayList<>();
+    /**
+     * Boosts affect the score of the entire document.<br>
+     * Provide a field to boost, then increase document relevance based on values.
+     *
+     * @param boosts The boosts to apply to the search
+     */
+    private Map<String, Boost> boosts = new LinkedHashMap<>();
+
+    /**
+     * Restricts a query to search only specific fields. Restricting fields will result in faster queries, especially for schemas with many text fields.
+     */
+    @JsonProperty("search_fields")
+    private Map<String,SearchField> searchFields = new LinkedHashMap<>();
+
+    /**
+     * Change the fields which appear in search results and how their values are rendered.
+     *
+     * @param resultFields The fields to render in the results
+     */
+    @JsonProperty("result_fields")
+    private Map<String,ResultField> resultFields = new LinkedHashMap<>();
+
+    /**
+     * Submit tags with the analytics parameter. Tags can be used to enrich each query with unique information.
+     * Once added, a tag cannot be removed.
+     *
+     * @param analytics The analytics tags for this query
+     */
     @JsonInclude(value = JsonInclude.Include.CUSTOM, valueFilter = Analytics.class)
     private Analytics analytics = new Analytics();
 
     /**
      * If true, generates an analytics query event for the search request. Defaults to true.
+     *
+     * @param recordAnalytics Whether analytics should be recorded
      */
+    @JsonProperty("record_analytics")
     private Boolean recordAnalytics;
-
-
-    @JsonIgnore
-    public SearchApiRequest addValueFilter(@NonNull String filterKey, @NonNull String... values ){
-        filters.put(filterKey, Arrays.asList(values));
-        return this;
-    }
-
-    @JsonIgnore
-    public SearchApiRequest addValueFilter(@NonNull String filterKey, @NonNull BigDecimal... values){
-        filters.put(filterKey,Arrays.asList(values));
-        return this;
-    }
-
-
-
-
-
-
-
 
 }

@@ -1,6 +1,8 @@
-package co.elasticsearch.enterprisesearch.client.model.request;
+package co.elasticsearch.enterprisesearch.client.model.request.facet;
 
 import co.elasticsearch.enterprisesearch.client.model.Sort;
+import co.elasticsearch.enterprisesearch.client.model.request.facet.Facet;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
@@ -10,8 +12,8 @@ import javax.validation.constraints.Min;
 @Getter
 @Setter
 @Accessors(chain = true)
-public class ValueFacet implements Facet{
-    private String key;
+@JsonPropertyOrder({"type","name","sort","size"})
+public class ValueFacet implements Facet {
     private final String type = "value";
     private String name;
     @Min(1)

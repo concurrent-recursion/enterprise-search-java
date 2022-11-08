@@ -28,7 +28,7 @@ public class GeoLocationSort {
     }
 
     private final BigDecimal[] center = new BigDecimal[2];
-    private String order;
+    private Sort.Direction order;
 
     private String mode;
 
@@ -36,7 +36,7 @@ public class GeoLocationSort {
         return center;
     }
 
-    public String getOrder() {
+    public Sort.Direction getOrder() {
         return order;
     }
 
@@ -52,10 +52,7 @@ public class GeoLocationSort {
         return mode;
     }
 
-    public GeoLocationSort setOrder(String order) {
-        if (!Sort.ASCENDING.equals(order) && !Sort.DESCENDING.equals(order)) {
-            throw new IllegalArgumentException("Sort direction '" + order + "' is invalid. Must be one of ['" + Sort.ASCENDING + "','" + Sort.DESCENDING + "']");
-        }
+    public GeoLocationSort setOrder(Sort.Direction order) {
         this.order = order;
         return this;
     }
