@@ -1,6 +1,6 @@
 package co.elasticsearch.enterprisesearch.client.model.request.boost;
 
-import co.elasticsearch.enterprisesearch.client.model.GeoLocation;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
@@ -10,10 +10,18 @@ import java.math.BigDecimal;
 @Getter
 @Setter
 @Accessors(chain = true)
+@JsonInclude(JsonInclude.Include.NON_EMPTY)
 public class GeolocationProximityBoost implements Boost{
     private final String type = "proximity";
+
+    /**
+     *  Type of function to calculate the boost value. Can be linear, exponential, or gaussian.
+     * @param function The function to calculate the boost
+     */
+    private Function function;
     /**
      * The mode of the distribution, specified as a latitude-longitude pair
+     * @param center The anchor point for the boost
      */
     private BigDecimal[] center;
     /**

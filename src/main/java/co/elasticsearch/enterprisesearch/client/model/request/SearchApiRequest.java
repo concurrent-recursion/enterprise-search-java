@@ -1,7 +1,9 @@
 package co.elasticsearch.enterprisesearch.client.model.request;
 
 import co.elasticsearch.enterprisesearch.client.model.Sort;
+import co.elasticsearch.enterprisesearch.client.model.request.boost.Boost;
 import co.elasticsearch.enterprisesearch.client.model.request.facet.Facet;
+import co.elasticsearch.enterprisesearch.client.model.request.filter.ComposableFilter;
 import co.elasticsearch.enterprisesearch.client.model.request.filter.Filter;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -73,7 +75,7 @@ public class SearchApiRequest {
      *
      * @param filters The filters to apply to the search
      */
-    private Map<String, Filter> filters = new LinkedHashMap<>();
+    private ComposableFilter filters;
 
     /**
      * Use the precision parameter of the search API to tune precision and recall for a query. Learn more in Precision tuning (beta).<br>
@@ -91,7 +93,7 @@ public class SearchApiRequest {
      *
      * @param boosts The boosts to apply to the search
      */
-    private Map<String, Boost> boosts = new LinkedHashMap<>();
+    private Map<String, List<Boost>> boosts = new LinkedHashMap<>();
 
     /**
      * Restricts a query to search only specific fields. Restricting fields will result in faster queries, especially for schemas with many text fields.

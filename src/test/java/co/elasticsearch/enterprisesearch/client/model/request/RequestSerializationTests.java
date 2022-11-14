@@ -1,18 +1,16 @@
-package co.elasticsearch.enterprisesearch;
+package co.elasticsearch.enterprisesearch.client.model.request;
 
-import co.elasticsearch.enterprisesearch.client.model.*;
-import co.elasticsearch.enterprisesearch.client.model.request.*;
+import co.elasticsearch.enterprisesearch.client.model.GeoLocation;
+import co.elasticsearch.enterprisesearch.client.model.Sort;
+import co.elasticsearch.enterprisesearch.client.model.request.boost.*;
 import co.elasticsearch.enterprisesearch.client.model.request.facet.Facet;
 import co.elasticsearch.enterprisesearch.client.model.request.facet.SearchRangeFacet;
 import co.elasticsearch.enterprisesearch.client.model.request.facet.ValueFacet;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.core.JsonProcessingException;
+import co.elasticsearch.enterprisesearch.client.model.request.filter.*;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import lombok.SneakyThrows;
-import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
@@ -23,16 +21,14 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 import java.time.OffsetDateTime;
-import java.util.*;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
-@Slf4j
-class EnterpriseSearchJavaApplicationTests {
+class RequestSerializationTests {
     private static final ObjectMapper objectMapper = new ObjectMapper();
-
-    @BeforeAll
-    static void setup(){
+    static{
         objectMapper.registerModule(new JavaTimeModule());
-
     }
 
     @SneakyThrows
@@ -74,6 +70,15 @@ class EnterpriseSearchJavaApplicationTests {
         SearchApiRequest multiple = new SearchApiRequest().setSort(List.of(new Sort("pubdate",Sort.Direction.DESCENDING),new Sort(Sort.SCORE, Sort.Direction.ASCENDING)));
         json = writeValueAsString(multiple);
         Assertions.assertEquals("{\"sort\":[{\"pubdate\":\"desc\"},{\"_score\":\"asc\"}]}",json);
+
+
+        SearchApiRequest geoSort = new SearchApiRequest();
+        List<Sort> sorts = geoSort.getSort();
+        sorts.add(new Sort("location", new GeoLocationSort(new GeoLocation(new BigDecimal("-77.08"),new BigDecimal("38.89"))).setMode(GeoLocationSort.Mode.MIN).setOrder(Sort.Direction.ASCENDING)));
+        sorts.add(new Sort("title", Sort.Direction.ASCENDING));
+        json = writeValueAsString(geoSort);
+        Assertions.assertEquals("{\"sort\":[{\"location\":{\"center\":[38.89,-77.08],\"mode\":\"min\",\"order\":\"asc\"}},{\"title\":\"asc\"}]}",json);
+
     }
 
     @Test
@@ -119,7 +124,7 @@ class EnterpriseSearchJavaApplicationTests {
         request = new SearchApiRequest();
 
         request.getFacets().put("date_established",List.of(new SearchRangeFacet().setName("half-century").setRanges(List.of(
-               new DateRange().setFrom(OffsetDateTime.parse("1900-01-01T12:00:00Z")).setTo(OffsetDateTime.parse("1950-01-01T00:00:00.11+00:00"))
+                new DateRange().setFrom(OffsetDateTime.parse("1900-01-01T12:00:00Z")).setTo(OffsetDateTime.parse("1950-01-01T00:00:00.11+00:00"))
         ))));
         json = writeValueAsString(request);
         Assertions.assertEquals("{\"facets\":{\"date_established\":[{\"type\":\"range\",\"name\":\"half-century\",\"ranges\":[{\"from\":\"1900-01-01T12:00:00.00Z\",\"to\":\"1950-01-01T00:00:00.11Z\"}]}]}}",json);
@@ -137,11 +142,92 @@ class EnterpriseSearchJavaApplicationTests {
 
     }
 
+    //TODO: Filters
+
+    @Test
+    void serializeFilters(){
+        SearchApiRequest request = new SearchApiRequest();
+        SimpleComposableFilter filter = new SimpleComposableFilter();
+        filter.getFilters().put("world_heritage_site",new TextValueFilter().setValues(List.of("true")));
+        request.setFilters(filter);
+        String json = writeValueAsString(request);
+        Assertions.assertEquals("{\"filters\":{\"world_heritage_site\":[\"true\"]}}",json);
+
+        request = new SearchApiRequest();
+        filter = new SimpleComposableFilter();
+        filter.getFilters().put("date_established",new DateRangeFilter().setFrom(OffsetDateTime.parse("1900-01-01T12:00:00+00:00")).setTo(OffsetDateTime.parse("1950-01-01T00:00:00+00:00")));
+        request.setFilters(filter);
+        json = writeValueAsString(request);
+        Assertions.assertEquals("{\"filters\":{\"date_established\":{\"from\":\"1900-01-01T12:00:00Z\",\"to\":\"1950-01-01T00:00:00Z\"}}}",json);
+
+        request = new SearchApiRequest();
+        filter = new SimpleComposableFilter();
+        filter.getFilters().put("location",new GeolocationFilter().setCenter(new GeoLocation("37.386483,-122.083842")).setDistance(new BigDecimal(300)).setUnit(GeoLocation.Unit.KILOMETERS));
+        request.setFilters(filter);
+        json = writeValueAsString(request);
+        Assertions.assertEquals("{\"filters\":{\"location\":{\"center\":[-122.083842,37.386483],\"distance\":300,\"unit\":\"km\"}}}",json);
+
+        request = new SearchApiRequest();
+        filter = new SimpleComposableFilter();
+        filter.getFilters().put("location",new GeolocationFilter().setCenter(new GeoLocation("37.386483,-122.083842")).setFrom(new BigDecimal(0)).setTo(new BigDecimal(1000)).setUnit(GeoLocation.Unit.METERS));
+        request.setFilters(filter);
+        json = writeValueAsString(request);
+        Assertions.assertEquals("{\"filters\":{\"location\":{\"center\":[-122.083842,37.386483],\"unit\":\"m\",\"from\":0,\"to\":1000}}}",json);
+
+        request = new SearchApiRequest();
+
+        ComposableFilter composeFilter = new NestedFilter()
+                .setAll(List.of(Map.of("states",new TextValueFilter().setValues(List.of("California")),"world_heritage_site",new TextValueFilter().setValues(List.of("true")))))
+                .setAny(List.of(Map.of("acres",new NumberRangeFilter().setFrom(new BigDecimal(40000)),"square_km",new NumberRangeFilter().setFrom(new BigDecimal(500)))))
+                .setNone(List.of(Map.of("title",new TextValueFilter().setValues(List.of("Yosemite")))))
+                ;
+        request.setFilters(composeFilter);
+        json = writeValueAsString(request);
+        Assertions.assertEquals("{\"filters\":{\"all\":[{\"states\":\"California\"},{\"world_heritage_site\":\"true\"}],\"any\":[{\"acres\":{\"from\":40000}},{\"square_km\":{\"from\":500}}],\"none\":[{\"title\":\"Yosemite\"}]}}",json);
+    }
+
     @Test
     void serializePrecision(){
         SearchApiRequest request = new SearchApiRequest().setPrecision(1);
         String json = writeValueAsString(request);
         Assertions.assertEquals("{\"precision\":1}",json);
+    }
+
+    @Test
+    void serializeBoosts(){
+        SearchApiRequest request = new SearchApiRequest();
+        request.getBoosts().put("world_heritage_site", List.of(new ValueBoost().setOperation(Boost.Operation.MULTIPLY).setValues(List.of("true")).setFactor(new BigDecimal(10))));
+        String json = writeValueAsString(request);
+        Assertions.assertEquals("{\"boosts\":{\"world_heritage_site\":[{\"type\":\"value\",\"value\":\"true\",\"operation\":\"multiply\",\"factor\":10}]}}",json);
+
+        request = new SearchApiRequest();
+        request.getBoosts().put("visitors",List.of(new FunctionalBoost().setFunction(Boost.Function.LOGARITHMIC).setOperation(Boost.Operation.MULTIPLY).setFactor(new BigDecimal(2))));
+        String functionalJson = writeValueAsString(request);
+        Assertions.assertEquals("{\"boosts\":{\"visitors\":[{\"type\":\"functional\",\"function\":\"logarithmic\",\"operation\":\"multiply\",\"factor\":2}]}}",functionalJson);
+
+
+        request = new SearchApiRequest();
+        Boost geoBoost = new GeolocationProximityBoost()
+                .setFactor(new BigDecimal(8))
+                .setCenter(new BigDecimal[]{new BigDecimal("25.32"),new BigDecimal("-80.93")})
+                .setFunction(Boost.Function.LINEAR);
+        request.getBoosts().put("location",List.of(geoBoost));
+        String proximityJson = writeValueAsString(request);
+        Assertions.assertEquals("{\"boosts\":{\"location\":[{\"type\":\"proximity\",\"function\":\"linear\",\"center\":[25.32,-80.93],\"factor\":8}]}}",proximityJson);
+
+        request = new SearchApiRequest();
+        Boost functionalBoost = new NumberProximityBoost().setFunction(Boost.Function.LINEAR).setCenter(new BigDecimal("205.2")).setFactor(new BigDecimal(8));
+        request.getBoosts().put("acres",List.of(functionalBoost));
+        String numberProximityJson = writeValueAsString(request);
+        Assertions.assertEquals("{\"boosts\":{\"acres\":[{\"type\":\"proximity\",\"function\":\"linear\",\"center\":205.2,\"factor\":8}]}}",numberProximityJson);
+
+
+        request = new SearchApiRequest();
+        Boost recencyBoost = new RecencyBoost().setFunction(Boost.Function.LINEAR).setUseNow(true).setFactor(new BigDecimal(8));
+        request.getBoosts().put("date_established",List.of(recencyBoost));
+        String recencyJson = writeValueAsString(request);
+        Assertions.assertEquals("{\"boosts\":{\"date_established\":[{\"type\":\"proximity\",\"function\":\"linear\",\"center\":\"now\",\"factor\":8}]}}",recencyJson);
+
     }
 
     @Test
@@ -188,9 +274,9 @@ class EnterpriseSearchJavaApplicationTests {
     @Test
     void serializeRecordAnalytics(){
         SearchApiRequest request = new SearchApiRequest();
-        request.setRecordAnalytics(true);
+        request.setRecordAnalytics(false);
         String json = writeValueAsString(request);
-        Assertions.assertEquals("{\"record_analytics\":true}",json);
+        Assertions.assertEquals("{\"record_analytics\":false}",json);
     }
 
 
@@ -203,5 +289,4 @@ class EnterpriseSearchJavaApplicationTests {
             Assertions.assertNotNull(request,"SearchApiRequest should not be null");
         }
     }
-
 }

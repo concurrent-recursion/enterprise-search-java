@@ -1,59 +1,43 @@
 package co.elasticsearch.enterprisesearch.client.model.request;
 
+import co.elasticsearch.enterprisesearch.client.model.GeoLocation;
 import co.elasticsearch.enterprisesearch.client.model.Sort;
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonValue;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import lombok.Setter;
+import lombok.experimental.Accessors;
 
-import java.math.BigDecimal;
+import java.util.Arrays;
 
 //TODO: See https://www.elastic.co/guide/en/app-search/current/api-reference.html#overview-api-references-geolocation
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
-public class GeoLocationSort {
-    public GeoLocationSort(BigDecimal latitude, BigDecimal longitude) {
-        if (latitude.compareTo(BigDecimal.valueOf(-90L)) < 0) {
-            throw new IllegalArgumentException("Latitude cannot be less than -90. Received " + latitude);
-        } else if (latitude.compareTo(BigDecimal.valueOf(90L)) > 0) {
-            throw new IllegalArgumentException("Latitude cannot be more than 90. Received " + latitude);
-        }
+@Getter
+@Setter
+@Accessors(chain = true)
+public class GeoLocationSort  {
 
-        if (longitude.compareTo(BigDecimal.valueOf(-180L)) < 0) {
-            throw new IllegalArgumentException("Longitude cannot be less than -180. Received " + longitude);
-        } else if (longitude.compareTo(BigDecimal.valueOf(180L)) > 0) {
-            throw new IllegalArgumentException("Longitude cannot be more than 180. Received " + longitude);
-        }
-
-        center[0] = longitude;
-        center[1] = latitude;
-
-
-    }
-
-    private final BigDecimal[] center = new BigDecimal[2];
+    private final GeoLocation center;
+    private Mode mode;
     private Sort.Direction order;
 
-    private String mode;
 
-    public BigDecimal[] getCenter() {
-        return center;
+    public GeoLocationSort(GeoLocation geoLocation) {
+        center = geoLocation;
     }
 
-    public Sort.Direction getOrder() {
-        return order;
-    }
-
-    public GeoLocationSort setMode(String mode) {
-        if (!"min".equals(mode) && !"max".equals(mode) && !"median".equals(mode) && !"avg".equals(mode)) {
-            throw new IllegalArgumentException(String.format("Invalid mode '%s' must be one of:['min','max','median','avg']", mode));
+    @Getter
+    @RequiredArgsConstructor
+    public enum Mode {
+        MIN("min"),MAX("max"),MEDIAN("median"),AVERAGE("avg");
+        @JsonValue
+        private final String value;
+        @JsonCreator
+        public static Mode fromValue(String value){
+            return Arrays.stream(values()).filter(m -> m.value.equals(value)).findFirst().orElse(null);
         }
-        this.mode = mode;
-        return this;
     }
 
-    public String getMode() {
-        return mode;
-    }
-
-    public GeoLocationSort setOrder(Sort.Direction order) {
-        this.order = order;
-        return this;
-    }
 }

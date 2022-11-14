@@ -1,15 +1,14 @@
 package co.elasticsearch.enterprisesearch.client.model.request;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
 
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
+import java.util.Objects;
 
 /**
  * Object to delimit the pagination parameters.
@@ -35,4 +34,16 @@ public class Page {
     @Max(100)
     private Integer current = 1;
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Page)) return false;
+        Page page = (Page) o;
+        return Objects.equals(size, page.size) && Objects.equals(current, page.current);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(size, current);
+    }
 }
