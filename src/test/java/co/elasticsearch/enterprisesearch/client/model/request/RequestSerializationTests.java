@@ -22,6 +22,7 @@ import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 import java.time.OffsetDateTime;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -175,15 +176,24 @@ class RequestSerializationTests {
         Assertions.assertEquals("{\"filters\":{\"location\":{\"center\":[-122.083842,37.386483],\"unit\":\"m\",\"from\":0,\"to\":1000}}}",json);
 
         request = new SearchApiRequest();
-
         ComposableFilter composeFilter = new NestedFilter()
-                .setAll(List.of(Map.of("states",new TextValueFilter().setValues(List.of("California")),"world_heritage_site",new TextValueFilter().setValues(List.of("true")))))
-                .setAny(List.of(Map.of("acres",new NumberRangeFilter().setFrom(new BigDecimal(40000)),"square_km",new NumberRangeFilter().setFrom(new BigDecimal(500)))))
+                .setAll(List.of(Map.of("states",new TextValueFilter().setValues(List.of("California"))),Map.of("world_heritage_site",new TextValueFilter().setValues(List.of("true")))))
+                .setAny(List.of(Map.of("acres",new NumberRangeFilter().setFrom(new BigDecimal(40000))),Map.of("square_km",new NumberRangeFilter().setFrom(new BigDecimal(500)))))
                 .setNone(List.of(Map.of("title",new TextValueFilter().setValues(List.of("Yosemite")))))
                 ;
         request.setFilters(composeFilter);
         json = writeValueAsString(request);
-        Assertions.assertEquals("{\"filters\":{\"all\":[{\"states\":\"California\"},{\"world_heritage_site\":\"true\"}],\"any\":[{\"acres\":{\"from\":40000}},{\"square_km\":{\"from\":500}}],\"none\":[{\"title\":\"Yosemite\"}]}}",json);
+        Assertions.assertEquals("{\"filters\":{\"all\":[{\"states\":[\"California\"]},{\"world_heritage_site\":[\"true\"]}],\"any\":[{\"acres\":{\"from\":40000}},{\"square_km\":{\"from\":500}}],\"none\":[{\"title\":[\"Yosemite\"]}]}}",json);
+
+        request = new SearchApiRequest();
+        Map<String,Filter> filterMap = new LinkedHashMap<>();
+        filterMap.put("size",new NumberValueFilter().setValues(List.of(new BigDecimal("123.45"),new BigDecimal("-22"))));
+        filterMap.put("pubDate",new DateValueFilter().setValues(List.of(OffsetDateTime.parse("2019-05-15T00:00:00Z"))));
+        filter = new SimpleComposableFilter().setFilters(filterMap);
+        request.setFilters(filter);
+        json = writeValueAsString(request);
+        Assertions.assertEquals("{\"filters\":{\"size\":[123.45,-22],\"pubDate\":[\"2019-05-15T00:00:00Z\"]}}",json);
+
     }
 
     @Test
