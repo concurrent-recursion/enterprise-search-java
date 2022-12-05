@@ -75,7 +75,7 @@ public class SearchApiRequest {
      *
      * @param filters The filters to apply to the search
      */
-    private ComposableFilter filters;
+    private Filter filters;
 
     /**
      * Use the precision parameter of the search API to tune precision and recall for a query. Learn more in Precision tuning (beta).<br>

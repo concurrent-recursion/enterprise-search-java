@@ -1,6 +1,7 @@
-package co.elasticsearch.enterprisesearch.client.model.request;
+package co.elasticsearch.enterprisesearch.client.model.request.range;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
@@ -11,6 +12,7 @@ import java.math.BigDecimal;
 @Setter
 @Accessors(chain = true)
 @JsonInclude(JsonInclude.Include.NON_NULL)
+@JsonDeserialize
 public class NumberRange implements Range {
     /**
      * Inclusive lower bound of the range. Is required if to is not given.

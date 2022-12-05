@@ -1,6 +1,9 @@
 package co.elasticsearch.enterprisesearch.client.model.request.filter;
 
-public interface Filter {
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
+@JsonDeserialize(using = FilterDeserializer.class)
+
+public interface Filter {
 
 }
