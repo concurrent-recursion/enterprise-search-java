@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonValue;
 import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.Accessors;
 
@@ -17,8 +18,9 @@ import java.util.Map;
 @Setter
 @Accessors(chain = true)
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
+@RequiredArgsConstructor
 public class NumberValueFilter implements Filter, Map.Entry<String,List<BigDecimal>> {
-    private String name;
+    private final String name;
 
     @Override
     public String getKey() {

@@ -8,6 +8,7 @@ import lombok.Setter;
 import lombok.experimental.Accessors;
 
 import java.time.OffsetDateTime;
+import java.time.format.DateTimeFormatter;
 
 import static co.elasticsearch.enterprisesearch.client.model.request.filter.DateValueFilter.DATE_PATTERN;
 
@@ -17,6 +18,20 @@ import static co.elasticsearch.enterprisesearch.client.model.request.filter.Date
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonDeserialize
 public class DateRange implements Range {
+
+    public DateRange(){}
+    public DateRange(OffsetDateTime from, OffsetDateTime to){
+        this.from = from;
+        this.to = to;
+    }
+    public DateRange(String from, String to){
+        if(from != null){
+            this.from = OffsetDateTime.parse(from, DateTimeFormatter.ofPattern(DATE_PATTERN));
+        }
+        if(to != null){
+            this.to = OffsetDateTime.parse(to,DateTimeFormatter.ofPattern(DATE_PATTERN));
+        }
+    }
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = DATE_PATTERN)
     private OffsetDateTime from;
 

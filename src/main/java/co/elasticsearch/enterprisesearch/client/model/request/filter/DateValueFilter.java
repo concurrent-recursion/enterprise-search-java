@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonValue;
 import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.Accessors;
 
@@ -19,12 +20,13 @@ import java.util.stream.Collectors;
 @Setter
 @Accessors(chain = true)
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
+@RequiredArgsConstructor
 public class DateValueFilter implements Filter, Map.Entry<String,List<OffsetDateTime>> {
     //"yyyy-MM-dd'T'HH:mm:ss[.SS]XXX" ?
     public static final String DATE_PATTERN = "yyyy-MM-dd'T'HH:mm:ss[.SS]XXX";
 
     @JsonIgnore
-    private String name;
+    private final String name;
     @JsonIgnore
     private List<OffsetDateTime> values = new ArrayList<>();
 

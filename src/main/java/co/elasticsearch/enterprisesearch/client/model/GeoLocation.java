@@ -35,12 +35,17 @@ public class GeoLocation {
     @JsonValue
     private final BigDecimal[] center = new BigDecimal[2];
     public GeoLocation(BigDecimal latitude, BigDecimal longitude) {
-
         validate(latitude,longitude);
         center[0] = longitude;
         center[1] = latitude;
+    }
 
-
+    public GeoLocation(String latitude, String longitude){
+        BigDecimal lat = new BigDecimal(latitude);
+        BigDecimal lon = new BigDecimal(longitude);
+        validate(lat,lon);
+        center[0] = lon;
+        center[1] = lat;
     }
 
     public GeoLocation(String center){
@@ -55,7 +60,7 @@ public class GeoLocation {
             longitude = wellKnown.group(1);
             latitude = wellKnown.group(2);
         }else{
-            throw new IllegalStateException("Geohash format is currently unsupported");
+            throw new IllegalArgumentException("Geohash format is currently unsupported");
         }
         validate(new BigDecimal(latitude),new BigDecimal(longitude));
         this.center[0] = new BigDecimal(longitude);

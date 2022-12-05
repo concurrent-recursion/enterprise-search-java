@@ -4,6 +4,7 @@ import co.elasticsearch.enterprisesearch.client.model.request.range.DateRange;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.Accessors;
 
@@ -16,8 +17,9 @@ import static co.elasticsearch.enterprisesearch.client.model.request.filter.Date
 @Setter
 @Accessors(chain = true)
 @JsonInclude(JsonInclude.Include.NON_NULL)
+@RequiredArgsConstructor
 public class DateRangeFilter implements Filter, Map.Entry<String, DateRange>{
-    private String name;
+    private final String name;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = DATE_PATTERN)
     private OffsetDateTime from;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = DATE_PATTERN)

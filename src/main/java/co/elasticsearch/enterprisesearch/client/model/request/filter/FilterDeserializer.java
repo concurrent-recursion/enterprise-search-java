@@ -4,7 +4,6 @@ package co.elasticsearch.enterprisesearch.client.model.request.filter;
 import co.elasticsearch.enterprisesearch.client.model.GeolocationRange;
 import co.elasticsearch.enterprisesearch.client.model.request.range.DateRange;
 import co.elasticsearch.enterprisesearch.client.model.request.range.NumberRange;
-import com.fasterxml.jackson.core.JacksonException;
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.TreeNode;
@@ -45,8 +44,8 @@ class FilterDeserializer extends StdDeserializer<Filter> {
         return filters;
     }
 
-    private NestedFilter deserializeNestedFilter(JsonParser jsonParser, TreeNode node) throws JsonProcessingException {
-        NestedFilter filter = new NestedFilter();
+    private BooleanFilter deserializeNestedFilter(JsonParser jsonParser, TreeNode node) throws JsonProcessingException {
+        BooleanFilter filter = new BooleanFilter();
 
         ArrayNode allNode = (ArrayNode) node.get("all");
         filter.setAll(parseFilters(jsonParser, allNode));
@@ -86,13 +85,13 @@ class FilterDeserializer extends StdDeserializer<Filter> {
 
             if (filterNode.get("center") != null) {
                 //Geolocation Filter
-                return new GeolocationFilter().setGeolocationRange(jsonParser.getCodec().treeToValue(filterNode, GeolocationRange.class)).setName(filterName);
+                return new GeolocationFilter(filterName).setGeolocationRange(jsonParser.getCodec().treeToValue(filterNode, GeolocationRange.class));
             } else if (to instanceof NumericNode || from instanceof NumericNode) {
                 //Numeric Range Filter
-                return new NumberRangeFilter().setRange(jsonParser.getCodec().treeToValue(filterNode, NumberRange.class)).setName(filterName);
+                return new NumberRangeFilter(filterName).setRange(jsonParser.getCodec().treeToValue(filterNode, NumberRange.class));
             } else if (to instanceof TextNode || from instanceof TextNode) {
                 //Date Range Filter
-                return new DateRangeFilter().setFilterValue(jsonParser.getCodec().treeToValue(filterNode, DateRange.class)).setName(filterName);
+                return new DateRangeFilter(filterName).setFilterValue(jsonParser.getCodec().treeToValue(filterNode, DateRange.class));
             } else {
                 //Value Filters
                 final JsonNode firstValue = getFirstValue(filterNode);
@@ -100,13 +99,13 @@ class FilterDeserializer extends StdDeserializer<Filter> {
 
                 if (firstValue instanceof NumericNode) {
                     //Number Value Filter
-                    return new NumberValueFilter().setName(filterName).setValues(nodeStream.map(JsonNode::asText).map(BigDecimal::new).collect(Collectors.toList()));
+                    return new NumberValueFilter(filterName).setValues(nodeStream.map(JsonNode::asText).map(BigDecimal::new).collect(Collectors.toList()));
                 } else if (isDate((TextNode) firstValue)) {
                     //Date Value Filter
-                    return new DateValueFilter().setName(filterName).setValues(nodeStream.map(JsonNode::asText).map(dateString -> OffsetDateTime.parse(dateString, dateTimeFormatter)).collect(Collectors.toList()));
+                    return new DateValueFilter(filterName).setValues(nodeStream.map(JsonNode::asText).map(dateString -> OffsetDateTime.parse(dateString, dateTimeFormatter)).collect(Collectors.toList()));
                 } else {
                     //Text Value Filter
-                    return new TextValueFilter().setName(filterName).setValues(nodeStream.map(JsonNode::asText).collect(Collectors.toList()));
+                    return new TextValueFilter(filterName).setValues(nodeStream.map(JsonNode::asText).collect(Collectors.toList()));
                 }
 
             }

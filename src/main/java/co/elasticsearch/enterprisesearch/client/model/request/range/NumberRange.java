@@ -14,6 +14,53 @@ import java.math.BigDecimal;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonDeserialize
 public class NumberRange implements Range {
+
+    public NumberRange(){}
+    public NumberRange(BigDecimal from, BigDecimal to){
+        this.from = from;
+        this.to = to;
+    }
+    public NumberRange(String from, String to){
+        if(from != null){
+            this.from = new BigDecimal(from);
+        }
+        if(to != null){
+            this.to = new BigDecimal(to);
+        }
+    }
+    public NumberRange(Integer from, Integer to){
+        if(from != null) {
+            this.from = new BigDecimal(from);
+        }
+        if(to != null) {
+            this.to = new BigDecimal(to);
+        }
+    }
+    public NumberRange(Long from, Long to){
+        if(from != null){
+        this.from = new BigDecimal(from);
+    }
+        if(to != null) {
+            this.to = new BigDecimal(to);
+        }
+    }
+    public NumberRange(Float from, Float to){
+        if(from != null) {
+            this.from = BigDecimal.valueOf(from);
+        }
+        if(to != null) {
+            this.to = BigDecimal.valueOf(to);
+        }
+    }
+    public NumberRange(Double from, Double to){
+        if(from != null) {
+            this.from = BigDecimal.valueOf(from);
+        }
+        if(to != null) {
+            this.to = BigDecimal.valueOf(to);
+        }
+    }
+
     /**
      * Inclusive lower bound of the range. Is required if to is not given.
      *

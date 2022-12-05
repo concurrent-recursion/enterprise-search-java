@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.experimental.Accessors;
 
 import javax.validation.constraints.Max;
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -22,6 +23,11 @@ public class Analytics {
     @JsonIgnore
     public Analytics addTag(@Max(64) String tag){
         tags.add(tag);
+        return this;
+    }
+
+    public Analytics withTags(String... tags){
+        this.tags = new HashSet<>(Arrays.asList(tags));
         return this;
     }
 }

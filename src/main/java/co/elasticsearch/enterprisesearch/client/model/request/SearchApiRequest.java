@@ -3,7 +3,6 @@ package co.elasticsearch.enterprisesearch.client.model.request;
 import co.elasticsearch.enterprisesearch.client.model.Sort;
 import co.elasticsearch.enterprisesearch.client.model.request.boost.Boost;
 import co.elasticsearch.enterprisesearch.client.model.request.facet.Facet;
-import co.elasticsearch.enterprisesearch.client.model.request.filter.ComposableFilter;
 import co.elasticsearch.enterprisesearch.client.model.request.filter.Filter;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -12,10 +11,7 @@ import lombok.experimental.Accessors;
 
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Data
 @Accessors(chain = true)
@@ -125,5 +121,20 @@ public class SearchApiRequest {
      */
     @JsonProperty("record_analytics")
     private Boolean recordAnalytics;
+
+    public SearchApiRequest withSorts(Sort... sorts){
+        this.sort = Arrays.asList(sorts);
+        return this;
+    }
+
+    public SearchApiRequest withTags(String... tags){
+        analytics.withTags(tags);
+        return this;
+    }
+
+    public SearchApiRequest addFacets(String name, Facet... facets){
+        this.facets.put(name,Arrays.asList(facets));
+        return this;
+    }
 
 }

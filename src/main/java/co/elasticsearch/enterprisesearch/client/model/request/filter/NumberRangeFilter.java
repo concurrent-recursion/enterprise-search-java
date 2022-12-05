@@ -3,6 +3,7 @@ package co.elasticsearch.enterprisesearch.client.model.request.filter;
 import co.elasticsearch.enterprisesearch.client.model.request.range.NumberRange;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.Accessors;
 
@@ -13,8 +14,9 @@ import java.util.Map;
 @Setter
 @Accessors(chain = true)
 @JsonInclude(JsonInclude.Include.NON_NULL)
+@RequiredArgsConstructor
 public class NumberRangeFilter implements Filter, Map.Entry<String, NumberRange> {
-    private String name;
+    private final String name;
     private BigDecimal from;
     private BigDecimal to;
 

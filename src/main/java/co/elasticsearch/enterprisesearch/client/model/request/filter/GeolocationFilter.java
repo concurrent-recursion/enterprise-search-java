@@ -4,6 +4,7 @@ import co.elasticsearch.enterprisesearch.client.model.GeoLocation;
 import co.elasticsearch.enterprisesearch.client.model.GeolocationRange;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.Accessors;
 
@@ -14,8 +15,9 @@ import java.util.Map;
 @Getter
 @Setter
 @Accessors(chain = true)
+@RequiredArgsConstructor
 public class GeolocationFilter implements Filter, Map.Entry<String, GeolocationRange> {
-    private String name;
+    private final String name;
     /**
      * The mode of the distribution, specified as a latitude-longitude pair
      */

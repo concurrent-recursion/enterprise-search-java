@@ -14,15 +14,9 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import lombok.SneakyThrows;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
-import java.io.InputStream;
 import java.math.BigDecimal;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.nio.file.StandardOpenOption;
 import java.time.OffsetDateTime;
 import java.util.HashMap;
 import java.util.List;
@@ -66,18 +60,18 @@ class RequestSerializationTests {
 
     @Test
     void serializeSort(){
-        SearchApiRequest defaultPageSize = new SearchApiRequest().setSort(List.of(new Sort(Sort.SCORE,Sort.Direction.ASCENDING)));
+        SearchApiRequest defaultPageSize = new SearchApiRequest().withSorts(new Sort(Sort.SCORE,Sort.Direction.ASCENDING));
         String json = writeValueAsString(defaultPageSize);
         Assertions.assertEquals("{\"sort\":[{\"_score\":\"asc\"}]}",json);
 
-        SearchApiRequest multiple = new SearchApiRequest().setSort(List.of(new Sort("pubdate",Sort.Direction.DESCENDING),new Sort(Sort.SCORE, Sort.Direction.ASCENDING)));
+        SearchApiRequest multiple = new SearchApiRequest().withSorts(new Sort("pubdate",Sort.Direction.DESCENDING),new Sort(Sort.SCORE, Sort.Direction.ASCENDING));
         json = writeValueAsString(multiple);
         Assertions.assertEquals("{\"sort\":[{\"pubdate\":\"desc\"},{\"_score\":\"asc\"}]}",json);
 
 
         SearchApiRequest geoSort = new SearchApiRequest();
         List<Sort> sorts = geoSort.getSort();
-        sorts.add(new Sort("location", new GeoLocationSort(new GeoLocation(new BigDecimal("-77.08"),new BigDecimal("38.89"))).setMode(GeoLocationSort.Mode.MIN).setOrder(Sort.Direction.ASCENDING)));
+        sorts.add(new Sort("location", new GeoLocationSort(new GeoLocation("-77.08","38.89")).setMode(GeoLocationSort.Mode.MIN).setOrder(Sort.Direction.ASCENDING)));
         sorts.add(new Sort("title", Sort.Direction.ASCENDING));
         json = writeValueAsString(geoSort);
         Assertions.assertEquals("{\"sort\":[{\"location\":{\"center\":[38.89,-77.08],\"mode\":\"min\",\"order\":\"asc\"}},{\"title\":\"asc\"}]}",json);
@@ -110,31 +104,31 @@ class RequestSerializationTests {
 
         //Value
         request = new SearchApiRequest();
-        request.getFacets().put("states",List.of(new ValueFacet().setName("top-five-states").setSort(new Sort("count",Sort.Direction.DESCENDING)).setSize(5)));
+        request.getFacets().put("states",List.of(new ValueFacet("top-five-states").setSort(new Sort("count",Sort.Direction.DESCENDING)).setSize(5)));
         json = writeValueAsString(request);
         Assertions.assertEquals("{\"facets\":{\"states\":[{\"type\":\"value\",\"name\":\"top-five-states\",\"sort\":{\"count\":\"desc\"},\"size\":5}]}}",json);
 
         //Range on Number
         request = new SearchApiRequest();
-        request.getFacets().put("acres",List.of(new SearchRangeFacet().setName("min-and-max-range").setRanges(List.of(
-                new NumberRange().setFrom(new BigDecimal("1")).setTo(new BigDecimal("10000")),
-                new NumberRange().setFrom(new BigDecimal("10000"))
-        ))));
+        request.addFacets("acres",new SearchRangeFacet("min-and-max-range").setRanges(List.of(
+                new NumberRange("1","10000"),
+                new NumberRange(10000,null)
+        )));
         json = writeValueAsString(request);
         Assertions.assertEquals("{\"facets\":{\"acres\":[{\"type\":\"range\",\"name\":\"min-and-max-range\",\"ranges\":[{\"from\":1,\"to\":10000},{\"from\":10000}]}]}}",json);
 
         //Range on a Date
         request = new SearchApiRequest();
 
-        request.getFacets().put("date_established",List.of(new SearchRangeFacet().setName("half-century").setRanges(List.of(
+        request.addFacets("date_established",new SearchRangeFacet("half-century").setRanges(List.of(
                 new DateRange().setFrom(OffsetDateTime.parse("1900-01-01T12:00:00Z")).setTo(OffsetDateTime.parse("1950-01-01T00:00:00.11+00:00"))
-        ))));
+        )));
         json = writeValueAsString(request);
         Assertions.assertEquals("{\"facets\":{\"date_established\":[{\"type\":\"range\",\"name\":\"half-century\",\"ranges\":[{\"from\":\"1900-01-01T12:00:00.00Z\",\"to\":\"1950-01-01T00:00:00.11Z\"}]}]}}",json);
 
         //Range on Geolocation
         request = new SearchApiRequest();
-        request.getFacets().put("location",List.of(new SearchRangeFacet().setName("geo-range-from-san-francisco").setCenter(new GeoLocation(new BigDecimal("37.386483"),new BigDecimal("-122.083842"))).setUnit(GeoLocation.Unit.METERS).setRanges(List.of(
+        request.getFacets().put("location",List.of(new SearchRangeFacet("geo-range-from-san-francisco").setCenter(new GeoLocation(new BigDecimal("37.386483"),new BigDecimal("-122.083842"))).setUnit(GeoLocation.Unit.METERS).setRanges(List.of(
                 new NumberRange().setFrom(BigDecimal.ZERO).setTo(new BigDecimal("100000")).setName("Nearby"),
                 new NumberRange().setFrom(new BigDecimal("100000")).setTo(new BigDecimal("300000")).setName("A longer drive."),
                 new NumberRange().setFrom(new BigDecimal("300000")).setName("Perhaps fly?")
@@ -151,50 +145,40 @@ class RequestSerializationTests {
     void serializeFilters(){
         SearchApiRequest request = new SearchApiRequest();
 
-        request.setFilters(new TextValueFilter().setName("world_heritage_site").setValues(List.of("true")));
+        request.setFilters(new TextValueFilter("world_heritage_site").setValues(List.of("true")));
         String json = writeValueAsString(request);
         Assertions.assertEquals("{\"filters\":{\"world_heritage_site\":[\"true\"]}}",json);
 
         request = new SearchApiRequest();
-        request.setFilters(new DateRangeFilter().setName("date_established").setFilterValue(new DateRange().setFrom(OffsetDateTime.parse("1900-01-01T12:00:00+00:00")).setTo(OffsetDateTime.parse("1950-01-01T00:00:00+00:00"))));
+        request.setFilters(new DateRangeFilter("date_established").setFilterValue(new DateRange().setFrom(OffsetDateTime.parse("1900-01-01T12:00:00+00:00")).setTo(OffsetDateTime.parse("1950-01-01T00:00:00+00:00"))));
 
         json = writeValueAsString(request);
         Assertions.assertEquals("{\"filters\":{\"date_established\":{\"from\":\"1900-01-01T12:00:00.00Z\",\"to\":\"1950-01-01T00:00:00.00Z\"}}}",json);
 
         request = new SearchApiRequest();
-        request.setFilters(new GeolocationFilter().setName("location").setGeolocationRange(new GeolocationRange().setCenter(new GeoLocation("37.386483,-122.083842")).setDistance(new BigDecimal(300)).setUnit(GeoLocation.Unit.KILOMETERS)));
+        request.setFilters(new GeolocationFilter("location").setGeolocationRange(new GeolocationRange().setCenter(new GeoLocation("37.386483,-122.083842")).setDistance(new BigDecimal(300)).setUnit(GeoLocation.Unit.KILOMETERS)));
         json = writeValueAsString(request);
         Assertions.assertEquals("{\"filters\":{\"location\":{\"center\":[-122.083842,37.386483],\"distance\":300,\"unit\":\"km\"}}}",json);
 
         request = new SearchApiRequest();
-        request.setFilters(new GeolocationFilter().setName("location").setGeolocationRange(new GeolocationRange().setCenter(new GeoLocation("37.386483,-122.083842")).setFrom(new BigDecimal(0)).setTo(new BigDecimal(1000)).setUnit(GeoLocation.Unit.METERS)));
+        request.setFilters(new GeolocationFilter("location").setGeolocationRange(new GeolocationRange().setCenter(new GeoLocation("37.386483,-122.083842")).setFrom(new BigDecimal(0)).setTo(new BigDecimal(1000)).setUnit(GeoLocation.Unit.METERS)));
         json = writeValueAsString(request);
         Assertions.assertEquals("{\"filters\":{\"location\":{\"center\":[-122.083842,37.386483],\"unit\":\"m\",\"from\":0,\"to\":1000}}}",json);
 
         request = new SearchApiRequest();
-        NestedFilter nf = new NestedFilter();
-        nf.getAll();
-//        NestedFilter composeFilter = new NestedFilter()
-//                .setAll(List.of(Map.of("states",new TextValueFilter().setValues(List.of("California"))),Map.of("world_heritage_site",new TextValueFilter().setValues(List.of("true")))))
-//                .setAny(List.of(Map.of("acres",new NumberRangeFilter().setFrom(new BigDecimal(40000))),Map.of("square_km",new NumberRangeFilter().setFrom(new BigDecimal(500)))))
-//                .setNone(List.of(Map.of("title",new TextValueFilter().setValues(List.of("Yosemite")))))
-//                ;
-        request.setFilters(new NestedFilter()
-                .setAll(List.of(
-                        new TextValueFilter().setName("states").setValues(List.of("California")),
-                        new TextValueFilter().setName("world_heritage_site").setValues(List.of("true"))
-                )).setAny(List.of(
-                        new NumberRangeFilter().setName("acres").setRange(new NumberRange().setFrom(new BigDecimal(40_000))),
-                        new NumberRangeFilter().setName("square_km").setRange(new NumberRange().setFrom(new BigDecimal(500)))
-                )).setNone(List.of(
-                        new TextValueFilter().setName("title").setValues(List.of("Yosemite"))))
+        request.setFilters(new BooleanFilter()
+                .allOf(
+                        new TextValueFilter("states").setValues(List.of("California")),
+                        new TextValueFilter("world_heritage_site").setValues(List.of("true"))
+                ).anyOf(
+                        new NumberRangeFilter("acres").setRange(new NumberRange(40_000,null)),
+                        new NumberRangeFilter("square_km").setRange(new NumberRange(500,null))
+                ).noneOf(
+                        new TextValueFilter("title").setValues(List.of("Yosemite"))
+                )
         );
-
         json = writeValueAsString(request);
         Assertions.assertEquals("{\"filters\":{\"all\":[{\"states\":[\"California\"]},{\"world_heritage_site\":[\"true\"]}],\"any\":[{\"acres\":{\"from\":40000}},{\"square_km\":{\"from\":500}}],\"none\":[{\"title\":[\"Yosemite\"]}]}}",json);
-
-
-
     }
 
     @Test
@@ -291,13 +275,5 @@ class RequestSerializationTests {
     }
 
 
-    @Test
-    @Disabled
-    void JsonDeserializeTest() throws Exception{
-        Path path = Paths.get("src/test/resources/examples/search-request-1.json");
-        try(InputStream is = Files.newInputStream(path, StandardOpenOption.READ)){
-            SearchApiRequest request = objectMapper.readValue(is,SearchApiRequest.class);
-            Assertions.assertNotNull(request,"SearchApiRequest should not be null");
-        }
-    }
+
 }
