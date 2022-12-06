@@ -1,6 +1,7 @@
 package co.elasticsearch.enterprisesearch.client.model.response;
 
 import co.elasticsearch.enterprisesearch.TestUtil;
+import co.elasticsearch.enterprisesearch.client.SearchClient;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -15,11 +16,13 @@ class ResponseParseTest {
         objectMapper.registerModule(new JavaTimeModule());
     }
 
+
+
     @Test
     void deserializeResponse() throws JsonProcessingException {
         String json = TestUtil.readResourceFile("examples/responses/parks-1.json");
         JavaType type = objectMapper.getTypeFactory().constructParametricType(SearchApiResponse.class, NationalParkDocument.class);
         SearchApiResponse<NationalParkDocument> response = objectMapper.readValue(json, type);
-        log.info(objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(response));
+        System.out.println(objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(response));
     }
 }

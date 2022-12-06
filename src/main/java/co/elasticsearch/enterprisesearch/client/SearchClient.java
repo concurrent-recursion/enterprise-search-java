@@ -7,11 +7,13 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.json.JsonMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import lombok.Builder;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import okhttp3.*;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
@@ -40,11 +42,12 @@ public class SearchClient {
             if(bearerToken != null){
                 intercepted.header("Authorization","Bearer " + bearerToken);
             }else if(username != null && password != null){
-                intercepted.header("Authorization",Credentials.basic(username,password));
+                intercepted.header("Authorization",Credentials.basic(username,password, StandardCharsets.UTF_8));
             }
             return chain.proceed(intercepted.build());
         }
     };
+
 
     private OkHttpClient getClient(){
         if(client == null){

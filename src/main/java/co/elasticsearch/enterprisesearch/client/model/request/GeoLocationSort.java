@@ -2,6 +2,7 @@ package co.elasticsearch.enterprisesearch.client.model.request;
 
 import co.elasticsearch.enterprisesearch.client.model.GeoLocation;
 import co.elasticsearch.enterprisesearch.client.model.Sort;
+import co.elasticsearch.enterprisesearch.client.model.SortOrder;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonValue;
@@ -17,7 +18,7 @@ import java.util.Arrays;
 @Getter
 @Setter
 @Accessors(chain = true)
-public class GeoLocationSort  {
+public class GeoLocationSort implements SortOrder {
 
     private final GeoLocation center;
     private Mode mode;
@@ -28,6 +29,11 @@ public class GeoLocationSort  {
         center = geoLocation;
     }
 
+    @Override
+    public Sort.Direction getOrder() {
+        return order;
+    }
+
     @Getter
     @RequiredArgsConstructor
     public enum Mode {
@@ -36,7 +42,7 @@ public class GeoLocationSort  {
         private final String value;
         @JsonCreator
         public static Mode fromValue(String value){
-            return Arrays.stream(values()).filter(m -> m.value.equals(value)).findFirst().orElse(null);
+            return Arrays.stream(values()).filter(m -> m.value.equals(value)).findFirst().orElseThrow();
         }
     }
 

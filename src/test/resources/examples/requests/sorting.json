@@ -1,0 +1,8 @@
+{
+  "query": "This is a test",
+  "sort" : [
+    {"_score": "asc"},
+    {"title" : "desc"},
+    {"location": {"center": [10.34,-120.6],"mode": "max", "order": "desc"}}
+  ]
+}

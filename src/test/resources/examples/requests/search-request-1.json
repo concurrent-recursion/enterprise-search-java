@@ -4,9 +4,7 @@
     "size" : 20,
     "current" : 1
   },
-  "sort" : [ {
-    "_score" : "asc"
-  }, {
+  "sort" : [ {"_score" : "asc"}, {
     "home" : {
       "center" : [ 23.002, -54.123 ],
       "order" : "desc"
