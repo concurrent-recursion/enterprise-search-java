@@ -27,9 +27,10 @@ public class GeoLocation {
     @Getter
     @RequiredArgsConstructor
     public enum Unit {
-        MILLIMETERS("mm"),CENTIMETERS("cm"),METERS("m"),KILOMETERS("km"),INCHES("in"),FEET("ft"),YARDS("yd"),MILES("mi");
+        MILLIMETERS("mm"), CENTIMETERS("cm"), METERS("m"), KILOMETERS("km"), INCHES("in"), FEET("ft"), YARDS("yd"), MILES("mi");
         @JsonValue
         private final String value;
+
         @JsonCreator
         public static Unit findByValue(String value) {
             return Arrays.stream(values()).filter(v -> v.value.equals(value)).findFirst().orElse(null);
@@ -42,44 +43,45 @@ public class GeoLocation {
     private final BigDecimal longitude;
 
     @JsonValue
-    public BigDecimal[] getCenter(){
-        return new BigDecimal[]{longitude,latitude};
+    public BigDecimal[] getCenter() {
+        return new BigDecimal[]{longitude, latitude};
     }
+
     public GeoLocation(BigDecimal latitude, BigDecimal longitude) {
-        validate(latitude,longitude);
+        validate(latitude, longitude);
         this.longitude = longitude;
         this.latitude = latitude;
     }
 
-    public GeoLocation(String latitude, String longitude){
+    public GeoLocation(String latitude, String longitude) {
         BigDecimal lat = new BigDecimal(latitude);
         BigDecimal lon = new BigDecimal(longitude);
-        validate(lat,lon);
+        validate(lat, lon);
         this.longitude = lon;
         this.latitude = lat;
     }
 
-    public GeoLocation(String center){
+    public GeoLocation(String center) {
         Matcher latitudeLongitude = LATITUDE_LONGITUDE.matcher(center);
         Matcher wellKnown = WELL_KNOWN_TEXT_POINT.matcher(center);
         final String latitudeString;
         final String longitudeString;
-        if(latitudeLongitude.matches()){
+        if (latitudeLongitude.matches()) {
             latitudeString = latitudeLongitude.group(1);
             longitudeString = latitudeLongitude.group(3);
-        }else if(wellKnown.matches()){
+        } else if (wellKnown.matches()) {
             longitudeString = wellKnown.group(1);
             latitudeString = wellKnown.group(2);
-        }else{
+        } else {
             throw new IllegalArgumentException("Geohash format is currently unsupported");
         }
-        validate(new BigDecimal(latitudeString),new BigDecimal(longitudeString));
+        validate(new BigDecimal(latitudeString), new BigDecimal(longitudeString));
         this.longitude = new BigDecimal(longitudeString);
         this.latitude = new BigDecimal(latitudeString);
     }
 
 
-    private static void validate(BigDecimal latitude, BigDecimal longitude){
+    private static void validate(BigDecimal latitude, BigDecimal longitude) {
         if (latitude.compareTo(BigDecimal.valueOf(-90L)) < 0) {
             throw new IllegalArgumentException("Latitude cannot be less than -90. Received " + latitude);
         } else if (latitude.compareTo(BigDecimal.valueOf(90L)) > 0) {

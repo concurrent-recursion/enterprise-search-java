@@ -10,15 +10,16 @@ import com.fasterxml.jackson.databind.node.TextNode;
 import java.io.IOException;
 
 class FacetDeserializer extends StdDeserializer<Facet> {
-    protected FacetDeserializer(){
+    protected FacetDeserializer() {
         super(Facet.class);
     }
+
     @Override
     public Facet deserialize(JsonParser jsonParser, DeserializationContext deserializationContext) throws IOException, JacksonException {
         TreeNode node = jsonParser.readValueAsTree();
         TextNode type = (TextNode) node.get("type");
-        if("range".equals(type.asText())){
-           return jsonParser.getCodec().treeToValue(node,SearchRangeFacet.class);
+        if ("range".equals(type.asText())) {
+            return jsonParser.getCodec().treeToValue(node, SearchRangeFacet.class);
            /* SearchRangeFacet rangeFacet = new SearchRangeFacet();
             rangeFacet.setName(((TextNode)node.get("name")).asText());
             if(node.get("center") != null){
@@ -38,7 +39,7 @@ class FacetDeserializer extends StdDeserializer<Facet> {
                 }
             });
             return rangeFacet;*/
-        }else{
+        } else {
             return jsonParser.getCodec().treeToValue(node, ValueFacet.class);
         }
 

@@ -18,6 +18,7 @@ public class ResultFieldRendered {
 
     /**
      * If true, return the raw text field if no snippet is found. If false, only use snippets.
+     *
      * @param fallback true to return the raw text field if no snippet is found. otherwise, only use snippets.
      */
     private Boolean fallback;

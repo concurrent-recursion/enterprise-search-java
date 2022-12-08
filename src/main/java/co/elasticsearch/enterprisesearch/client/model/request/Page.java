@@ -17,10 +17,11 @@ import java.util.Objects;
 @Setter
 @Accessors(chain = true)
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
-@JsonPropertyOrder({"size","current"})
+@JsonPropertyOrder({"size", "current"})
 public class Page {
     /**
      * Number of results per page
+     *
      * @param size Must be greater than or equal to 1 and less than or equal to 1000.
      */
     @Min(1)
@@ -28,6 +29,7 @@ public class Page {
     private Integer size = 10;
     /**
      * Page number of results to return, defaults to 1
+     *
      * @param current Must be greater than or equal to 1 and less than or equal to 100
      */
     @Min(1)

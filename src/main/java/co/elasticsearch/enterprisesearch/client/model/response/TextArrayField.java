@@ -10,7 +10,7 @@ import java.util.List;
 @Getter
 @Setter
 @Accessors(chain = true)
-public class TextArrayField implements Field{
+public class TextArrayField implements Field {
     private List<String> raw = new ArrayList<>();
     private String snippet;
 }

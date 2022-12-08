@@ -33,24 +33,23 @@ public class SearchClient {
     private OkHttpClient client;
 
 
-
     private final Interceptor authInterceptor = new Interceptor() {
         @NotNull
         @Override
         public Response intercept(@NotNull Chain chain) throws IOException {
             Request.Builder intercepted = chain.request().newBuilder();
-            if(bearerToken != null){
-                intercepted.header("Authorization","Bearer " + bearerToken);
-            }else if(username != null && password != null){
-                intercepted.header("Authorization",Credentials.basic(username,password, StandardCharsets.UTF_8));
+            if (bearerToken != null) {
+                intercepted.header("Authorization", "Bearer " + bearerToken);
+            } else if (username != null && password != null) {
+                intercepted.header("Authorization", Credentials.basic(username, password, StandardCharsets.UTF_8));
             }
             return chain.proceed(intercepted.build());
         }
     };
 
 
-    private OkHttpClient getClient(){
-        if(client == null){
+    private OkHttpClient getClient() {
+        if (client == null) {
             client = new OkHttpClient.Builder()
                     .retryOnConnectionFailure(false)
                     .callTimeout(readTimeoutMillis, TimeUnit.MILLISECONDS)
@@ -63,10 +62,10 @@ public class SearchClient {
     }
 
     public <T> SearchApiResponse<T> search(SearchApiRequest request, String engineName, Class<T> resultClass) throws IOException {
-        HttpUrl url = Objects.requireNonNull(HttpUrl.parse(baseUri + "/api/as/v1/engines/{engineName}/search")).newBuilder().setPathSegment(4,engineName).build();
+        HttpUrl url = Objects.requireNonNull(HttpUrl.parse(baseUri + "/api/as/v1/engines/{engineName}/search")).newBuilder().setPathSegment(4, engineName).build();
         Request okRequest = new Request.Builder()
                 .url(url)
-                .post(RequestBody.create(objectMapper.writeValueAsBytes(request),APP_JSON))
+                .post(RequestBody.create(objectMapper.writeValueAsBytes(request), APP_JSON))
                 .build();
 
         try (Response response = getClient().newCall(okRequest).execute()) {
@@ -74,7 +73,7 @@ public class SearchClient {
                 throw new IOException("Unexpected Response " + response);
             }
             JavaType type = objectMapper.getTypeFactory().constructParametricType(SearchApiResponse.class, resultClass);
-            return objectMapper.readValue(Objects.requireNonNull(response.body()).byteStream(),type);
+            return objectMapper.readValue(Objects.requireNonNull(response.body()).byteStream(), type);
         }
     }
 

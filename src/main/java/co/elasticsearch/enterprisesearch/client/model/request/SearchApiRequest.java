@@ -8,11 +8,9 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import lombok.AccessLevel;
 import lombok.Data;
 import lombok.Getter;
-import lombok.Setter;
 import lombok.experimental.Accessors;
 
 import javax.validation.constraints.Max;
@@ -106,7 +104,7 @@ public class SearchApiRequest {
 
     @JsonProperty("search_fields")
     @Getter(AccessLevel.PACKAGE)
-    private Map<String,SearchField> searchFieldMap = new LinkedHashMap<>();
+    private Map<String, SearchField> searchFieldMap = new LinkedHashMap<>();
 
     /**
      * Change the fields which appear in search results and how their values are rendered.
@@ -115,7 +113,7 @@ public class SearchApiRequest {
      */
     @JsonProperty("result_fields")
     @Getter(AccessLevel.PACKAGE)
-    private Map<String,ResultField> resultFieldMap = new LinkedHashMap<>();
+    private Map<String, ResultField> resultFieldMap = new LinkedHashMap<>();
 
     /**
      * Submit tags with the analytics parameter. Tags can be used to enrich each query with unique information.
@@ -134,47 +132,47 @@ public class SearchApiRequest {
     @JsonProperty("record_analytics")
     private Boolean recordAnalytics;
 
-    public SearchApiRequest withSorts(Sort... sorts){
+    public SearchApiRequest withSorts(Sort... sorts) {
         this.sort = Arrays.asList(sorts);
         return this;
     }
 
-    public SearchApiRequest withTags(String... tags){
+    public SearchApiRequest withTags(String... tags) {
         analytics.withTags(tags);
         return this;
     }
 
-    public SearchApiRequest withFacets(Facet... facets){
-        for(Facet facet : facets) {
-            this.facetMap.putIfAbsent(facet.getFieldName(),new ArrayList<>());
+    public SearchApiRequest withFacets(Facet... facets) {
+        for (Facet facet : facets) {
+            this.facetMap.putIfAbsent(facet.getFieldName(), new ArrayList<>());
             this.facetMap.get(facet.getFieldName()).add(facet);
         }
         return this;
     }
 
-    public SearchApiRequest withBoosts(Boost... boosts){
-        for(Boost boost : boosts){
-            this.boostMap.put(boost.getName(),Collections.singletonList(boost));
+    public SearchApiRequest withBoosts(Boost... boosts) {
+        for (Boost boost : boosts) {
+            this.boostMap.put(boost.getName(), Collections.singletonList(boost));
         }
         return this;
     }
 
-    public SearchApiRequest withSearchFields(SearchField... fields){
-        for(SearchField field : fields){
-            this.searchFieldMap.put(field.getName(),field);
+    public SearchApiRequest withSearchFields(SearchField... fields) {
+        for (SearchField field : fields) {
+            this.searchFieldMap.put(field.getName(), field);
         }
         return this;
     }
 
-    public SearchApiRequest withResultFields(ResultField... fields){
-        for(ResultField field : fields){
-            this.resultFieldMap.put(field.getName(),field);
+    public SearchApiRequest withResultFields(ResultField... fields) {
+        for (ResultField field : fields) {
+            this.resultFieldMap.put(field.getName(), field);
         }
         return this;
     }
 
     @JsonIgnore
-    public List<Boost> getBoosts(){
+    public List<Boost> getBoosts() {
         return this.boostMap.values().stream().flatMap(Collection::stream).collect(Collectors.toList());
     }
 
@@ -182,7 +180,7 @@ public class SearchApiRequest {
      * Restricts a query to search only specific fields. Restricting fields will result in faster queries, especially for schemas with many text fields.
      */
     @JsonIgnore
-    public List<SearchField> getSearchFields(){
+    public List<SearchField> getSearchFields() {
         return new ArrayList<>(this.searchFieldMap.values());
     }
 
@@ -190,39 +188,40 @@ public class SearchApiRequest {
      * The fields which appear in search results and how their values are rendered.
      */
     @JsonIgnore
-    public List<ResultField> getResultFields(){
+    public List<ResultField> getResultFields() {
         return new ArrayList<>(this.resultFieldMap.values());
     }
 
     @JsonIgnore
-    public List<Facet> getFacets(){
+    public List<Facet> getFacets() {
         return facetMap.values().stream().flatMap(Collection::stream).collect(Collectors.toList());
     }
 
-    void setBoostMap(Map<String,List<Boost>> boosts){
-        for(Map.Entry<String,List<Boost>> field : boosts.entrySet()){
-            for(Boost b : field.getValue()){
+    void setBoostMap(Map<String, List<Boost>> boosts) {
+        for (Map.Entry<String, List<Boost>> field : boosts.entrySet()) {
+            for (Boost b : field.getValue()) {
                 b.setName(field.getKey());
             }
         }
         this.boostMap = boosts;
     }
-    void setSearchFieldMap(Map<String,SearchField> searchFieldMap){
-        for(Map.Entry<String,SearchField> field : searchFieldMap.entrySet()){
+
+    void setSearchFieldMap(Map<String, SearchField> searchFieldMap) {
+        for (Map.Entry<String, SearchField> field : searchFieldMap.entrySet()) {
             field.getValue().setName(field.getKey());
         }
         this.searchFieldMap = searchFieldMap;
     }
 
-    void setResultFieldMap(Map<String,ResultField> resultFieldMap){
-        for(Map.Entry<String,ResultField> field : resultFieldMap.entrySet()){
+    void setResultFieldMap(Map<String, ResultField> resultFieldMap) {
+        for (Map.Entry<String, ResultField> field : resultFieldMap.entrySet()) {
             field.getValue().setName(field.getKey());
         }
         this.resultFieldMap = resultFieldMap;
     }
 
-    void setFacetMap(Map<String,List<Facet>> facetMap){
-        for(Map.Entry<String,List<Facet>> facet : facetMap.entrySet()){
+    void setFacetMap(Map<String, List<Facet>> facetMap) {
+        for (Map.Entry<String, List<Facet>> facet : facetMap.entrySet()) {
             facet.getValue().forEach(f -> f.setFieldName(facet.getKey()));
         }
         this.facetMap = facetMap;

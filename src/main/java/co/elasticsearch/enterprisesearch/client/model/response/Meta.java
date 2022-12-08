@@ -10,10 +10,11 @@ import java.util.List;
 
 @Data
 @Accessors(chain = true)
-@JsonPropertyOrder({"warnings","request_id","page","alerts"})
+@JsonPropertyOrder({"warnings", "request_id", "page", "alerts"})
 public class Meta {
     /**
      * String ID representing the request. Guaranteed to be unique.
+     *
      * @param The request id
      */
     @JsonProperty("request_id")
@@ -21,7 +22,6 @@ public class Meta {
     private List<String> warnings = new ArrayList<>();
     private List<String> alerts = new ArrayList<>();
     private Page page = new Page();
-
 
 
 }

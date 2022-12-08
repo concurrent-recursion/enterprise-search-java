@@ -23,8 +23,8 @@ public interface DocumentsApi<T> {
     @Headers("Accept: application/json")
     List<IndexDocumentsApiResponse> indexDocuments(@Param("engineName") String engineName, List<T> documents);
 
-    @RequestLine(value="DELETE /api/as/v1/engines/{engineName}/documents")
+    @RequestLine(value = "DELETE /api/as/v1/engines/{engineName}/documents")
     @Headers("Accept: application/json")
-    List<DeleteDocumentsApiResponse> deleteDocuments(@Param("engineName") String engineName,List<String> ids);
+    List<DeleteDocumentsApiResponse> deleteDocuments(@Param("engineName") String engineName, List<String> ids);
 
 }

@@ -16,7 +16,9 @@ import java.math.BigDecimal;
 public class NumberProximityBoost implements Boost {
     private String name;
 
-    public BoostType getType(){return BoostType.PROXIMITY;}
+    public BoostType getType() {
+        return BoostType.PROXIMITY;
+    }
 
     /**
      * The mode of the distribution, scores based on proximity to this value

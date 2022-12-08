@@ -19,7 +19,9 @@ import static co.elasticsearch.enterprisesearch.client.model.request.filter.Date
 public class RecencyBoost implements Boost {
     private String name;
 
-    public Boost.BoostType getType(){return BoostType.PROXIMITY;}
+    public Boost.BoostType getType() {
+        return BoostType.PROXIMITY;
+    }
 
     private Function function;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = DATE_PATTERN)

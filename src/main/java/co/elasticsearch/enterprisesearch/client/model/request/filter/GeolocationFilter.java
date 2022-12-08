@@ -18,7 +18,7 @@ import java.util.Objects;
 @Accessors(chain = true)
 @RequiredArgsConstructor
 @ToString
-public class GeolocationFilter implements Filter{
+public class GeolocationFilter implements Filter {
     private final String name;
     /**
      * The mode of the distribution, specified as a latitude-longitude pair
@@ -35,7 +35,6 @@ public class GeolocationFilter implements Filter{
     private BigDecimal to;
 
 
-
     public GeolocationFilter setRange(GeolocationRange value) {
         this.to = value == null ? null : value.getTo();
         this.from = value == null ? null : value.getFrom();
@@ -45,7 +44,7 @@ public class GeolocationFilter implements Filter{
         return this;
     }
 
-    public GeolocationRange getRange(){
+    public GeolocationRange getRange() {
         return new GeolocationRange().setCenter(center).setFrom(from).setTo(to).setUnit(unit).setDistance(distance);
     }
 

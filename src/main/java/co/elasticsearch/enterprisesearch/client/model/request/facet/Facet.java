@@ -10,8 +10,11 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 public interface Facet {
     @JsonIgnore
     String getFieldName();
+
     Facet setFieldName(String fieldName);
+
     String getType();
+
     String getName();
 
 }

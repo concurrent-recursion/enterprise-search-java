@@ -21,31 +21,33 @@ import java.util.stream.Collectors;
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
 @RequiredArgsConstructor
 @ToString
-public class NumberValueFilter implements Filter{
+public class NumberValueFilter implements Filter {
     private final String name;
 
-    @JsonFormat(with = {JsonFormat.Feature.ACCEPT_SINGLE_VALUE_AS_ARRAY,JsonFormat.Feature.WRITE_SINGLE_ELEM_ARRAYS_UNWRAPPED})
+    @JsonFormat(with = {JsonFormat.Feature.ACCEPT_SINGLE_VALUE_AS_ARRAY, JsonFormat.Feature.WRITE_SINGLE_ELEM_ARRAYS_UNWRAPPED})
     private List<BigDecimal> values = new ArrayList<>();
 
-    public NumberValueFilter(String name,BigDecimal... values){
+    public NumberValueFilter(String name, BigDecimal... values) {
         this(name);
         this.values.addAll(Arrays.asList(values));
     }
 
-    public NumberValueFilter(String name, Integer... values){
+    public NumberValueFilter(String name, Integer... values) {
         this(name);
         this.values.addAll(Arrays.stream(values).map(BigDecimal::new).collect(Collectors.toList()));
     }
 
-    public NumberValueFilter(String name, Long... values){
+    public NumberValueFilter(String name, Long... values) {
         this(name);
         this.values.addAll(Arrays.stream(values).map(BigDecimal::new).collect(Collectors.toList()));
     }
-    public NumberValueFilter(String name, Float... values){
+
+    public NumberValueFilter(String name, Float... values) {
         this(name);
         this.values.addAll(Arrays.stream(values).map(BigDecimal::valueOf).collect(Collectors.toList()));
     }
-    public NumberValueFilter(String name, Double... values){
+
+    public NumberValueFilter(String name, Double... values) {
         this(name);
         this.values.addAll(Arrays.stream(values).map(BigDecimal::valueOf).collect(Collectors.toList()));
     }

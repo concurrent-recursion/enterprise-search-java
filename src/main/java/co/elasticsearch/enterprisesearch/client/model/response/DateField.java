@@ -12,7 +12,7 @@ import static co.elasticsearch.enterprisesearch.client.model.request.filter.Date
 @Getter
 @Setter
 @Accessors(chain = true)
-public class DateField implements Field{
+public class DateField implements Field {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = DATE_PATTERN)
     private OffsetDateTime raw;
 }

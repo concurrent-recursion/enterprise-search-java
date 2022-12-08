@@ -27,7 +27,7 @@ public class BooleanFilter implements Filter {
         return this;
     }
 
-    public BooleanFilter noneOf(Filter... filters){
+    public BooleanFilter noneOf(Filter... filters) {
         none.addAll(Arrays.asList(filters));
         return this;
     }

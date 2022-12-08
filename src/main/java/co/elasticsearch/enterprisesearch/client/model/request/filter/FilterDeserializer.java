@@ -35,7 +35,7 @@ class FilterDeserializer extends StdDeserializer<Filter> {
             return Collections.emptyList();
         }
         List<Filter> filters = new ArrayList<>();
-        for(JsonNode element : filterValues){
+        for (JsonNode element : filterValues) {
             filters.add(jsonParser.getCodec().treeToValue(element, Filter.class));
         }
         return filters;

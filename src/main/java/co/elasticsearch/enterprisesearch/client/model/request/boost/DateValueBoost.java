@@ -45,6 +45,4 @@ public class DateValueBoost implements Boost {
     private BigDecimal factor;
 
 
-
-
 }

@@ -37,11 +37,12 @@ public class GeoLocationSort implements SortOrder {
     @Getter
     @RequiredArgsConstructor
     public enum Mode {
-        MIN("min"),MAX("max"),MEDIAN("median"),AVERAGE("avg");
+        MIN("min"), MAX("max"), MEDIAN("median"), AVERAGE("avg");
         @JsonValue
         private final String value;
+
         @JsonCreator
-        public static Mode fromValue(String value){
+        public static Mode fromValue(String value) {
             return Arrays.stream(values()).filter(m -> m.value.equals(value)).findFirst().orElseThrow();
         }
     }

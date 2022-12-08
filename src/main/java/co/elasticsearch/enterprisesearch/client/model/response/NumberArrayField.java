@@ -14,15 +14,16 @@ import java.util.stream.Collectors;
 @Getter
 @Setter
 @Accessors(chain = true)
-public class NumberArrayField implements Field{
+public class NumberArrayField implements Field {
     private List<BigDecimal> raw = new ArrayList<>();
 
     @JsonIgnore
-    public List<Integer> getRawInteger(){
+    public List<Integer> getRawInteger() {
         return raw == null ? Collections.emptyList() : raw.stream().map(BigDecimal::intValueExact).collect(Collectors.toList());
     }
+
     @JsonIgnore
-    public List<Long> getRawLong(){
+    public List<Long> getRawLong() {
         return raw == null ? Collections.emptyList() : raw.stream().map(BigDecimal::longValueExact).collect(Collectors.toList());
     }
 }

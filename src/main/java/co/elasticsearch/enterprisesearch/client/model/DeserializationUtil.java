@@ -14,20 +14,20 @@ import java.util.stream.StreamSupport;
 
 @UtilityClass
 public class DeserializationUtil {
-    public JsonNode getFirstValue(TreeNode filterNode){
-        if(filterNode instanceof ArrayNode){
+    public JsonNode getFirstValue(TreeNode filterNode) {
+        if (filterNode instanceof ArrayNode) {
             return ((ArrayNode) filterNode).elements().next();
-        }else{
+        } else {
             return (JsonNode) filterNode;
         }
     }
 
-    public Stream<JsonNode> getNodeStream(TreeNode filterNode){
+    public Stream<JsonNode> getNodeStream(TreeNode filterNode) {
         if (filterNode instanceof ArrayNode) {
             ArrayNode filterValues = (ArrayNode) filterNode;
             return StreamSupport.stream(filterValues.spliterator(), false);
         } else {
-            return Stream.of( (JsonNode) filterNode);
+            return Stream.of((JsonNode) filterNode);
         }
     }
 

@@ -22,56 +22,61 @@ public class NumberRangeFilter implements Filter {
     private BigDecimal from;
     private BigDecimal to;
 
-    public NumberRangeFilter(String name, BigDecimal from, BigDecimal to){
+    public NumberRangeFilter(String name, BigDecimal from, BigDecimal to) {
         this(name);
         this.from = from;
         this.to = to;
     }
-    public NumberRangeFilter(String name, Integer from, Integer to){
+
+    public NumberRangeFilter(String name, Integer from, Integer to) {
         this(name);
-        if(from != null) {
+        if (from != null) {
             this.from = new BigDecimal(from);
         }
-        if(to != null) {
+        if (to != null) {
             this.to = new BigDecimal(to);
         }
     }
-    public NumberRangeFilter(String name, Long from, Long to){
+
+    public NumberRangeFilter(String name, Long from, Long to) {
         this(name);
-        if(from != null) {
+        if (from != null) {
             this.from = new BigDecimal(from);
         }
-        if(to != null) {
+        if (to != null) {
             this.to = new BigDecimal(to);
         }
     }
-    public NumberRangeFilter(String name, Float from, Float to){
+
+    public NumberRangeFilter(String name, Float from, Float to) {
         this(name);
-        if(from != null) {
+        if (from != null) {
             this.from = BigDecimal.valueOf(from);
         }
-        if(to != null) {
+        if (to != null) {
             this.to = BigDecimal.valueOf(to);
         }
     }
-    public NumberRangeFilter(String name, Double from, Double to){
+
+    public NumberRangeFilter(String name, Double from, Double to) {
         this(name);
-        if(from != null) {
+        if (from != null) {
             this.from = BigDecimal.valueOf(from);
         }
-        if(to != null) {
+        if (to != null) {
             this.to = BigDecimal.valueOf(to);
         }
     }
 
 
-    public NumberRangeFilter setRange(NumberRange range){
+    public NumberRangeFilter setRange(NumberRange range) {
         this.from = range == null ? null : range.getFrom();
         this.to = range == null ? null : range.getTo();
         return this;
     }
-    public NumberRange getRange(){
-        return from == null && to == null ? null : new NumberRange(from,to);
+
+    public NumberRange getRange() {
+        return from == null && to == null ? null : new NumberRange(from, to);
     }
 
     @Override

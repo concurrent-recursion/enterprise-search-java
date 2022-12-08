@@ -11,6 +11,6 @@ import java.util.List;
 @Getter
 @Setter
 @Accessors(chain = true)
-public class DateArrayField implements Field{
+public class DateArrayField implements Field {
     private List<OffsetDateTime> raw = new ArrayList<>();
 }

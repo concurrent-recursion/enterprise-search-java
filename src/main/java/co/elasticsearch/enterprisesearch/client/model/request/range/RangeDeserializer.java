@@ -9,7 +9,7 @@ import com.fasterxml.jackson.databind.node.NumericNode;
 import java.io.IOException;
 
 public class RangeDeserializer extends StdDeserializer<Range> {
-    protected RangeDeserializer(){
+    protected RangeDeserializer() {
         super(Range.class);
     }
 
@@ -18,9 +18,9 @@ public class RangeDeserializer extends StdDeserializer<Range> {
         TreeNode node = jsonParser.readValueAsTree();
         TreeNode to = node.get("to");
         TreeNode from = node.get("from");
-        if(to instanceof NumericNode || from instanceof NumericNode){
+        if (to instanceof NumericNode || from instanceof NumericNode) {
             return jsonParser.getCodec().treeToValue(node, NumberRange.class);
-        }else{
+        } else {
             return jsonParser.getCodec().treeToValue(node, DateRange.class);
         }
     }

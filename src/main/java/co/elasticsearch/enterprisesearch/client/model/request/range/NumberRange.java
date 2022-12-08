@@ -18,48 +18,55 @@ import java.util.Objects;
 @ToString
 public class NumberRange implements Range<BigDecimal> {
 
-    public NumberRange(){}
-    public NumberRange(BigDecimal from, BigDecimal to){
+    public NumberRange() {
+    }
+
+    public NumberRange(BigDecimal from, BigDecimal to) {
         this.from = from;
         this.to = to;
     }
-    public NumberRange(String from, String to){
-        if(from != null){
+
+    public NumberRange(String from, String to) {
+        if (from != null) {
             this.from = new BigDecimal(from);
         }
-        if(to != null){
+        if (to != null) {
             this.to = new BigDecimal(to);
         }
     }
-    public NumberRange(Integer from, Integer to){
-        if(from != null) {
+
+    public NumberRange(Integer from, Integer to) {
+        if (from != null) {
             this.from = new BigDecimal(from);
         }
-        if(to != null) {
+        if (to != null) {
             this.to = new BigDecimal(to);
         }
     }
-    public NumberRange(Long from, Long to){
-        if(from != null){
-        this.from = new BigDecimal(from);
-    }
-        if(to != null) {
+
+    public NumberRange(Long from, Long to) {
+        if (from != null) {
+            this.from = new BigDecimal(from);
+        }
+        if (to != null) {
             this.to = new BigDecimal(to);
         }
     }
-    public NumberRange(Float from, Float to){
-        if(from != null) {
+
+    public NumberRange(Float from, Float to) {
+        if (from != null) {
             this.from = BigDecimal.valueOf(from);
         }
-        if(to != null) {
+        if (to != null) {
             this.to = BigDecimal.valueOf(to);
         }
     }
-    public NumberRange(Double from, Double to){
-        if(from != null) {
+
+    public NumberRange(Double from, Double to) {
+        if (from != null) {
             this.from = BigDecimal.valueOf(from);
         }
-        if(to != null) {
+        if (to != null) {
             this.to = BigDecimal.valueOf(to);
         }
     }

@@ -11,15 +11,16 @@ import java.math.BigDecimal;
 @Setter
 @Accessors(chain = true)
 
-public class NumberField implements Field{
+public class NumberField implements Field {
     private BigDecimal raw;
 
     @JsonIgnore
-    public Long getRawLong(){
+    public Long getRawLong() {
         return raw == null ? null : raw.longValueExact();
     }
+
     @JsonIgnore
-    public Integer getRawInteger(){
+    public Integer getRawInteger() {
         return raw == null ? null : raw.intValueExact();
     }
 }

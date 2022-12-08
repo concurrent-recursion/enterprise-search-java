@@ -16,8 +16,10 @@ import java.util.Objects;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class SearchField {
 
-    public SearchField(){}
-    public SearchField(String fieldName){
+    public SearchField() {
+    }
+
+    public SearchField(String fieldName) {
         this.name = fieldName;
     }
 
@@ -25,6 +27,7 @@ public class SearchField {
     private String name;
     /**
      * Weight is given between 10 (most relevant) to 1 (least relevant)
+     *
      * @param weight A value between 1 and 10 for relevance
      */
     @Min(1)

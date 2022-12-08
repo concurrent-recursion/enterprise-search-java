@@ -15,41 +15,49 @@ public class Range {
 
     private String center;
 
-    public String getCenter(){
+    public String getCenter() {
         return center;
     }
-    public Range setCenter(BigDecimal latitude, BigDecimal longitude){
+
+    public Range setCenter(BigDecimal latitude, BigDecimal longitude) {
         DecimalFormat decimalFormat = new DecimalFormat("###.#######");
         this.center = decimalFormat.format(latitude) + ", " + decimalFormat.format(longitude);
         return this;
     }
 
-    public String getName(){
+    public String getName() {
         return name;
     }
-    public Range setName(String name){
+
+    public Range setName(String name) {
         this.name = name;
         return this;
     }
-    public Object getFrom(){
+
+    public Object getFrom() {
         return from;
     }
-    public Object getTo(){
+
+    public Object getTo() {
         return to;
     }
-    public Range setTo(BigDecimal to){
+
+    public Range setTo(BigDecimal to) {
         this.to = to;
         return this;
     }
-    public Range setFrom(BigDecimal from){
+
+    public Range setFrom(BigDecimal from) {
         this.from = from;
         return this;
     }
-    public Range setTo(OffsetDateTime to){
+
+    public Range setTo(OffsetDateTime to) {
         this.to = DateTimeFormatter.ISO_OFFSET_DATE_TIME.format(to);
         return this;
     }
-    public Range setFrom(OffsetDateTime from){
+
+    public Range setFrom(OffsetDateTime from) {
         this.from = DateTimeFormatter.ISO_OFFSET_DATE_TIME.format(from);
         return this;
     }

@@ -30,10 +30,11 @@ public class DateValueFilter implements Filter {
     private final String name;
     private List<OffsetDateTime> values = new ArrayList<>();
 
-    public DateValueFilter(String name, OffsetDateTime... values){
-        this(name,Arrays.asList(values));
+    public DateValueFilter(String name, OffsetDateTime... values) {
+        this(name, Arrays.asList(values));
     }
-    public DateValueFilter(String name, List<OffsetDateTime> values){
+
+    public DateValueFilter(String name, List<OffsetDateTime> values) {
         this(name);
         this.values.addAll(values);
     }

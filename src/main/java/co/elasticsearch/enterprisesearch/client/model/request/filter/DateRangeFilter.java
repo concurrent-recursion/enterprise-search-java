@@ -20,21 +20,21 @@ import static co.elasticsearch.enterprisesearch.client.model.request.filter.Date
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @RequiredArgsConstructor
 @ToString
-public class DateRangeFilter implements Filter{
+public class DateRangeFilter implements Filter {
     private final String name;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = DATE_PATTERN)
     private OffsetDateTime from;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = DATE_PATTERN)
     private OffsetDateTime to;
 
-    public DateRangeFilter setRange(DateRange range){
+    public DateRangeFilter setRange(DateRange range) {
         this.from = range == null ? null : range.getFrom();
         this.to = range == null ? null : range.getTo();
         return this;
     }
 
-    public DateRange getRange(){
-        return from == null && to == null ? null : new DateRange(from,to);
+    public DateRange getRange() {
+        return from == null && to == null ? null : new DateRange(from, to);
     }
 
 

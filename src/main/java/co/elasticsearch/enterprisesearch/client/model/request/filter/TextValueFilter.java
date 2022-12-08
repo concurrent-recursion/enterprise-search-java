@@ -19,7 +19,7 @@ import java.util.Objects;
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
 @RequiredArgsConstructor
 @ToString
-public class TextValueFilter implements Filter{
+public class TextValueFilter implements Filter {
     @JsonIgnore
     private final String name;
 
@@ -27,10 +27,11 @@ public class TextValueFilter implements Filter{
     private List<String> values = new ArrayList<>();
 
 
-    public TextValueFilter(String name, String... values){
-        this(name,Arrays.asList(values));
+    public TextValueFilter(String name, String... values) {
+        this(name, Arrays.asList(values));
     }
-    public TextValueFilter(String name, List<String> values){
+
+    public TextValueFilter(String name, List<String> values) {
         this(name);
         this.values.addAll(values);
     }
