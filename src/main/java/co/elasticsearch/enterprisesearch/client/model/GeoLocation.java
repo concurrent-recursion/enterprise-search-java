@@ -1,14 +1,17 @@
 package co.elasticsearch.enterprisesearch.client.model;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonValue;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+import lombok.ToString;
 
 import java.math.BigDecimal;
 import java.util.Arrays;
+import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -16,6 +19,7 @@ import java.util.regex.Pattern;
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
 @Getter
 @JsonDeserialize(using = GeolocationDeserializer.class)
+@ToString
 public class GeoLocation {
     static final Pattern LATITUDE_LONGITUDE = Pattern.compile("^([+-]?\\d{1,3}(\\.\\d+)?),\\s?([+-]?\\d{1,3}(\\.\\d+)?)$");
     static final Pattern WELL_KNOWN_TEXT_POINT = Pattern.compile("^POINT \\(([+-]?\\d{1,3}(\\.\\d+)) ([+-]?\\d{1,3}(\\.\\d+))\\)");
@@ -32,39 +36,46 @@ public class GeoLocation {
         }
     }
 
+    @JsonIgnore
+    private final BigDecimal latitude;
+    @JsonIgnore
+    private final BigDecimal longitude;
+
     @JsonValue
-    private final BigDecimal[] center = new BigDecimal[2];
+    public BigDecimal[] getCenter(){
+        return new BigDecimal[]{longitude,latitude};
+    }
     public GeoLocation(BigDecimal latitude, BigDecimal longitude) {
         validate(latitude,longitude);
-        center[0] = longitude;
-        center[1] = latitude;
+        this.longitude = longitude;
+        this.latitude = latitude;
     }
 
     public GeoLocation(String latitude, String longitude){
         BigDecimal lat = new BigDecimal(latitude);
         BigDecimal lon = new BigDecimal(longitude);
         validate(lat,lon);
-        center[0] = lon;
-        center[1] = lat;
+        this.longitude = lon;
+        this.latitude = lat;
     }
 
     public GeoLocation(String center){
         Matcher latitudeLongitude = LATITUDE_LONGITUDE.matcher(center);
         Matcher wellKnown = WELL_KNOWN_TEXT_POINT.matcher(center);
-        final String latitude;
-        final String longitude;
+        final String latitudeString;
+        final String longitudeString;
         if(latitudeLongitude.matches()){
-            latitude = latitudeLongitude.group(1);
-            longitude = latitudeLongitude.group(3);
+            latitudeString = latitudeLongitude.group(1);
+            longitudeString = latitudeLongitude.group(3);
         }else if(wellKnown.matches()){
-            longitude = wellKnown.group(1);
-            latitude = wellKnown.group(2);
+            longitudeString = wellKnown.group(1);
+            latitudeString = wellKnown.group(2);
         }else{
             throw new IllegalArgumentException("Geohash format is currently unsupported");
         }
-        validate(new BigDecimal(latitude),new BigDecimal(longitude));
-        this.center[0] = new BigDecimal(longitude);
-        this.center[1] = new BigDecimal(latitude);
+        validate(new BigDecimal(latitudeString),new BigDecimal(longitudeString));
+        this.longitude = new BigDecimal(longitudeString);
+        this.latitude = new BigDecimal(latitudeString);
     }
 
 
@@ -82,4 +93,16 @@ public class GeoLocation {
         }
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof GeoLocation)) return false;
+        GeoLocation that = (GeoLocation) o;
+        return latitude.equals(that.latitude) && longitude.equals(that.longitude);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(latitude, longitude);
+    }
 }

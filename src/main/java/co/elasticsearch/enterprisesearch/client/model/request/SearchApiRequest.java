@@ -4,14 +4,21 @@ import co.elasticsearch.enterprisesearch.client.model.Sort;
 import co.elasticsearch.enterprisesearch.client.model.request.boost.Boost;
 import co.elasticsearch.enterprisesearch.client.model.request.facet.Facet;
 import co.elasticsearch.enterprisesearch.client.model.request.filter.Filter;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import lombok.AccessLevel;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 import lombok.experimental.Accessors;
 
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Data
 @Accessors(chain = true)
@@ -89,7 +96,10 @@ public class SearchApiRequest {
      *
      * @param boosts The boosts to apply to the search
      */
-    private Map<String, List<Boost>> boosts = new LinkedHashMap<>();
+    @JsonProperty("boosts")
+    @Getter(AccessLevel.PACKAGE)
+    @JsonFormat(with = {JsonFormat.Feature.ACCEPT_SINGLE_VALUE_AS_ARRAY, JsonFormat.Feature.WRITE_SINGLE_ELEM_ARRAYS_UNWRAPPED})
+    private Map<String, List<Boost>> boostMap = new LinkedHashMap<>();
 
     /**
      * Restricts a query to search only specific fields. Restricting fields will result in faster queries, especially for schemas with many text fields.
@@ -135,6 +145,27 @@ public class SearchApiRequest {
     public SearchApiRequest addFacets(String name, Facet... facets){
         this.facets.put(name,Arrays.asList(facets));
         return this;
+    }
+
+    public SearchApiRequest withBoosts(Boost... boosts){
+        for(Boost boost : boosts){
+            this.boostMap.put(boost.getName(),Collections.singletonList(boost));
+        }
+        return this;
+    }
+
+    @JsonIgnore
+    public List<Boost> getBoosts(){
+        return this.boostMap.values().stream().flatMap(Collection::stream).collect(Collectors.toList());
+    }
+
+    void setBoostMap(Map<String,List<Boost>> boosts){
+        for(Map.Entry<String,List<Boost>> field : boosts.entrySet()){
+            for(Boost b : field.getValue()){
+                b.setName(field.getKey());
+            }
+        }
+        this.boostMap = boosts;
     }
 
 }

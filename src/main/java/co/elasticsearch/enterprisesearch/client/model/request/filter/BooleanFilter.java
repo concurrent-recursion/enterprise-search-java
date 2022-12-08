@@ -3,6 +3,7 @@ package co.elasticsearch.enterprisesearch.client.model.request.filter;
 import com.fasterxml.jackson.annotation.JsonValue;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 import lombok.experimental.Accessors;
 
 import java.util.*;
@@ -10,6 +11,7 @@ import java.util.*;
 @Getter
 @Setter
 @Accessors(chain = true)
+@ToString
 public class BooleanFilter implements Filter {
     private List<Filter> all = new ArrayList<>();
     private List<Filter> any = new ArrayList<>();
@@ -44,5 +46,18 @@ public class BooleanFilter implements Filter {
             values.put("none", none);
         }
         return values;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof BooleanFilter)) return false;
+        BooleanFilter that = (BooleanFilter) o;
+        return Objects.equals(all, that.all) && Objects.equals(any, that.any) && Objects.equals(none, that.none);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(all, any, none);
     }
 }

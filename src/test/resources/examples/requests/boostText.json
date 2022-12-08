@@ -1,0 +1,13 @@
+{
+  "query": "heritage site",
+  "boosts": {
+    "world_heritage_site": [
+      {
+        "type": "value",
+        "value": ["true","false"],
+        "operation": "multiply",
+        "factor": 10
+      }
+    ]
+  }
+}

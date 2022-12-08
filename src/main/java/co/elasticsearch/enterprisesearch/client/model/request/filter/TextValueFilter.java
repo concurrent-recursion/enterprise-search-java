@@ -5,37 +5,46 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 import lombok.experimental.Accessors;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
+import java.util.Objects;
 
 @Getter
 @Setter
 @Accessors(chain = true)
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
 @RequiredArgsConstructor
-public class TextValueFilter implements Filter, Map.Entry<String,List<String>> {
+@ToString
+public class TextValueFilter implements Filter{
     @JsonIgnore
     private final String name;
 
     @JsonIgnore
     private List<String> values = new ArrayList<>();
 
-    @Override
-    public String getKey() {
-        return name;
+
+    public TextValueFilter(String name, String... values){
+        this(name,Arrays.asList(values));
+    }
+    public TextValueFilter(String name, List<String> values){
+        this(name);
+        this.values.addAll(values);
     }
 
     @Override
-    public List<String> getValue() {
-        return values;
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof TextValueFilter)) return false;
+        TextValueFilter that = (TextValueFilter) o;
+        return name.equals(that.name) && values.equals(that.values);
     }
 
     @Override
-    public List<String> setValue(List<String> value) {
-        this.values = value;
-        return value;
+    public int hashCode() {
+        return Objects.hash(name, values);
     }
 }

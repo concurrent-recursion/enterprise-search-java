@@ -1,0 +1,16 @@
+{
+  "query": "parks",
+  "filters": {
+    "all": [
+      { "states": "California" },
+      { "world_heritage_site": "true" }
+    ],
+    "any": [
+      { "acres": { "from": 40000 } },
+      { "square_km": { "from": 500 } }
+    ],
+    "none": [
+      { "title": "Yosemite" }
+    ]
+  }
+}

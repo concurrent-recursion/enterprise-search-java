@@ -1,0 +1,6 @@
+{
+  "query": "parks",
+  "filters" : {
+    "states": [ "California", "Alaska" ]
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "query": "parks",
+  "filters": {
+    "any": [
+      {
+        "all": [
+          {
+            "states": "California"
+          },
+          {
+            "world_heritage_site": "true"
+          }
+        ]
+      }
+    ]
+  }
+}

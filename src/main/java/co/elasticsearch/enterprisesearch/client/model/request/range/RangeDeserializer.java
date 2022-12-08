@@ -23,6 +23,5 @@ public class RangeDeserializer extends StdDeserializer<Range> {
         }else{
             return jsonParser.getCodec().treeToValue(node, DateRange.class);
         }
-
     }
 }

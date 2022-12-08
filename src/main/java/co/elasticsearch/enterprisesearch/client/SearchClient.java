@@ -4,10 +4,10 @@ import co.elasticsearch.enterprisesearch.client.model.request.SearchApiRequest;
 import co.elasticsearch.enterprisesearch.client.model.response.SearchApiResponse;
 import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.databind.json.JsonMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import lombok.Builder;
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import okhttp3.*;
 import org.jetbrains.annotations.NotNull;
@@ -21,7 +21,7 @@ import java.util.concurrent.TimeUnit;
 @Builder
 public class SearchClient {
     private static final MediaType APP_JSON = MediaType.parse("application/json");
-    private final ObjectMapper objectMapper = JsonMapper.builder().addModule(new JavaTimeModule()).build();
+    private final ObjectMapper objectMapper = JsonMapper.builder().addModule(new JavaTimeModule()).disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS).build();
 
     private final String baseUri;
     private String username;

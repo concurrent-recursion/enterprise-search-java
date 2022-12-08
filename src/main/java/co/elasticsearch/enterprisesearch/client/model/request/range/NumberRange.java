@@ -13,7 +13,7 @@ import java.math.BigDecimal;
 @Accessors(chain = true)
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonDeserialize
-public class NumberRange implements Range {
+public class NumberRange implements Range<BigDecimal> {
 
     public NumberRange(){}
     public NumberRange(BigDecimal from, BigDecimal to){

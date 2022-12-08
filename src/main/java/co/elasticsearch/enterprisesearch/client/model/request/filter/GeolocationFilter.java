@@ -6,17 +6,19 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 import lombok.experimental.Accessors;
 
 import java.math.BigDecimal;
-import java.util.Map;
+import java.util.Objects;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @Getter
 @Setter
 @Accessors(chain = true)
 @RequiredArgsConstructor
-public class GeolocationFilter implements Filter, Map.Entry<String, GeolocationRange> {
+@ToString
+public class GeolocationFilter implements Filter{
     private final String name;
     /**
      * The mode of the distribution, specified as a latitude-longitude pair
@@ -33,28 +35,30 @@ public class GeolocationFilter implements Filter, Map.Entry<String, GeolocationR
     private BigDecimal to;
 
 
-    @Override
-    public String getKey() {
-        return name;
-    }
 
-    @Override
-    public GeolocationRange getValue() {
-        return new GeolocationRange().setUnit(unit).setTo(to).setFrom(from).setDistance(distance).setCenter(center);
-    }
-
-    @Override
-    public GeolocationRange setValue(GeolocationRange value) {
-        this.to = value.getTo();
-        this.from = value.getFrom();
-        this.unit = value.getUnit();
-        this.center = value.getCenter();
-        this.distance = value.getDistance();
-        return value;
-    }
-
-    public GeolocationFilter setGeolocationRange(GeolocationRange value){
-        setValue(value);
+    public GeolocationFilter setRange(GeolocationRange value) {
+        this.to = value == null ? null : value.getTo();
+        this.from = value == null ? null : value.getFrom();
+        this.unit = value == null ? null : value.getUnit();
+        this.center = value == null ? null : value.getCenter();
+        this.distance = value == null ? null : value.getDistance();
         return this;
+    }
+
+    public GeolocationRange getRange(){
+        return new GeolocationRange().setCenter(center).setFrom(from).setTo(to).setUnit(unit).setDistance(distance);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof GeolocationFilter)) return false;
+        GeolocationFilter that = (GeolocationFilter) o;
+        return name.equals(that.name) && center.equals(that.center) && Objects.equals(distance, that.distance) && unit == that.unit && Objects.equals(from, that.from) && Objects.equals(to, that.to);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, center, distance, unit, from, to);
     }
 }

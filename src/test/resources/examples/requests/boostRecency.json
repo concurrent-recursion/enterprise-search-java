@@ -1,0 +1,11 @@
+{
+  "boosts": {
+    "date_established": {
+      "type": "proximity",
+      "function": "linear",
+      "center": "now",
+      "factor": 8
+    }
+  },
+  "query": "old growth"
+}

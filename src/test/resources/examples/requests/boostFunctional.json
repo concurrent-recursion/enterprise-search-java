@@ -1,0 +1,11 @@
+{
+  "boosts": {
+    "visitors": {
+      "type": "functional",
+      "function": "logarithmic",
+      "operation": "multiply",
+      "factor": 2
+    }
+  },
+  "query": "popular parks"
+}

@@ -9,7 +9,7 @@ import com.fasterxml.jackson.databind.node.TextNode;
 
 import java.io.IOException;
 
-public class FacetDeserializer extends StdDeserializer<Facet> {
+class FacetDeserializer extends StdDeserializer<Facet> {
     protected FacetDeserializer(){
         super(Facet.class);
     }

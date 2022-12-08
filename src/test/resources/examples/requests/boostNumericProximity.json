@@ -1,0 +1,11 @@
+{
+  "boosts": {
+    "acres": {
+      "type": "proximity",
+      "function": "gaussian",
+      "center": 130,
+      "factor": 7.1
+    }
+  },
+  "query": "old growth"
+}

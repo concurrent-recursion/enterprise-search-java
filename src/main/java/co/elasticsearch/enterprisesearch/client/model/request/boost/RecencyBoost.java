@@ -15,9 +15,12 @@ import static co.elasticsearch.enterprisesearch.client.model.request.filter.Date
 @Setter
 @Accessors(chain = true)
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
-@JsonPropertyOrder({"type","function","center","factor"})
-public class RecencyBoost implements Boost{
-    private final String type = "proximity";
+@JsonPropertyOrder({"type", "function", "center", "factor"})
+public class RecencyBoost implements Boost {
+    private String name;
+
+    public Boost.BoostType getType(){return BoostType.PROXIMITY;}
+
     private Function function;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = DATE_PATTERN)
     private OffsetDateTime center;
@@ -27,14 +30,14 @@ public class RecencyBoost implements Boost{
     private BigDecimal factor;
 
     @JsonGetter
-    public String getCenter(){
+    public String getCenter() {
 
-        if(useNow){
+        if (useNow) {
             return "now";
-        }else if (center != null){
+        } else if (center != null) {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ssXXX");
             return formatter.format(center);
-        }else{
+        } else {
             return null;
         }
     }

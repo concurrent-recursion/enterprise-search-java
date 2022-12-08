@@ -1,0 +1,13 @@
+{
+  "query": "heritage site",
+  "boosts": {
+    "date_established": [
+      {
+        "type": "value",
+        "value": "1901-01-22T00:00:00Z",
+        "operation": "add",
+        "factor": 1.0
+      }
+    ]
+  }
+}

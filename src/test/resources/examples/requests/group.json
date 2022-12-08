@@ -1,0 +1,9 @@
+{
+  "query": "parks",
+  "group" : {
+    "field" : "states",
+    "size" : 4,
+    "sort" : {"_score": "asc"},
+    "collapse" : false
+  }
+}

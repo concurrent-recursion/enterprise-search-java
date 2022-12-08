@@ -1,0 +1,12 @@
+{
+  "query": "parks",
+  "filters": {
+    "location": {
+      "center": "37.386483, -122.083842",
+      "distance": 300,
+      "unit": "km",
+      "from": 0,
+      "to": 1000
+    }
+  }
+}

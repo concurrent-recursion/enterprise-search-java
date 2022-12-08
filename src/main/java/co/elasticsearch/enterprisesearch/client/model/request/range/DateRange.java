@@ -1,5 +1,6 @@
 package co.elasticsearch.enterprisesearch.client.model.request.range;
 
+import co.elasticsearch.enterprisesearch.client.model.request.filter.DateValueFilter;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
@@ -8,7 +9,6 @@ import lombok.Setter;
 import lombok.experimental.Accessors;
 
 import java.time.OffsetDateTime;
-import java.time.format.DateTimeFormatter;
 
 import static co.elasticsearch.enterprisesearch.client.model.request.filter.DateValueFilter.DATE_PATTERN;
 
@@ -17,7 +17,7 @@ import static co.elasticsearch.enterprisesearch.client.model.request.filter.Date
 @Accessors(chain = true)
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonDeserialize
-public class DateRange implements Range {
+public class DateRange implements Range<OffsetDateTime> {
 
     public DateRange(){}
     public DateRange(OffsetDateTime from, OffsetDateTime to){
@@ -26,10 +26,10 @@ public class DateRange implements Range {
     }
     public DateRange(String from, String to){
         if(from != null){
-            this.from = OffsetDateTime.parse(from, DateTimeFormatter.ofPattern(DATE_PATTERN));
+            this.from = OffsetDateTime.parse(from, DateValueFilter.RFC_3339);
         }
         if(to != null){
-            this.to = OffsetDateTime.parse(to,DateTimeFormatter.ofPattern(DATE_PATTERN));
+            this.to = OffsetDateTime.parse(to, DateValueFilter.RFC_3339);
         }
     }
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = DATE_PATTERN)

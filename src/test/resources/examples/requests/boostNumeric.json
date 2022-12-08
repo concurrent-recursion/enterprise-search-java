@@ -1,0 +1,13 @@
+{
+  "query": "heritage site",
+  "boosts": {
+    "acres": [
+      {
+        "type": "value",
+        "value": [10,20.2],
+        "operation": "add",
+        "factor": 2.3
+      }
+    ]
+  }
+}
