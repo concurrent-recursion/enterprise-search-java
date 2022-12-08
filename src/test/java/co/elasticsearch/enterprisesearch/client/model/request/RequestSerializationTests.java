@@ -98,20 +98,19 @@ class RequestSerializationTests {
 
     @Test
     void serializeFacets(){
-        final Map<String,List<Facet>> facets = new HashMap<>();
-        SearchApiRequest request = new SearchApiRequest().setFacets(facets);
+        SearchApiRequest request = new SearchApiRequest();
         String json = writeValueAsString(request);
         Assertions.assertEquals("{}",json);
 
         //Value
         request = new SearchApiRequest();
-        request.getFacets().put("states",List.of(new ValueFacet("top-five-states").setSort(new Sort("count",Sort.Direction.DESCENDING)).setSize(5)));
+        request.withFacets(new ValueFacet("states").setName("top-five-states").setSort(new Sort("count",Sort.Direction.DESCENDING)).setSize(5));
         json = writeValueAsString(request);
         Assertions.assertEquals("{\"facets\":{\"states\":{\"type\":\"value\",\"name\":\"top-five-states\",\"sort\":{\"count\":\"desc\"},\"size\":5}}}",json);
 
         //Range on Number
         request = new SearchApiRequest();
-        request.addFacets("acres",new SearchRangeFacet("min-and-max-range").setRanges(List.of(
+        request.withFacets(new SearchRangeFacet("acres").setName("min-and-max-range").setRanges(List.of(
                 new NumberRange("1","10000"),
                 new NumberRange(10000,null)
         )));
@@ -121,7 +120,7 @@ class RequestSerializationTests {
         //Range on a Date
         request = new SearchApiRequest();
 
-        request.addFacets("date_established",new SearchRangeFacet("half-century").setRanges(List.of(
+        request.withFacets(new SearchRangeFacet("date_established").setName("half-century").setRanges(List.of(
                 new DateRange().setFrom(OffsetDateTime.parse("1900-01-01T12:00:00Z")).setTo(OffsetDateTime.parse("1950-01-01T00:00:00.11+00:00"))
         )));
         json = writeValueAsString(request);
@@ -129,12 +128,12 @@ class RequestSerializationTests {
 
         //Range on Geolocation
         request = new SearchApiRequest();
-        request.getFacets().put("location",List.of(new SearchRangeFacet("geo-range-from-san-francisco").setCenter(new GeoLocation(new BigDecimal("37.386483"),new BigDecimal("-122.083842"))).setUnit(GeoLocation.Unit.METERS).setRanges(List.of(
+        request.withFacets(new SearchRangeFacet("location").setName("geo-range-from-san-francisco").setCenter(new GeoLocation(new BigDecimal("37.386483"),new BigDecimal("-122.083842"))).setUnit(GeoLocation.Unit.METERS).setRanges(List.of(
                 new NumberRange().setFrom(BigDecimal.ZERO).setTo(new BigDecimal("100000")).setName("Nearby"),
                 new NumberRange().setFrom(new BigDecimal("100000")).setTo(new BigDecimal("300000")).setName("A longer drive."),
                 new NumberRange().setFrom(new BigDecimal("300000")).setName("Perhaps fly?")
 
-        ))));
+        )));
         json = writeValueAsString(request);
         Assertions.assertEquals("{\"facets\":{\"location\":{\"type\":\"range\",\"name\":\"geo-range-from-san-francisco\",\"center\":[-122.083842,37.386483],\"unit\":\"m\",\"ranges\":[{\"from\":0,\"to\":100000,\"name\":\"Nearby\"},{\"from\":100000,\"to\":300000,\"name\":\"A longer drive.\"},{\"from\":300000,\"name\":\"Perhaps fly?\"}]}}}",json);
 
@@ -249,33 +248,28 @@ class RequestSerializationTests {
 
     @Test
     void serializeSearchFields(){
-        SearchApiRequest request = new SearchApiRequest();
-        request.getSearchFields().put("title",new SearchField());
-        request.getSearchFields().put("description",new SearchField());
-        request.getSearchFields().put("states",new SearchField());
+        SearchApiRequest request = new SearchApiRequest()
+                .withSearchFields(new SearchField("title"),new SearchField("description"),new SearchField("states"));
         String json = writeValueAsString(request);
         Assertions.assertEquals("{\"search_fields\":{\"title\":{},\"description\":{},\"states\":{}}}",json);
 
-        request = new SearchApiRequest();
-        request.getSearchFields().put("title",new SearchField().setWeight(10));
-        request.getSearchFields().put("description",new SearchField().setWeight(5));
-        request.getSearchFields().put("states",new SearchField().setWeight(3));
+        request = new SearchApiRequest().withSearchFields(new SearchField("title").setWeight(10),new SearchField("description").setWeight(5),new SearchField("states").setWeight(3));
         json = writeValueAsString(request);
         Assertions.assertEquals("{\"search_fields\":{\"title\":{\"weight\":10},\"description\":{\"weight\":5},\"states\":{\"weight\":3}}}",json);
     }
 
     @Test
     void serializeResultsFields(){
-        SearchApiRequest request = new SearchApiRequest();
-        request.getResultFields().put("title",new ResultField().setRaw(new ResultFieldRendered()));
-        request.getResultFields().put("description",new ResultField().setRaw(new ResultFieldRendered().setSize(50)));
+        SearchApiRequest request = new SearchApiRequest()
+                .withResultFields(new ResultField("title").withRaw(),new ResultField("description").withRaw(50));
         String json = writeValueAsString(request);
         Assertions.assertEquals("{\"result_fields\":{\"title\":{\"raw\":{}},\"description\":{\"raw\":{\"size\":50}}}}",json);
 
-        SearchApiRequest request2 = new SearchApiRequest();
-        request2.getResultFields().put("title",new ResultField().setSnippet(new ResultFieldRendered().setSize(20).setFallback(true)));
-        request2.getResultFields().put("description",new ResultField().setRaw(new ResultFieldRendered().setSize(200)).setSnippet(new ResultFieldRendered().setSize(100)));
-        request2.getResultFields().put("states",new ResultField().setRaw(new ResultFieldRendered()).setSnippet(new ResultFieldRendered().setSize(20).setFallback(true)));
+        SearchApiRequest request2 = new SearchApiRequest().withResultFields(
+                new ResultField("title").withSnippet(20,true),
+            new ResultField("description").withRaw(200).withSnippet(100),
+                new ResultField("states").withRaw().withSnippet(20,true)
+        );
         String json2 = writeValueAsString(request2);
         Assertions.assertEquals("{\"result_fields\":{\"title\":{\"snippet\":{\"size\":20,\"fallback\":true}},\"description\":{\"raw\":{\"size\":200},\"snippet\":{\"size\":100}},\"states\":{\"raw\":{},\"snippet\":{\"size\":20,\"fallback\":true}}}}",json2);
     }

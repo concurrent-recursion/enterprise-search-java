@@ -2,9 +2,14 @@ package co.elasticsearch.enterprisesearch.client.model.request;
 
 import co.elasticsearch.enterprisesearch.TestUtil;
 import co.elasticsearch.enterprisesearch.client.model.GeoLocation;
+import co.elasticsearch.enterprisesearch.client.model.Range;
 import co.elasticsearch.enterprisesearch.client.model.Sort;
 import co.elasticsearch.enterprisesearch.client.model.request.boost.*;
+import co.elasticsearch.enterprisesearch.client.model.request.facet.Facet;
+import co.elasticsearch.enterprisesearch.client.model.request.facet.SearchRangeFacet;
+import co.elasticsearch.enterprisesearch.client.model.request.facet.ValueFacet;
 import co.elasticsearch.enterprisesearch.client.model.request.filter.*;
+import co.elasticsearch.enterprisesearch.client.model.request.range.NumberRange;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
@@ -259,5 +264,63 @@ class RequestDeserializationTests {
         assertEquals(Boost.BoostType.PROXIMITY,recencyBoost.getType());
     }
 
+    @Test
+    void searchFields() throws JsonProcessingException{
+        String searchFieldString = TestUtil.readResourceFile("examples/requests/searchField.json");
+        SearchApiRequest searchFieldRequest = objectMapper.readValue(searchFieldString, SearchApiRequest.class);
+        List<SearchField> fields = searchFieldRequest.getSearchFields();
+        SearchField titleField = fields.get(0);
+        assertEquals(new SearchField("title").setWeight(10),titleField);
+        SearchField descriptionField = fields.get(1);
+        assertEquals(new SearchField("description").setWeight(5),descriptionField);
+        SearchField statesField = fields.get(2);
+        assertEquals(new SearchField("states"),statesField);
+    }
 
+    @Test
+    void resultFields() throws JsonProcessingException{
+        String searchFieldString = TestUtil.readResourceFile("examples/requests/resultFields.json");
+        SearchApiRequest searchFieldRequest = objectMapper.readValue(searchFieldString, SearchApiRequest.class);
+        List<ResultField> resultFields = searchFieldRequest.getResultFields();
+        ResultField title = resultFields.get(0);
+        assertEquals(new ResultField("title").withRaw().withoutSnippet(),title);
+        ResultField description = resultFields.get(1);
+        assertEquals(new ResultField("description").withoutRaw().withSnippet(50,true),description);
+        ResultField states = resultFields.get(2);
+        assertEquals(new ResultField("states").withRaw(100).withSnippet(20,false),states);
+    }
+
+    @Test
+    void analytics() throws JsonProcessingException {
+        String searchFieldString = TestUtil.readResourceFile("examples/requests/analyticsTags.json");
+        SearchApiRequest analyticsRequest = objectMapper.readValue(searchFieldString, SearchApiRequest.class);
+        assertIterableEquals(List.of("web","mobile"),analyticsRequest.getAnalytics().getTags());
+    }
+    @Test
+    void facetValues() throws JsonProcessingException {
+        String searchFieldString = TestUtil.readResourceFile("examples/requests/facetText.json");
+        SearchApiRequest facetsRequest = objectMapper.readValue(searchFieldString, SearchApiRequest.class);
+        Optional<Facet> optionalStates = facetsRequest.getFacets().stream().filter(f -> f.getFieldName().equals("states")).findFirst();
+        assertTrue(optionalStates.isPresent());
+        assertInstanceOf(ValueFacet.class,optionalStates.get());
+        ValueFacet valueFacet = (ValueFacet) optionalStates.get();
+        assertEquals("value",valueFacet.getType());
+        assertEquals("top-five-states",valueFacet.getName());
+        assertEquals(5,valueFacet.getSize());
+        assertEquals("count",valueFacet.getSort().getName());
+    }
+
+    @Test
+    void facetRange() throws JsonProcessingException {
+        String searchFieldString = TestUtil.readResourceFile("examples/requests/facetRange.json");
+        SearchApiRequest facetsRequest = objectMapper.readValue(searchFieldString, SearchApiRequest.class);
+        Optional<Facet> acres = facetsRequest.getFacets().stream().filter(f -> f.getFieldName().equals("acres")).findFirst();
+        assertTrue(acres.isPresent());
+        assertInstanceOf(SearchRangeFacet.class,acres.get());
+        SearchRangeFacet acreFacet = (SearchRangeFacet) acres.get();
+        assertEquals("range",acreFacet.getType());
+        assertEquals("min-and-max-range",acreFacet.getName());
+        assertEquals(new NumberRange().setFrom(new BigDecimal(1)).setTo(new BigDecimal(10000)),acreFacet.getRanges().get(0));
+
+    }
 }

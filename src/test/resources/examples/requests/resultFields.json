@@ -1,0 +1,23 @@
+{
+  "query": "everglade",
+  "result_fields": {
+    "title": {
+      "raw": {}
+    },
+    "description": {
+      "snippet": {
+        "size": 50,
+        "fallback" : true
+      }
+    },
+    "states": {
+      "raw" : {
+        "size": 100
+      },
+      "snippet": {
+        "size": 20,
+        "fallback": false
+      }
+    }
+  }
+}

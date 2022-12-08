@@ -1,0 +1,12 @@
+{
+  "search_fields": {
+    "title": {
+      "weight": 10
+    },
+    "description": {
+      "weight": 5
+    },
+    "states": {}
+  },
+  "query": "everglade"
+}

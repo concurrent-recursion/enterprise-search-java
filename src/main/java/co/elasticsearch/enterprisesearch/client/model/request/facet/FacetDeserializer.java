@@ -39,7 +39,7 @@ class FacetDeserializer extends StdDeserializer<Facet> {
             });
             return rangeFacet;*/
         }else{
-            return jsonParser.getCodec().treeToValue(node,ValueFacet.class);
+            return jsonParser.getCodec().treeToValue(node, ValueFacet.class);
         }
 
     }

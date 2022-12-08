@@ -1,0 +1,13 @@
+{
+  "query": "park",
+  "facets": {
+    "states": [
+      {
+        "type": "value",
+        "name": "top-five-states",
+        "sort": { "count": "desc" },
+        "size": 5
+      }
+    ]
+  }
+}

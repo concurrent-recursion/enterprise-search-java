@@ -1,0 +1,15 @@
+{
+  "query": "park",
+  "facets": {
+    "acres": [
+      {
+        "type": "range",
+        "name": "min-and-max-range",
+        "ranges": [
+          { "from": 1, "to": 10000 },
+          { "from": 10000 }
+        ]
+      }
+    ]
+  }
+}
