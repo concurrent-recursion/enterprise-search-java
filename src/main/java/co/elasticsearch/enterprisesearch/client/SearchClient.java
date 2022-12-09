@@ -29,46 +29,46 @@ public class SearchClient {
      * @param baseUrl The enterprise search base URL
      * @return The enterprise search base url
      */
-    private final String baseUrl;
+    final String baseUrl;
 
     /**
      * Optional, if using BASIC authentication this is the username
      * @param username the username
      * @return The username
      */
-    private String username;
+    String username;
     /**
      * Optional, if using BASIC authentication this is the password
      * @param password the password
      * @return the password
      */
-    private String password;
+    String password;
     /**
      * Optional, Either an API Key or Elasticsearch tokens
      * @param bearerToken The API Key, or Elasticsearch token. Should NOT contain "Bearer " prefix
      * @return The API Key or token
      */
-    private String bearerToken;
+    String bearerToken;
     /**
      * The engine that requests should be sent to
      * @param engine the engine
      * @return the engine
      */
-    private String engine;
+    String engine;
     /**
      * The timeout waiting to connect to Elasticsearch
      * @param readTimeoutMillis The number of milliseconds to wait, default is 500
      * @return the number of milliseconds to wait
      */
     @Builder.Default
-    private Integer readTimeoutMillis = 500;
+    Integer readTimeoutMillis = 500;
     /**
      * The timeout waiting for the response to complete from Elasticsearch
      * @param callTimeoutMillis The number of milliseconds to wait, default is 5000
      * @return the number of milliseconds to wait
      */
     @Builder.Default
-    private Integer callTimeoutMillis = 5000;
+    Integer callTimeoutMillis = 5000;
 
 
     /**
@@ -76,7 +76,7 @@ public class SearchClient {
      * @param client the client
      * @return the client
      */
-    private OkHttpClient client;
+    OkHttpClient client;
 
 
     private final Interceptor authInterceptor = new Interceptor() {
@@ -109,6 +109,7 @@ public class SearchClient {
 
     public <T> SearchApiResponse<T> search(SearchApiRequest request, String engineName, Class<T> resultClass) throws IOException {
         HttpUrl url = Objects.requireNonNull(HttpUrl.parse(baseUrl + "/api/as/v1/engines/{engineName}/search")).newBuilder().setPathSegment(4, engineName).build();
+        System.out.println(objectMapper.writeValueAsString(request));
         Request okRequest = new Request.Builder()
                 .url(url)
                 .post(RequestBody.create(objectMapper.writeValueAsBytes(request), APP_JSON))
@@ -118,8 +119,10 @@ public class SearchClient {
             if (!response.isSuccessful()) {
                 throw new IOException("Unexpected Response " + response);
             }
+            String res = new String(response.body().bytes(),StandardCharsets.UTF_8);
+            System.out.println("response = " + res);
             JavaType type = objectMapper.getTypeFactory().constructParametricType(SearchApiResponse.class, resultClass);
-            return objectMapper.readValue(Objects.requireNonNull(response.body()).byteStream(), type);
+            return objectMapper.readValue(res.getBytes(StandardCharsets.UTF_8), type);
         }
     }
 

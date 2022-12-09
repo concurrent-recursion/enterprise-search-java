@@ -1,5 +1,6 @@
 package co.elasticsearch.enterprisesearch.client.model.response;
 
+import co.elasticsearch.enterprisesearch.client.model.Engine;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import lombok.Data;
@@ -19,6 +20,13 @@ public class Meta {
      */
     @JsonProperty("request_id")
     private String requestId;
+
+    /**
+     * The precision of the search
+     * @param precision The precision
+     * @return the precision
+     */
+    private Integer precision;
     /**
      * Array of warnings for the query. Included with error responses and success responses, so inspect all responses for warnings.
      * @param warnings the warnings
@@ -37,6 +45,13 @@ public class Meta {
      * @return the page metadata
      */
     private Page page = new Page();
+
+    /**
+     * The engine associated with this search request
+     * @param engine the engine
+     * @return the engine
+     */
+    private Engine engine = new Engine();
 
 
 }
