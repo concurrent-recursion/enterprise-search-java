@@ -6,9 +6,8 @@ import lombok.experimental.Accessors;
 
 @Data
 @Accessors(chain = true)
-public class NationalParkDocument {
-    @JsonProperty("_meta")
-    private MetaField meta;
+public class NationalParkDocument extends ResponseDocument{
+
     private TextField id;
     @JsonProperty("date_established")
     private DateField dateEstablished;

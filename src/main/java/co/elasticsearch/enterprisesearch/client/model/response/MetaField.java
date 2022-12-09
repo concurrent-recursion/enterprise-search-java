@@ -16,4 +16,16 @@ public class MetaField {
      * @return the score
      */
     private BigDecimal score;
+    /**
+     * The name of the engine this document belongs to
+     * @param engine the engine name
+     * @return the engine name
+     */
+    private String engine;
+    /**
+     * The document id
+     * @param id the document id
+     * @return the document id
+     */
+    private String id;
 }

@@ -15,7 +15,7 @@ import java.util.function.Consumer;
 @Data
 @Accessors(chain = true)
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
-public class SearchApiResponse<T> implements Iterable<T>{
+public class SearchApiResponse<T extends ResponseDocument> implements Iterable<T>{
     /**
      * Object delimiting the results meta data.
      * @param meta the page metadata

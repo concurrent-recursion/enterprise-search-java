@@ -1,6 +1,7 @@
 package co.elasticsearch.enterprisesearch.client;
 
 import co.elasticsearch.enterprisesearch.client.model.request.SearchApiRequest;
+import co.elasticsearch.enterprisesearch.client.model.response.ResponseDocument;
 import co.elasticsearch.enterprisesearch.client.model.response.SearchApiResponse;
 import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -29,55 +30,43 @@ public class SearchClient {
      * @param baseUrl The enterprise search base URL
      * @return The enterprise search base url
      */
-    final String baseUrl;
+    private final String baseUrl;
 
     /**
      * Optional, if using BASIC authentication this is the username
      * @param username the username
      * @return The username
      */
-    String username;
+    private String username;
     /**
      * Optional, if using BASIC authentication this is the password
      * @param password the password
      * @return the password
      */
-    String password;
+    private String password;
     /**
      * Optional, Either an API Key or Elasticsearch tokens
      * @param bearerToken The API Key, or Elasticsearch token. Should NOT contain "Bearer " prefix
      * @return The API Key or token
      */
-    String bearerToken;
+    private String bearerToken;
     /**
      * The engine that requests should be sent to
      * @param engine the engine
      * @return the engine
      */
-    String engine;
+    private String engine;
+
     /**
-     * The timeout waiting to connect to Elasticsearch
-     * @param readTimeoutMillis The number of milliseconds to wait, default is 500
-     * @return the number of milliseconds to wait
+     * A client builder to customise the internal configuration of the OkHttpClient
+     * @param clientBuilder the clientBuilder
+     * @return the clientBuilder
      */
     @Builder.Default
-    Integer readTimeoutMillis = 500;
-    /**
-     * The timeout waiting for the response to complete from Elasticsearch
-     * @param callTimeoutMillis The number of milliseconds to wait, default is 5000
-     * @return the number of milliseconds to wait
-     */
-    @Builder.Default
-    Integer callTimeoutMillis = 5000;
+    private OkHttpClient.Builder clientBuilder = new OkHttpClient.Builder();
 
 
-    /**
-     * The internal client
-     * @param client the client
-     * @return the client
-     */
-    OkHttpClient client;
-
+    private static OkHttpClient client;
 
     private final Interceptor authInterceptor = new Interceptor() {
         @NotNull
@@ -96,10 +85,7 @@ public class SearchClient {
 
     private OkHttpClient getClient() {
         if (client == null) {
-            client = new OkHttpClient.Builder()
-                    .retryOnConnectionFailure(false)
-                    .callTimeout(readTimeoutMillis, TimeUnit.MILLISECONDS)
-                    .readTimeout(callTimeoutMillis, TimeUnit.MILLISECONDS)
+            client = clientBuilder
                     .addInterceptor(authInterceptor)
                     .connectionPool(new ConnectionPool(10, 5, TimeUnit.SECONDS))
                     .build();
@@ -107,9 +93,9 @@ public class SearchClient {
         return client;
     }
 
-    public <T> SearchApiResponse<T> search(SearchApiRequest request, String engineName, Class<T> resultClass) throws IOException {
+    public <T extends ResponseDocument> SearchApiResponse<T> search(SearchApiRequest request, String engineName, Class<T> resultClass) throws IOException {
         HttpUrl url = Objects.requireNonNull(HttpUrl.parse(baseUrl + "/api/as/v1/engines/{engineName}/search")).newBuilder().setPathSegment(4, engineName).build();
-        System.out.println(objectMapper.writeValueAsString(request));
+        log.debug("Executing AppSearch Search url:{}",url);
         Request okRequest = new Request.Builder()
                 .url(url)
                 .post(RequestBody.create(objectMapper.writeValueAsBytes(request), APP_JSON))
@@ -119,10 +105,10 @@ public class SearchClient {
             if (!response.isSuccessful()) {
                 throw new IOException("Unexpected Response " + response);
             }
-            String res = new String(response.body().bytes(),StandardCharsets.UTF_8);
-            System.out.println("response = " + res);
+
             JavaType type = objectMapper.getTypeFactory().constructParametricType(SearchApiResponse.class, resultClass);
-            return objectMapper.readValue(res.getBytes(StandardCharsets.UTF_8), type);
+            assert response.body() != null;
+            return objectMapper.readValue(response.body().byteStream(), type);
         }
     }
 
