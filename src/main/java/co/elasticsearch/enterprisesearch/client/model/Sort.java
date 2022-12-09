@@ -37,26 +37,26 @@ public class Sort {
 
     @Getter
     @RequiredArgsConstructor
-    public enum Direction implements SortOrder {
+    public enum Order implements SortOrder {
         ASCENDING("asc"), DESCENDING("desc");
         @JsonValue
         private final String value;
 
         @JsonCreator
-        public static Direction fromValue(String value) {
+        public static Order fromValue(String value) {
             return Arrays.stream(values()).filter(m -> m.value.equals(value)).findFirst().orElseThrow();
         }
 
         @Override
-        public Direction getOrder() {
+        public Order getOrder() {
             return this;
         }
     }
 
 
-    public Sort(String field, @NonNull Direction direction) {
+    public Sort(String field, @NonNull Sort.Order order) {
         this.name = field;
-        this.direction = direction;
+        this.direction = order;
     }
 
     public Sort(String field, GeoLocationSort location) {
@@ -68,7 +68,7 @@ public class Sort {
     static Sort createSort(ObjectNode node) {
         Map.Entry<String, JsonNode> field = node.fields().next();
         if (field.getValue().getNodeType().equals(JsonNodeType.STRING)) {
-            return new Sort(field.getKey(), Direction.fromValue(field.getValue().asText()));
+            return new Sort(field.getKey(), Order.fromValue(field.getValue().asText()));
         } else {
             JsonNode centerNode = field.getValue().get("center");
             JsonNode modeNode = field.getValue().get("mode");
@@ -80,7 +80,7 @@ public class Sort {
                 geoLocationSort = new GeoLocationSort(new GeoLocation(centerNode.asText()));
             }
             geoLocationSort.setMode(GeoLocationSort.Mode.fromValue(modeNode.textValue()));
-            geoLocationSort.setOrder(Sort.Direction.fromValue(orderNode.textValue()));
+            geoLocationSort.setOrder(Order.fromValue(orderNode.textValue()));
             return new Sort(field.getKey(), geoLocationSort);
         }
     }

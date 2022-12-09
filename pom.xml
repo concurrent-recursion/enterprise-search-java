@@ -2,11 +2,11 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <groupId>co.elasticsearch</groupId>
-    <artifactId>enterprise-search-java</artifactId>
+    <groupId>com.github.concurrent-recursion</groupId>
+    <artifactId>enterprisesearch-java-client</artifactId>
     <version>0.0.1</version>
-    <name>enterprise-search-java</name>
-    <description>enterprise-search-java</description>
+    <name>Enterprisesearch Java Client</name>
+    <description>Java client for Elasticsearch Enterprisesearch application</description>
     <properties>
         <maven.compiler.source>11</maven.compiler.source>
         <maven.compiler.target>11</maven.compiler.target>
@@ -96,6 +96,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-javadoc-plugin</artifactId>
+                <version>3.4.1</version>
                 <configuration>
                     <sourcepath>${project.build.directory}/delombok</sourcepath>
                 </configuration>
@@ -112,6 +113,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-source-plugin</artifactId>
+                <version>3.2.1</version>
                 <executions>
                     <execution>
                         <id>attach-sources</id>

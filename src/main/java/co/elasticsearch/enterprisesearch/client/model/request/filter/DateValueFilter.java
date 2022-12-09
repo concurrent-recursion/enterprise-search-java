@@ -22,12 +22,21 @@ import java.util.Objects;
 @RequiredArgsConstructor
 @ToString
 public class DateValueFilter implements Filter {
-    //"yyyy-MM-dd'T'HH:mm:ss[.SS]XXX" ?
     public static final String DATE_PATTERN = "yyyy-MM-dd'T'HH:mm:ss[.SS]XXX";
     public static final DateTimeFormatter RFC_3339 = DateTimeFormatter.ofPattern(DATE_PATTERN);
 
+    /**
+     * The field from your schema upon which to apply your filter
+     * @param name The field name
+     * @return the field name
+     */
     @JsonIgnore
     private final String name;
+    /**
+     * The value upon which to filter. The value must be an exact match
+     * @param values The Date(s) to match on
+     * @return The values
+     */
     private List<OffsetDateTime> values = new ArrayList<>();
 
     public DateValueFilter(String name, OffsetDateTime... values) {

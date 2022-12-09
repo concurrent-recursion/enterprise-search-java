@@ -5,6 +5,7 @@ import co.elasticsearch.enterprisesearch.client.model.GeoLocation;
 import co.elasticsearch.enterprisesearch.client.model.Sort;
 import co.elasticsearch.enterprisesearch.client.model.request.boost.*;
 import co.elasticsearch.enterprisesearch.client.model.request.facet.Facet;
+import co.elasticsearch.enterprisesearch.client.model.request.facet.FacetSortField;
 import co.elasticsearch.enterprisesearch.client.model.request.facet.SearchRangeFacet;
 import co.elasticsearch.enterprisesearch.client.model.request.facet.ValueFacet;
 import co.elasticsearch.enterprisesearch.client.model.request.filter.*;
@@ -53,16 +54,16 @@ class RequestDeserializationTests {
         assertEquals("This is a test",request.getQuery());
         Sort score = request.getSort().get(0);
         assertEquals(Sort.SCORE,score.getName());
-        assertEquals(Sort.Direction.ASCENDING,score.getDirection());
+        assertEquals(Sort.Order.ASCENDING,score.getDirection());
 
         Sort title = request.getSort().get(1);
         assertEquals("title",title.getName());
-        assertEquals(Sort.Direction.DESCENDING,title.getDirection());
+        assertEquals(Sort.Order.DESCENDING,title.getDirection());
 
         Sort geo = request.getSort().get(2);
         assertEquals("location",geo.getName());
         GeoLocationSort geoSort= (GeoLocationSort) geo.getDirection();
-        assertEquals(Sort.Direction.DESCENDING,geoSort.getOrder());
+        assertEquals(Sort.Order.DESCENDING,geoSort.getOrder());
 
     }
 
@@ -73,7 +74,7 @@ class RequestDeserializationTests {
         Group group = request.getGroup();
         assertEquals("states",group.getField());
         assertEquals(4,group.getSize());
-        assertEquals(new Sort(Sort.SCORE,Sort.Direction.ASCENDING),group.getSort());
+        assertEquals(new Sort(Sort.SCORE, Sort.Order.ASCENDING),group.getSort());
         assertEquals(false,group.getCollapse());
     }
 
@@ -306,7 +307,7 @@ class RequestDeserializationTests {
         assertEquals("value",valueFacet.getType());
         assertEquals("top-five-states",valueFacet.getName());
         assertEquals(5,valueFacet.getSize());
-        assertEquals("count",valueFacet.getSort().getName());
+        assertEquals(FacetSortField.COUNT,valueFacet.getSortField());
     }
 
     @Test

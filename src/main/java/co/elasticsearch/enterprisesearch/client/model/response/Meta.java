@@ -14,13 +14,28 @@ import java.util.List;
 public class Meta {
     /**
      * String ID representing the request. Guaranteed to be unique.
-     *
-     * @param The request id
+     * @param requestId The request id
+     * @return the request id
      */
     @JsonProperty("request_id")
     private String requestId;
+    /**
+     * Array of warnings for the query. Included with error responses and success responses, so inspect all responses for warnings.
+     * @param warnings the warnings
+     * @return the warnings
+     */
     private List<String> warnings = new ArrayList<>();
+    /**
+     * Array of alerts for your deployment. Included with error responses and success responses, so inspect all responses for alerts.
+     * @param alerts the alerts
+     * @return the alerts
+     */
     private List<String> alerts = new ArrayList<>();
+    /**
+     * Object delimiting the pagination meta data.
+     * @param page the page metadata
+     * @return the page metadata
+     */
     private Page page = new Page();
 
 

@@ -18,8 +18,23 @@ import java.util.Objects;
 @RequiredArgsConstructor
 @ToString
 public class NumberRangeFilter implements Filter {
+    /**
+     * The field from your schema upon which to apply your filter
+     * @param name the field name
+     * @return the field name
+     */
     private final String name;
+    /**
+     * Inclusive lower bound of the range. Is required if to is not given.
+     * @param from the lower bound
+     * @return the lower bound
+     */
     private BigDecimal from;
+    /**
+     * Exclusive upper bound of the range. Is required if from is not given.
+     * @param to the upper bound
+     * @return the upper bound
+     */
     private BigDecimal to;
 
     public NumberRangeFilter(String name, BigDecimal from, BigDecimal to) {
@@ -68,13 +83,20 @@ public class NumberRangeFilter implements Filter {
         }
     }
 
-
+    /**
+     * Set the range
+     * @param range The range for this filter
+     * @return This filter
+     */
     public NumberRangeFilter setRange(NumberRange range) {
         this.from = range == null ? null : range.getFrom();
         this.to = range == null ? null : range.getTo();
         return this;
     }
-
+    /**
+     * Get the range for this filter
+     * @return The range
+     */
     public NumberRange getRange() {
         return from == null && to == null ? null : new NumberRange(from, to);
     }

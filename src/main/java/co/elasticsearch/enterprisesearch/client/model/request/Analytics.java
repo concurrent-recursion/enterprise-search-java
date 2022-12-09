@@ -16,8 +16,8 @@ import java.util.Set;
 public class Analytics {
     /**
      * Submit tags with the analytics parameter. Tags can be used to enrich each query with unique information. Once added, a tag cannot be removed. Supports arrays.
-     *
      * @param tags Array of strings representing the tags you’d like to apply to the query. You may submit up to 16 tags, and each may be up to 64 characters in length.
+     * @return the tags
      */
     private Set<String> tags = new HashSet<>();
 
@@ -27,6 +27,11 @@ public class Analytics {
         return this;
     }
 
+    /**
+     * Submit tags with the analytics parameter. Tags can be used to enrich each query with unique information. Once added, a tag cannot be removed. Supports arrays.
+     * @param tags Array of strings representing the tags you’d like to apply to the query. You may submit up to 16 tags, and each may be up to 64 characters in length.
+     * @return the tags
+     */
     public Analytics withTags(String... tags) {
         this.tags = new HashSet<>(Arrays.asList(tags));
         return this;

@@ -23,12 +23,17 @@ public class SearchField {
         this.name = fieldName;
     }
 
+    /**
+     * The field name
+     * @param name the field name
+     * @return the field name
+     */
     @JsonIgnore
     private String name;
     /**
      * Weight is given between 10 (most relevant) to 1 (least relevant)
-     *
      * @param weight A value between 1 and 10 for relevance
+     * @return the weight
      */
     @Min(1)
     @Max(10)

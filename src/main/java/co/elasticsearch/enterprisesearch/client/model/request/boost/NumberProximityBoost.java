@@ -24,19 +24,17 @@ public class NumberProximityBoost implements Boost {
      * The mode of the distribution, scores based on proximity to this value
      *
      * @param center The mode of the distribution, scores based on proximity to this value
+     * @return The center
      */
     private BigDecimal center;
     /**
      * Type of function to calculate the boost value. Can be linear, exponential, or gaussian.
      *
      * @param function The function to calculate the boost
+     * @return the function
      */
     private Function function;
 
-    /**
-     * Factor to alter the impact of a boost on the score of a document. Must be between 0 and 10. Defaults to 1.0. A negative factor or fractional factor will not deboost a result.
-     *
-     * @param factor A factor between 0.0 and 10.0
-     */
+
     private BigDecimal factor;
 }

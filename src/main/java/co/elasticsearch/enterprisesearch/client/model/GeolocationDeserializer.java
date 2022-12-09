@@ -10,6 +10,9 @@ import com.fasterxml.jackson.databind.node.TextNode;
 
 import java.io.IOException;
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 
 class GeolocationDeserializer extends StdDeserializer<GeoLocation> {
     protected GeolocationDeserializer() {

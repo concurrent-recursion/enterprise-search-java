@@ -10,6 +10,7 @@ import java.time.OffsetDateTime;
 import java.time.format.DateTimeFormatter;
 
 import static co.elasticsearch.enterprisesearch.client.model.request.filter.DateValueFilter.DATE_PATTERN;
+import static co.elasticsearch.enterprisesearch.client.model.request.filter.DateValueFilter.RFC_3339;
 
 @Getter
 @Setter
@@ -23,22 +24,44 @@ public class RecencyBoost implements Boost {
         return BoostType.PROXIMITY;
     }
 
+    /**
+     * Type of function to calculate the boost value. Can be linear, exponential, or gaussian.
+     *
+     * @param function The function to calculate the boost
+     * @return The function
+     */
     private Function function;
+
+    /**
+     * The mode of the distribution, specified as a RFC3339 DateTime
+     *
+     * @param center The anchor point for the boost
+     * @return The datetime center
+     */
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = DATE_PATTERN)
     private OffsetDateTime center;
+
+    /**
+     * Whether anchoring is based on special value "now"
+     * @param useNow true to anchor on "now"
+     * @return true if using special value "now", otherwise false
+     */
     @JsonIgnore
-    private boolean useNow = true;
+    private boolean useNow = false;
 
     private BigDecimal factor;
 
+    /**
+     * The center for this boost
+     * @return The string representation of the center point
+     */
     @JsonGetter
     public String getCenter() {
 
         if (useNow) {
             return "now";
         } else if (center != null) {
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ssXXX");
-            return formatter.format(center);
+            return RFC_3339.format(center);
         } else {
             return null;
         }

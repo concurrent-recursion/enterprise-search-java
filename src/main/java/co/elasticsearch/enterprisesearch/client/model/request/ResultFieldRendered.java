@@ -12,14 +12,19 @@ import java.util.Objects;
 @Setter
 @Accessors(chain = true)
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class ResultFieldRendered {
+class ResultFieldRendered {
+    /**
+     * The raw size of the field
+     * @param size the size of the field
+     * @return the size of the field
+     */
     @Min(20)
     private Integer size;
 
     /**
      * If true, return the raw text field if no snippet is found. If false, only use snippets.
-     *
      * @param fallback true to return the raw text field if no snippet is found. otherwise, only use snippets.
+     * @return fallback enabled
      */
     private Boolean fallback;
 

@@ -23,6 +23,7 @@ public class Page {
      * Number of results per page
      *
      * @param size Must be greater than or equal to 1 and less than or equal to 1000.
+     * @return page size
      */
     @Min(1)
     @Max(1000)
@@ -31,6 +32,7 @@ public class Page {
      * Page number of results to return, defaults to 1
      *
      * @param current Must be greater than or equal to 1 and less than or equal to 100
+     * @return current page number
      */
     @Min(1)
     @Max(100)

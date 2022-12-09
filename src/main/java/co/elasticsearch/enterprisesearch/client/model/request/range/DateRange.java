@@ -36,15 +36,26 @@ public class DateRange implements Range<OffsetDateTime> {
         }
     }
 
+    /**
+     * Inclusive lower bound of the range. Is required if to is not given.
+     * @param from the lower bound
+     * @return the lower bound
+     */
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = DATE_PATTERN)
     private OffsetDateTime from;
 
+    /**
+     * Exclusive upper bound of the range. Is required if from is not given.
+     * @param to the upper bound
+     * @return the upper bound
+     */
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = DATE_PATTERN)
     private OffsetDateTime to;
     /**
      * Name given to the range
      *
      * @param name Name given to the range
+     * @return the name of the range
      */
     private String name;
 }

@@ -22,8 +22,18 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 @ToString
 public class NumberValueFilter implements Filter {
+    /**
+     * The field from your schema upon which to apply your filter
+     * @param name the field name
+     * @return the field name
+     */
     private final String name;
 
+    /**
+     * The value upon which to filter. The value must be an exact match
+     * @param values The values to match on
+     * @return The values
+     */
     @JsonFormat(with = {JsonFormat.Feature.ACCEPT_SINGLE_VALUE_AS_ARRAY, JsonFormat.Feature.WRITE_SINGLE_ELEM_ARRAYS_UNWRAPPED})
     private List<BigDecimal> values = new ArrayList<>();
 

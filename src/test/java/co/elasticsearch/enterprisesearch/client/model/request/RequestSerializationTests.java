@@ -4,7 +4,7 @@ import co.elasticsearch.enterprisesearch.client.model.GeoLocation;
 import co.elasticsearch.enterprisesearch.client.model.GeolocationRange;
 import co.elasticsearch.enterprisesearch.client.model.Sort;
 import co.elasticsearch.enterprisesearch.client.model.request.boost.*;
-import co.elasticsearch.enterprisesearch.client.model.request.facet.Facet;
+import co.elasticsearch.enterprisesearch.client.model.request.facet.FacetSortField;
 import co.elasticsearch.enterprisesearch.client.model.request.facet.SearchRangeFacet;
 import co.elasticsearch.enterprisesearch.client.model.request.facet.ValueFacet;
 import co.elasticsearch.enterprisesearch.client.model.request.filter.*;
@@ -19,9 +19,7 @@ import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
 import java.time.OffsetDateTime;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 class RequestSerializationTests {
     private static final ObjectMapper objectMapper = new ObjectMapper();
@@ -61,19 +59,19 @@ class RequestSerializationTests {
 
     @Test
     void serializeSort(){
-        SearchApiRequest defaultPageSize = new SearchApiRequest().withSorts(new Sort(Sort.SCORE,Sort.Direction.ASCENDING));
+        SearchApiRequest defaultPageSize = new SearchApiRequest().withSorts(new Sort(Sort.SCORE, Sort.Order.ASCENDING));
         String json = writeValueAsString(defaultPageSize);
         Assertions.assertEquals("{\"sort\":{\"_score\":\"asc\"}}",json);
 
-        SearchApiRequest multiple = new SearchApiRequest().withSorts(new Sort("pubdate",Sort.Direction.DESCENDING),new Sort(Sort.SCORE, Sort.Direction.ASCENDING));
+        SearchApiRequest multiple = new SearchApiRequest().withSorts(new Sort("pubdate", Sort.Order.DESCENDING),new Sort(Sort.SCORE, Sort.Order.ASCENDING));
         json = writeValueAsString(multiple);
         Assertions.assertEquals("{\"sort\":[{\"pubdate\":\"desc\"},{\"_score\":\"asc\"}]}",json);
 
 
         SearchApiRequest geoSort = new SearchApiRequest();
         List<Sort> sorts = geoSort.getSort();
-        sorts.add(new Sort("location", new GeoLocationSort(new GeoLocation("-77.08","38.89")).setMode(GeoLocationSort.Mode.MIN).setOrder(Sort.Direction.ASCENDING)));
-        sorts.add(new Sort("title", Sort.Direction.ASCENDING));
+        sorts.add(new Sort("location", new GeoLocationSort(new GeoLocation("-77.08","38.89")).setMode(GeoLocationSort.Mode.MIN).setOrder(Sort.Order.ASCENDING)));
+        sorts.add(new Sort("title", Sort.Order.ASCENDING));
         json = writeValueAsString(geoSort);
         Assertions.assertEquals("{\"sort\":[{\"location\":{\"center\":[38.89,-77.08],\"mode\":\"min\",\"order\":\"asc\"}},{\"title\":\"asc\"}]}",json);
 
@@ -83,7 +81,7 @@ class RequestSerializationTests {
     void serializeGroup(){
         SearchApiRequest request = new SearchApiRequest().setGroup(
                 new Group()
-                        .setSort(new Sort(Sort.SCORE,Sort.Direction.ASCENDING))
+                        .setSort(new Sort(Sort.SCORE, Sort.Order.ASCENDING))
                         .setField("states")
                         .setCollapse(true)
                         .setSize(20)
@@ -104,7 +102,7 @@ class RequestSerializationTests {
 
         //Value
         request = new SearchApiRequest();
-        request.withFacets(new ValueFacet("states").setName("top-five-states").setSort(new Sort("count",Sort.Direction.DESCENDING)).setSize(5));
+        request.withFacets(new ValueFacet("states").setName("top-five-states").setSortField(FacetSortField.COUNT).setSortOrder(Sort.Order.DESCENDING).setSize(5));
         json = writeValueAsString(request);
         Assertions.assertEquals("{\"facets\":{\"states\":{\"type\":\"value\",\"name\":\"top-five-states\",\"sort\":{\"count\":\"desc\"},\"size\":5}}}",json);
 

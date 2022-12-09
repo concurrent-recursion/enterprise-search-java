@@ -1,5 +1,6 @@
 package co.elasticsearch.enterprisesearch.client.model.request.filter;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Getter;
@@ -20,10 +21,19 @@ import java.util.Objects;
 @RequiredArgsConstructor
 @ToString
 public class TextValueFilter implements Filter {
-    @JsonIgnore
+    /**
+     * The field from your schema upon which to apply your filter
+     * @param name the field name
+     * @return the field name
+     */
     private final String name;
 
-    @JsonIgnore
+    /**
+     * The value upon which to filter. The value must be an exact match, even casing: True will not match on true.
+     * @param values The values to match on
+     * @return The values
+     */
+    @JsonFormat(with = {JsonFormat.Feature.ACCEPT_SINGLE_VALUE_AS_ARRAY, JsonFormat.Feature.WRITE_SINGLE_ELEM_ARRAYS_UNWRAPPED})
     private List<String> values = new ArrayList<>();
 
 

@@ -31,9 +31,29 @@ public class SearchRangeFacet implements Facet {
     private String fieldName;
 
     private final String type = "range";
+    /**
+     * Name given to facet
+     * @param name The name
+     * @return the name
+     */
     private String name;
+    /**
+     * The mode of the distribution, specified as a latitude-longitude pair
+     * @param center the center
+     * @return the center
+     */
     private GeoLocation center;
+    /**
+     * The base unit of measurement
+     * @param unit The unit
+     * @return the unit
+     */
     private GeoLocation.Unit unit;
+    /**
+     * An array of range objects
+     * @param ranges The ranges
+     * @return The ranges
+     */
     private List<Range> ranges = new ArrayList<>();
 
 

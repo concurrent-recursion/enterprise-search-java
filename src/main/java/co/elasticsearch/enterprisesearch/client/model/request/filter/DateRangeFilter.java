@@ -21,18 +21,42 @@ import static co.elasticsearch.enterprisesearch.client.model.request.filter.Date
 @RequiredArgsConstructor
 @ToString
 public class DateRangeFilter implements Filter {
+    /**
+     * The field from your schema upon which to apply your filter
+     * @param name the field name
+     * @return The field name
+     */
     private final String name;
+    /**
+     * Inclusive lower bound of the range. Is required if to is not given.
+     * @param from the lower bound
+     * @return the lower bound
+     */
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = DATE_PATTERN)
     private OffsetDateTime from;
+    /**
+     * Exclusive upper bound of the range. Is required if from is not given.
+     * @param to the upper bound
+     * @return the upper bound
+     */
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = DATE_PATTERN)
     private OffsetDateTime to;
 
+    /**
+     * Set the range, upper bound exclusive, lower bound inclusive
+     * @param range The range
+     * @return This filter
+     */
     public DateRangeFilter setRange(DateRange range) {
         this.from = range == null ? null : range.getFrom();
         this.to = range == null ? null : range.getTo();
         return this;
     }
 
+    /**
+     * Get the filter range
+     * @return The filter range
+     */
     public DateRange getRange() {
         return from == null && to == null ? null : new DateRange(from, to);
     }

@@ -19,31 +19,63 @@ import java.util.Objects;
 @RequiredArgsConstructor
 @ToString
 public class GeolocationFilter implements Filter {
+    /**
+     * The field from your schema upon which to apply your filter
+     * @param name the field name
+     * @return the field name
+     */
     private final String name;
     /**
      * The mode of the distribution, specified as a latitude-longitude pair
+     * @param center the center
+     * @return the center
      */
     private GeoLocation center;
+    /**
+     * A number representing the distance unit. Is required if from or to is not given.
+     * @param distance the distance
+     * @return the distance
+     */
     private BigDecimal distance;
     /**
-     * The base unit of measurement: mm, cm, m (meters), km, in, ft, yd, or mi (mile)
+     * The base unit of measurement
+     * @param unit the unit
+     * @return the unit
      */
     private GeoLocation.Unit unit;
 
-
+    /**
+     * Inclusive lower bound of the range. Is required if to is not given.
+     * @param from the lower bound
+     * @return the lower bound
+     */
     private BigDecimal from;
+    /**
+     * Exclusive upper bound of the range. Is required if from is not given.
+     * @param to the upper bound
+     * @return the upper bound
+     */
     private BigDecimal to;
 
 
-    public GeolocationFilter setRange(GeolocationRange value) {
-        this.to = value == null ? null : value.getTo();
-        this.from = value == null ? null : value.getFrom();
-        this.unit = value == null ? null : value.getUnit();
-        this.center = value == null ? null : value.getCenter();
-        this.distance = value == null ? null : value.getDistance();
+    /**
+     * Set the range
+     * @param range The range for this filter
+     * @return This filter
+     */
+    public GeolocationFilter setRange(GeolocationRange range) {
+        this.to = range == null ? null : range.getTo();
+        this.from = range == null ? null : range.getFrom();
+        this.unit = range == null ? null : range.getUnit();
+        this.center = range == null ? null : range.getCenter();
+        this.distance = range == null ? null : range.getDistance();
         return this;
     }
 
+    /**
+     * Get the range for this filter
+     * @return The range
+     */
     public GeolocationRange getRange() {
         return new GeolocationRange().setCenter(center).setFrom(from).setTo(to).setUnit(unit).setDistance(distance);
     }

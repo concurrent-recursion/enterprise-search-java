@@ -12,5 +12,10 @@ import java.util.List;
 @Setter
 @Accessors(chain = true)
 public class DateArrayField implements Field {
+    /**
+     * The raw value of dates
+     * @param raw the raw value
+     * @return the raw values
+     */
     private List<OffsetDateTime> raw = new ArrayList<>();
 }

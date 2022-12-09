@@ -19,9 +19,26 @@ import java.util.Arrays;
 @Accessors(chain = true)
 public class GeoLocationSort implements SortOrder {
 
+    /**
+     * Center point will be used to calculate the distance from that point to the field in each document, and return the
+     * results ordered by distance. Center point can be specified using any of the geolocation field formats, see
+     * geolocation fields.
+     * @param center the center
+     * @return the center
+     */
     private final GeoLocation center;
+    /**
+     * How to calculate distance in case a field has several geo points. By default, the shortest distance is taken into account when sorting in ascending order and the longest distance when sorting in descending order.
+     * @param mode the sort mode
+     * @return the sort mode
+     */
     private Mode mode;
-    private Sort.Direction order;
+    /**
+     * The sort order
+     * @param order the sort order
+     * @return the sort order
+     */
+    private Sort.Order order;
 
 
     public GeoLocationSort(GeoLocation geoLocation) {
@@ -29,7 +46,7 @@ public class GeoLocationSort implements SortOrder {
     }
 
     @Override
-    public Sort.Direction getOrder() {
+    public Sort.Order getOrder() {
         return order;
     }
 

@@ -8,6 +8,16 @@ import lombok.experimental.Accessors;
 @Setter
 @Accessors(chain = true)
 public class TextField implements Field {
+    /**
+     * The raw text value of the field
+     * @param raw the raw value
+     * @return the raw value
+     */
     private String raw;
+    /**
+     * The snippet of the field
+     * @param snippet the snippet
+     * @return the snippet
+     */
     private String snippet;
 }

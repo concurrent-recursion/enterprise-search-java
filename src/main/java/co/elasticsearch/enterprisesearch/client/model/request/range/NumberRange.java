@@ -73,20 +73,20 @@ public class NumberRange implements Range<BigDecimal> {
 
     /**
      * Inclusive lower bound of the range. Is required if to is not given.
-     *
-     * @param from Inclusive lower bound of the range. Is required if to is not given.
+     * @param from the lower bound
+     * @return the lower bound
      */
     private BigDecimal from;
     /**
      * Exclusive upper bound of the range. Is required if from is not given.
-     *
-     * @param to Exclusive upper bound of the range
+     * @param to the upper bound
+     * @return the upper bound
      */
     private BigDecimal to;
     /**
      * Name given to the range
-     *
-     * @param name Name given to the range
+     * @param name the range name
+     * @return the range name
      */
     private String name;
 

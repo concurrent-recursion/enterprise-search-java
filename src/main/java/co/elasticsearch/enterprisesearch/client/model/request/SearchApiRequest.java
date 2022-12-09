@@ -29,18 +29,19 @@ public class SearchApiRequest {
      * The following Lucene query syntax is supported:
      * <ul>
      *     <li>double quoted strings</li>
-     *     <li><tt>+</tt> and <tt>-</tt></li>
-     *     <li><tt>AND</tt>, <tt>OR</tt>, <tt>NOT</tt></li>
+     *     <li><code>+</code> and <code>-</code></li>
+     *     <li><code>AND</code>, <code>OR</code>, <code>NOT</code></li>
      * </ul>
      *
      * @param query String or number to match
+     * @return query to match
      */
     private String query;
 
     /**
      * Object to delimit the pagination parameters.
-     *
      * @param page The page parameters
+     * @return the page
      */
     @JsonInclude(value = JsonInclude.Include.CUSTOM, valueFilter = Page.class)
     private Page page = new Page();
@@ -49,8 +50,8 @@ public class SearchApiRequest {
      * Sort your results in an order other than document score.
      * Using sort will override the default relevance scoring method.
      * A special sorting field name is available, _score, to order by relevance.
-     *
      * @param sort The fields to sort the results
+     * @return the sorts
      */
     private List<Sort> sort = new ArrayList<>();
 
@@ -58,16 +59,16 @@ public class SearchApiRequest {
      * Grouped results based on shared fields. The most relevant document will have a _group key.
      * The key includes all other documents that share an identical value within the grouped field.
      * Documents in the _group key will not appear anywhere else in the search response.
-     *
      * @param group The group parameters
+     * @return the groups
      */
     @JsonInclude(value = JsonInclude.Include.CUSTOM, valueFilter = Group.class)
     private Group group = new Group();
 
     /**
      * Value and Range facets for the query
-     *
-     * @param facets The facets to build on the search results
+     * @param facetMap The facets to build on the search results
+     * @return the facetMap of facets
      */
     @JsonProperty("facets")
     @Getter(AccessLevel.PACKAGE)
@@ -75,16 +76,16 @@ public class SearchApiRequest {
 
     /**
      * Apply conditions to field values to filter results.
-     *
      * @param filters The filters to apply to the search
+     * @return the filters
      */
     private Filter filters;
 
     /**
      * Use the precision parameter of the search API to tune precision and recall for a query. Learn more in Precision tuning (beta).<br>
      * The range of values represents a sliding scale that manages the inherent tradeoff between precision and recall.
-     *
      * @param precision A value between 1 and 11, inclusive. Lower values favor recall, while higher values favor precision.
+     * @return the precision
      */
     @Min(1)
     @Max(11)
@@ -93,8 +94,8 @@ public class SearchApiRequest {
     /**
      * Boosts affect the score of the entire document.<br>
      * Provide a field to boost, then increase document relevance based on values.
-     *
-     * @param boosts The boosts to apply to the search
+     * @param boostMap The boosts to apply to the search
+     * @return the boosts
      */
     @JsonProperty("boosts")
     @Getter(AccessLevel.PACKAGE)
@@ -102,14 +103,20 @@ public class SearchApiRequest {
     private Map<String, List<Boost>> boostMap = new LinkedHashMap<>();
 
 
+    /**
+     * Restricts a query to search only specific fields. Restricting fields will result in faster queries, especially for schemas with many text fields.
+     * Only available within text fields.
+     * @param searchFieldMap the search fields
+     * @return the search fields
+     */
     @JsonProperty("search_fields")
     @Getter(AccessLevel.PACKAGE)
     private Map<String, SearchField> searchFieldMap = new LinkedHashMap<>();
 
     /**
      * Change the fields which appear in search results and how their values are rendered.
-     *
-     * @param resultFields The fields to render in the results
+     * @param resultFieldMap The fields to render in the results
+     * @return the result fields
      */
     @JsonProperty("result_fields")
     @Getter(AccessLevel.PACKAGE)
@@ -120,6 +127,7 @@ public class SearchApiRequest {
      * Once added, a tag cannot be removed.
      *
      * @param analytics The analytics tags for this query
+     * @return the analytics
      */
     @JsonInclude(value = JsonInclude.Include.CUSTOM, valueFilter = Analytics.class)
     private Analytics analytics = new Analytics();
@@ -128,20 +136,38 @@ public class SearchApiRequest {
      * If true, generates an analytics query event for the search request. Defaults to true.
      *
      * @param recordAnalytics Whether analytics should be recorded
+     * @return true if analytics are recorded
      */
     @JsonProperty("record_analytics")
     private Boolean recordAnalytics;
 
+    /**
+     * Sort your results in an order other than document score.
+     * Using sort will override the default relevance scoring method.
+     * A special sorting field name is available, _score, to order by relevance.
+     * @param sorts The fields to sort the results
+     * @return This request
+     */
     public SearchApiRequest withSorts(Sort... sorts) {
         this.sort = Arrays.asList(sorts);
         return this;
     }
-
+    /**
+     * Tags can be used to enrich each query with unique information.
+     * @param tags The analytics tags for this query
+     * @return this request
+     */
     public SearchApiRequest withTags(String... tags) {
         analytics.withTags(tags);
         return this;
     }
 
+    /**
+     * Provides the counts of each value or range for a field. When faceting on an array field, each unique value will be
+     * included in the response. Each value is only counted once.
+     * @param facets the facets
+     * @return this request
+     */
     public SearchApiRequest withFacets(Facet... facets) {
         for (Facet facet : facets) {
             this.facetMap.putIfAbsent(facet.getFieldName(), new ArrayList<>());
@@ -150,6 +176,12 @@ public class SearchApiRequest {
         return this;
     }
 
+    /**
+     * Provide a field to boost, then increase document relevance based on values.
+     * Boosts affect the score of the entire document.
+     * @param boosts The boosts to apply
+     * @return this request
+     */
     public SearchApiRequest withBoosts(Boost... boosts) {
         for (Boost boost : boosts) {
             this.boostMap.put(boost.getName(), Collections.singletonList(boost));
@@ -157,6 +189,12 @@ public class SearchApiRequest {
         return this;
     }
 
+    /**
+     * Restricts a query to search only specific fields. Restricting fields will result in faster queries, especially
+     * for schemas with many text fields. Only available within text fields.
+     * @param fields The fields
+     * @return this request
+     */
     public SearchApiRequest withSearchFields(SearchField... fields) {
         for (SearchField field : fields) {
             this.searchFieldMap.put(field.getName(), field);
@@ -164,6 +202,11 @@ public class SearchApiRequest {
         return this;
     }
 
+    /**
+     * Change the fields which appear in search results and how their values are rendered.
+     * @param fields The fields to include in the result
+     * @return The fields to include in the result
+     */
     public SearchApiRequest withResultFields(ResultField... fields) {
         for (ResultField field : fields) {
             this.resultFieldMap.put(field.getName(), field);
@@ -171,13 +214,18 @@ public class SearchApiRequest {
         return this;
     }
 
+    /**
+     * Get the boosts
+     * @return the boosts
+     */
     @JsonIgnore
     public List<Boost> getBoosts() {
         return this.boostMap.values().stream().flatMap(Collection::stream).collect(Collectors.toList());
     }
 
     /**
-     * Restricts a query to search only specific fields. Restricting fields will result in faster queries, especially for schemas with many text fields.
+     * Get the search fields
+     * @return the search fields
      */
     @JsonIgnore
     public List<SearchField> getSearchFields() {
@@ -185,13 +233,18 @@ public class SearchApiRequest {
     }
 
     /**
-     * The fields which appear in search results and how their values are rendered.
+     * Get the result fields
+     * @return the result fields
      */
     @JsonIgnore
     public List<ResultField> getResultFields() {
         return new ArrayList<>(this.resultFieldMap.values());
     }
 
+    /**
+     * Get the facets
+     * @return The facets
+     */
     @JsonIgnore
     public List<Facet> getFacets() {
         return facetMap.values().stream().flatMap(Collection::stream).collect(Collectors.toList());

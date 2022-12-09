@@ -13,6 +13,11 @@ import static co.elasticsearch.enterprisesearch.client.model.request.filter.Date
 @Setter
 @Accessors(chain = true)
 public class DateField implements Field {
+    /**
+     * The raw date value
+     * @param raw the value
+     * @return the value
+     */
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = DATE_PATTERN)
     private OffsetDateTime raw;
 }
