@@ -13,7 +13,6 @@ import lombok.experimental.Accessors;
 
 import java.util.Arrays;
 
-//TODO: See https://www.elastic.co/guide/en/app-search/current/api-reference.html#overview-api-references-geolocation
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
 @Getter
 @Setter

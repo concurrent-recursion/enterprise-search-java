@@ -8,7 +8,7 @@ import com.fasterxml.jackson.databind.node.NumericNode;
 
 import java.io.IOException;
 
-public class RangeDeserializer extends StdDeserializer<Range> {
+class RangeDeserializer extends StdDeserializer<Range> {
     protected RangeDeserializer() {
         super(Range.class);
     }

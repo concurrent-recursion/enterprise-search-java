@@ -4,20 +4,21 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>co.elasticsearch</groupId>
     <artifactId>enterprise-search-java</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>0.0.1</version>
     <name>enterprise-search-java</name>
     <description>enterprise-search-java</description>
     <properties>
         <maven.compiler.source>11</maven.compiler.source>
         <maven.compiler.target>11</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven-lombok-plugin.version>1.18.20.0</maven-lombok-plugin.version>
 
         <jackson.version>2.14.0</jackson.version>
-        <openfeign.version>12.0</openfeign.version>
         <slf4j.version>2.0.3</slf4j.version>
         <lombok.version>1.18.24</lombok.version>
         <junit.version>5.9.1</junit.version>
         <javax.version>2.0.1.Final</javax.version>
+        <okhttp.version>4.10.0</okhttp.version>
     </properties>
     <dependencies>
         <dependency>
@@ -35,19 +36,9 @@
             <optional>true</optional>
         </dependency>
         <dependency>
-            <groupId>io.github.openfeign</groupId>
-            <artifactId>feign-core</artifactId>
-            <version>${openfeign.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>io.github.openfeign</groupId>
-            <artifactId>feign-jackson</artifactId>
-            <version>${openfeign.version}</version>
-        </dependency>
-        <dependency>
             <groupId>com.squareup.okhttp3</groupId>
             <artifactId>okhttp</artifactId>
-            <version>4.10.0</version>
+            <version>${okhttp.version}</version>
         </dependency>
 
         <dependency>
@@ -85,18 +76,50 @@
     <build>
         <plugins>
             <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.10.1</version>
+                <groupId>org.projectlombok</groupId>
+                <artifactId>lombok-maven-plugin</artifactId>
+                <version>${maven-lombok-plugin.version}</version>
                 <configuration>
-                    <annotationProcessorPaths>
-                        <path>
-                            <groupId>org.projectlombok</groupId>
-                            <artifactId>lombok</artifactId>
-                            <version>${lombok.version}</version>
-                        </path>
-                    </annotationProcessorPaths>
+                    <sourceDirectory>${project.basedir}/src/main/java</sourceDirectory>
+                    <outputDirectory>${project.build.directory}/delombok</outputDirectory>
+                    <addOutputDirectory>false</addOutputDirectory>
                 </configuration>
+                <executions>
+                    <execution>
+                        <phase>generate-sources</phase>
+                        <goals>
+                            <goal>delombok</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <configuration>
+                    <sourcepath>${project.build.directory}/delombok</sourcepath>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>attach-javadoc</id>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>attach-sources</id>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>

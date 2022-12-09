@@ -17,9 +17,8 @@ import java.util.List;
 @Data
 @Accessors(chain = true)
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
-@JsonPropertyOrder({"name", "center", "unit", "ranges"})
+@JsonPropertyOrder({"type","name", "center", "unit", "ranges"})
 @JsonDeserialize()
-@JsonIgnoreProperties({"type"})
 public class SearchRangeFacet implements Facet {
 
     public SearchRangeFacet() {
@@ -31,14 +30,14 @@ public class SearchRangeFacet implements Facet {
 
     private String fieldName;
 
+    private final String type = "range";
     private String name;
     private GeoLocation center;
     private GeoLocation.Unit unit;
     private List<Range> ranges = new ArrayList<>();
 
-    public String getType() {
-        return "range";
-    }
+
+
 
     @JsonGetter
     public BigDecimal[] center() {

@@ -25,7 +25,7 @@ class BoostDeserializer extends StdDeserializer<Boost> {
     }
 
     @Override
-    public Boost deserialize(JsonParser jsonParser, DeserializationContext deserializationContext) throws IOException, JacksonException {
+    public Boost deserialize(JsonParser jsonParser, DeserializationContext deserializationContext) throws IOException {
         TreeNode node = jsonParser.readValueAsTree();
 
 

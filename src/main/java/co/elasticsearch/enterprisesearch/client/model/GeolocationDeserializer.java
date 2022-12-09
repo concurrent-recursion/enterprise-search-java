@@ -17,7 +17,7 @@ class GeolocationDeserializer extends StdDeserializer<GeoLocation> {
     }
 
     @Override
-    public GeoLocation deserialize(JsonParser jsonParser, DeserializationContext deserializationContext) throws IOException, JacksonException {
+    public GeoLocation deserialize(JsonParser jsonParser, DeserializationContext deserializationContext) throws IOException {
         TreeNode node = jsonParser.readValueAsTree();
         if (node.isArray()) {
             ArrayNode geoArray = (ArrayNode) node;

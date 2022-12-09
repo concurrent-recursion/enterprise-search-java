@@ -2,7 +2,6 @@ package co.elasticsearch.enterprisesearch.client.model.request;
 
 import co.elasticsearch.enterprisesearch.TestUtil;
 import co.elasticsearch.enterprisesearch.client.model.GeoLocation;
-import co.elasticsearch.enterprisesearch.client.model.Range;
 import co.elasticsearch.enterprisesearch.client.model.Sort;
 import co.elasticsearch.enterprisesearch.client.model.request.boost.*;
 import co.elasticsearch.enterprisesearch.client.model.request.facet.Facet;

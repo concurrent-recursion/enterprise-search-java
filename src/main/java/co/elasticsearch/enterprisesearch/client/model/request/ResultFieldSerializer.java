@@ -6,7 +6,7 @@ import com.fasterxml.jackson.databind.ser.std.StdSerializer;
 
 import java.io.IOException;
 
-public class ResultFieldSerializer extends StdSerializer<ResultField> {
+class ResultFieldSerializer extends StdSerializer<ResultField> {
     protected ResultFieldSerializer() {
         super(ResultField.class);
     }

@@ -14,10 +14,9 @@ import javax.validation.constraints.Min;
 @Getter
 @Setter
 @Accessors(chain = true)
-@JsonPropertyOrder({"name", "sort", "size"})
+@JsonPropertyOrder({"type","name", "sort", "size"})
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonDeserialize
-@JsonIgnoreProperties({"type"})
 public class ValueFacet implements Facet {
 
     public ValueFacet() {
@@ -30,9 +29,8 @@ public class ValueFacet implements Facet {
 
     private String fieldName;
 
-    public String getType() {
-        return "value";
-    }
+    private final String type = "value";
+
 
     private String name;
     @Min(1)

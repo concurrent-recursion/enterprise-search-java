@@ -7,6 +7,8 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
 
+import java.util.Objects;
+
 @Getter
 @Setter
 @Accessors(chain = true)
@@ -32,4 +34,18 @@ public class Page extends co.elasticsearch.enterprisesearch.client.model.request
      */
     @JsonProperty("total_results")
     private Integer totalResults;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Page)) return false;
+        if (!super.equals(o)) return false;
+        Page page = (Page) o;
+        return Objects.equals(totalPages, page.totalPages) && Objects.equals(totalResults, page.totalResults);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), totalPages, totalResults);
+    }
 }
