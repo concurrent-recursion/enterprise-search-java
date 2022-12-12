@@ -1,6 +1,6 @@
 package co.elasticsearch.enterprisesearch.client.model;
 
-import co.elasticsearch.enterprisesearch.client.model.response.Meta;
+import co.elasticsearch.enterprisesearch.client.model.response.search.Meta;
 import lombok.Data;
 import lombok.experimental.Accessors;
 

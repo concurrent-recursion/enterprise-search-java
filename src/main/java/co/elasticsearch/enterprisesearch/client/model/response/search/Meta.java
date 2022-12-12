@@ -1,6 +1,7 @@
-package co.elasticsearch.enterprisesearch.client.model.response;
+package co.elasticsearch.enterprisesearch.client.model.response.search;
 
 import co.elasticsearch.enterprisesearch.client.model.Engine;
+import co.elasticsearch.enterprisesearch.client.model.response.Page;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import lombok.Data;

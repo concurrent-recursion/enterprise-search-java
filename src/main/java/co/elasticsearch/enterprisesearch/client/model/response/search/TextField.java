@@ -1,4 +1,4 @@
-package co.elasticsearch.enterprisesearch.client.model.response;
+package co.elasticsearch.enterprisesearch.client.model.response.search;
 
 import lombok.Getter;
 import lombok.Setter;

@@ -1,12 +1,13 @@
 package co.elasticsearch.enterprisesearch.client.model.response;
 
+import co.elasticsearch.enterprisesearch.client.model.response.search.*;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
 @Data
 @Accessors(chain = true)
-public class NationalParkDocument extends ResponseDocument{
+public class NationalParkDocument extends ResponseDocument {
 
     private TextField id;
     @JsonProperty("date_established")

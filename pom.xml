@@ -57,6 +57,13 @@
             <artifactId>validation-api</artifactId>
             <version>${javax.version}</version>
         </dependency>
+        <!-- MultivaluedMap - Allowing headers to be passed into client -->
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-collections4</artifactId>
+            <version>4.4</version>
+        </dependency>
+
 
     </dependencies>
 

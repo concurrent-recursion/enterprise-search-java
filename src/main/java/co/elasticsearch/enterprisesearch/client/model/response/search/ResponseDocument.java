@@ -1,4 +1,4 @@
-package co.elasticsearch.enterprisesearch.client.model.response;
+package co.elasticsearch.enterprisesearch.client.model.response.search;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;

@@ -1,15 +1,16 @@
 package co.elasticsearch.enterprisesearch.client;
 
 import co.elasticsearch.enterprisesearch.client.model.request.SearchApiRequest;
-import co.elasticsearch.enterprisesearch.client.model.response.SearchApiResponse;
-import co.elasticsearch.enterprisesearch.client.model.response.TextField;
-import org.junit.jupiter.api.Test;
+import co.elasticsearch.enterprisesearch.client.model.response.search.TextField;
 
-import java.io.IOException;
+import javax.swing.text.Document;
+import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class SearchClientTest {
+
+    private AppSearchClient client;
 
 
     static class TestResult{
@@ -20,6 +21,10 @@ class SearchClientTest {
         public void setTitle(TextField title){
             this.title = title;
         }
+    }
+
+    void test(){
+
     }
 
 }
