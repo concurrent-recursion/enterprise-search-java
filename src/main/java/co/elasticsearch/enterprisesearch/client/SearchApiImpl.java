@@ -16,7 +16,7 @@ import static co.elasticsearch.enterprisesearch.client.AppSearchClient.APP_JSON;
 
 @RequiredArgsConstructor
 @Slf4j
-public class SearchApiImpl<T extends ResponseDocument> implements SearchApi<T>{
+class SearchApiImpl<T extends ResponseDocument> implements SearchApi<T>{
 
     private final ObjectMapper objectMapper;
     private final String baseUrl;

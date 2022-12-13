@@ -19,6 +19,14 @@ public interface DocumentsApi<T> {
     IndexResponse index(String engineName, List<T> documents) throws IOException;
 
     /**
+     * Retrieves one or more documents by id. All field values are returned in string format
+     * @param engineName the engine name
+     * @param ids the document ids
+     * @return a list of documents matching the given ids. Documents not found will be null entries
+     */
+    ListResponse<T> getDocuments(String engineName, List<String> ids) throws IOException;
+
+    /**
      * Delete the documents with the given ids
      * @param engineName The engine name
      * @param ids A list of document ids to delete
@@ -33,5 +41,5 @@ public interface DocumentsApi<T> {
      * @param page A page object
      * @return A list of documents
      */
-    ListResponse<T> listDocuments(String engineName, Page page);
+    ListResponse<T> listDocuments(String engineName, Page page) throws IOException;
 }

@@ -81,4 +81,19 @@ public class AppSearchClient {
         return new SearchApiImpl<>(objectMapper,baseUrl,client,resultType);
     }
 
+    public EnginesApi engines(){
+        return new EnginesApiImpl(objectMapper,baseUrl,client);
+    }
+
+    public SchemaApi schemas(){
+        return new SchemaApiImpl(objectMapper,baseUrl,client);
+    }
+
+    public SearchSettingsApi searchSettings(){
+        return new SearchSettingsApiImpl(objectMapper,baseUrl,client);
+    }
+
+    public SourceEnginesApi sourceEngines(){
+        return new SourceEnginesApiImpl(objectMapper,baseUrl,client);
+    }
 }

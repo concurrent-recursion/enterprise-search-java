@@ -21,7 +21,7 @@ import java.math.BigDecimal;
 import java.time.OffsetDateTime;
 import java.util.List;
 
-class RequestSerializationTests {
+class SearchRequestSerializationTests {
     private static final ObjectMapper objectMapper = new ObjectMapper();
     static{
         objectMapper.registerModule(new JavaTimeModule()).disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS).enable(SerializationFeature.WRITE_SINGLE_ELEM_ARRAYS_UNWRAPPED);

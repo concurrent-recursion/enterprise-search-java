@@ -23,7 +23,7 @@ import java.util.Optional;
 import static co.elasticsearch.enterprisesearch.client.model.request.filter.DateValueFilter.RFC_3339;
 import static org.junit.jupiter.api.Assertions.*;
 
-class RequestDeserializationTests {
+class SearchRequestDeserializationTests {
     private static final ObjectMapper objectMapper = new ObjectMapper();
     static{
         objectMapper.registerModule(new JavaTimeModule());

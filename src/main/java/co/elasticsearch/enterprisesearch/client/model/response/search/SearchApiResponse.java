@@ -1,5 +1,6 @@
 package co.elasticsearch.enterprisesearch.client.model.response.search;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Data;
@@ -46,5 +47,14 @@ public class SearchApiResponse<T extends ResponseDocument> implements Iterable<T
     @Override
     public Spliterator<T> spliterator() {
         return results.spliterator();
+    }
+
+    @JsonIgnore
+    public boolean isWarning(){
+        return !meta.getWarnings().isEmpty();
+    }
+    @JsonIgnore
+    public boolean isAlert(){
+        return !meta.getAlerts().isEmpty();
     }
 }
