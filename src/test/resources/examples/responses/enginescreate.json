@@ -1,0 +1,9 @@
+{
+  "name":"my-large-engine",
+  "type":"default",
+  "language":null,
+  "index_create_settings_override": {
+    "number_of_shards": 10
+  },
+  "document_count": 0
+}

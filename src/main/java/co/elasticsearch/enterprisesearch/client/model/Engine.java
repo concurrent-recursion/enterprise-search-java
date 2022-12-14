@@ -2,22 +2,25 @@ package co.elasticsearch.enterprisesearch.client.model;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 import lombok.experimental.Accessors;
 
-@Data
+@Getter
+@Setter
 @Accessors(chain = true)
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
 public class Engine {
     /**
-     * The name of the AppSearch Engine
-     * @param name the engine name
-     * @return the engine name
+     * Name of the Engine. Can only contain lowercase letters, numbers, and hyphens.
+     * @param name name of the engine
+     * @return name of the engine
      */
     private String name;
     /**
-     * The type of the engine
-     * @param type the engine type
-     * @return the engine type
+     * Type of the Engine.
+     * @param type type of the engine
+     * @return type of the engine
      */
-    private String type;
+    private String type = "default";
 }

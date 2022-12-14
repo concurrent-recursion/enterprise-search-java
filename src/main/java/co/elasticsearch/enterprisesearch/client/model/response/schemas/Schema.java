@@ -1,16 +1,19 @@
 package co.elasticsearch.enterprisesearch.client.model.response.schemas;
 
+import co.elasticsearch.enterprisesearch.client.model.response.ErrorableResponse;
 import com.fasterxml.jackson.annotation.JsonAnyGetter;
 import com.fasterxml.jackson.annotation.JsonAnySetter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 import java.util.*;
 
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
-public class Schema {
+@ToString
+public class Schema implements ErrorableResponse {
 
     @JsonAnyGetter
     @JsonAnySetter
@@ -39,5 +42,18 @@ public class Schema {
     @JsonIgnore
     public boolean isError(){
         return !errors.isEmpty();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Schema)) return false;
+        Schema schema = (Schema) o;
+        return Objects.equals(fields, schema.fields) && Objects.equals(errors, schema.errors);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(fields, errors);
     }
 }

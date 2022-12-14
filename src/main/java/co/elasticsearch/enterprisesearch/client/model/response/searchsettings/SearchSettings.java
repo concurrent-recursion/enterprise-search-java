@@ -1,24 +1,28 @@
 package co.elasticsearch.enterprisesearch.client.model.response.searchsettings;
 
-import co.elasticsearch.enterprisesearch.client.model.request.ResultField;
-import co.elasticsearch.enterprisesearch.client.model.request.SearchField;
-import co.elasticsearch.enterprisesearch.client.model.request.boost.Boost;
+import co.elasticsearch.enterprisesearch.client.model.request.search.ResultField;
+import co.elasticsearch.enterprisesearch.client.model.request.search.SearchField;
+import co.elasticsearch.enterprisesearch.client.model.request.search.boost.Boost;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.experimental.Accessors;
 
 import java.util.*;
 import java.util.stream.Collectors;
 
 @Getter
 @Setter
+@Accessors(chain = true)
+@JsonPropertyOrder({"search_fields","result_fields","boosts","precision","precision_enabled"})
 public class SearchSettings {
     @Getter(AccessLevel.PACKAGE)
     @JsonProperty("search_fields")
-    private Map<String, SearchField> searchFieldMap = new HashMap<>();
+    private Map<String, SearchField> searchFieldMap = new LinkedHashMap<>();
     @Getter(AccessLevel.PACKAGE)
     @JsonProperty("result_fields")
     private Map<String, ResultField> resultFieldMap = new HashMap<>();
@@ -36,8 +40,38 @@ public class SearchSettings {
      * @return the result fields
      */
     @JsonIgnore
-    public List<ResultField> getResults() {
-        return new ArrayList<>(this.resultFieldMap.values());
+    public Collection<ResultField> getResults() {
+        return this.resultFieldMap.values();
+    }
+
+    /**
+     * Add a result field to the settings
+     * @param resultField the result field
+     * @return this search settings
+     */
+    @JsonIgnore
+    public SearchSettings addResultField(ResultField resultField){
+        this.resultFieldMap.put(resultField.getName(),resultField);
+        return this;
+    }
+
+    void setResultFieldMap(Map<String,ResultField> resultFieldMap){
+        for(Map.Entry<String,ResultField> entry : resultFieldMap.entrySet()){
+            entry.getValue().setName(entry.getKey());
+        }
+        this.resultFieldMap = resultFieldMap;
+    }
+
+
+    /**
+     * Adds a search field to the settings
+     * @param searchField the search field
+     * @return this search settings
+     */
+    @JsonIgnore
+    public SearchSettings addSearchField(SearchField searchField){
+        this.searchFieldMap.put(searchField.getName(),searchField);
+        return this;
     }
 
     /**
@@ -45,8 +79,15 @@ public class SearchSettings {
      * @return the search fields
      */
     @JsonIgnore
-    public List<SearchField> getSearchFields() {
-        return new ArrayList<>(this.searchFieldMap.values());
+    public Collection<SearchField> getSearchFields() {
+        return this.searchFieldMap.values();
+    }
+
+    void setSearchFieldMap(Map<String,SearchField> searchFieldMap){
+        for(Map.Entry<String,SearchField> searchField : searchFieldMap.entrySet()){
+            searchField.getValue().setName(searchField.getKey());
+        }
+        this.searchFieldMap = searchFieldMap;
     }
 
     /**
@@ -56,5 +97,25 @@ public class SearchSettings {
     @JsonIgnore
     public List<Boost> getBoosts() {
         return this.boostMap.values().stream().flatMap(Collection::stream).collect(Collectors.toList());
+    }
+
+    /**
+     * Add Boost to the search settings
+     * @param boost the boost
+     * @return this search settings
+     */
+    public SearchSettings addBoost(Boost boost){
+        this.boostMap.putIfAbsent(boost.getName(),new ArrayList<>());
+        this.boostMap.get(boost.getName()).add(boost);
+        return this;
+    }
+
+    void setBoostMap(Map<String,List<Boost>> boostMap){
+        for(Map.Entry<String,List<Boost>> boost : boostMap.entrySet()){
+            for(Boost b : boost.getValue()){
+                b.setName(boost.getKey());
+            }
+        }
+        this.boostMap = boostMap;
     }
 }

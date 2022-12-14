@@ -1,6 +1,6 @@
 package co.elasticsearch.enterprisesearch.client.model;
 
-import co.elasticsearch.enterprisesearch.client.model.request.GeoLocationSort;
+import co.elasticsearch.enterprisesearch.client.model.request.search.GeoLocationSort;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonKey;

@@ -1,0 +1,12 @@
+{
+  "description": "text",
+  "nps_link": "text",
+  "states": "text",
+  "title": "text",
+  "visitors": "number",
+  "world_heritage_site": "text",
+  "location": "geolocation",
+  "acres": "number",
+  "date_established": "date",
+  "square_km": "number"
+}

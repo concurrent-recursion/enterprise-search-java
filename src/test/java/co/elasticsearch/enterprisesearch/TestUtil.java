@@ -8,7 +8,6 @@ import java.nio.file.Paths;
 
 public class TestUtil {
 
-
     public static String readResourceFile(String path){
         Path resourcePath = Paths.get("src/test/resources",path);
         try {

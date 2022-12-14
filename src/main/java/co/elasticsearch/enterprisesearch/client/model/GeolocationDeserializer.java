@@ -1,6 +1,5 @@
 package co.elasticsearch.enterprisesearch.client.model;
 
-import com.fasterxml.jackson.core.JacksonException;
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.TreeNode;
 import com.fasterxml.jackson.databind.DeserializationContext;
@@ -10,9 +9,6 @@ import com.fasterxml.jackson.databind.node.TextNode;
 
 import java.io.IOException;
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
 
 class GeolocationDeserializer extends StdDeserializer<GeoLocation> {
     protected GeolocationDeserializer() {

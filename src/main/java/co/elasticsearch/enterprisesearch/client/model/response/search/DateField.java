@@ -7,7 +7,7 @@ import lombok.experimental.Accessors;
 
 import java.time.OffsetDateTime;
 
-import static co.elasticsearch.enterprisesearch.client.model.request.filter.DateValueFilter.DATE_PATTERN;
+import static co.elasticsearch.enterprisesearch.client.model.request.search.filter.DateValueFilter.DATE_PATTERN;
 
 @Getter
 @Setter

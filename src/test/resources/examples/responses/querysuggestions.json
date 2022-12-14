@@ -1,0 +1,18 @@
+{
+  "results": {
+    "documents": [
+      {
+        "suggestion": "carlsbad"
+      },
+      {
+        "suggestion": "carlsbad caverns"
+      },
+      {
+        "suggestion": "carolina"
+      }
+    ]
+  },
+  "meta": {
+    "request_id": "914f909793379ed5af9379b4401f19be"
+  }
+}

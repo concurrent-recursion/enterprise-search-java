@@ -1,0 +1,14 @@
+[
+  {
+    "id": "park_zion",
+    "deleted": true
+  },
+  {
+    "id": "park_yosmite",
+    "deleted": true
+  },
+  {
+    "id": "does_not_exist",
+    "deleted": false
+  }
+]

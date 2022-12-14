@@ -2,6 +2,7 @@ package co.elasticsearch.enterprisesearch.client.model.response;
 
 import co.elasticsearch.enterprisesearch.TestUtil;
 import co.elasticsearch.enterprisesearch.client.model.response.documents.IndexResponse;
+import co.elasticsearch.enterprisesearch.client.model.response.documents.IndexResult;
 import co.elasticsearch.enterprisesearch.client.model.response.search.SearchApiResponse;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JavaType;
@@ -36,8 +37,8 @@ class ResponseParseTest {
     @Test
     void indexResponse() throws JsonProcessingException{
         String json = TestUtil.readResourceFile("examples/responses/index.json");
-        JavaType listType = TypeFactory.defaultInstance().constructParametricType(List.class, IndexResponse.IndexResult.class);
-        List<IndexResponse.IndexResult> results = objectMapper.readValue(json,listType);
+        JavaType listType = TypeFactory.defaultInstance().constructParametricType(List.class, IndexResult.class);
+        List<IndexResult> results = objectMapper.readValue(json,listType);
         IndexResponse response = new IndexResponse().setDocuments(results);
         assertEquals(3,response.getDocuments().size());
         assertTrue(response.isError());

@@ -4,18 +4,17 @@ package co.elasticsearch.enterprisesearch.client.model.response.documents;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 import lombok.experimental.Accessors;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Spliterator;
+import java.util.*;
 import java.util.function.Consumer;
 
 @Getter
 @Setter
 @Accessors(chain = true)
+@ToString
 public class ListResponse<T>  implements Iterable<T>{
     /**
      * The documents from the given engine
@@ -47,5 +46,18 @@ public class ListResponse<T>  implements Iterable<T>{
     @Override
     public Spliterator<T> spliterator() {
         return documents.spliterator();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof ListResponse)) return false;
+        ListResponse<?> that = (ListResponse<?>) o;
+        return documents.equals(that.documents) && meta.equals(that.meta);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(documents, meta);
     }
 }

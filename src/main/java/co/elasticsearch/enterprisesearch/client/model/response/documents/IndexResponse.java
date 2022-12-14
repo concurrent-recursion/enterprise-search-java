@@ -1,10 +1,9 @@
 package co.elasticsearch.enterprisesearch.client.model.response.documents;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
+import co.elasticsearch.enterprisesearch.client.model.response.ErrorableResponse;
 import com.fasterxml.jackson.annotation.JsonValue;
 import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.ToString;
 import lombok.experimental.Accessors;
 import org.jetbrains.annotations.NotNull;
 
@@ -14,7 +13,8 @@ import java.util.stream.Collectors;
 
 @Data
 @Accessors(chain = true)
-public class IndexResponse implements Iterable<IndexResponse.IndexResult>{
+@ToString
+public class IndexResponse implements Iterable<IndexResult>, ErrorableResponse {
     /**
      * The results of the index operation
      * @param documents the results
@@ -44,7 +44,7 @@ public class IndexResponse implements Iterable<IndexResponse.IndexResult>{
      * @return true if there is an IndexResult with an error, otherwise false
      */
     public boolean isError(){
-        return documents.stream().anyMatch(r -> !r.errors.isEmpty());
+        return documents.stream().anyMatch(r -> !r.getErrors().isEmpty());
     }
 
     /**
@@ -52,7 +52,7 @@ public class IndexResponse implements Iterable<IndexResponse.IndexResult>{
      * @return A list of IndexResult objects that have an error
      */
     public List<IndexResult> getErrors(){
-        return documents.stream().filter(r -> r.errors.isEmpty()).collect(Collectors.toList());
+        return documents.stream().filter(r -> !r.getErrors().isEmpty()).collect(Collectors.toList());
     }
 
     /**
@@ -63,26 +63,16 @@ public class IndexResponse implements Iterable<IndexResponse.IndexResult>{
         return documents.stream().map(IndexResult::getId).collect(Collectors.toSet());
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof IndexResponse)) return false;
+        IndexResponse response = (IndexResponse) o;
+        return Objects.equals(documents, response.documents);
+    }
 
-    @Getter
-    @Setter
-    @Accessors(chain = true)
-    public static class IndexResult {
-
-
-        /**
-         * The indexed document's id
-         *
-         * @param id the document id
-         * @return the document id
-         */
-        private String id;
-        /**
-         * List of errors, if any, while indexing the document
-         *
-         * @param errors list of errors
-         * @return list of errors
-         */
-        private List<String> errors = new ArrayList<>();
+    @Override
+    public int hashCode() {
+        return Objects.hash(documents);
     }
 }

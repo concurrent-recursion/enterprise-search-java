@@ -1,7 +1,7 @@
 package co.elasticsearch.enterprisesearch.client.model.response.search;
 
 import co.elasticsearch.enterprisesearch.client.model.Engine;
-import co.elasticsearch.enterprisesearch.client.model.response.Page;
+import co.elasticsearch.enterprisesearch.client.model.response.ResponsePage;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import lombok.Data;
@@ -45,7 +45,7 @@ public class Meta {
      * @param page the page metadata
      * @return the page metadata
      */
-    private Page page = new Page();
+    private ResponsePage page = new ResponsePage();
 
     /**
      * The engine associated with this search request

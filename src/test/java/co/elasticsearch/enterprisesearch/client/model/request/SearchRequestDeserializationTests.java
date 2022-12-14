@@ -3,13 +3,14 @@ package co.elasticsearch.enterprisesearch.client.model.request;
 import co.elasticsearch.enterprisesearch.TestUtil;
 import co.elasticsearch.enterprisesearch.client.model.GeoLocation;
 import co.elasticsearch.enterprisesearch.client.model.Sort;
-import co.elasticsearch.enterprisesearch.client.model.request.boost.*;
-import co.elasticsearch.enterprisesearch.client.model.request.facet.Facet;
-import co.elasticsearch.enterprisesearch.client.model.request.facet.FacetSortField;
-import co.elasticsearch.enterprisesearch.client.model.request.facet.SearchRangeFacet;
-import co.elasticsearch.enterprisesearch.client.model.request.facet.ValueFacet;
-import co.elasticsearch.enterprisesearch.client.model.request.filter.*;
-import co.elasticsearch.enterprisesearch.client.model.request.range.NumberRange;
+import co.elasticsearch.enterprisesearch.client.model.request.search.*;
+import co.elasticsearch.enterprisesearch.client.model.request.search.boost.*;
+import co.elasticsearch.enterprisesearch.client.model.request.search.facet.Facet;
+import co.elasticsearch.enterprisesearch.client.model.request.search.facet.FacetSortField;
+import co.elasticsearch.enterprisesearch.client.model.request.search.facet.SearchRangeFacet;
+import co.elasticsearch.enterprisesearch.client.model.request.search.facet.ValueFacet;
+import co.elasticsearch.enterprisesearch.client.model.request.search.filter.*;
+import co.elasticsearch.enterprisesearch.client.model.request.search.range.NumberRange;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
@@ -20,7 +21,7 @@ import java.time.OffsetDateTime;
 import java.util.List;
 import java.util.Optional;
 
-import static co.elasticsearch.enterprisesearch.client.model.request.filter.DateValueFilter.RFC_3339;
+import static co.elasticsearch.enterprisesearch.client.model.request.search.filter.DateValueFilter.RFC_3339;
 import static org.junit.jupiter.api.Assertions.*;
 
 class SearchRequestDeserializationTests {
@@ -270,9 +271,9 @@ class SearchRequestDeserializationTests {
         SearchApiRequest searchFieldRequest = objectMapper.readValue(searchFieldString, SearchApiRequest.class);
         List<SearchField> fields = searchFieldRequest.getSearchFields();
         SearchField titleField = fields.get(0);
-        assertEquals(new SearchField("title").setWeight(10),titleField);
+        assertEquals(new SearchField("title").setWeight(new BigDecimal("10")),titleField);
         SearchField descriptionField = fields.get(1);
-        assertEquals(new SearchField("description").setWeight(5),descriptionField);
+        assertEquals(new SearchField("description").setWeight(new BigDecimal("5")),descriptionField);
         SearchField statesField = fields.get(2);
         assertEquals(new SearchField("states"),statesField);
     }

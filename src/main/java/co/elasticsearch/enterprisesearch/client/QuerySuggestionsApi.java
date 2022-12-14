@@ -3,8 +3,6 @@ package co.elasticsearch.enterprisesearch.client;
 import co.elasticsearch.enterprisesearch.client.model.request.querysuggestions.QuerySuggestionsRequest;
 import co.elasticsearch.enterprisesearch.client.model.response.querysuggestions.QuerySuggestionsResponse;
 
-import java.io.IOException;
-
 public interface QuerySuggestionsApi {
-    QuerySuggestionsResponse getQuerySuggestion(String engine, QuerySuggestionsRequest request) throws IOException;
+    QuerySuggestionsResponse getQuerySuggestion(String engine, QuerySuggestionsRequest request);
 }

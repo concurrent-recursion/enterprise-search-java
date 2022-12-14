@@ -1,6 +1,6 @@
 package co.elasticsearch.enterprisesearch.client.model;
 
-import co.elasticsearch.enterprisesearch.client.model.request.filter.DateValueFilter;
+import co.elasticsearch.enterprisesearch.client.model.request.search.filter.DateValueFilter;
 import com.fasterxml.jackson.core.TreeNode;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ArrayNode;

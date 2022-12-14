@@ -11,5 +11,10 @@ import java.util.List;
 @Setter
 @Accessors(chain = true)
 public class Document {
+    /**
+     * The fields contained in the document
+     * @param fields the fields in the documents
+     * @return the fields in the document
+     */
     private List<String> fields = new ArrayList<>();
 }

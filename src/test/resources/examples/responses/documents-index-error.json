@@ -1,0 +1,16 @@
+[
+  {
+    "id": "park_yosemite",
+    "errors": []
+  },
+  {
+    "id": "",
+    "errors": [
+      "Missing required key 'id'"
+    ]
+  },
+  {
+    "id": "park_wind-cave",
+    "errors": []
+  }
+]

@@ -3,13 +3,14 @@ package co.elasticsearch.enterprisesearch.client.model.request;
 import co.elasticsearch.enterprisesearch.client.model.GeoLocation;
 import co.elasticsearch.enterprisesearch.client.model.GeolocationRange;
 import co.elasticsearch.enterprisesearch.client.model.Sort;
-import co.elasticsearch.enterprisesearch.client.model.request.boost.*;
-import co.elasticsearch.enterprisesearch.client.model.request.facet.FacetSortField;
-import co.elasticsearch.enterprisesearch.client.model.request.facet.SearchRangeFacet;
-import co.elasticsearch.enterprisesearch.client.model.request.facet.ValueFacet;
-import co.elasticsearch.enterprisesearch.client.model.request.filter.*;
-import co.elasticsearch.enterprisesearch.client.model.request.range.DateRange;
-import co.elasticsearch.enterprisesearch.client.model.request.range.NumberRange;
+import co.elasticsearch.enterprisesearch.client.model.request.search.*;
+import co.elasticsearch.enterprisesearch.client.model.request.search.boost.*;
+import co.elasticsearch.enterprisesearch.client.model.request.search.facet.FacetSortField;
+import co.elasticsearch.enterprisesearch.client.model.request.search.facet.SearchRangeFacet;
+import co.elasticsearch.enterprisesearch.client.model.request.search.facet.ValueFacet;
+import co.elasticsearch.enterprisesearch.client.model.request.search.filter.*;
+import co.elasticsearch.enterprisesearch.client.model.request.search.range.DateRange;
+import co.elasticsearch.enterprisesearch.client.model.request.search.range.NumberRange;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
@@ -251,7 +252,7 @@ class SearchRequestSerializationTests {
         String json = writeValueAsString(request);
         Assertions.assertEquals("{\"search_fields\":{\"title\":{},\"description\":{},\"states\":{}}}",json);
 
-        request = new SearchApiRequest().withSearchFields(new SearchField("title").setWeight(10),new SearchField("description").setWeight(5),new SearchField("states").setWeight(3));
+        request = new SearchApiRequest().withSearchFields(new SearchField("title").setWeight(new BigDecimal("10")),new SearchField("description").setWeight(new BigDecimal("5")),new SearchField("states").setWeight(new BigDecimal("3")));
         json = writeValueAsString(request);
         Assertions.assertEquals("{\"search_fields\":{\"title\":{\"weight\":10},\"description\":{\"weight\":5},\"states\":{\"weight\":3}}}",json);
     }

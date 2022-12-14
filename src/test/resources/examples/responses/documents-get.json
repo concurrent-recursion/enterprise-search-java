@@ -1,0 +1,18 @@
+[
+  {
+    "description": "Located at the junction of the Colorado Plateau, Great Basin, and Mojave Desert, this park contains sandstone features such as mesas, rock towers, and canyons, including the Virgin River Narrows. The various sandstone formations and the forks of the Virgin River create a wilderness divided into four ecosystems: desert, riparian, woodland, and coniferous forest.",
+    "nps_link": "https://www.nps.gov/zion/index.htm",
+    "states": [
+      "Utah"
+    ],
+    "title": "Zion",
+    "visitors": "4295127",
+    "world_heritage_site": "false",
+    "location": "37.3,-113.05",
+    "acres": "147237.02",
+    "square_km": "595.8",
+    "date_established": "1919-11-19T06:00:00Z",
+    "id": "park_zion"
+  },
+  null
+]

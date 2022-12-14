@@ -1,0 +1,58 @@
+{
+  "search_fields": {
+    "description": {
+      "weight": 9.2
+    },
+    "nps_link": {
+      "weight": 1
+    },
+    "states": {
+      "weight": 1
+    },
+    "title": {
+      "weight": 3
+    },
+    "world_heritage_site": {
+      "weight": 1
+    },
+    "id": {
+      "weight": 1
+    }
+  },
+  "result_fields": {
+    "title": {
+      "snippet": {
+        "size": 20,
+        "fallback": true
+      }
+    },
+    "description": {
+      "raw": {
+        "size": 200
+      },
+      "snippet": {
+        "size": 100
+      }
+    },
+    "states": {
+      "raw" : {},
+      "snippet": {
+        "size": 20,
+        "fallback": true
+      }
+    }
+  },
+  "boosts": {
+    "world_heritage_site": [
+      {
+        "type": "value",
+        "factor": 9.5,
+        "value": [
+          "true"
+        ]
+      }
+    ]
+  },
+  "precision": 2,
+  "precision_enabled": true
+}

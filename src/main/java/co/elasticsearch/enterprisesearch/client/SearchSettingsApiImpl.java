@@ -4,12 +4,12 @@ import co.elasticsearch.enterprisesearch.client.model.response.searchsettings.Se
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import okhttp3.*;
+import okhttp3.HttpUrl;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
 
-import java.io.IOException;
 import java.util.Objects;
-
-import static co.elasticsearch.enterprisesearch.client.AppSearchClient.APP_JSON;
 
 @Slf4j
 @RequiredArgsConstructor
@@ -22,56 +22,25 @@ class SearchSettingsApiImpl implements SearchSettingsApi{
 
 
     @Override
-    public SearchSettings get(String engineName) throws IOException {
+    public SearchSettings get(String engineName) {
         HttpUrl url = Objects.requireNonNull(HttpUrl.parse(baseUrl + SEARCH_SETTINGS_PATH)).newBuilder().setPathSegment(4, engineName).build();
-
-        log.debug("Getting Search Settings {} ",url);
-        Request okRequest = new Request.Builder()
-                .url(url)
-                .get()
-                .build();
-
-        try (Response response = client.newCall(okRequest).execute()) {
-            if (!response.isSuccessful() || response.body() == null) {
-                throw new IOException("Unexpected Response " + response);
-            }
-            return objectMapper.readValue(response.body().byteStream(),SearchSettings.class);
-        }
+        Request okRequest = new Request.Builder().url(url).get().build();
+        return ClientUtils.marshalResponse(client,okRequest,objectMapper,SearchSettings.class);
     }
 
     @Override
-    public SearchSettings update(String engineName, SearchSettings settings) throws IOException {
+    public SearchSettings update(String engineName, SearchSettings settings) {
         HttpUrl url = Objects.requireNonNull(HttpUrl.parse(baseUrl + SEARCH_SETTINGS_PATH)).newBuilder().setPathSegment(4, engineName).build();
-
         log.debug("Updating Search Settings {} , Settings:{}",url,settings);
-        Request okRequest = new Request.Builder()
-                .url(url)
-                .put(RequestBody.create(objectMapper.writeValueAsBytes(settings), APP_JSON))
-                .build();
-
-        try (Response response = client.newCall(okRequest).execute()) {
-            if (!response.isSuccessful() || response.body() == null) {
-                throw new IOException("Unexpected Response " + response);
-            }
-            return objectMapper.readValue(response.body().byteStream(),SearchSettings.class);
-        }
+        Request okRequest = new Request.Builder().url(url).put(ClientUtils.marshalPayload(objectMapper,settings)).build();
+        return ClientUtils.marshalResponse(client,okRequest,objectMapper,SearchSettings.class);
     }
 
     @Override
-    public SearchSettings reset(String engineName) throws IOException {
+    public SearchSettings reset(String engineName){
         HttpUrl url = Objects.requireNonNull(HttpUrl.parse(baseUrl + SEARCH_SETTINGS_PATH + "/reset")).newBuilder().setPathSegment(4, engineName).build();
-
         log.debug("Resetting Search Settings {}",url);
-        Request okRequest = new Request.Builder()
-                .url(url)
-                .post(RequestBody.create("",null))
-                .build();
-
-        try (Response response = client.newCall(okRequest).execute()) {
-            if (!response.isSuccessful() || response.body() == null) {
-                throw new IOException("Unexpected Response " + response);
-            }
-            return objectMapper.readValue(response.body().byteStream(),SearchSettings.class);
-        }
+        Request okRequest = new Request.Builder().url(url).post(RequestBody.create("",null)).build();
+        return ClientUtils.marshalResponse(client,okRequest,objectMapper,SearchSettings.class);
     }
 }
