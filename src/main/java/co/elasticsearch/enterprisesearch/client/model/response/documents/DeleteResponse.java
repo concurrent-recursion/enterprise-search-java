@@ -19,7 +19,7 @@ import java.util.stream.Collectors;
 public class DeleteResponse implements ErrorableResponse {
     /**
      * The results
-     * @param results the results
+     * @param documents the results
      * @return the results
      */
     private List<DeleteResult> documents = new ArrayList<>();

@@ -1,6 +1,6 @@
 package co.elasticsearch.enterprisesearch.client;
 
-import co.elasticsearch.enterprisesearch.client.model.request.search.SearchApiRequest;
+import co.elasticsearch.enterprisesearch.client.model.request.search.SearchRequest;
 import co.elasticsearch.enterprisesearch.client.model.response.search.ResponseDocument;
 import co.elasticsearch.enterprisesearch.client.model.response.search.SearchApiResponse;
 import com.fasterxml.jackson.databind.JavaType;
@@ -23,7 +23,7 @@ class SearchApiImpl<T extends ResponseDocument> implements SearchApi<T>{
     private final Class<T> resultType;
 
     @Override
-    public SearchApiResponse<T> search(String engineName,SearchApiRequest request ){
+    public SearchApiResponse<T> search(String engineName, SearchRequest request ){
         HttpUrl url = Objects.requireNonNull(HttpUrl.parse(baseUrl + "/api/as/v1/engines/{engineName}/search")).newBuilder().setPathSegment(4, engineName).build();
 
         Request okRequest = new Request.Builder().url(url).post(ClientUtils.marshalPayload(objectMapper,request)).build();

@@ -33,7 +33,7 @@ class SearchRequestDeserializationTests {
     @Test
     void basicProperties() throws JsonProcessingException {
         String requestExample = TestUtil.readResourceFile("examples/requests/basicProperties.json");
-        SearchApiRequest request = objectMapper.readValue(requestExample,SearchApiRequest.class);
+        SearchRequest request = objectMapper.readValue(requestExample, SearchRequest.class);
         assertEquals("Parks",request.getQuery());
         assertEquals(10,request.getPrecision());
         assertEquals(true,request.getRecordAnalytics());
@@ -42,7 +42,7 @@ class SearchRequestDeserializationTests {
     @Test
     void queryWithPage() throws JsonProcessingException {
         String requestExample = TestUtil.readResourceFile("examples/requests/queryWithPage.json");
-        SearchApiRequest request = objectMapper.readValue(requestExample,SearchApiRequest.class);
+        SearchRequest request = objectMapper.readValue(requestExample, SearchRequest.class);
         assertEquals("This is a test",request.getQuery());
         assertEquals(200,request.getPage().getSize());
         assertEquals(100,request.getPage().getCurrent());
@@ -51,7 +51,7 @@ class SearchRequestDeserializationTests {
     @Test
     void queryWithSorts() throws JsonProcessingException {
         String requestExample = TestUtil.readResourceFile("examples/requests/sorting.json");
-        SearchApiRequest request = objectMapper.readValue(requestExample,SearchApiRequest.class);
+        SearchRequest request = objectMapper.readValue(requestExample, SearchRequest.class);
         assertEquals("This is a test",request.getQuery());
         Sort score = request.getSort().get(0);
         assertEquals(Sort.SCORE,score.getName());
@@ -71,7 +71,7 @@ class SearchRequestDeserializationTests {
     @Test
     void queryWithGroup() throws JsonProcessingException {
         String requestExample = TestUtil.readResourceFile("examples/requests/group.json");
-        SearchApiRequest request = objectMapper.readValue(requestExample,SearchApiRequest.class);
+        SearchRequest request = objectMapper.readValue(requestExample, SearchRequest.class);
         Group group = request.getGroup();
         assertEquals("states",group.getField());
         assertEquals(4,group.getSize());
@@ -82,7 +82,7 @@ class SearchRequestDeserializationTests {
     @Test
     void filterSimple() throws JsonProcessingException {
         String simpleFilter = TestUtil.readResourceFile("examples/requests/filterSimple.json");
-        SearchApiRequest simpleFilterRequest = objectMapper.readValue(simpleFilter, SearchApiRequest.class);
+        SearchRequest simpleFilterRequest = objectMapper.readValue(simpleFilter, SearchRequest.class);
         Filter whcFilter = simpleFilterRequest.getFilters();
         assertInstanceOf(TextValueFilter.class,whcFilter);
         TextValueFilter whcTextFilter = (TextValueFilter) whcFilter;
@@ -93,7 +93,7 @@ class SearchRequestDeserializationTests {
     void filterArray() throws JsonProcessingException {
 
         String arrayFilter = TestUtil.readResourceFile("examples/requests/filterArray.json");
-        SearchApiRequest request = objectMapper.readValue(arrayFilter, SearchApiRequest.class);
+        SearchRequest request = objectMapper.readValue(arrayFilter, SearchRequest.class);
         Filter filter = request.getFilters();
         assertInstanceOf(TextValueFilter.class,filter);
         TextValueFilter f = (TextValueFilter) filter;
@@ -103,7 +103,7 @@ class SearchRequestDeserializationTests {
     @Test
     void filterDateRange() throws JsonProcessingException {
         String dateRangeFilter = TestUtil.readResourceFile("examples/requests/filterDateRange.json");
-        SearchApiRequest dateRangeRequest = objectMapper.readValue(dateRangeFilter,SearchApiRequest.class);
+        SearchRequest dateRangeRequest = objectMapper.readValue(dateRangeFilter, SearchRequest.class);
         Filter dateEstablishedFilter = dateRangeRequest.getFilters();
         assertInstanceOf(DateRangeFilter.class,dateEstablishedFilter);
         DateRangeFilter dateRange = (DateRangeFilter) dateEstablishedFilter;
@@ -115,7 +115,7 @@ class SearchRequestDeserializationTests {
     @Test
     void filterGeolocation() throws JsonProcessingException {
         String filterJson = TestUtil.readResourceFile("examples/requests/filterGeolocation.json");
-        SearchApiRequest request = objectMapper.readValue(filterJson,SearchApiRequest.class);
+        SearchRequest request = objectMapper.readValue(filterJson, SearchRequest.class);
         Filter abstractFilter = request.getFilters();
         assertInstanceOf(GeolocationFilter.class,abstractFilter);
         GeolocationFilter geolocationFilter = (GeolocationFilter) abstractFilter;
@@ -127,7 +127,7 @@ class SearchRequestDeserializationTests {
     @Test
     void filterBoolean() throws JsonProcessingException {
         String dateRangeFilter = TestUtil.readResourceFile("examples/requests/filterBoolean.json");
-        SearchApiRequest dateRangeRequest = objectMapper.readValue(dateRangeFilter,SearchApiRequest.class);
+        SearchRequest dateRangeRequest = objectMapper.readValue(dateRangeFilter, SearchRequest.class);
         Filter rootFilter = dateRangeRequest.getFilters();
         assertInstanceOf(BooleanFilter.class,rootFilter);
         BooleanFilter booleanFilter = (BooleanFilter) rootFilter;
@@ -147,7 +147,7 @@ class SearchRequestDeserializationTests {
     @Test
     void filterNested() throws JsonProcessingException {
         String filterString = TestUtil.readResourceFile("examples/requests/filterNested.json");
-        SearchApiRequest nestedRequest = objectMapper.readValue(filterString, SearchApiRequest.class);
+        SearchRequest nestedRequest = objectMapper.readValue(filterString, SearchRequest.class);
         Filter rootFilter = nestedRequest.getFilters();
         assertInstanceOf(BooleanFilter.class,rootFilter);
         BooleanFilter booleanFilter = (BooleanFilter) rootFilter;
@@ -162,7 +162,7 @@ class SearchRequestDeserializationTests {
     @Test
     void boostTextValue() throws JsonProcessingException {
         String boostString = TestUtil.readResourceFile("examples/requests/boostText.json");
-        SearchApiRequest boostRequest = objectMapper.readValue(boostString, SearchApiRequest.class);
+        SearchRequest boostRequest = objectMapper.readValue(boostString, SearchRequest.class);
         Optional<Boost> oBoost = boostRequest.getBoosts().stream().filter(b -> b.getName().equals("world_heritage_site")).findFirst();
         assertTrue(oBoost.isPresent());
         Boost boost = oBoost.get();
@@ -177,7 +177,7 @@ class SearchRequestDeserializationTests {
     @Test
     void boostNumericValue() throws JsonProcessingException{
         String boostString = TestUtil.readResourceFile("examples/requests/boostNumeric.json");
-        SearchApiRequest boostRequest = objectMapper.readValue(boostString, SearchApiRequest.class);
+        SearchRequest boostRequest = objectMapper.readValue(boostString, SearchRequest.class);
         Optional<Boost> oBoost = boostRequest.getBoosts().stream().filter(b -> b.getName().equals("acres")).findFirst();
         assertTrue(oBoost.isPresent());
         Boost boost = oBoost.get();
@@ -192,7 +192,7 @@ class SearchRequestDeserializationTests {
     @Test
     void boostDateValue() throws JsonProcessingException{
         String boostString = TestUtil.readResourceFile("examples/requests/boostDate.json");
-        SearchApiRequest boostRequest = objectMapper.readValue(boostString, SearchApiRequest.class);
+        SearchRequest boostRequest = objectMapper.readValue(boostString, SearchRequest.class);
         Optional<Boost> oBoost = boostRequest.getBoosts().stream().filter(b -> b.getName().equals("date_established")).findFirst();
         assertTrue(oBoost.isPresent());
         Boost boost = oBoost.get();
@@ -207,7 +207,7 @@ class SearchRequestDeserializationTests {
     @Test
     void boostFunctional() throws JsonProcessingException{
         String boostString = TestUtil.readResourceFile("examples/requests/boostFunctional.json");
-        SearchApiRequest boostRequest = objectMapper.readValue(boostString, SearchApiRequest.class);
+        SearchRequest boostRequest = objectMapper.readValue(boostString, SearchRequest.class);
         Optional<Boost> oBoost = boostRequest.getBoosts().stream().filter(b -> b.getName().equals("visitors")).findFirst();
         assertTrue(oBoost.isPresent());
         Boost boost = oBoost.get();
@@ -222,7 +222,7 @@ class SearchRequestDeserializationTests {
     @Test
     void boostNumericProximity() throws JsonProcessingException{
         String boostString = TestUtil.readResourceFile("examples/requests/boostNumericProximity.json");
-        SearchApiRequest boostRequest = objectMapper.readValue(boostString, SearchApiRequest.class);
+        SearchRequest boostRequest = objectMapper.readValue(boostString, SearchRequest.class);
         Optional<Boost> oBoost = boostRequest.getBoosts().stream().filter(b -> b.getName().equals("acres")).findFirst();
         assertTrue(oBoost.isPresent());
         Boost boost = oBoost.get();
@@ -237,7 +237,7 @@ class SearchRequestDeserializationTests {
     @Test
     void boostGeolocationProximity() throws JsonProcessingException{
         String boostString = TestUtil.readResourceFile("examples/requests/boostGeolocation.json");
-        SearchApiRequest boostRequest = objectMapper.readValue(boostString, SearchApiRequest.class);
+        SearchRequest boostRequest = objectMapper.readValue(boostString, SearchRequest.class);
         Optional<Boost> oBoost = boostRequest.getBoosts().stream().filter(b -> b.getName().equals("location")).findFirst();
         assertTrue(oBoost.isPresent());
         Boost boost = oBoost.get();
@@ -252,7 +252,7 @@ class SearchRequestDeserializationTests {
     @Test
     void boostRecency() throws JsonProcessingException{
         String boostString = TestUtil.readResourceFile("examples/requests/boostRecency.json");
-        SearchApiRequest boostRequest = objectMapper.readValue(boostString, SearchApiRequest.class);
+        SearchRequest boostRequest = objectMapper.readValue(boostString, SearchRequest.class);
         Optional<Boost> oBoost = boostRequest.getBoosts().stream().filter(b -> b.getName().equals("date_established")).findFirst();
         assertTrue(oBoost.isPresent());
         Boost boost = oBoost.get();
@@ -268,7 +268,7 @@ class SearchRequestDeserializationTests {
     @Test
     void searchFields() throws JsonProcessingException{
         String searchFieldString = TestUtil.readResourceFile("examples/requests/searchField.json");
-        SearchApiRequest searchFieldRequest = objectMapper.readValue(searchFieldString, SearchApiRequest.class);
+        SearchRequest searchFieldRequest = objectMapper.readValue(searchFieldString, SearchRequest.class);
         List<SearchField> fields = searchFieldRequest.getSearchFields();
         SearchField titleField = fields.get(0);
         assertEquals(new SearchField("title").setWeight(new BigDecimal("10")),titleField);
@@ -281,7 +281,7 @@ class SearchRequestDeserializationTests {
     @Test
     void resultFields() throws JsonProcessingException{
         String searchFieldString = TestUtil.readResourceFile("examples/requests/resultFields.json");
-        SearchApiRequest searchFieldRequest = objectMapper.readValue(searchFieldString, SearchApiRequest.class);
+        SearchRequest searchFieldRequest = objectMapper.readValue(searchFieldString, SearchRequest.class);
         List<ResultField> resultFields = searchFieldRequest.getResultFields();
         ResultField title = resultFields.get(0);
         assertEquals(new ResultField("title").withRaw().withoutSnippet(),title);
@@ -294,13 +294,13 @@ class SearchRequestDeserializationTests {
     @Test
     void analytics() throws JsonProcessingException {
         String searchFieldString = TestUtil.readResourceFile("examples/requests/analyticsTags.json");
-        SearchApiRequest analyticsRequest = objectMapper.readValue(searchFieldString, SearchApiRequest.class);
+        SearchRequest analyticsRequest = objectMapper.readValue(searchFieldString, SearchRequest.class);
         assertIterableEquals(List.of("web","mobile"),analyticsRequest.getAnalytics().getTags());
     }
     @Test
     void facetValues() throws JsonProcessingException {
         String searchFieldString = TestUtil.readResourceFile("examples/requests/facetText.json");
-        SearchApiRequest facetsRequest = objectMapper.readValue(searchFieldString, SearchApiRequest.class);
+        SearchRequest facetsRequest = objectMapper.readValue(searchFieldString, SearchRequest.class);
         Optional<Facet> optionalStates = facetsRequest.getFacets().stream().filter(f -> f.getFieldName().equals("states")).findFirst();
         assertTrue(optionalStates.isPresent());
         assertInstanceOf(ValueFacet.class,optionalStates.get());
@@ -314,7 +314,7 @@ class SearchRequestDeserializationTests {
     @Test
     void facetRange() throws JsonProcessingException {
         String searchFieldString = TestUtil.readResourceFile("examples/requests/facetRange.json");
-        SearchApiRequest facetsRequest = objectMapper.readValue(searchFieldString, SearchApiRequest.class);
+        SearchRequest facetsRequest = objectMapper.readValue(searchFieldString, SearchRequest.class);
         Optional<Facet> acres = facetsRequest.getFacets().stream().filter(f -> f.getFieldName().equals("acres")).findFirst();
         assertTrue(acres.isPresent());
         assertInstanceOf(SearchRangeFacet.class,acres.get());

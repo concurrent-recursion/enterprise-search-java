@@ -22,7 +22,7 @@ import java.util.stream.Collectors;
 @Data
 @Accessors(chain = true)
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
-public class SearchApiRequest {
+public class SearchRequest {
 
     /**
      * String or number to match.<br>
@@ -149,7 +149,7 @@ public class SearchApiRequest {
      * @param sorts The fields to sort the results
      * @return This request
      */
-    public SearchApiRequest withSorts(Sort... sorts) {
+    public SearchRequest withSorts(Sort... sorts) {
         this.sort = Arrays.asList(sorts);
         return this;
     }
@@ -158,7 +158,7 @@ public class SearchApiRequest {
      * @param tags The analytics tags for this query
      * @return this request
      */
-    public SearchApiRequest withTags(String... tags) {
+    public SearchRequest withTags(String... tags) {
         analytics.withTags(tags);
         return this;
     }
@@ -169,7 +169,7 @@ public class SearchApiRequest {
      * @param facets the facets
      * @return this request
      */
-    public SearchApiRequest withFacets(Facet... facets) {
+    public SearchRequest withFacets(Facet... facets) {
         for (Facet facet : facets) {
             this.facetMap.putIfAbsent(facet.getFieldName(), new ArrayList<>());
             this.facetMap.get(facet.getFieldName()).add(facet);
@@ -183,7 +183,7 @@ public class SearchApiRequest {
      * @param boosts The boosts to apply
      * @return this request
      */
-    public SearchApiRequest withBoosts(Boost... boosts) {
+    public SearchRequest withBoosts(Boost... boosts) {
         for (Boost boost : boosts) {
             this.boostMap.put(boost.getName(), Collections.singletonList(boost));
         }
@@ -196,7 +196,7 @@ public class SearchApiRequest {
      * @param fields The fields
      * @return this request
      */
-    public SearchApiRequest withSearchFields(SearchField... fields) {
+    public SearchRequest withSearchFields(SearchField... fields) {
         for (SearchField field : fields) {
             this.searchFieldMap.put(field.getName(), field);
         }
@@ -208,7 +208,7 @@ public class SearchApiRequest {
      * @param fields The fields to include in the result
      * @return The fields to include in the result
      */
-    public SearchApiRequest withResultFields(ResultField... fields) {
+    public SearchRequest withResultFields(ResultField... fields) {
         for (ResultField field : fields) {
             this.resultFieldMap.put(field.getName(), field);
         }

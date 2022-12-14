@@ -31,7 +31,17 @@ public class SearchSettings {
     @JsonFormat(with = {JsonFormat.Feature.ACCEPT_SINGLE_VALUE_AS_ARRAY, JsonFormat.Feature.WRITE_SINGLE_ELEM_ARRAYS_UNWRAPPED})
     private Map<String, List<Boost>> boostMap = new LinkedHashMap<>();
 
+    /**
+     * The value of the precision parameter must be an integer between 1 and 11, inclusive. The range of values represents a sliding scale that manages the inherent tradeoff between precision and recall. Lower values favor recall, while higher values favor precision.
+     * @param precision the precision
+     * @return the precision
+     */
     private Integer precision;
+    /**
+     * Whether precision is enabled on this engine
+     * @param precisionEnabled whether precision is enabled
+     * @return true if precision is enabled, otherwise false
+     */
     @JsonProperty("precision_enabled")
     private Boolean precisionEnabled;
 
