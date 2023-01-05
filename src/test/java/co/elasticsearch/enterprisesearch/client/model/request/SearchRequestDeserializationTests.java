@@ -114,7 +114,7 @@ class SearchRequestDeserializationTests {
 
     @Test
     void filterGeolocation() throws JsonProcessingException {
-        String filterJson = TestUtil.readResourceFile("examples/requests/filterGeolocation.json");
+        String filterJson = TestUtil.readResourceFile("examples/requests/filterGeoLocation.json");
         SearchRequest request = objectMapper.readValue(filterJson, SearchRequest.class);
         Filter abstractFilter = request.getFilters();
         assertInstanceOf(GeolocationFilter.class,abstractFilter);
