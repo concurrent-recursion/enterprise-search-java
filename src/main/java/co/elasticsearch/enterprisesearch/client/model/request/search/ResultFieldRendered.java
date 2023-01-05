@@ -1,11 +1,11 @@
 package co.elasticsearch.enterprisesearch.client.model.request.search;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
+import jakarta.validation.constraints.Min;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
 
-import javax.validation.constraints.Min;
 import java.util.Objects;
 
 @Getter

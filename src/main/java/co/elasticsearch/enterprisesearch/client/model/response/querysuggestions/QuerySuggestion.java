@@ -1,7 +1,5 @@
 package co.elasticsearch.enterprisesearch.client.model.response.querysuggestions;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonValue;
 import lombok.*;
 import lombok.experimental.Accessors;
 

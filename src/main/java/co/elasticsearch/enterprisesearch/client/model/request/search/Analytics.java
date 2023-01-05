@@ -2,10 +2,10 @@ package co.elasticsearch.enterprisesearch.client.model.request.search;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
+import jakarta.validation.constraints.Max;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
-import javax.validation.constraints.Max;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;

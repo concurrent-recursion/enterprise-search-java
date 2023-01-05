@@ -1,6 +1,5 @@
 package co.elasticsearch.enterprisesearch.client.model.response.engines;
 
-import co.elasticsearch.enterprisesearch.client.model.request.engines.CreateEngine;
 import co.elasticsearch.enterprisesearch.client.model.response.ErrorableResponse;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;

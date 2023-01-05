@@ -2,12 +2,12 @@ package co.elasticsearch.enterprisesearch.client.model.request.search;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
 
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
 import java.math.BigDecimal;
 import java.util.Objects;
 
@@ -40,26 +40,6 @@ public class SearchField {
     @Max(10)
     private BigDecimal weight;
 
-/*    @JsonIgnore
-    public SearchField setWeight(int weight){
-        this.weight = new BigDecimal(weight);
-        return this;
-    }
-    @JsonIgnore
-    public SearchField setWeight(float weight){
-        this.weight = BigDecimal.valueOf(weight);
-        return this;
-    }
-    @JsonIgnore
-    public SearchField setWeight(double weight){
-        this.weight = BigDecimal.valueOf(weight);
-        return this;
-    }
-
-    public SearchField setWeight(BigDecimal weight){
-        this.weight = weight;
-        return this;
-    }*/
 
     @Override
     public boolean equals(Object o) {
