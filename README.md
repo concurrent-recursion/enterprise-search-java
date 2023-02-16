@@ -17,9 +17,9 @@ Example for Maven:
 
 ```xml
 <dependency>
-  <groupId>com.github.concurrent-recursion</groupId>
-  <artifactId>enterprise-search-java</artifactId>
-  <version>x.y.z</version>
+    <groupId>io.github.concurrent-recursion</groupId>
+    <artifactId>enterprisesearch-java-client</artifactId>
+    <version>0.0.2</version>
 </dependency>
 ```
 
