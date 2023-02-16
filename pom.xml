@@ -2,11 +2,38 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
+
     <groupId>io.github.concurrent-recursion</groupId>
     <artifactId>enterprisesearch-java-client</artifactId>
     <version>0.0.2</version>
-    <name>Enterprisearch Java Client</name>
+    <packaging>jar</packaging>
+
+    <name>Enterprise Search Java Client</name>
     <description>Unofficial Java client for Elasticsearch Enterprise Search Application</description>
+    <url>https://github.com/concurrent-recursion/enterprise-search-java</url>
+
+    <licenses>
+        <license>
+            <name>Apache-2.0</name>
+            <url>https://www.apache.org/licenses/LICENSE-2.0.txt</url>
+        </license>
+    </licenses>
+
+    <developers>
+        <developer>
+            <name>Brad Hall</name>
+            <email>hall.bradleya@gmail.com</email>
+            <organization></organization>
+            <organizationUrl>https://www.github.com/concurrent-recursion</organizationUrl>
+        </developer>
+    </developers>
+
+    <scm>
+        <connection>scm:git:git://github.com/concurrent-recursion/enterprise-java-client.git</connection>
+        <developerConnection>scm:git:ssh://github.com:concurrent-recursion/enterprise-java-client.git</developerConnection>
+        <url>http://github.com/concurrent-recursion/enterprise-java-client/tree/master</url>
+    </scm>
+
     <properties>
         <maven.compiler.source>11</maven.compiler.source>
         <maven.compiler.target>11</maven.compiler.target>
