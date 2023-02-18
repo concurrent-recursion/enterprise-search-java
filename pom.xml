@@ -23,7 +23,7 @@
         <developer>
             <name>Brad Hall</name>
             <email>hall.bradleya@gmail.com</email>
-            <organization></organization>
+            <organization/>
             <organizationUrl>https://www.github.com/concurrent-recursion</organizationUrl>
         </developer>
     </developers>
@@ -46,7 +46,7 @@
         <maven-gpg-plugin.version>3.0.1</maven-gpg-plugin.version>
 
         <jackson.version>2.14.1</jackson.version>
-        <slf4j.version>2.0.5</slf4j.version>
+        <slf4j.version>2.0.6</slf4j.version>
         <lombok.version>1.18.24</lombok.version>
         <junit.version>5.9.1</junit.version>
         <jakarta-validation.version>3.0.2</jakarta-validation.version>
