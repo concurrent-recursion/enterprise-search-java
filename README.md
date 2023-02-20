@@ -67,7 +67,7 @@ if(indexResponse.isError()){
 SearchApi<NationalParkSearch> parkSearchClient = client.search(NationalParkSearch.class);
 
 //Execute a search against the specified engine
-SearchApiResponse<NationalParkSearch> results = parkSearchClient.search("my-engine",new SearchApiRequest().setQuery("zion"));
+SearchApiResponse<NationalParkSearch> results = parkSearchClient.search("my-engine",new SearchRequest().setQuery("zion"));
 log.info("Found {} results",results.getMeta().getPage().getTotalResults());
 for(NationalParkSearch park : results){
     log.info("Found id:{}, title:{}",park.getId().getRaw(),park.getTitle().getRaw());
