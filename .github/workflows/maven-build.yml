@@ -14,9 +14,8 @@ jobs:
           distribution: 'temurin'
       - name: Build with Maven
         run: mvn --batch-mode --no-transfer-progress clean verify
+      - run: mkdir staging && cp target/surefire-reports/TEST-*.xml staging
       - uses: actions/upload-artifact@v3
-      - name: Package Artifacts
-        run: mkdir staging && cp target/surefire-reports/TEST-*.xml staging
         with:
           name: Test Reports
           path: staging
