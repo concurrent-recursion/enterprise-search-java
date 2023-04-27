@@ -1,13 +1,23 @@
 package co.elasticsearch.enterprisesearch.client;
 
+import co.elasticsearch.enterprisesearch.client.model.AppSearchErrorResponseException;
 import co.elasticsearch.enterprisesearch.client.model.request.Page;
+import co.elasticsearch.enterprisesearch.client.model.response.ErrorResponse;
 import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.exc.MismatchedInputException;
+import dev.failsafe.RetryPolicy;
+import dev.failsafe.Timeout;
+import dev.failsafe.okhttp.FailsafeCall;
 import lombok.experimental.UtilityClass;
 import lombok.extern.slf4j.Slf4j;
 import okhttp3.*;
 
 import java.io.IOException;
+import java.net.ProtocolException;
+import java.security.SecureRandom;
+import java.time.Duration;
+import java.util.concurrent.TimeUnit;
 
 import static co.elasticsearch.enterprisesearch.client.AppSearchClient.APP_JSON;
 
@@ -16,33 +26,67 @@ import static co.elasticsearch.enterprisesearch.client.AppSearchClient.APP_JSON;
 class ClientUtils {
     public <T> T marshalResponse(final OkHttpClient client, final Request request, final ObjectMapper mapper, final Class<T> responseType){
         log.debug("Making HttpRequest {} {}",request.method(),request.url());
-        try(Response response = client.newCall(request).execute()){
-            log.trace("Response Code:{}",response.code());
+        FailsafeCall failsafeCall = FailsafeCall
+                .with(RetryPolicy.ofDefaults())
+                .compose(client.newCall(request));
+
+        try(Response response = failsafeCall.execute()){
             if(response.body() == null){
                 if(responseType == null){
                     return null;
                 }else {
-                    throw new ElasticServerException("Server Response is empty");
+                    throw new ElasticServerException("Server Response is empty, Expecting " + responseType);
                 }
             }
-            return mapper.readValue(response.body().byteStream(),responseType);
-        }catch (IOException e){
+            return marshal(mapper,response,responseType);
+        }catch(IOException e){
+            log.error("Exception during request",e);
             throw new ElasticServerException(e);
         }
     }
     public <T> T marshalResponse(final OkHttpClient client, final Request request, final ObjectMapper mapper, final JavaType responseType){
         log.debug("Making HttpRequest {} {}",request.method(),request.url());
-        try(Response response = client.newCall(request).execute()){
-            log.trace("Response Code:{}",response.code());
+        FailsafeCall failsafeCall = FailsafeCall
+                .with(RetryPolicy.ofDefaults())
+                .compose(client.newCall(request));
+        try(Response response = failsafeCall.execute()){
             if(response.body() == null){
                 if(responseType == null){
                     return null;
                 }else {
-                    throw new ElasticServerException("Server Response is empty");
+                    throw new ElasticServerException("Server Response is empty, Expecting " + responseType);
                 }
             }
-            return mapper.readValue(response.body().byteStream(),responseType);
-        }catch (IOException e){
+            return marshal(mapper,response,responseType);
+        }catch(IOException e){
+            log.error("Exception during request",e);
+            throw new ElasticServerException(e);
+        }
+    }
+
+
+    private <T> T marshal(final ObjectMapper mapper, Response response,JavaType responseType) throws IOException{
+        String responseBody = response.body().string();
+        try {
+            return mapper.readValue(responseBody, responseType);
+        }catch(MismatchedInputException oops){
+            ErrorResponse err = mapper.readValue(responseBody, ErrorResponse.class);
+            throw new AppSearchErrorResponseException(err,response.code());
+        }catch(IOException e){
+            log.error("Exception parsing response: {}",responseBody);
+            throw new ElasticServerException(e);
+        }
+    }
+
+    private <T> T marshal(final ObjectMapper mapper, Response response,Class<T> responseType) throws IOException{
+        String responseBody = response.body().string();
+        try {
+            return mapper.readValue(responseBody, responseType);
+        }catch(MismatchedInputException oops){
+            ErrorResponse err = mapper.readValue(responseBody, ErrorResponse.class);
+            throw new AppSearchErrorResponseException(err,response.code());
+        }catch(IOException e){
+            log.error("Exception parsing response: {}",responseBody);
             throw new ElasticServerException(e);
         }
     }
@@ -65,6 +109,8 @@ class ClientUtils {
             throw new ElasticClientException(e);
         }
     }
+
+
 
 
 }

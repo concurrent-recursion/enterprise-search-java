@@ -78,7 +78,6 @@ public class AppSearchClient {
         return new DocumentsApiImpl<>(objectMapper,baseUrl,client,documentType);
     }
 
-
     public <T extends ResponseDocument> SearchApi<T> search(Class<T> resultType){
         return new SearchApiImpl<>(objectMapper,baseUrl,client,resultType);
     }
