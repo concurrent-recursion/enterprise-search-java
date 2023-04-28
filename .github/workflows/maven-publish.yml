@@ -24,8 +24,8 @@ jobs:
         env:
           MAVEN_USERNAME: ${{ secrets.OSSRH_USERNAME }}
           MAVEN_PASSWORD: ${{ secrets.OSSRH_TOKEN }}
-      - uses: actions/upload-artifact@v3
       - run: mkdir staging && cp target/*.jar staging
+      - uses: actions/upload-artifact@v3
         with:
           name: Package
           path: staging
