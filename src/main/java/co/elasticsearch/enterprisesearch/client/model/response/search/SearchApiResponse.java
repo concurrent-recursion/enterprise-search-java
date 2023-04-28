@@ -1,5 +1,6 @@
 package co.elasticsearch.enterprisesearch.client.model.response.search;
 
+import co.elasticsearch.enterprisesearch.client.model.response.ErrorableResponse;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -16,7 +17,7 @@ import java.util.function.Consumer;
 @Data
 @Accessors(chain = true)
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
-public class SearchApiResponse<T extends ResponseDocument> implements Iterable<T>{
+public class SearchApiResponse<T extends ResponseDocument> implements Iterable<T>, ErrorableResponse {
     /**
      * Object delimiting the results meta data.
      * @param meta the page metadata
@@ -32,6 +33,8 @@ public class SearchApiResponse<T extends ResponseDocument> implements Iterable<T
      */
     @JsonIgnoreProperties(ignoreUnknown = true)
     private List<T> results = new ArrayList<>();
+
+    private List<String> errors = new ArrayList<>();
 
     @NotNull
     @Override
@@ -56,5 +59,10 @@ public class SearchApiResponse<T extends ResponseDocument> implements Iterable<T
     @JsonIgnore
     public boolean isAlert(){
         return !meta.getAlerts().isEmpty();
+    }
+
+    @Override
+    public boolean isError() {
+        return !errors.isEmpty();
     }
 }

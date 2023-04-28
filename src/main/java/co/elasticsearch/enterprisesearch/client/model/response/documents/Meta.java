@@ -1,18 +1,21 @@
 package co.elasticsearch.enterprisesearch.client.model.response.documents;
 
 import co.elasticsearch.enterprisesearch.client.model.response.ResponsePage;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 import lombok.experimental.Accessors;
 
+import java.io.Serializable;
 import java.util.Objects;
 
 @Getter
 @Setter
 @Accessors(chain = true)
 @ToString
-public class Meta {
+@JsonInclude(JsonInclude.Include.NON_EMPTY)
+public class Meta implements Serializable {
     /**
      * The page metadata
      * @param page the page

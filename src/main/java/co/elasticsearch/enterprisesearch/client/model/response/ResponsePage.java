@@ -9,6 +9,7 @@ import lombok.Setter;
 import lombok.ToString;
 import lombok.experimental.Accessors;
 
+import java.io.Serializable;
 import java.util.Objects;
 
 @Getter
@@ -17,7 +18,7 @@ import java.util.Objects;
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
 @JsonPropertyOrder({"total_pages", "size", "current", "total_results"})
 @ToString
-public class ResponsePage extends Page {
+public class ResponsePage extends Page implements Serializable {
     /**
      * Response Value<br>
      * Number representing the total pages of results. Value is 0 when you paginate beyond 10,000 results.

@@ -11,7 +11,7 @@ public abstract class ResponseDocument {
      * @param meta the document metadata
      * @return the document metadata
      */
-    @JsonProperty("_meta")
+    @JsonProperty("meta")
     private MetaField meta;
 
 

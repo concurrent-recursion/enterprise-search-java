@@ -70,11 +70,20 @@ class ClientUtils {
         try {
             return mapper.readValue(responseBody, responseType);
         }catch(MismatchedInputException oops){
-            ErrorResponse err = mapper.readValue(responseBody, ErrorResponse.class);
+            ErrorResponse err = attemptErrorResponseMarshal(mapper,responseBody,oops);
             throw new AppSearchErrorResponseException(err,response.code());
         }catch(IOException e){
             log.error("Exception parsing response: {}",responseBody);
             throw new ElasticServerException(e);
+        }
+    }
+
+    private ErrorResponse attemptErrorResponseMarshal(final ObjectMapper mapper, String responseBody, final MismatchedInputException cause) throws ElasticClientException{
+        try{
+            return mapper.readValue(responseBody, ErrorResponse.class);
+        }catch (Exception e){
+            log.trace("Exception trying to marshal an ErrorResponse, probably caused by the original marshalling being incorrect",e);
+            throw new ElasticClientException("Unable to parse response",cause);
         }
     }
 
@@ -83,7 +92,7 @@ class ClientUtils {
         try {
             return mapper.readValue(responseBody, responseType);
         }catch(MismatchedInputException oops){
-            ErrorResponse err = mapper.readValue(responseBody, ErrorResponse.class);
+            ErrorResponse err = attemptErrorResponseMarshal(mapper,responseBody,oops);
             throw new AppSearchErrorResponseException(err,response.code());
         }catch(IOException e){
             log.error("Exception parsing response: {}",responseBody);
