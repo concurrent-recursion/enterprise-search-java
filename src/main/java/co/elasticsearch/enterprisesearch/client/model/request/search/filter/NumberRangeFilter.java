@@ -11,6 +11,9 @@ import lombok.experimental.Accessors;
 import java.math.BigDecimal;
 import java.util.Objects;
 
+/**
+ * Represents a Number Range Filter for a search request
+ */
 @Getter
 @Setter
 @Accessors(chain = true)
@@ -37,12 +40,24 @@ public class NumberRangeFilter implements Filter {
      */
     private BigDecimal to;
 
+    /**
+     * Create a NumberRangeFilter with the given name, start, and end
+     * @param name the filter name
+     * @param from the filter start
+     * @param to the filter end
+     */
     public NumberRangeFilter(String name, BigDecimal from, BigDecimal to) {
         this(name);
         this.from = from;
         this.to = to;
     }
 
+    /**
+     * Create a NumberRangeFilter with the given name, start, and end
+     * @param name the filter name
+     * @param from the filter start
+     * @param to the filter end
+     */
     public NumberRangeFilter(String name, Integer from, Integer to) {
         this(name);
         if (from != null) {
@@ -53,6 +68,12 @@ public class NumberRangeFilter implements Filter {
         }
     }
 
+    /**
+     * Create a NumberRangeFilter with the given name, start, and end
+     * @param name the filter name
+     * @param from the filter start
+     * @param to the filter end
+     */
     public NumberRangeFilter(String name, Long from, Long to) {
         this(name);
         if (from != null) {
@@ -63,6 +84,12 @@ public class NumberRangeFilter implements Filter {
         }
     }
 
+    /**
+     * Create a NumberRangeFilter with the given name, start, and end
+     * @param name the filter name
+     * @param from the filter start
+     * @param to the filter end
+     */
     public NumberRangeFilter(String name, Float from, Float to) {
         this(name);
         if (from != null) {
@@ -73,6 +100,12 @@ public class NumberRangeFilter implements Filter {
         }
     }
 
+    /**
+     * Create a NumberRangeFilter with the given name, start, and end
+     * @param name the filter name
+     * @param from the filter start
+     * @param to the filter end
+     */
     public NumberRangeFilter(String name, Double from, Double to) {
         this(name);
         if (from != null) {

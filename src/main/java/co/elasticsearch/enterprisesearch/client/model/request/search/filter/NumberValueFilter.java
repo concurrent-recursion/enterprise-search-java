@@ -15,6 +15,9 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
+/**
+ * Represents a Number Value Filter for a search request
+ */
 @Getter
 @Setter
 @Accessors(chain = true)
@@ -37,26 +40,51 @@ public class NumberValueFilter implements Filter {
     @JsonFormat(with = {JsonFormat.Feature.ACCEPT_SINGLE_VALUE_AS_ARRAY, JsonFormat.Feature.WRITE_SINGLE_ELEM_ARRAYS_UNWRAPPED})
     private List<BigDecimal> values = new ArrayList<>();
 
+    /**
+     * Create a Number Value Filter with the given name and value(s)
+     * @param name The filter name
+     * @param values The filter value(s)
+     */
     public NumberValueFilter(String name, BigDecimal... values) {
         this(name);
         this.values.addAll(Arrays.asList(values));
     }
 
+    /**
+     * Create a Number Value Filter with the given name and value(s)
+     * @param name The filter name
+     * @param values The filter value(s)
+     */
     public NumberValueFilter(String name, Integer... values) {
         this(name);
         this.values.addAll(Arrays.stream(values).map(BigDecimal::new).collect(Collectors.toList()));
     }
 
+    /**
+     * Create a Number Value Filter with the given name and value(s)
+     * @param name The filter name
+     * @param values The filter value(s)
+     */
     public NumberValueFilter(String name, Long... values) {
         this(name);
         this.values.addAll(Arrays.stream(values).map(BigDecimal::new).collect(Collectors.toList()));
     }
 
+    /**
+     * Create a Number Value Filter with the given name and value(s)
+     * @param name The filter name
+     * @param values The filter value(s)
+     */
     public NumberValueFilter(String name, Float... values) {
         this(name);
         this.values.addAll(Arrays.stream(values).map(BigDecimal::valueOf).collect(Collectors.toList()));
     }
 
+    /**
+     * Create a Number Value Filter with the given name and value(s)
+     * @param name The filter name
+     * @param values The filter value(s)
+     */
     public NumberValueFilter(String name, Double... values) {
         this(name);
         this.values.addAll(Arrays.stream(values).map(BigDecimal::valueOf).collect(Collectors.toList()));

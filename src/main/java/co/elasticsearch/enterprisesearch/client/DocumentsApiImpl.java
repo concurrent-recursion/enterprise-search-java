@@ -25,7 +25,7 @@ import java.util.Objects;
 
 @Slf4j
 @RequiredArgsConstructor
-public class DocumentsApiImpl<T> implements DocumentsApi<T>{
+class DocumentsApiImpl<T> implements DocumentsApi<T>{
     private final ObjectMapper objectMapper;
     private final String baseUrl;
     private final OkHttpClient client;

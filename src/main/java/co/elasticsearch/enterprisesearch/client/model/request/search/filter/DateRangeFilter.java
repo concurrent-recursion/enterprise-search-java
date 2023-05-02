@@ -14,6 +14,9 @@ import java.util.Objects;
 
 import static co.elasticsearch.enterprisesearch.client.model.request.search.filter.DateValueFilter.DATE_PATTERN;
 
+/**
+ * Represents a Search Date Range filter
+ */
 @Getter
 @Setter
 @Accessors(chain = true)
@@ -23,7 +26,6 @@ import static co.elasticsearch.enterprisesearch.client.model.request.search.filt
 public class DateRangeFilter implements Filter {
     /**
      * The field from your schema upon which to apply your filter
-     * @param name the field name
      * @return The field name
      */
     private final String name;

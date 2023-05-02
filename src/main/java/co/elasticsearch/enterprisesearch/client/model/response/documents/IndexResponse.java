@@ -11,6 +11,9 @@ import java.util.*;
 import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
+/**
+ * Represents the response from an IndexRequest
+ */
 @Data
 @Accessors(chain = true)
 @ToString

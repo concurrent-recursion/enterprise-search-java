@@ -7,10 +7,12 @@ import lombok.experimental.Accessors;
 
 import java.math.BigDecimal;
 
+/**
+ * Represents a field with a single number value
+ */
 @Getter
 @Setter
 @Accessors(chain = true)
-
 public class NumberField implements Field {
     /**
      * The raw numeric value of the field

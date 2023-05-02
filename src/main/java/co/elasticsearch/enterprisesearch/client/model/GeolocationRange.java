@@ -7,6 +7,9 @@ import lombok.experimental.Accessors;
 
 import java.math.BigDecimal;
 
+/**
+ * Represents Geolocation Range
+ */
 @Getter
 @Setter
 @Accessors(chain = true)

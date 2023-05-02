@@ -10,6 +10,9 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Represents an error response
+ */
 @Getter
 @Setter
 @Accessors(chain = true)

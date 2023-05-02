@@ -10,6 +10,9 @@ import lombok.experimental.Accessors;
 import java.io.Serializable;
 import java.util.Objects;
 
+/**
+ * Represents metadata from the Response
+ */
 @Getter
 @Setter
 @Accessors(chain = true)

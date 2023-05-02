@@ -11,6 +11,10 @@ import org.jetbrains.annotations.NotNull;
 import java.util.*;
 import java.util.function.Consumer;
 
+/**
+ * Represents a Response from List Document Request
+ * @param <T> The type of documents contained in the response
+ */
 @Getter
 @Setter
 @Accessors(chain = true)

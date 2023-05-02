@@ -9,6 +9,9 @@ import java.time.OffsetDateTime;
 
 import static co.elasticsearch.enterprisesearch.client.model.request.search.filter.DateValueFilter.DATE_PATTERN;
 
+/**
+ * Represents a date field in the engine schema
+ */
 @Getter
 @Setter
 @Accessors(chain = true)

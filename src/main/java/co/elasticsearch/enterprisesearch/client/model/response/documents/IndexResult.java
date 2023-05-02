@@ -9,6 +9,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+/**
+ * Represents an individual document in an IndexResponse
+ */
 @Getter
 @Setter
 @Accessors(chain = true)

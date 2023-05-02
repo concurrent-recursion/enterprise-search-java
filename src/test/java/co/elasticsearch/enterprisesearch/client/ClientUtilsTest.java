@@ -44,12 +44,12 @@ class ClientUtilsTest {
     }
     @Test
     void testSuccess(){
-        String mockResponse = TestUtil.readResourceFile("examples/responses/search-response-1.json");
-        mockWebServer.enqueue(new MockResponse().setResponseCode(200).setBody(mockResponse));
+            String mockResponse = TestUtil.readResourceFile("examples/responses/search-response-1.json");
+            mockWebServer.enqueue(new MockResponse().setResponseCode(200).setBody(mockResponse));
 
-        SearchApi<TestSearchDocument> search = asp.search(TestSearchDocument.class);
-        SearchApiResponse<TestSearchDocument> results = search.search(ENGINE_NAME,new SearchRequest());
-        Assertions.assertEquals(100,results.getResults().size());
+            SearchApi<TestSearchDocument> search = asp.search(TestSearchDocument.class);
+            SearchApiResponse<TestSearchDocument> results = search.search(ENGINE_NAME,new SearchRequest());
+            Assertions.assertEquals(100,results.getResults().size());
     }
 
     @Test

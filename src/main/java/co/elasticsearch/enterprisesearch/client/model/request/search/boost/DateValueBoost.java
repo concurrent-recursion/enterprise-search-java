@@ -11,14 +11,24 @@ import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Represents a boost on a date value
+ */
 @Getter
 @Setter
 @Accessors(chain = true)
 public class DateValueBoost implements Boost {
 
+    /**
+     * The name of the boost
+     */
     private String name;
 
 
+    /**
+     * Get the type of boost
+     * @return The BoostType
+     */
     public BoostType getType() {
         return BoostType.VALUE;
     }

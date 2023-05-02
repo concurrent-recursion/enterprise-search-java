@@ -2,6 +2,9 @@ package co.elasticsearch.enterprisesearch.client;
 
 import lombok.Getter;
 
+/**
+ * Represents different methods of authenticating with the App Search Server
+ */
 @Getter
 public class ClientAuthentication {
     /**

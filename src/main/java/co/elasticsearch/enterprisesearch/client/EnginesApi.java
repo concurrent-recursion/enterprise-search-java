@@ -5,6 +5,9 @@ import co.elasticsearch.enterprisesearch.client.model.request.engines.CreateEngi
 import co.elasticsearch.enterprisesearch.client.model.response.engines.EngineResponse;
 import co.elasticsearch.enterprisesearch.client.model.response.engines.EnginesResponse;
 
+/**
+ * Represents operations in the AppSearch Engines API
+ */
 public interface EnginesApi {
     /**
      * Retrieves an Engine by name.
@@ -20,7 +23,17 @@ public interface EnginesApi {
      */
     EnginesResponse listEngines(Page page);
 
+    /**
+     * Create a new Engine
+     * @param engine The engine to create
+     * @return The Engine create response
+     */
     EngineResponse createEngine(CreateEngine engine);
 
+    /**
+     * Delete an engine
+     * @param engineName The name of the engine to delete
+     * @return true if the engine was successfully deleted, otherwise false
+     */
     boolean deleteEngine(String engineName);
 }

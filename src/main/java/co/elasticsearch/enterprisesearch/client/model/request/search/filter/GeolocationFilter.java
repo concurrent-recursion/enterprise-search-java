@@ -12,6 +12,9 @@ import lombok.experimental.Accessors;
 import java.math.BigDecimal;
 import java.util.Objects;
 
+/**
+ * Represents a Geolocation Filter on a search request
+ */
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @Getter
 @Setter

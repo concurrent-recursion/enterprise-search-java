@@ -7,6 +7,9 @@ import lombok.experimental.Accessors;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Represents a QuerySuggestion request document
+ */
 @Getter
 @Setter
 @Accessors(chain = true)

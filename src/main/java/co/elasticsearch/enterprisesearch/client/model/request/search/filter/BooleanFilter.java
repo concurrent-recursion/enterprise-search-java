@@ -8,6 +8,9 @@ import lombok.experimental.Accessors;
 
 import java.util.*;
 
+/**
+ * Represents a Boolean Filter, which can contain child filters
+ */
 @Getter
 @Setter
 @Accessors(chain = true)
@@ -26,7 +29,7 @@ public class BooleanFilter implements Filter {
      */
     private List<Filter> any = new ArrayList<>();
     /**
-     * All of the filters must <em>not</em> match. This functions as a <em>NOT</em> condition.
+     * All the filters must <em>not</em> match. This functions as a <em>NOT</em> condition.
      * @param none the filters to match on
      * @return the filters
      */
@@ -37,7 +40,6 @@ public class BooleanFilter implements Filter {
      * @param filters the filters to match on
      * @return This filters
      */
-
     public BooleanFilter allOf(Filter... filters) {
         all.addAll(Arrays.asList(filters));
         return this;

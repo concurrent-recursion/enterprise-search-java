@@ -7,6 +7,10 @@ import co.elasticsearch.enterprisesearch.client.model.response.documents.ListRes
 
 import java.util.List;
 
+/**
+ * Represents the Documents API in AppSearch
+ * @param <T> The type of document(s) to store in the engine
+ */
 public interface DocumentsApi<T> {
     /**
      * Create or Update document(s) in the index

@@ -8,6 +8,9 @@ import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Represents a schema field that can contain an array of dates
+ */
 @Getter
 @Setter
 @Accessors(chain = true)

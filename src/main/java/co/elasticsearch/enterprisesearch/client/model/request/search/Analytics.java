@@ -4,13 +4,20 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import jakarta.validation.constraints.Max;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 import lombok.experimental.Accessors;
 
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
-@Data
+/**
+ * Allows you to group/tag requests for analytics
+ */
+@Getter
+@Setter
 @Accessors(chain = true)
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
 public class Analytics {
@@ -21,6 +28,11 @@ public class Analytics {
      */
     private Set<String> tags = new HashSet<>();
 
+    /**
+     * Add a tag to the request
+     * @param tag The tag to add. Maximum length of 64
+     * @return The Analytics object
+     */
     @JsonIgnore
     public Analytics addTag(@Max(64) String tag) {
         tags.add(tag);
@@ -35,5 +47,18 @@ public class Analytics {
     public Analytics withTags(String... tags) {
         this.tags = new HashSet<>(Arrays.asList(tags));
         return this;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Analytics analytics = (Analytics) o;
+        return Objects.equals(tags, analytics.tags);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(tags);
     }
 }

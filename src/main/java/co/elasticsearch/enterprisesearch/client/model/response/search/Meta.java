@@ -10,6 +10,9 @@ import lombok.experimental.Accessors;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Represents metadata from the search response
+ */
 @Data
 @Accessors(chain = true)
 @JsonPropertyOrder({"warnings", "request_id", "page", "alerts"})

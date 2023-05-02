@@ -15,7 +15,7 @@ import java.util.Objects;
 
 @Slf4j
 @RequiredArgsConstructor
-public class EnginesApiImpl implements EnginesApi{
+class EnginesApiImpl implements EnginesApi{
     private final ObjectMapper objectMapper;
     private final String baseUrl;
     private final OkHttpClient client;

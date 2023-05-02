@@ -8,6 +8,9 @@ import lombok.experimental.Accessors;
 
 import java.util.Objects;
 
+/**
+ * Represents metadata from the query suggestion response
+ */
 @Getter
 @Setter
 @Accessors(chain = true)

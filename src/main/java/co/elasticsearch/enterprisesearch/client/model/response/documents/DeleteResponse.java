@@ -12,6 +12,9 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
+/**
+ * Represents a response from the delete operation
+ */
 @Getter
 @Setter
 @Accessors(chain = true)
@@ -24,11 +27,19 @@ public class DeleteResponse implements ErrorableResponse {
      */
     private List<DeleteResult> documents = new ArrayList<>();
 
+    /**
+     * Is the response and error repsonse
+     * @return true if 1 or more errors are returned, otherwise false
+     */
     @JsonIgnore
     public boolean isError(){
         return documents.stream().anyMatch(dr -> !dr.isDeleted());
     }
 
+    /**
+     * Get the errors from the response
+     * @return The errors from the response
+     */
     public List<DeleteResult> getErrors(){
         return documents.stream().filter(d -> !d.isDeleted()).collect(Collectors.toList());
     }

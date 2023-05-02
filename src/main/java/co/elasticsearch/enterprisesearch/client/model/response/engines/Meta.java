@@ -6,6 +6,9 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
 
+/**
+ * Represents metadata from an engines response
+ */
 @Getter
 @Setter
 @Accessors(chain = true)

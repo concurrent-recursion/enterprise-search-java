@@ -34,8 +34,14 @@ public class SearchApiResponse<T extends ResponseDocument> implements Iterable<T
     @JsonIgnoreProperties(ignoreUnknown = true)
     private List<T> results = new ArrayList<>();
 
+    /**
+     * The errors associated with this response, if any
+     * @param errors the errors
+     * @return the errors
+     */
     private List<String> errors = new ArrayList<>();
 
+    @JsonIgnore
     @NotNull
     @Override
     public Iterator<T> iterator() {
@@ -47,20 +53,31 @@ public class SearchApiResponse<T extends ResponseDocument> implements Iterable<T
         results.forEach(action);
     }
 
+    @JsonIgnore
     @Override
     public Spliterator<T> spliterator() {
         return results.spliterator();
     }
 
+    /**
+     * Returns if there is 1 or more warnings for this response
+     * @return true if there is at least 1 warning, otherwise false
+     */
     @JsonIgnore
     public boolean isWarning(){
         return !meta.getWarnings().isEmpty();
     }
+
+    /**
+     * Returns if there is 1 or more alerts for this response
+     * @return true if there is at least 1 alert, otherwise false
+     */
     @JsonIgnore
     public boolean isAlert(){
         return !meta.getAlerts().isEmpty();
     }
 
+    @JsonIgnore
     @Override
     public boolean isError() {
         return !errors.isEmpty();

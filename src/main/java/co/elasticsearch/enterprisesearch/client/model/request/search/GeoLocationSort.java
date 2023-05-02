@@ -13,6 +13,9 @@ import lombok.experimental.Accessors;
 
 import java.util.Arrays;
 
+/**
+ * Represents a Geolocation Sort in a search request
+ */
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
 @Getter
 @Setter
@@ -41,6 +44,10 @@ public class GeoLocationSort implements SortOrder {
     private Sort.Order order;
 
 
+    /**
+     * Build a GeoLocationSort from a central point
+     * @param geoLocation the centeral geolocation point
+     */
     public GeoLocationSort(GeoLocation geoLocation) {
         center = geoLocation;
     }
@@ -50,13 +57,41 @@ public class GeoLocationSort implements SortOrder {
         return order;
     }
 
+    /**
+     * How to calculate distance in case a field has several geo points. By default, the shortest distance is taken into account when sorting in ascending order and the longest distance when sorting in descending order.
+     */
     @Getter
     @RequiredArgsConstructor
     public enum Mode {
-        MIN("min"), MAX("max"), MEDIAN("median"), AVERAGE("avg");
+        /**
+         * Minimum
+         */
+        MIN("min"),
+        /**
+         * Maximum
+         */
+        MAX("max"),
+        /**
+         * Median
+         */
+        MEDIAN("median"),
+        /**
+         * Average
+         */
+        AVERAGE("avg");
+
+        /**
+         * The string value of the Mode
+         * @return the string value
+         */
         @JsonValue
         private final String value;
 
+        /**
+         * Get a Mode from the string value
+         * @param value The value to match
+         * @return The Mode with the matching value, otherwise an exception is thrown
+         */
         @JsonCreator
         public static Mode fromValue(String value) {
             return Arrays.stream(values()).filter(m -> m.value.equals(value)).findFirst().orElseThrow();

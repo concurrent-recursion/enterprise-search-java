@@ -6,13 +6,32 @@ import lombok.RequiredArgsConstructor;
 
 import java.util.Arrays;
 
+/**
+ * Represents a facet sort type
+ */
 @RequiredArgsConstructor
 @Getter
 public enum FacetSortField {
-    COUNT("count"),VALUE("value");
+    /**
+     * Sort the facet values by count
+     */
+    COUNT("count"),
+    /**
+     * Sort the facet value by the values
+     */
+    VALUE("value");
+
+    /**
+     * The name of the facet
+     */
     @JsonValue
     private final String name;
 
+    /**
+     * Get a Facet Sort by value
+     * @param value The value to lookup
+     * @return The FacetSortField for the value, otherwise an exception will be thrown
+     */
     public static FacetSortField fromValue(String value){
         return Arrays.stream(values()).filter(v -> v.name.equals(value)).findFirst().orElseThrow();
     }

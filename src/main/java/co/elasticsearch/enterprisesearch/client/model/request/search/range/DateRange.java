@@ -12,6 +12,9 @@ import java.time.OffsetDateTime;
 
 import static co.elasticsearch.enterprisesearch.client.model.request.search.filter.DateValueFilter.DATE_PATTERN;
 
+/**
+ * Represents a date range request
+ */
 @Getter
 @Setter
 @Accessors(chain = true)
@@ -19,14 +22,27 @@ import static co.elasticsearch.enterprisesearch.client.model.request.search.filt
 @JsonDeserialize
 public class DateRange implements Range<OffsetDateTime> {
 
+    /**
+     * Creates empty date range
+     */
     public DateRange() {
     }
 
+    /**
+     * Creates date range with given start and end date, inclusive
+     * @param from The start date of the range
+     * @param to the end date of the range
+     */
     public DateRange(OffsetDateTime from, OffsetDateTime to) {
         this.from = from;
         this.to = to;
     }
 
+    /**
+     * Creates date range with given start and end date using RFC 3339 formatted string, inclusive
+     * @param from The start date of the range
+     * @param to the end date of the range
+     */
     public DateRange(String from, String to) {
         if (from != null) {
             this.from = OffsetDateTime.parse(from, DateValueFilter.RFC_3339);

@@ -13,7 +13,7 @@ import java.util.Objects;
 
 @Slf4j
 @RequiredArgsConstructor
-public class QuerySuggestionsApiImpl implements QuerySuggestionsApi{
+class QuerySuggestionsApiImpl implements QuerySuggestionsApi{
     private final ObjectMapper objectMapper;
     private final String baseUrl;
     private final OkHttpClient client;

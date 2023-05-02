@@ -11,6 +11,9 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * Represents a field with 1 or more number values
+ */
 @Getter
 @Setter
 @Accessors(chain = true)

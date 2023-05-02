@@ -16,6 +16,10 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 //TODO: See https://www.elastic.co/guide/en/app-search/current/api-reference.html#overview-api-references-geolocation
+
+/**
+ * Represents a GeoLocation
+ */
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
 @Getter
 @JsonDeserialize(using = GeolocationDeserializer.class)
@@ -24,35 +28,101 @@ public class GeoLocation {
     static final Pattern LATITUDE_LONGITUDE = Pattern.compile("^([+-]?\\d{1,3}(\\.\\d+)?),\\s?([+-]?\\d{1,3}(\\.\\d+)?)$");
     static final Pattern WELL_KNOWN_TEXT_POINT = Pattern.compile("^POINT \\(([+-]?\\d{1,3}(\\.\\d+)) ([+-]?\\d{1,3}(\\.\\d+))\\)");
 
+    /**
+     * Represents a Geolocation Unit of measurement
+     */
     @Getter
     @RequiredArgsConstructor
     public enum Unit {
-        MILLIMETERS("mm"), CENTIMETERS("cm"), METERS("m"), KILOMETERS("km"), INCHES("in"), FEET("ft"), YARDS("yd"), MILES("mi");
+        /**
+         * Millimeters
+         */
+        MILLIMETERS("mm"),
+        /**
+         * Centimeters
+         */
+        CENTIMETERS("cm"),
+        /**
+         * Meters
+         */
+        METERS("m"),
+        /**
+         * Kilometer
+         */
+        KILOMETERS("km"),
+        /**
+         * Inch
+         */
+        INCHES("in"),
+        /**
+         * Feet
+         */
+        FEET("ft"),
+        /**
+         * Yard
+         */
+        YARDS("yd"),
+        /**
+         * Mile
+         */
+        MILES("mi");
+
+        /**
+         * The facet value
+         * @return The value value
+         */
         @JsonValue
         private final String value;
 
+        /**
+         * Find the Unit by value
+         * @param value The value to lookup
+         * @return The Unit that matches the value, otherwise throw an exception
+         */
         @JsonCreator
         public static Unit findByValue(String value) {
             return Arrays.stream(values()).filter(v -> v.value.equals(value)).findFirst().orElse(null);
         }
     }
 
+    /**
+     * The latitude of the GeoLocation
+     * @return The latitude
+     */
     @JsonIgnore
     private final BigDecimal latitude;
+    /**
+     * The longitude of the GeoLocation
+     * @return The longitude
+     */
     @JsonIgnore
     private final BigDecimal longitude;
 
+    /**
+     * The center point of the GeoLocation object
+     * @return An array of [latitude, longitude]
+     */
     @JsonValue
     public BigDecimal[] getCenter() {
         return new BigDecimal[]{longitude, latitude};
     }
 
+    /**
+     * Create a GeoLocation
+     * @param latitude The latitude of the geolocation
+     * @param longitude The longitude of the geolocation
+     */
     public GeoLocation(BigDecimal latitude, BigDecimal longitude) {
         validate(latitude, longitude);
         this.longitude = longitude;
         this.latitude = latitude;
     }
 
+    /**
+     * Create a GeoLocation
+     * @param latitude The latitude of the geolocation
+     * @param longitude The longitude of the geolocation
+     */
     public GeoLocation(String latitude, String longitude) {
         BigDecimal lat = new BigDecimal(latitude);
         BigDecimal lon = new BigDecimal(longitude);
@@ -61,6 +131,10 @@ public class GeoLocation {
         this.latitude = lat;
     }
 
+    /**
+     * Create a GeoLocation
+     * @param center The string representation of the GeoLocation. It must be either latitude, longitude or wellknown format
+     */
     public GeoLocation(String center) {
         Matcher latitudeLongitude = LATITUDE_LONGITUDE.matcher(center);
         Matcher wellKnown = WELL_KNOWN_TEXT_POINT.matcher(center);

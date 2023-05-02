@@ -5,6 +5,9 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
 
+/**
+ * Represents a Query Suggestion Request
+ */
 @Getter
 @Setter
 @Accessors(chain = true)

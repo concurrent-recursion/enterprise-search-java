@@ -9,6 +9,9 @@ import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
+/**
+ * Represents a Search Request Group
+ */
 @Data
 @Accessors(chain = true)
 @JsonInclude(JsonInclude.Include.NON_EMPTY)

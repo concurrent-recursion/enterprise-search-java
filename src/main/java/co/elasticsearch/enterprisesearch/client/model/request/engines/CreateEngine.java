@@ -14,6 +14,9 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 
+/**
+ * Represents a request to create a new Engine
+ */
 @Getter
 @Setter
 @Accessors(chain = true)

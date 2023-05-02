@@ -15,10 +15,18 @@ import java.util.*;
 @ToString
 public class Schema implements ErrorableResponse {
 
+    /**
+     * The 
+     */
     @JsonAnyGetter
     @JsonAnySetter
     private final Map<String, FieldType> fields = new LinkedHashMap<>();
 
+    /**
+     * Get the errors
+     * @param errors the errors
+     * @return the errors
+     */
     @Getter
     @Setter
     private List<String> errors = new ArrayList<>();

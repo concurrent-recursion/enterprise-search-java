@@ -6,6 +6,9 @@ import lombok.experimental.Accessors;
 
 import java.math.BigDecimal;
 
+/**
+ * Represents the _meta field on the response document
+ */
 @Getter
 @Setter
 @Accessors(chain = true)

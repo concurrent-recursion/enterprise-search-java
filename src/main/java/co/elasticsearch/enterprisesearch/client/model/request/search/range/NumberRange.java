@@ -10,6 +10,9 @@ import lombok.experimental.Accessors;
 import java.math.BigDecimal;
 import java.util.Objects;
 
+/**
+ * Represents a number range
+ */
 @Getter
 @Setter
 @Accessors(chain = true)
@@ -18,14 +21,27 @@ import java.util.Objects;
 @ToString
 public class NumberRange implements Range<BigDecimal> {
 
+    /**
+     * Create a new empty number range
+     */
     public NumberRange() {
     }
 
+    /**
+     * Create a new number range
+     * @param from The start of the number range
+     * @param to The end of the number range
+     */
     public NumberRange(BigDecimal from, BigDecimal to) {
         this.from = from;
         this.to = to;
     }
 
+    /**
+     * Create a new number range
+     * @param from The start of the number range
+     * @param to The end of the number range
+     */
     public NumberRange(String from, String to) {
         if (from != null) {
             this.from = new BigDecimal(from);
@@ -35,6 +51,11 @@ public class NumberRange implements Range<BigDecimal> {
         }
     }
 
+    /**
+     * Create a new number range
+     * @param from The start of the number range
+     * @param to The end of the number range
+     */
     public NumberRange(Integer from, Integer to) {
         if (from != null) {
             this.from = new BigDecimal(from);
@@ -44,6 +65,11 @@ public class NumberRange implements Range<BigDecimal> {
         }
     }
 
+    /**
+     * Create a new number range
+     * @param from The start of the number range
+     * @param to The end of the number range
+     */
     public NumberRange(Long from, Long to) {
         if (from != null) {
             this.from = new BigDecimal(from);
@@ -53,6 +79,11 @@ public class NumberRange implements Range<BigDecimal> {
         }
     }
 
+    /**
+     * Create a new number range
+     * @param from The start of the number range
+     * @param to The end of the number range
+     */
     public NumberRange(Float from, Float to) {
         if (from != null) {
             this.from = BigDecimal.valueOf(from);
@@ -62,6 +93,11 @@ public class NumberRange implements Range<BigDecimal> {
         }
     }
 
+    /**
+     * Create a new number range
+     * @param from The start of the number range
+     * @param to The end of the number range
+     */
     public NumberRange(Double from, Double to) {
         if (from != null) {
             this.from = BigDecimal.valueOf(from);
