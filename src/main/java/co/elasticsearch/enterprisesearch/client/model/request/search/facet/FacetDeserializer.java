@@ -1,5 +1,6 @@
 package co.elasticsearch.enterprisesearch.client.model.request.search.facet;
 
+import co.elasticsearch.enterprisesearch.client.model.FacetType;
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.TreeNode;
 import com.fasterxml.jackson.databind.DeserializationContext;
@@ -17,7 +18,8 @@ class FacetDeserializer extends StdDeserializer<Facet> {
     public Facet deserialize(JsonParser jsonParser, DeserializationContext deserializationContext) throws IOException {
         TreeNode node = jsonParser.readValueAsTree();
         TextNode type = (TextNode) node.get("type");
-        if ("range".equals(type.asText())) {
+        FacetType facetType = FacetType.fromValue(type.asText());
+        if (FacetType.RANGE.equals(facetType)) {
             return jsonParser.getCodec().treeToValue(node, SearchRangeFacet.class);
         } else {
             return jsonParser.getCodec().treeToValue(node, ValueFacet.class);

@@ -5,21 +5,27 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.Accessors;
 
 import java.math.BigDecimal;
 import java.util.Objects;
 
+/**
+ * Represents a Search Field in the request
+ */
 @Getter
 @Setter
 @Accessors(chain = true)
 @JsonInclude(JsonInclude.Include.NON_NULL)
+@NoArgsConstructor
 public class SearchField {
 
-    public SearchField() {
-    }
-
+    /**
+     * Create a SearchField with the
+     * @param fieldName
+     */
     public SearchField(String fieldName) {
         this.name = fieldName;
     }

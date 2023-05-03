@@ -58,4 +58,9 @@ public class DeserializationUtil {
             //Intentionally Blank
         }
     }
+
+    public boolean isNumeric(TreeNode node){
+        return node.asToken().isNumeric();
+
+    }
 }

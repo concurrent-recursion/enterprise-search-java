@@ -34,7 +34,7 @@ public class NumberField implements Field {
     /**
      * The raw Integer representation of the field
      * @return The Integer value
-     * @throws ArithmeticException if this has a nonzero fractional part, or will not fit in a int
+     * @throws ArithmeticException if this has a nonzero fractional part, or will not fit in an int
      */
     @JsonIgnore
     public Integer getRawInteger() {

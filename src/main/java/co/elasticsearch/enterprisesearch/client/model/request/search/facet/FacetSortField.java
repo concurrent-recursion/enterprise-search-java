@@ -1,5 +1,6 @@
 package co.elasticsearch.enterprisesearch.client.model.request.search.facet;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -32,6 +33,7 @@ public enum FacetSortField {
      * @param value The value to lookup
      * @return The FacetSortField for the value, otherwise an exception will be thrown
      */
+    @JsonCreator
     public static FacetSortField fromValue(String value){
         return Arrays.stream(values()).filter(v -> v.name.equals(value)).findFirst().orElseThrow();
     }

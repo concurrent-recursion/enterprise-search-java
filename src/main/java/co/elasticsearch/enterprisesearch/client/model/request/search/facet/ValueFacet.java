@@ -1,5 +1,6 @@
 package co.elasticsearch.enterprisesearch.client.model.request.search.facet;
 
+import co.elasticsearch.enterprisesearch.client.model.FacetType;
 import co.elasticsearch.enterprisesearch.client.model.Sort;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -31,8 +32,10 @@ public class ValueFacet implements Facet {
 
     private String fieldName;
 
-    private final String type = "value";
-
+    @Override
+    public FacetType getType() {
+        return FacetType.VALUE;
+    }
 
     /**
      * Name given to facet

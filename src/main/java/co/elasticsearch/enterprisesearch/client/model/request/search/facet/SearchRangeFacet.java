@@ -1,5 +1,6 @@
 package co.elasticsearch.enterprisesearch.client.model.request.search.facet;
 
+import co.elasticsearch.enterprisesearch.client.model.FacetType;
 import co.elasticsearch.enterprisesearch.client.model.GeoLocation;
 import co.elasticsearch.enterprisesearch.client.model.request.search.range.Range;
 import com.fasterxml.jackson.annotation.JsonGetter;
@@ -29,7 +30,11 @@ public class SearchRangeFacet implements Facet {
 
     private String fieldName;
 
-    private final String type = "range";
+    @Override
+    public FacetType getType() {
+        return FacetType.RANGE;
+    }
+
     /**
      * Name given to facet
      * @param name The name

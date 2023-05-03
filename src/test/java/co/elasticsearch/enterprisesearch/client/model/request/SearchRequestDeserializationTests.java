@@ -305,7 +305,7 @@ class SearchRequestDeserializationTests {
         assertTrue(optionalStates.isPresent());
         assertInstanceOf(ValueFacet.class,optionalStates.get());
         ValueFacet valueFacet = (ValueFacet) optionalStates.get();
-        assertEquals("value",valueFacet.getType());
+        assertEquals("value",valueFacet.getType().getValue());
         assertEquals("top-five-states",valueFacet.getName());
         assertEquals(5,valueFacet.getSize());
         assertEquals(FacetSortField.COUNT,valueFacet.getSortField());
@@ -319,7 +319,7 @@ class SearchRequestDeserializationTests {
         assertTrue(acres.isPresent());
         assertInstanceOf(SearchRangeFacet.class,acres.get());
         SearchRangeFacet acreFacet = (SearchRangeFacet) acres.get();
-        assertEquals("range",acreFacet.getType());
+        assertEquals("range",acreFacet.getType().getValue());
         assertEquals("min-and-max-range",acreFacet.getName());
         assertEquals(new NumberRange().setFrom(new BigDecimal(1)).setTo(new BigDecimal(10000)),acreFacet.getRanges().get(0));
 

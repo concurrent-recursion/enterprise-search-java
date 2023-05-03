@@ -1,6 +1,8 @@
 package co.elasticsearch.enterprisesearch.client.model.request.search.facet;
 
+import co.elasticsearch.enterprisesearch.client.model.FacetType;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
@@ -9,6 +11,7 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
  */
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
 @JsonDeserialize(using = FacetDeserializer.class)
+@JsonIgnoreProperties(value = { "type" }, allowGetters = true)
 public interface Facet {
     /**
      * The field from your schema upon which to apply your facet.
@@ -28,8 +31,7 @@ public interface Facet {
      * Type of facet
      * @return The facet type
      */
-
-    String getType();
+    FacetType getType();
 
     /**
      * Name given to the facet

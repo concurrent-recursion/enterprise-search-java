@@ -1,0 +1,2173 @@
+{
+  "meta": {
+    "alerts": [],
+    "warnings": [],
+    "precision": 2,
+    "page": {
+      "current": 1,
+      "total_pages": 1000,
+      "total_results": 10000,
+      "size": 10
+    },
+    "engine": {
+      "name": "testengine",
+      "type": "default"
+    },
+    "request_id": "DsSUlKlCTdaXfkgWQGIZDw"
+  },
+  "results": [
+    {
+      "_meta": {
+        "score": 0.4,
+        "engine": "TestEngine",
+        "id": "644c073f2e9d7b5846eba601"
+      },
+      "title": {
+        "raw": "ex laborum amet cillum adipisicing aute exercitation proident sit ipsum"
+      },
+      "categories": {
+        "raw": [
+          "dolor",
+          "enim",
+          "minim"
+        ]
+      },
+      "date": {
+        "raw": "2023-04-19T12:40:27.12Z"
+      },
+      "itemNumber": {
+        "raw": 194476
+      }
+    },
+    {
+      "_meta": {
+        "score": 0.58,
+        "engine": "TestEngine",
+        "id": "644c073ff1efcd291de54bf0"
+      },
+      "title": {
+        "raw": "irure et aliqua sint officia do elit mollit nisi magna"
+      },
+      "categories": {
+        "raw": [
+          "quis",
+          "sit",
+          "velit"
+        ]
+      },
+      "date": {
+        "raw": "2023-02-20T01:21:29.12Z"
+      },
+      "itemNumber": {
+        "raw": 494677
+      }
+    },
+    {
+      "_meta": {
+        "score": 0.1,
+        "engine": "TestEngine",
+        "id": "644c073f5e08051073bc8925"
+      },
+      "title": {
+        "raw": "officia ipsum nisi sint ex nostrud ad esse ex incididunt"
+      },
+      "categories": {
+        "raw": [
+          "consectetur"
+        ]
+      },
+      "date": {
+        "raw": "2023-03-27T11:25:16Z"
+      },
+      "itemNumber": {
+        "raw": 815925
+      }
+    },
+    {
+      "_meta": {
+        "score": 0.63,
+        "engine": "TestEngine",
+        "id": "644c073f92ad1fb1c3b8af19"
+      },
+      "title": {
+        "raw": "dolore irure nulla consectetur do deserunt dolore id nulla nostrud"
+      },
+      "categories": {
+        "raw": []
+      },
+      "date": {
+        "raw": "2023-04-20T04:11:25.12Z"
+      },
+      "itemNumber": {
+        "raw": 819266
+      }
+    },
+    {
+      "_meta": {
+        "score": 0.32,
+        "engine": "TestEngine",
+        "id": "644c073f2617a6dbc36e02a2"
+      },
+      "title": {
+        "raw": "ut occaecat in dolor reprehenderit irure sunt consectetur sit quis"
+      },
+      "categories": {
+        "raw": [
+          "qui"
+        ]
+      },
+      "date": {
+        "raw": "2023-03-08T09:00:16.12Z"
+      },
+      "itemNumber": {
+        "raw": 513098
+      }
+    },
+    {
+      "_meta": {
+        "score": 0.81,
+        "engine": "TestEngine",
+        "id": "644c073fbb4b3bae849ca50a"
+      },
+      "title": {
+        "raw": "adipisicing est commodo pariatur aliquip minim nulla exercitation nisi nostrud"
+      },
+      "categories": {
+        "raw": [
+          "sit",
+          "quis",
+          "ex"
+        ]
+      },
+      "date": {
+        "raw": "2023-03-23T08:11:02.12Z"
+      },
+      "itemNumber": {
+        "raw": 340190
+      }
+    },
+    {
+      "_meta": {
+        "score": 0.36,
+        "engine": "TestEngine",
+        "id": "644c073fcd8f5ee496883c9c"
+      },
+      "title": {
+        "raw": "irure occaecat voluptate sit in adipisicing enim nisi cupidatat ipsum"
+      },
+      "categories": {
+        "raw": [
+          "sunt"
+        ]
+      },
+      "date": {
+        "raw": "2023-01-28T11:38:05.12Z"
+      },
+      "itemNumber": {
+        "raw": 657977
+      }
+    },
+    {
+      "_meta": {
+        "score": 0.62,
+        "engine": "TestEngine",
+        "id": "644c073f9871be8d2c3e00f5"
+      },
+      "title": {
+        "raw": "ipsum minim adipisicing eu mollit qui ut et labore reprehenderit"
+      },
+      "categories": {
+        "raw": [
+          "nisi",
+          "incididunt",
+          "voluptate",
+          "non"
+        ]
+      },
+      "date": {
+        "raw": "2023-03-11T04:31:02.12Z"
+      },
+      "itemNumber": {
+        "raw": 215458
+      }
+    },
+    {
+      "_meta": {
+        "score": 0.5,
+        "engine": "TestEngine",
+        "id": "644c073fb33aec941341233c"
+      },
+      "title": {
+        "raw": "commodo veniam dolor proident aute Lorem deserunt officia mollit in"
+      },
+      "categories": {
+        "raw": [
+          "excepteur"
+        ]
+      },
+      "date": {
+        "raw": "2023-03-11T12:16:24.12Z"
+      },
+      "itemNumber": {
+        "raw": 667673
+      }
+    },
+    {
+      "_meta": {
+        "score": 0.67,
+        "engine": "TestEngine",
+        "id": "644c073fca69bf021483a79b"
+      },
+      "title": {
+        "raw": "fugiat aliquip consequat pariatur anim culpa cupidatat ipsum laborum enim"
+      },
+      "categories": {
+        "raw": []
+      },
+      "date": {
+        "raw": "2023-01-09T02:58:08.12Z"
+      },
+      "itemNumber": {
+        "raw": 467642
+      }
+    },
+    {
+      "_meta": {
+        "score": 0.99,
+        "engine": "TestEngine",
+        "id": "644c073f1d68e609513d4ecd"
+      },
+      "title": {
+        "raw": "ea sit do culpa aute excepteur elit commodo velit sit"
+      },
+      "categories": {
+        "raw": [
+          "incididunt",
+          "occaecat",
+          "incididunt",
+          "deserunt"
+        ]
+      },
+      "date": {
+        "raw": "2023-04-26T09:17:56.12Z"
+      },
+      "itemNumber": {
+        "raw": 860132
+      }
+    },
+    {
+      "_meta": {
+        "score": 0.75,
+        "engine": "TestEngine",
+        "id": "644c073fff18bb81660dcde8"
+      },
+      "title": {
+        "raw": "ipsum voluptate eiusmod ex nulla sit aute ut in commodo"
+      },
+      "categories": {
+        "raw": [
+          "sunt",
+          "occaecat",
+          "sint"
+        ]
+      },
+      "date": {
+        "raw": "2023-03-13T07:21:34.12Z"
+      },
+      "itemNumber": {
+        "raw": 769920
+      }
+    },
+    {
+      "_meta": {
+        "score": 0.06,
+        "engine": "TestEngine",
+        "id": "644c073f81d588cac00211f3"
+      },
+      "title": {
+        "raw": "cupidatat exercitation velit eiusmod officia est ipsum fugiat mollit commodo"
+      },
+      "categories": {
+        "raw": [
+          "magna",
+          "nulla",
+          "dolor"
+        ]
+      },
+      "date": {
+        "raw": "2023-02-18T03:35:12.12Z"
+      },
+      "itemNumber": {
+        "raw": 700870
+      }
+    },
+    {
+      "_meta": {
+        "score": 0.94,
+        "engine": "TestEngine",
+        "id": "644c073f0645a306048f56b5"
+      },
+      "title": {
+        "raw": "id ad ad velit exercitation adipisicing anim nulla proident deserunt"
+      },
+      "categories": {
+        "raw": [
+          "nulla",
+          "Lorem",
+          "duis"
+        ]
+      },
+      "date": {
+        "raw": "2023-03-25T03:10:44.12Z"
+      },
+      "itemNumber": {
+        "raw": 354680
+      }
+    },
+    {
+      "_meta": {
+        "score": 0.83,
+        "engine": "TestEngine",
+        "id": "644c073f09b70e465d80d20d"
+      },
+      "title": {
+        "raw": "voluptate qui cillum laborum fugiat pariatur magna pariatur adipisicing ea"
+      },
+      "categories": {
+        "raw": [
+          "et",
+          "consectetur",
+          "pariatur",
+          "cillum"
+        ]
+      },
+      "date": {
+        "raw": "2023-03-04T01:01:56.12Z"
+      },
+      "itemNumber": {
+        "raw": 152062
+      }
+    },
+    {
+      "_meta": {
+        "score": 0.61,
+        "engine": "TestEngine",
+        "id": "644c073f9f548b026ef60965"
+      },
+      "title": {
+        "raw": "nisi enim id cupidatat et anim consequat mollit est consectetur"
+      },
+      "categories": {
+        "raw": [
+          "incididunt",
+          "tempor"
+        ]
+      },
+      "date": {
+        "raw": "2023-01-21T05:44:43.12Z"
+      },
+      "itemNumber": {
+        "raw": 334515
+      }
+    },
+    {
+      "_meta": {
+        "score": 0.27,
+        "engine": "TestEngine",
+        "id": "644c073ffcc6d499949f8552"
+      },
+      "title": {
+        "raw": "aute id aute eu in est adipisicing amet commodo non"
+      },
+      "categories": {
+        "raw": [
+          "aliquip",
+          "fugiat",
+          "sunt"
+        ]
+      },
+      "date": {
+        "raw": "2023-03-09T03:57:41.12Z"
+      },
+      "itemNumber": {
+        "raw": 105179
+      }
+    },
+    {
+      "_meta": {
+        "score": 0.26,
+        "engine": "TestEngine",
+        "id": "644c073f66af8a2fd6e81a8f"
+      },
+      "title": {
+        "raw": "dolore excepteur ut quis ut commodo excepteur nisi incididunt dolor"
+      },
+      "categories": {
+        "raw": []
+      },
+      "date": {
+        "raw": "2023-01-03T10:22:11.12Z"
+      },
+      "itemNumber": {
+        "raw": 660326
+      }
+    },
+    {
+      "_meta": {
+        "score": 0.75,
+        "engine": "TestEngine",
+        "id": "644c073f133c82cb199d8aa5"
+      },
+      "title": {
+        "raw": "veniam deserunt nostrud amet esse esse minim adipisicing in elit"
+      },
+      "categories": {
+        "raw": [
+          "sint",
+          "et"
+        ]
+      },
+      "date": {
+        "raw": "2023-03-17T11:50:06.12Z"
+      },
+      "itemNumber": {
+        "raw": 691948
+      }
+    },
+    {
+      "_meta": {
+        "score": 0.47,
+        "engine": "TestEngine",
+        "id": "644c073f157fd6e0dfcb062c"
+      },
+      "title": {
+        "raw": "eiusmod quis reprehenderit laborum ad consequat nisi sit aliqua dolor"
+      },
+      "categories": {
+        "raw": [
+          "culpa",
+          "dolore",
+          "sit"
+        ]
+      },
+      "date": {
+        "raw": "2023-03-23T05:04:26.12Z"
+      },
+      "itemNumber": {
+        "raw": 178756
+      }
+    },
+    {
+      "_meta": {
+        "score": 0.82,
+        "engine": "TestEngine",
+        "id": "644c073f4c1a48554b5baf88"
+      },
+      "title": {
+        "raw": "ut exercitation consequat commodo ipsum duis ut nulla Lorem anim"
+      },
+      "categories": {
+        "raw": []
+      },
+      "date": {
+        "raw": "2023-03-30T09:13:29.12Z"
+      },
+      "itemNumber": {
+        "raw": 261862
+      }
+    },
+    {
+      "_meta": {
+        "score": 0.14,
+        "engine": "TestEngine",
+        "id": "644c073f831b3a003fd4f891"
+      },
+      "title": {
+        "raw": "dolore ea esse aliqua eiusmod laboris irure qui duis nisi"
+      },
+      "categories": {
+        "raw": []
+      },
+      "date": {
+        "raw": "2023-03-02T09:02:33.12Z"
+      },
+      "itemNumber": {
+        "raw": 984962
+      }
+    },
+    {
+      "_meta": {
+        "score": 0.99,
+        "engine": "TestEngine",
+        "id": "644c073f3bcd274d7b0dcb32"
+      },
+      "title": {
+        "raw": "irure eiusmod veniam exercitation occaecat Lorem esse voluptate id quis"
+      },
+      "categories": {
+        "raw": []
+      },
+      "date": {
+        "raw": "2023-01-27T08:04:52.12Z"
+      },
+      "itemNumber": {
+        "raw": 640168
+      }
+    },
+    {
+      "_meta": {
+        "score": 0.07,
+        "engine": "TestEngine",
+        "id": "644c073fc2abe534ad9a62b2"
+      },
+      "title": {
+        "raw": "ipsum irure velit irure sunt est ullamco velit reprehenderit aliquip"
+      },
+      "categories": {
+        "raw": []
+      },
+      "date": {
+        "raw": "2023-02-20T07:21:06.12Z"
+      },
+      "itemNumber": {
+        "raw": 544292
+      }
+    },
+    {
+      "_meta": {
+        "score": 0.83,
+        "engine": "TestEngine",
+        "id": "644c073f4f2313be9f495ec4"
+      },
+      "title": {
+        "raw": "ex anim excepteur elit anim laboris reprehenderit reprehenderit irure proident"
+      },
+      "categories": {
+        "raw": []
+      },
+      "date": {
+        "raw": "2023-03-19T08:43:17.12Z"
+      },
+      "itemNumber": {
+        "raw": 159559
+      }
+    },
+    {
+      "_meta": {
+        "score": 0.84,
+        "engine": "TestEngine",
+        "id": "644c073f02f0e8489bde7a56"
+      },
+      "title": {
+        "raw": "duis et proident sit amet magna nostrud excepteur anim esse"
+      },
+      "categories": {
+        "raw": []
+      },
+      "date": {
+        "raw": "2023-04-22T10:56:57.12Z"
+      },
+      "itemNumber": {
+        "raw": 236659
+      }
+    },
+    {
+      "_meta": {
+        "score": 0.2,
+        "engine": "TestEngine",
+        "id": "644c073fdd88d6734928012f"
+      },
+      "title": {
+        "raw": "Lorem commodo ullamco ipsum elit aliquip adipisicing ut ipsum elit"
+      },
+      "categories": {
+        "raw": [
+          "voluptate"
+        ]
+      },
+      "date": {
+        "raw": "2023-03-14T04:46:02.12Z"
+      },
+      "itemNumber": {
+        "raw": 506895
+      }
+    },
+    {
+      "_meta": {
+        "score": 0.91,
+        "engine": "TestEngine",
+        "id": "644c073f8d646ec71244c2b9"
+      },
+      "title": {
+        "raw": "mollit aliqua mollit do ea fugiat consequat sunt ex in"
+      },
+      "categories": {
+        "raw": []
+      },
+      "date": {
+        "raw": "2023-02-24T04:17:35.12Z"
+      },
+      "itemNumber": {
+        "raw": 349091
+      }
+    },
+    {
+      "_meta": {
+        "score": 0.4,
+        "engine": "TestEngine",
+        "id": "644c073f73cb1b8507f59fbc"
+      },
+      "title": {
+        "raw": "exercitation anim dolor ipsum sunt labore exercitation tempor occaecat commodo"
+      },
+      "categories": {
+        "raw": [
+          "esse",
+          "ullamco"
+        ]
+      },
+      "date": {
+        "raw": "2023-03-10T10:32:42.12Z"
+      },
+      "itemNumber": {
+        "raw": 476692
+      }
+    },
+    {
+      "_meta": {
+        "score": 0.59,
+        "engine": "TestEngine",
+        "id": "644c073f4f1461271a51710b"
+      },
+      "title": {
+        "raw": "adipisicing commodo incididunt amet veniam consectetur reprehenderit excepteur dolore nulla"
+      },
+      "categories": {
+        "raw": [
+          "et",
+          "non",
+          "culpa"
+        ]
+      },
+      "date": {
+        "raw": "2023-02-28T05:15:13.12Z"
+      },
+      "itemNumber": {
+        "raw": 558259
+      }
+    },
+    {
+      "_meta": {
+        "score": 0.79,
+        "engine": "TestEngine",
+        "id": "644c073fdf9a5d4b5232f3b1"
+      },
+      "title": {
+        "raw": "nostrud enim labore quis duis adipisicing est mollit minim et"
+      },
+      "categories": {
+        "raw": [
+          "sit",
+          "quis",
+          "aliqua"
+        ]
+      },
+      "date": {
+        "raw": "2023-02-04T09:17:50.12Z"
+      },
+      "itemNumber": {
+        "raw": 720452
+      }
+    },
+    {
+      "_meta": {
+        "score": 0.14,
+        "engine": "TestEngine",
+        "id": "644c073fb15a72d76a5ecc12"
+      },
+      "title": {
+        "raw": "exercitation aliquip est et culpa velit proident laborum incididunt quis"
+      },
+      "categories": {
+        "raw": []
+      },
+      "date": {
+        "raw": "2023-01-16T05:38:59.12Z"
+      },
+      "itemNumber": {
+        "raw": 642740
+      }
+    },
+    {
+      "_meta": {
+        "score": 0.15,
+        "engine": "TestEngine",
+        "id": "644c073f944882746f265897"
+      },
+      "title": {
+        "raw": "incididunt labore duis aute velit laboris voluptate minim proident officia"
+      },
+      "categories": {
+        "raw": [
+          "proident"
+        ]
+      },
+      "date": {
+        "raw": "2023-03-23T01:31:21.12Z"
+      },
+      "itemNumber": {
+        "raw": 585791
+      }
+    },
+    {
+      "_meta": {
+        "score": 0.83,
+        "engine": "TestEngine",
+        "id": "644c073f55bb41ebcff3758d"
+      },
+      "title": {
+        "raw": "non pariatur laboris magna est consectetur anim dolore proident ad"
+      },
+      "categories": {
+        "raw": [
+          "Lorem",
+          "sunt",
+          "eiusmod"
+        ]
+      },
+      "date": {
+        "raw": "2023-04-28T06:55:03.12Z"
+      },
+      "itemNumber": {
+        "raw": 762168
+      }
+    },
+    {
+      "_meta": {
+        "score": 0.7,
+        "engine": "TestEngine",
+        "id": "644c073fcaf199222384c935"
+      },
+      "title": {
+        "raw": "culpa dolore esse incididunt sint nisi cillum cillum aliquip consectetur"
+      },
+      "categories": {
+        "raw": [
+          "qui",
+          "exercitation"
+        ]
+      },
+      "date": {
+        "raw": "2023-01-06T04:35:06.12Z"
+      },
+      "itemNumber": {
+        "raw": 915183
+      }
+    },
+    {
+      "_meta": {
+        "score": 0.85,
+        "engine": "TestEngine",
+        "id": "644c073f67648ec1786dbca9"
+      },
+      "title": {
+        "raw": "amet eu nisi reprehenderit qui nulla id culpa dolore esse"
+      },
+      "categories": {
+        "raw": []
+      },
+      "date": {
+        "raw": "2023-04-14T09:16:45.12Z"
+      },
+      "itemNumber": {
+        "raw": 697015
+      }
+    },
+    {
+      "_meta": {
+        "score": 0.98,
+        "engine": "TestEngine",
+        "id": "644c073f9d6b744e74eaaa22"
+      },
+      "title": {
+        "raw": "ex cillum deserunt officia amet nisi deserunt do dolor ad"
+      },
+      "categories": {
+        "raw": [
+          "mollit",
+          "amet",
+          "enim"
+        ]
+      },
+      "date": {
+        "raw": "2023-03-10T12:44:20.12Z"
+      },
+      "itemNumber": {
+        "raw": 424806
+      }
+    },
+    {
+      "_meta": {
+        "score": 0.62,
+        "engine": "TestEngine",
+        "id": "644c073f9bdaf44e3ac9b641"
+      },
+      "title": {
+        "raw": "duis minim Lorem proident anim mollit anim ipsum pariatur sint"
+      },
+      "categories": {
+        "raw": [
+          "adipisicing",
+          "ut"
+        ]
+      },
+      "date": {
+        "raw": "2023-01-15T05:59:12.12Z"
+      },
+      "itemNumber": {
+        "raw": 848190
+      }
+    },
+    {
+      "_meta": {
+        "score": 0.6,
+        "engine": "TestEngine",
+        "id": "644c073fb892cacc52940493"
+      },
+      "title": {
+        "raw": "veniam pariatur ut qui non incididunt consectetur cupidatat sunt ullamco"
+      },
+      "categories": {
+        "raw": [
+          "velit",
+          "exercitation"
+        ]
+      },
+      "date": {
+        "raw": "2023-02-16T06:54:52.12Z"
+      },
+      "itemNumber": {
+        "raw": 918829
+      }
+    },
+    {
+      "_meta": {
+        "score": 0.51,
+        "engine": "TestEngine",
+        "id": "644c073fc10828a038947fe2"
+      },
+      "title": {
+        "raw": "dolore in do consectetur officia nostrud ut commodo velit elit"
+      },
+      "categories": {
+        "raw": []
+      },
+      "date": {
+        "raw": "2023-03-25T08:31:12.12Z"
+      },
+      "itemNumber": {
+        "raw": 816300
+      }
+    },
+    {
+      "_meta": {
+        "score": 0.11,
+        "engine": "TestEngine",
+        "id": "644c073fffdb7b0f57c57b19"
+      },
+      "title": {
+        "raw": "ut sint ullamco velit sunt ipsum anim sunt irure nisi"
+      },
+      "categories": {
+        "raw": [
+          "labore",
+          "irure"
+        ]
+      },
+      "date": {
+        "raw": "2023-01-31T11:27:06.12Z"
+      },
+      "itemNumber": {
+        "raw": 345422
+      }
+    },
+    {
+      "_meta": {
+        "score": 0.12,
+        "engine": "TestEngine",
+        "id": "644c073ffc221967cd8aa9fb"
+      },
+      "title": {
+        "raw": "velit et magna ipsum elit officia deserunt tempor elit aliquip"
+      },
+      "categories": {
+        "raw": [
+          "do"
+        ]
+      },
+      "date": {
+        "raw": "2023-03-10T02:52:41.12Z"
+      },
+      "itemNumber": {
+        "raw": 419875
+      }
+    },
+    {
+      "_meta": {
+        "score": 0.14,
+        "engine": "TestEngine",
+        "id": "644c073fa86acfa0763ec09b"
+      },
+      "title": {
+        "raw": "do consectetur eiusmod laboris sit proident pariatur sunt in aliqua"
+      },
+      "categories": {
+        "raw": [
+          "ullamco",
+          "incididunt"
+        ]
+      },
+      "date": {
+        "raw": "2023-01-03T03:22:17.12Z"
+      },
+      "itemNumber": {
+        "raw": 224113
+      }
+    },
+    {
+      "_meta": {
+        "score": 0.55,
+        "engine": "TestEngine",
+        "id": "644c073f1b5bcd1c2a91f799"
+      },
+      "title": {
+        "raw": "veniam nisi veniam ad mollit officia et occaecat aliquip officia"
+      },
+      "categories": {
+        "raw": []
+      },
+      "date": {
+        "raw": "2023-01-29T01:47:21.12Z"
+      },
+      "itemNumber": {
+        "raw": 620597
+      }
+    },
+    {
+      "_meta": {
+        "score": 0.9,
+        "engine": "TestEngine",
+        "id": "644c073f26fb0d589ba323b0"
+      },
+      "title": {
+        "raw": "cillum ea magna quis in id enim nostrud id pariatur"
+      },
+      "categories": {
+        "raw": [
+          "aliqua",
+          "est"
+        ]
+      },
+      "date": {
+        "raw": "2023-04-25T01:55:54.12Z"
+      },
+      "itemNumber": {
+        "raw": 661833
+      }
+    },
+    {
+      "_meta": {
+        "score": 0.53,
+        "engine": "TestEngine",
+        "id": "644c073fcbca7f2a564b3eb5"
+      },
+      "title": {
+        "raw": "commodo nulla ad Lorem dolor laboris nulla enim cillum aliqua"
+      },
+      "categories": {
+        "raw": [
+          "consequat"
+        ]
+      },
+      "date": {
+        "raw": "2023-01-11T09:58:51.12Z"
+      },
+      "itemNumber": {
+        "raw": 536194
+      }
+    },
+    {
+      "_meta": {
+        "score": 0.99,
+        "engine": "TestEngine",
+        "id": "644c073f6355d3527387b016"
+      },
+      "title": {
+        "raw": "fugiat consectetur in proident deserunt est ipsum dolor aliquip consequat"
+      },
+      "categories": {
+        "raw": [
+          "id"
+        ]
+      },
+      "date": {
+        "raw": "2023-02-13T10:42:58.12Z"
+      },
+      "itemNumber": {
+        "raw": 535396
+      }
+    },
+    {
+      "_meta": {
+        "score": 0.48,
+        "engine": "TestEngine",
+        "id": "644c073f599aadb0e573ce45"
+      },
+      "title": {
+        "raw": "excepteur aliquip duis quis esse nulla adipisicing aliqua eu mollit"
+      },
+      "categories": {
+        "raw": []
+      },
+      "date": {
+        "raw": "2023-02-21T04:24:05.12Z"
+      },
+      "itemNumber": {
+        "raw": 972471
+      }
+    },
+    {
+      "_meta": {
+        "score": 0.16,
+        "engine": "TestEngine",
+        "id": "644c073fc3ab08c720946076"
+      },
+      "title": {
+        "raw": "amet occaecat esse dolore labore exercitation nostrud ullamco ut non"
+      },
+      "categories": {
+        "raw": [
+          "reprehenderit",
+          "officia"
+        ]
+      },
+      "date": {
+        "raw": "2023-03-06T07:10:50.12Z"
+      },
+      "itemNumber": {
+        "raw": 234658
+      }
+    },
+    {
+      "_meta": {
+        "score": 0.77,
+        "engine": "TestEngine",
+        "id": "644c073fdbf4112716f59026"
+      },
+      "title": {
+        "raw": "nulla magna ea laboris ea aliquip ad amet enim est"
+      },
+      "categories": {
+        "raw": []
+      },
+      "date": {
+        "raw": "2023-04-22T09:26:00.12Z"
+      },
+      "itemNumber": {
+        "raw": 284707
+      }
+    },
+    {
+      "_meta": {
+        "score": 0.44,
+        "engine": "TestEngine",
+        "id": "644c073f45b29d7d3552352b"
+      },
+      "title": {
+        "raw": "tempor velit eiusmod aliqua velit aute magna anim dolore veniam"
+      },
+      "categories": {
+        "raw": [
+          "voluptate"
+        ]
+      },
+      "date": {
+        "raw": "2023-03-06T07:43:01.12Z"
+      },
+      "itemNumber": {
+        "raw": 341452
+      }
+    },
+    {
+      "_meta": {
+        "score": 0.62,
+        "engine": "TestEngine",
+        "id": "644c073f4a2d9f66187093f8"
+      },
+      "title": {
+        "raw": "ut ad aliquip veniam veniam mollit proident voluptate culpa consequat"
+      },
+      "categories": {
+        "raw": [
+          "sit"
+        ]
+      },
+      "date": {
+        "raw": "2023-01-17T02:24:06.12Z"
+      },
+      "itemNumber": {
+        "raw": 657704
+      }
+    },
+    {
+      "_meta": {
+        "score": 0.08,
+        "engine": "TestEngine",
+        "id": "644c073f1737c1a6a6220f32"
+      },
+      "title": {
+        "raw": "esse irure elit consectetur pariatur sint adipisicing laborum non sint"
+      },
+      "categories": {
+        "raw": []
+      },
+      "date": {
+        "raw": "2023-03-08T07:40:35.12Z"
+      },
+      "itemNumber": {
+        "raw": 283331
+      }
+    },
+    {
+      "_meta": {
+        "score": 0.42,
+        "engine": "TestEngine",
+        "id": "644c073fc2cf8b5d3a2d2aa0"
+      },
+      "title": {
+        "raw": "cillum cillum commodo elit Lorem consectetur laboris fugiat amet veniam"
+      },
+      "categories": {
+        "raw": [
+          "magna",
+          "fugiat",
+          "esse"
+        ]
+      },
+      "date": {
+        "raw": "2023-04-14T10:55:04.12Z"
+      },
+      "itemNumber": {
+        "raw": 835187
+      }
+    },
+    {
+      "_meta": {
+        "score": 0.18,
+        "engine": "TestEngine",
+        "id": "644c073fc9ba09b71934a368"
+      },
+      "title": {
+        "raw": "consectetur deserunt ad proident sit commodo ut sint do Lorem"
+      },
+      "categories": {
+        "raw": [
+          "reprehenderit",
+          "aute",
+          "sint"
+        ]
+      },
+      "date": {
+        "raw": "2023-01-09T04:25:40.12Z"
+      },
+      "itemNumber": {
+        "raw": 679269
+      }
+    },
+    {
+      "_meta": {
+        "score": 0.31,
+        "engine": "TestEngine",
+        "id": "644c073f2019da21dd27b78a"
+      },
+      "title": {
+        "raw": "amet consequat incididunt ea Lorem sunt nisi in nisi Lorem"
+      },
+      "categories": {
+        "raw": [
+          "minim"
+        ]
+      },
+      "date": {
+        "raw": "2023-02-28T12:37:04.12Z"
+      },
+      "itemNumber": {
+        "raw": 504835
+      }
+    },
+    {
+      "_meta": {
+        "score": 0.63,
+        "engine": "TestEngine",
+        "id": "644c073fc25198d8afb7abd1"
+      },
+      "title": {
+        "raw": "dolore commodo nisi deserunt nulla incididunt excepteur consequat labore culpa"
+      },
+      "categories": {
+        "raw": [
+          "amet",
+          "nulla",
+          "laborum"
+        ]
+      },
+      "date": {
+        "raw": "2023-04-24T09:22:35.12Z"
+      },
+      "itemNumber": {
+        "raw": 644075
+      }
+    },
+    {
+      "_meta": {
+        "score": 0.82,
+        "engine": "TestEngine",
+        "id": "644c073f1671c6b6fc09078f"
+      },
+      "title": {
+        "raw": "non veniam ad consequat id laboris amet nisi velit proident"
+      },
+      "categories": {
+        "raw": [
+          "dolore",
+          "consequat",
+          "deserunt"
+        ]
+      },
+      "date": {
+        "raw": "2023-03-30T03:06:19.12Z"
+      },
+      "itemNumber": {
+        "raw": 139001
+      }
+    },
+    {
+      "_meta": {
+        "score": 0.85,
+        "engine": "TestEngine",
+        "id": "644c073f399a36851dcbc5bf"
+      },
+      "title": {
+        "raw": "est nulla nisi ea quis qui duis commodo anim magna"
+      },
+      "categories": {
+        "raw": [
+          "id",
+          "adipisicing"
+        ]
+      },
+      "date": {
+        "raw": "2023-04-20T01:21:23.12Z"
+      },
+      "itemNumber": {
+        "raw": 332738
+      }
+    },
+    {
+      "_meta": {
+        "score": 0.15,
+        "engine": "TestEngine",
+        "id": "644c073fa0d1479c3ceaa354"
+      },
+      "title": {
+        "raw": "proident non et laborum culpa labore duis qui irure commodo"
+      },
+      "categories": {
+        "raw": []
+      },
+      "date": {
+        "raw": "2023-04-03T09:08:38.12Z"
+      },
+      "itemNumber": {
+        "raw": 552844
+      }
+    },
+    {
+      "_meta": {
+        "score": 0.95,
+        "engine": "TestEngine",
+        "id": "644c073f1193042417dc6e21"
+      },
+      "title": {
+        "raw": "incididunt ut ipsum dolore dolor nostrud excepteur ex labore reprehenderit"
+      },
+      "categories": {
+        "raw": [
+          "sit",
+          "labore"
+        ]
+      },
+      "date": {
+        "raw": "2023-01-04T10:42:14.12Z"
+      },
+      "itemNumber": {
+        "raw": 301468
+      }
+    },
+    {
+      "_meta": {
+        "score": 0.69,
+        "engine": "TestEngine",
+        "id": "644c073f9e9c43cd844129d1"
+      },
+      "title": {
+        "raw": "consequat cupidatat est sint consequat nisi tempor cupidatat minim aute"
+      },
+      "categories": {
+        "raw": [
+          "do",
+          "ad"
+        ]
+      },
+      "date": {
+        "raw": "2023-03-23T10:11:26.12Z"
+      },
+      "itemNumber": {
+        "raw": 285497
+      }
+    },
+    {
+      "_meta": {
+        "score": 0.77,
+        "engine": "TestEngine",
+        "id": "644c073f9e165c33cc1da056"
+      },
+      "title": {
+        "raw": "officia culpa et enim laboris ea mollit elit mollit adipisicing"
+      },
+      "categories": {
+        "raw": [
+          "ad",
+          "ad",
+          "magna",
+          "quis"
+        ]
+      },
+      "date": {
+        "raw": "2023-01-13T03:23:18.12Z"
+      },
+      "itemNumber": {
+        "raw": 929618
+      }
+    },
+    {
+      "_meta": {
+        "score": 0.78,
+        "engine": "TestEngine",
+        "id": "644c073f9d194a037af9d064"
+      },
+      "title": {
+        "raw": "nisi irure est magna fugiat dolore aute minim non velit"
+      },
+      "categories": {
+        "raw": [
+          "proident",
+          "velit",
+          "nulla"
+        ]
+      },
+      "date": {
+        "raw": "2023-02-28T11:40:59.12Z"
+      },
+      "itemNumber": {
+        "raw": 650251
+      }
+    },
+    {
+      "_meta": {
+        "score": 0.69,
+        "engine": "TestEngine",
+        "id": "644c073fda2c2be899beb3aa"
+      },
+      "title": {
+        "raw": "do occaecat nisi dolore consectetur deserunt do anim enim incididunt"
+      },
+      "categories": {
+        "raw": [
+          "culpa"
+        ]
+      },
+      "date": {
+        "raw": "2023-03-03T01:15:33.12Z"
+      },
+      "itemNumber": {
+        "raw": 257733
+      }
+    },
+    {
+      "_meta": {
+        "score": 0.09,
+        "engine": "TestEngine",
+        "id": "644c073f01c248097ab67d99"
+      },
+      "title": {
+        "raw": "esse irure magna sint ipsum ipsum cupidatat velit tempor eiusmod"
+      },
+      "categories": {
+        "raw": [
+          "laboris",
+          "excepteur",
+          "culpa",
+          "non"
+        ]
+      },
+      "date": {
+        "raw": "2023-03-07T12:15:09.12Z"
+      },
+      "itemNumber": {
+        "raw": 802974
+      }
+    },
+    {
+      "_meta": {
+        "score": 0.76,
+        "engine": "TestEngine",
+        "id": "644c073fa2e4d0c0614c9dd2"
+      },
+      "title": {
+        "raw": "sit labore deserunt eiusmod ut nostrud qui adipisicing do eiusmod"
+      },
+      "categories": {
+        "raw": []
+      },
+      "date": {
+        "raw": "2023-03-26T03:41:00.12Z"
+      },
+      "itemNumber": {
+        "raw": 848260
+      }
+    },
+    {
+      "_meta": {
+        "score": 0.57,
+        "engine": "TestEngine",
+        "id": "644c073fe10f4aa70a6fda23"
+      },
+      "title": {
+        "raw": "magna non labore sit nulla anim sit laborum fugiat amet"
+      },
+      "categories": {
+        "raw": [
+          "amet",
+          "officia",
+          "velit"
+        ]
+      },
+      "date": {
+        "raw": "2023-04-12T08:20:33.12Z"
+      },
+      "itemNumber": {
+        "raw": 113349
+      }
+    },
+    {
+      "_meta": {
+        "score": 0.46,
+        "engine": "TestEngine",
+        "id": "644c073fd15d3743342a06fc"
+      },
+      "title": {
+        "raw": "nostrud minim officia aute nulla excepteur esse velit ullamco eiusmod"
+      },
+      "categories": {
+        "raw": []
+      },
+      "date": {
+        "raw": "2023-03-16T08:41:25.12Z"
+      },
+      "itemNumber": {
+        "raw": 157579
+      }
+    },
+    {
+      "_meta": {
+        "score": 0.61,
+        "engine": "TestEngine",
+        "id": "644c073fb863d91d42c114fd"
+      },
+      "title": {
+        "raw": "sunt do ea duis esse minim nisi aliquip ex id"
+      },
+      "categories": {
+        "raw": []
+      },
+      "date": {
+        "raw": "2023-03-21T08:56:15.12Z"
+      },
+      "itemNumber": {
+        "raw": 389472
+      }
+    },
+    {
+      "_meta": {
+        "score": 0.18,
+        "engine": "TestEngine",
+        "id": "644c073f93c0a14c6fb1025a"
+      },
+      "title": {
+        "raw": "sint consectetur culpa do sunt irure id labore magna in"
+      },
+      "categories": {
+        "raw": [
+          "qui"
+        ]
+      },
+      "date": {
+        "raw": "2023-01-02T08:59:45.12Z"
+      },
+      "itemNumber": {
+        "raw": 442800
+      }
+    },
+    {
+      "_meta": {
+        "score": 0.57,
+        "engine": "TestEngine",
+        "id": "644c073f75e0a915e145bf47"
+      },
+      "title": {
+        "raw": "laboris do dolore sint commodo anim exercitation culpa non sunt"
+      },
+      "categories": {
+        "raw": [
+          "et"
+        ]
+      },
+      "date": {
+        "raw": "2023-03-27T09:14:11.12Z"
+      },
+      "itemNumber": {
+        "raw": 803548
+      }
+    },
+    {
+      "_meta": {
+        "score": 0.42,
+        "engine": "TestEngine",
+        "id": "644c073f15f59e4a8cf1e489"
+      },
+      "title": {
+        "raw": "exercitation reprehenderit anim amet veniam fugiat sit dolor sint reprehenderit"
+      },
+      "categories": {
+        "raw": [
+          "tempor"
+        ]
+      },
+      "date": {
+        "raw": "2023-03-17T08:42:27.12Z"
+      },
+      "itemNumber": {
+        "raw": 895577
+      }
+    },
+    {
+      "_meta": {
+        "score": 0.19,
+        "engine": "TestEngine",
+        "id": "644c073f5ac3835e04644060"
+      },
+      "title": {
+        "raw": "sunt amet ea duis cupidatat est aliquip sunt laborum nisi"
+      },
+      "categories": {
+        "raw": []
+      },
+      "date": {
+        "raw": "2023-04-13T04:12:03.12Z"
+      },
+      "itemNumber": {
+        "raw": 153111
+      }
+    },
+    {
+      "_meta": {
+        "score": 0.69,
+        "engine": "TestEngine",
+        "id": "644c073f6cde3126cd932949"
+      },
+      "title": {
+        "raw": "ea pariatur magna minim officia nostrud amet laboris irure magna"
+      },
+      "categories": {
+        "raw": [
+          "velit",
+          "sunt",
+          "sit"
+        ]
+      },
+      "date": {
+        "raw": "2023-02-03T08:46:48.12Z"
+      },
+      "itemNumber": {
+        "raw": 208770
+      }
+    },
+    {
+      "_meta": {
+        "score": 0.31,
+        "engine": "TestEngine",
+        "id": "644c073f255f54b4586e3e9c"
+      },
+      "title": {
+        "raw": "cillum proident fugiat exercitation tempor fugiat dolor ad excepteur qui"
+      },
+      "categories": {
+        "raw": [
+          "est",
+          "consectetur",
+          "in"
+        ]
+      },
+      "date": {
+        "raw": "2023-04-09T01:04:21.12Z"
+      },
+      "itemNumber": {
+        "raw": 798995
+      }
+    },
+    {
+      "_meta": {
+        "score": 0.84,
+        "engine": "TestEngine",
+        "id": "644c073f0f03dcc4da985efe"
+      },
+      "title": {
+        "raw": "fugiat nisi ut eu ad cupidatat excepteur esse do nisi"
+      },
+      "categories": {
+        "raw": [
+          "officia",
+          "magna",
+          "ea"
+        ]
+      },
+      "date": {
+        "raw": "2023-01-02T12:21:52.12Z"
+      },
+      "itemNumber": {
+        "raw": 750458
+      }
+    },
+    {
+      "_meta": {
+        "score": 0.82,
+        "engine": "TestEngine",
+        "id": "644c073ffdf6687e14f348a2"
+      },
+      "title": {
+        "raw": "sit dolore do minim adipisicing mollit commodo dolore tempor voluptate"
+      },
+      "categories": {
+        "raw": []
+      },
+      "date": {
+        "raw": "2023-02-19T11:41:37.12Z"
+      },
+      "itemNumber": {
+        "raw": 797103
+      }
+    },
+    {
+      "_meta": {
+        "score": 0.21,
+        "engine": "TestEngine",
+        "id": "644c073f42332538b130ecc5"
+      },
+      "title": {
+        "raw": "ut dolor consequat laboris in sint proident sit aute non"
+      },
+      "categories": {
+        "raw": [
+          "magna"
+        ]
+      },
+      "date": {
+        "raw": "2023-02-21T04:51:41.12Z"
+      },
+      "itemNumber": {
+        "raw": 779517
+      }
+    },
+    {
+      "_meta": {
+        "score": 0.14,
+        "engine": "TestEngine",
+        "id": "644c073f0e55d96751303edb"
+      },
+      "title": {
+        "raw": "quis non ut ea culpa sit fugiat cupidatat proident enim"
+      },
+      "categories": {
+        "raw": []
+      },
+      "date": {
+        "raw": "2023-04-27T09:04:02.12Z"
+      },
+      "itemNumber": {
+        "raw": 975123
+      }
+    },
+    {
+      "_meta": {
+        "score": 0.43,
+        "engine": "TestEngine",
+        "id": "644c073f0e23a6dab3f13988"
+      },
+      "title": {
+        "raw": "reprehenderit magna ea elit elit irure ad excepteur aute nisi"
+      },
+      "categories": {
+        "raw": [
+          "ullamco",
+          "dolor",
+          "ut"
+        ]
+      },
+      "date": {
+        "raw": "2023-04-04T11:13:20.12Z"
+      },
+      "itemNumber": {
+        "raw": 699344
+      }
+    },
+    {
+      "_meta": {
+        "score": 0.04,
+        "engine": "TestEngine",
+        "id": "644c073f2177c88035d884a9"
+      },
+      "title": {
+        "raw": "amet consequat est culpa veniam sunt magna anim deserunt eiusmod"
+      },
+      "categories": {
+        "raw": [
+          "deserunt",
+          "eu"
+        ]
+      },
+      "date": {
+        "raw": "2023-01-12T01:11:27.12Z"
+      },
+      "itemNumber": {
+        "raw": 937568
+      }
+    },
+    {
+      "_meta": {
+        "score": 0.22,
+        "engine": "TestEngine",
+        "id": "644c073ff95ddc00509d1cba"
+      },
+      "title": {
+        "raw": "do excepteur quis officia veniam minim cupidatat ea culpa aliquip"
+      },
+      "categories": {
+        "raw": [
+          "esse",
+          "fugiat",
+          "id"
+        ]
+      },
+      "date": {
+        "raw": "2023-04-04T09:51:27.12Z"
+      },
+      "itemNumber": {
+        "raw": 853036
+      }
+    },
+    {
+      "_meta": {
+        "score": 0.9,
+        "engine": "TestEngine",
+        "id": "644c073fb1238966f6961f2a"
+      },
+      "title": {
+        "raw": "voluptate sint do officia commodo incididunt occaecat esse quis exercitation"
+      },
+      "categories": {
+        "raw": [
+          "aliquip",
+          "sunt",
+          "minim",
+          "elit"
+        ]
+      },
+      "date": {
+        "raw": "2023-03-18T06:31:06.12Z"
+      },
+      "itemNumber": {
+        "raw": 768169
+      }
+    },
+    {
+      "_meta": {
+        "score": 0.97,
+        "engine": "TestEngine",
+        "id": "644c073f675bf28eb464441d"
+      },
+      "title": {
+        "raw": "culpa duis non proident minim aute nulla esse amet et"
+      },
+      "categories": {
+        "raw": [
+          "eiusmod",
+          "officia"
+        ]
+      },
+      "date": {
+        "raw": "2023-02-03T12:22:07.12Z"
+      },
+      "itemNumber": {
+        "raw": 382298
+      }
+    },
+    {
+      "_meta": {
+        "score": 0.15,
+        "engine": "TestEngine",
+        "id": "644c073f38ab5112bd2e2379"
+      },
+      "title": {
+        "raw": "in laborum aliquip voluptate aliqua cillum reprehenderit anim commodo nulla"
+      },
+      "categories": {
+        "raw": [
+          "tempor"
+        ]
+      },
+      "date": {
+        "raw": "2023-04-28T05:44:23.12Z"
+      },
+      "itemNumber": {
+        "raw": 107123
+      }
+    },
+    {
+      "_meta": {
+        "score": 0.29,
+        "engine": "TestEngine",
+        "id": "644c073fc76847b72a25cf61"
+      },
+      "title": {
+        "raw": "occaecat qui deserunt non quis magna velit minim cillum officia"
+      },
+      "categories": {
+        "raw": [
+          "officia",
+          "non"
+        ]
+      },
+      "date": {
+        "raw": "2023-01-07T07:20:38.12Z"
+      },
+      "itemNumber": {
+        "raw": 614101
+      }
+    },
+    {
+      "_meta": {
+        "score": 0.32,
+        "engine": "TestEngine",
+        "id": "644c073fdb33eb312548ee05"
+      },
+      "title": {
+        "raw": "duis consequat aliqua sint cupidatat est et esse velit minim"
+      },
+      "categories": {
+        "raw": [
+          "nulla",
+          "dolore",
+          "adipisicing",
+          "laborum"
+        ]
+      },
+      "date": {
+        "raw": "2023-02-24T05:48:36.12Z"
+      },
+      "itemNumber": {
+        "raw": 581951
+      }
+    },
+    {
+      "_meta": {
+        "score": 0.08,
+        "engine": "TestEngine",
+        "id": "644c073f7304d2e74bd65088"
+      },
+      "title": {
+        "raw": "exercitation occaecat sint amet elit qui fugiat velit cillum sunt"
+      },
+      "categories": {
+        "raw": []
+      },
+      "date": {
+        "raw": "2023-01-01T06:51:09.12Z"
+      },
+      "itemNumber": {
+        "raw": 562851
+      }
+    },
+    {
+      "_meta": {
+        "score": 0.44,
+        "engine": "TestEngine",
+        "id": "644c073f9ead0663e62ef727"
+      },
+      "title": {
+        "raw": "ea qui aliqua voluptate magna aliqua consectetur sint culpa nulla"
+      },
+      "categories": {
+        "raw": []
+      },
+      "date": {
+        "raw": "2023-01-31T11:07:22.12Z"
+      },
+      "itemNumber": {
+        "raw": 195628
+      }
+    },
+    {
+      "_meta": {
+        "score": 0.81,
+        "engine": "TestEngine",
+        "id": "644c073fbe60417773da12c2"
+      },
+      "title": {
+        "raw": "mollit officia do veniam mollit exercitation dolor fugiat magna non"
+      },
+      "categories": {
+        "raw": [
+          "enim",
+          "minim",
+          "culpa"
+        ]
+      },
+      "date": {
+        "raw": "2023-03-26T04:16:22.12Z"
+      },
+      "itemNumber": {
+        "raw": 531138
+      }
+    },
+    {
+      "_meta": {
+        "score": 0.44,
+        "engine": "TestEngine",
+        "id": "644c073fdd3d2956f69f6fb0"
+      },
+      "title": {
+        "raw": "incididunt mollit nostrud anim excepteur amet excepteur fugiat occaecat culpa"
+      },
+      "categories": {
+        "raw": [
+          "est",
+          "sit"
+        ]
+      },
+      "date": {
+        "raw": "2023-02-18T08:34:36.12Z"
+      },
+      "itemNumber": {
+        "raw": 181786
+      }
+    },
+    {
+      "_meta": {
+        "score": 0.3,
+        "engine": "TestEngine",
+        "id": "644c073fd83049fe6169ff13"
+      },
+      "title": {
+        "raw": "aliquip esse nisi laboris qui proident aute exercitation consectetur nulla"
+      },
+      "categories": {
+        "raw": [
+          "ut"
+        ]
+      },
+      "date": {
+        "raw": "2023-03-18T09:32:21.12Z"
+      },
+      "itemNumber": {
+        "raw": 348726
+      }
+    },
+    {
+      "_meta": {
+        "score": 0.15,
+        "engine": "TestEngine",
+        "id": "644c073f49fc4667b168b104"
+      },
+      "title": {
+        "raw": "incididunt aliqua id fugiat ea enim reprehenderit eu dolor magna"
+      },
+      "categories": {
+        "raw": []
+      },
+      "date": {
+        "raw": "2023-01-02T09:29:24.12Z"
+      },
+      "itemNumber": {
+        "raw": 332873
+      }
+    },
+    {
+      "_meta": {
+        "score": 0.22,
+        "engine": "TestEngine",
+        "id": "644c073fa54fcc61983e666f"
+      },
+      "title": {
+        "raw": "tempor commodo exercitation aute consectetur enim nulla ullamco qui nisi"
+      },
+      "categories": {
+        "raw": [
+          "fugiat",
+          "do"
+        ]
+      },
+      "date": {
+        "raw": "2023-04-20T11:26:20.12Z"
+      },
+      "itemNumber": {
+        "raw": 616242
+      }
+    },
+    {
+      "_meta": {
+        "score": 0.11,
+        "engine": "TestEngine",
+        "id": "644c073f2c8f62cc80da5e11"
+      },
+      "title": {
+        "raw": "magna duis aute esse aute minim sint eiusmod aute aliquip"
+      },
+      "categories": {
+        "raw": [
+          "voluptate",
+          "dolor",
+          "pariatur"
+        ]
+      },
+      "date": {
+        "raw": "2023-02-15T02:20:01.12Z"
+      },
+      "itemNumber": {
+        "raw": 649227
+      }
+    },
+    {
+      "_meta": {
+        "score": 0.27,
+        "engine": "TestEngine",
+        "id": "644c073f13b90ddfb870c68d"
+      },
+      "title": {
+        "raw": "amet aute sunt amet quis esse culpa do eu commodo"
+      },
+      "categories": {
+        "raw": [
+          "ullamco",
+          "id",
+          "cupidatat"
+        ]
+      },
+      "date": {
+        "raw": "2023-04-24T10:07:06.12Z"
+      },
+      "itemNumber": {
+        "raw": 546442
+      }
+    },
+    {
+      "_meta": {
+        "score": 0.39,
+        "engine": "TestEngine",
+        "id": "644c073f384e4609e3d44535"
+      },
+      "title": {
+        "raw": "dolor nulla dolore deserunt cupidatat laborum in est fugiat velit"
+      },
+      "categories": {
+        "raw": []
+      },
+      "date": {
+        "raw": "2023-04-22T09:39:09.12Z"
+      },
+      "itemNumber": {
+        "raw": 746548
+      }
+    },
+    {
+      "_meta": {
+        "score": 0.57,
+        "engine": "TestEngine",
+        "id": "644c073f8b8d901b8bd9be8b"
+      },
+      "title": {
+        "raw": "ea eu ex culpa non id voluptate proident laboris mollit"
+      },
+      "categories": {
+        "raw": [
+          "id",
+          "magna"
+        ]
+      },
+      "date": {
+        "raw": "2023-01-24T05:12:24.12Z"
+      },
+      "itemNumber": {
+        "raw": 557017
+      }
+    },
+    {
+      "_meta": {
+        "score": 0.93,
+        "engine": "TestEngine",
+        "id": "644c073f8da04e793510877c"
+      },
+      "title": {
+        "raw": "est ut amet excepteur irure ad laboris est commodo adipisicing"
+      },
+      "categories": {
+        "raw": []
+      },
+      "date": {
+        "raw": "2023-04-18T07:14:27.12Z"
+      },
+      "itemNumber": {
+        "raw": 307556
+      }
+    }
+  ],
+  "facets": {
+    "acres": [
+      {
+        "type": "range",
+        "name": "min-and-max-range",
+        "data": [
+          {
+            "to": 10000,
+            "from": 1,
+            "count": 2
+          },
+          {
+            "from": 10000,
+            "count": 44
+          }
+        ]
+      }
+    ]
+  }
+}

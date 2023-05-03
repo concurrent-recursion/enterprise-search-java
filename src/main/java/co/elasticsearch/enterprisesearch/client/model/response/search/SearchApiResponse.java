@@ -1,18 +1,20 @@
 package co.elasticsearch.enterprisesearch.client.model.response.search;
 
 import co.elasticsearch.enterprisesearch.client.model.response.ErrorableResponse;
+import co.elasticsearch.enterprisesearch.client.model.response.search.facet.Facet;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.AccessLevel;
 import lombok.Data;
+import lombok.Getter;
 import lombok.experimental.Accessors;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Spliterator;
+import java.util.*;
 import java.util.function.Consumer;
+import java.util.stream.Collectors;
 
 @Data
 @Accessors(chain = true)
@@ -40,6 +42,24 @@ public class SearchApiResponse<T extends ResponseDocument> implements Iterable<T
      * @return the errors
      */
     private List<String> errors = new ArrayList<>();
+
+    /**
+     * Value and Range facets for the query
+     * @param facetMap The facets to build on the search results
+     * @return the facetMap of facets
+     */
+    @JsonProperty("facets")
+    @Getter(AccessLevel.PACKAGE)
+    private Map<String, List<Facet>> facetMap = new LinkedHashMap<>();
+
+    /**
+     * Get the facets
+     * @return The facets
+     */
+    @JsonIgnore
+    public List<Facet> getFacets() {
+        return facetMap.values().stream().flatMap(Collection::stream).collect(Collectors.toList());
+    }
 
     @JsonIgnore
     @NotNull
