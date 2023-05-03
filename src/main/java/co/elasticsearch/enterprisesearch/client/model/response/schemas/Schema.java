@@ -16,7 +16,7 @@ import java.util.*;
 public class Schema implements ErrorableResponse {
 
     /**
-     * The 
+     * The
      */
     @JsonAnyGetter
     @JsonAnySetter
