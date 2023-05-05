@@ -16,7 +16,7 @@ import java.util.List;
 @Accessors(chain = true)
 public class TextValueFacet implements Facet{
     private String name;
-    private List<FacetValue> data;
+    private List<FacetValue> data = new ArrayList<>();
 
     @Override
     public FacetType getType() {

@@ -9,6 +9,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import lombok.AccessLevel;
@@ -74,6 +75,7 @@ public class SearchRequest {
      */
     @JsonProperty("facets")
     @Getter(AccessLevel.PACKAGE)
+
     private Map<String, List<Facet>> facetMap = new LinkedHashMap<>();
 
     /**

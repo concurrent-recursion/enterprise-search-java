@@ -2,10 +2,8 @@ package co.elasticsearch.enterprisesearch.client.model.response.search;
 
 import co.elasticsearch.enterprisesearch.client.model.response.ErrorableResponse;
 import co.elasticsearch.enterprisesearch.client.model.response.search.facet.Facet;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.*;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import lombok.AccessLevel;
 import lombok.Data;
 import lombok.Getter;
@@ -51,6 +49,7 @@ public class SearchApiResponse<T extends ResponseDocument> implements Iterable<T
      */
     @JsonProperty("facets")
     @Getter(AccessLevel.PACKAGE)
+    @JsonFormat(without = {JsonFormat.Feature.WRITE_SINGLE_ELEM_ARRAYS_UNWRAPPED})
     private Map<String, List<Facet>> facetMap = new LinkedHashMap<>();
 
     /**
@@ -58,6 +57,7 @@ public class SearchApiResponse<T extends ResponseDocument> implements Iterable<T
      * @return The facets
      */
     @JsonIgnore
+    @JsonSerialize
     public List<Facet> getFacets() {
         return facetMap.values().stream().flatMap(Collection::stream).collect(Collectors.toList());
     }
