@@ -34,6 +34,7 @@ public class SearchApiResponse<T extends ResponseDocument> implements Iterable<T
      * @return the results
      */
     @JsonIgnoreProperties(ignoreUnknown = true)
+    @JsonInclude(JsonInclude.Include.ALWAYS)
     private List<T> results = new ArrayList<>();
 
     /**

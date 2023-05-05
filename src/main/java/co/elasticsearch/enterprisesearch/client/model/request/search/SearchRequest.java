@@ -26,7 +26,7 @@ public class SearchRequest {
 
     /**
      * String or number to match.<br>
-     * The value '' (empty string) matches all documents. (Note that API limits for documents returned applies.)<br>
+     * The value "" (empty string) matches all documents. (Note that API limits for documents returned applies.)<br>
      * The following Lucene query syntax is supported:
      * <ul>
      *     <li>double quoted strings</li>
@@ -37,7 +37,8 @@ public class SearchRequest {
      * @param query String or number to match
      * @return query to match
      */
-    private String query;
+    @JsonInclude(JsonInclude.Include.ALWAYS)
+    private String query = "";
 
     /**
      * Object to delimit the pagination parameters.
