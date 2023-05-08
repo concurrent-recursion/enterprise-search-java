@@ -5,6 +5,9 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
 
+/**
+ * Represents an engine
+ */
 @Getter
 @Setter
 @Accessors(chain = true)

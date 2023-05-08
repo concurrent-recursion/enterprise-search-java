@@ -24,6 +24,8 @@ public enum FacetSortField {
 
     /**
      * The name of the facet
+     * @param name the name of the facet
+     * @return the name of the facet
      */
     @JsonValue
     private final String name;

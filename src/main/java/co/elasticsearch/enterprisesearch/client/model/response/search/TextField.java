@@ -4,6 +4,9 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
 
+/**
+ * Represents a text field in a search response document, that only contains a single value
+ */
 @Getter
 @Setter
 @Accessors(chain = true)

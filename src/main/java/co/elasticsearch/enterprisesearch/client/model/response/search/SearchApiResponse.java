@@ -14,6 +14,10 @@ import java.util.*;
 import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
+/**
+ * Represents the response from a search operation
+ * @param <T> The type of document contained in the given engine
+ */
 @Data
 @Accessors(chain = true)
 @JsonInclude(JsonInclude.Include.NON_EMPTY)

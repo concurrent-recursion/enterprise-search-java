@@ -13,6 +13,9 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
+/**
+ * Represents a filter based on a text value
+ */
 @Getter
 @Setter
 @Accessors(chain = true)
@@ -36,10 +39,20 @@ public class TextValueFilter implements Filter {
     private List<String> values = new ArrayList<>();
 
 
+    /**
+     * Create a text value filter with the given values
+     * @param name The field name this filter applies to
+     * @param values The field values to filter on
+     */
     public TextValueFilter(String name, String... values) {
         this(name, Arrays.asList(values));
     }
 
+    /**
+     * Create a text value filter with the given values
+     * @param name The field name this filter applies to
+     * @param values The field values to filter on
+     */
     public TextValueFilter(String name, List<String> values) {
         this(name);
         this.values.addAll(values);

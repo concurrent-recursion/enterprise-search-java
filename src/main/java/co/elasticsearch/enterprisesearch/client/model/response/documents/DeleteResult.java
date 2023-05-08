@@ -7,6 +7,9 @@ import lombok.experimental.Accessors;
 
 import java.util.Objects;
 
+/**
+ * Represents the result of a document delete operation
+ */
 @Getter
 @Setter
 @Accessors(chain = true)

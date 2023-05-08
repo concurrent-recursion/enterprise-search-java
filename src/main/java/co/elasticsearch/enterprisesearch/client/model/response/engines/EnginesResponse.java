@@ -10,6 +10,9 @@ import lombok.experimental.Accessors;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Represents the response from a multi engine request
+ */
 @Getter
 @Setter
 @Accessors(chain = true)

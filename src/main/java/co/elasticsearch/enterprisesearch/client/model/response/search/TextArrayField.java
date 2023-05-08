@@ -7,6 +7,9 @@ import lombok.experimental.Accessors;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Represents a text field in a search response document, that can contain multiple values
+ */
 @Getter
 @Setter
 @Accessors(chain = true)

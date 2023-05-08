@@ -12,6 +12,9 @@ import lombok.experimental.Accessors;
 
 import java.util.*;
 
+/**
+ * Represents the response from an engine request
+ */
 @Getter
 @Setter
 @Accessors(chain = true)

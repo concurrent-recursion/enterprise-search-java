@@ -15,6 +15,9 @@ import lombok.experimental.Accessors;
 import java.util.*;
 import java.util.stream.Collectors;
 
+/**
+ * Represents the search settings for an engine in AppSearch
+ */
 @Getter
 @Setter
 @Accessors(chain = true)

@@ -20,6 +20,9 @@ import java.util.Arrays;
 import java.util.Map;
 import java.util.Objects;
 
+/**
+ * Represents a sort order
+ */
 @Slf4j
 @Getter
 @Setter
@@ -27,26 +30,64 @@ import java.util.Objects;
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
 @JsonSerialize(using = SortSerializer.class)
 public class Sort {
+    /**
+     * Default sorting for documents, score
+     */
     public static final String SCORE = "_score";
 
+    /**
+     * The sort name
+     * @param name the sort name
+     * @return the sort name
+     */
     @JsonKey
     private final String name;
+    /**
+     * The sort order
+     * @param direction the sort order
+     * @return the sort order
+     */
     @JsonValue
     private final SortOrder direction;
 
 
+    /**
+     * Represents a sort order
+     */
     @Getter
     @RequiredArgsConstructor
     public enum Order implements SortOrder {
-        ASCENDING("asc"), DESCENDING("desc");
+        /**
+         * Ascending order
+         */
+        ASCENDING("asc"),
+        /**
+         * Descending order
+         */
+        DESCENDING("desc");
+
+        /**
+         * The string representation of the order
+         * @param value The sort direction value
+         * @return the sort direction value
+         */
         @JsonValue
         private final String value;
 
+        /**
+         * finds the order with the given value
+         * @param value The value to find
+         * @return The sort Order with the matching value, or an exception is thrown
+         */
         @JsonCreator
         public static Order fromValue(String value) {
             return Arrays.stream(values()).filter(m -> m.value.equals(value)).findFirst().orElseThrow();
         }
 
+        /**
+         * The order of the sort
+         * @return The order
+         */
         @Override
         public Order getOrder() {
             return this;
@@ -54,16 +95,31 @@ public class Sort {
     }
 
 
+    /**
+     * Create a sort with the given name and order
+     * @param field The field to sort on
+     * @param order The order to sort results
+     */
     public Sort(String field, @NonNull Sort.Order order) {
         this.name = field;
         this.direction = order;
     }
 
+    /**
+     * Create a sort with the given name and location
+     * @param field The field name to sort on
+     * @param location The location to sort on;
+     */
     public Sort(String field, GeoLocationSort location) {
         this.name = field;
         this.direction = location;
     }
 
+    /**
+     * Creates a sort from a json node
+     * @param node The node to marshall into an object
+     * @return The marshalled Sort object
+     */
     @JsonCreator
     static Sort createSort(ObjectNode node) {
         Map.Entry<String, JsonNode> field = node.fields().next();

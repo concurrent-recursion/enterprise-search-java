@@ -14,6 +14,9 @@ import lombok.experimental.Accessors;
 
 import java.util.Map;
 
+/**
+ * Represents a request to facet based on a value
+ */
 @Getter
 @Setter
 @Accessors(chain = true)

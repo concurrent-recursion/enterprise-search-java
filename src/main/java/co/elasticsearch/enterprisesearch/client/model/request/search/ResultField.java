@@ -9,15 +9,25 @@ import lombok.experimental.Accessors;
 
 import java.util.Objects;
 
+/**
+ * Represents a field in a search results document
+ */
 @Getter
 @Setter
 @Accessors(chain = true)
 @JsonSerialize(using = ResultFieldSerializer.class)
 public class ResultField {
 
+    /**
+     * Create a blank result field
+     */
     public ResultField() {
     }
 
+    /**
+     * Create a result field with the given name
+     * @param name the field name
+     */
     public ResultField(String name) {
         this.name = name;
     }

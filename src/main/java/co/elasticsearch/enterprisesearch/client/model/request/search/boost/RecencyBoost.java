@@ -9,6 +9,9 @@ import lombok.experimental.Accessors;
 import java.math.BigDecimal;
 import java.time.OffsetDateTime;
 
+/**
+ * Represents a boost based on the recency of a date
+ */
 @Getter
 @Setter
 @Accessors(chain = true)

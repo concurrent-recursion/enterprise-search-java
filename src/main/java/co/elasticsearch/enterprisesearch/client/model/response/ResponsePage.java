@@ -12,6 +12,10 @@ import lombok.experimental.Accessors;
 import java.io.Serializable;
 import java.util.Objects;
 
+/**
+ * Represents the Page object withing a response. This contains totalPages and totalResults in addition to the Page object
+ * properties
+ */
 @Getter
 @Setter
 @Accessors(chain = true)

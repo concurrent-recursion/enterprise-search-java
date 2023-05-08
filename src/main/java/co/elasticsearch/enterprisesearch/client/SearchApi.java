@@ -4,6 +4,10 @@ import co.elasticsearch.enterprisesearch.client.model.request.search.SearchReque
 import co.elasticsearch.enterprisesearch.client.model.response.search.ResponseDocument;
 import co.elasticsearch.enterprisesearch.client.model.response.search.SearchApiResponse;
 
+/**
+ * Represents search operations for a particular engine
+ * @param <T> The type of documents contained in the engine
+ */
 public interface SearchApi<T extends ResponseDocument> {
     /**
      * Executes a search

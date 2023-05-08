@@ -8,6 +8,9 @@ import lombok.experimental.Accessors;
 
 import java.math.BigDecimal;
 
+/**
+ * Represents a functional boost on a search field
+ */
 @Getter
 @Setter
 @Accessors(chain = true)

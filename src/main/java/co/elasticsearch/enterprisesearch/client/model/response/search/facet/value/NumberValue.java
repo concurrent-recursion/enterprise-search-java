@@ -7,18 +7,23 @@ import lombok.experimental.Accessors;
 
 import java.math.BigDecimal;
 
+/**
+ * Represents a numeric facet value
+ */
 @Getter
 @Setter
 @Accessors(chain = true)
 public class NumberValue implements FacetValueValue<BigDecimal> {
     /**
      * The facet value
+     * @param value the value of the facet
      * @return the value of the facet
      */
     private BigDecimal value;
     /**
      * The count of the facet value
-     * @return the count of the facet value in the engine
+     * @param count the count of documents matching the value
+     * @return the count of documents matching the value
      */
     private Long count;
 

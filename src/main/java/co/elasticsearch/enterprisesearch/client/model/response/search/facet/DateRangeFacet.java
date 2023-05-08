@@ -10,10 +10,17 @@ import lombok.experimental.Accessors;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Represents a date range facet
+ */
 @Getter
 @Setter
 @Accessors(chain = true)
 public class DateRangeFacet implements Facet{
+    /**
+     * The facet name
+     * @param name the name of the facet
+     */
     private String name;
     private List<FacetValue> data = new ArrayList<>();
 

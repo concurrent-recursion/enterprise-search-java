@@ -5,6 +5,9 @@ import lombok.experimental.Accessors;
 
 import java.util.Objects;
 
+/**
+ * Represents a query suggestion response
+ */
 @Getter
 @Setter
 @Accessors(chain = true)

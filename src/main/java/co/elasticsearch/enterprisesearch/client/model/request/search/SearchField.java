@@ -24,7 +24,7 @@ public class SearchField {
 
     /**
      * Create a SearchField with the
-     * @param fieldName
+     * @param fieldName the field name
      */
     public SearchField(String fieldName) {
         this.name = fieldName;

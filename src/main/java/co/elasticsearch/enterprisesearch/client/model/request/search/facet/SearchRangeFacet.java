@@ -14,6 +14,9 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Represents a Search Facet on a range
+ */
 @Data
 @Accessors(chain = true)
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
@@ -21,13 +24,25 @@ import java.util.List;
 @JsonDeserialize()
 public class SearchRangeFacet implements Facet {
 
+    /**
+     * Create an empty range facet
+     */
     public SearchRangeFacet() {
     }
 
+    /**
+     * Create a range facet with a name and empty range
+     * @param fieldName The name of the field to facet on
+     */
     public SearchRangeFacet(String fieldName) {
         this.fieldName = fieldName;
     }
 
+    /**
+     * The field name of the facet
+     * @param fieldName the field name
+     * @return the field name
+     */
     private String fieldName;
 
     @Override
@@ -61,8 +76,10 @@ public class SearchRangeFacet implements Facet {
     private List<Range> ranges = new ArrayList<>();
 
 
-
-
+    /**
+     * In the case of a GeoLocation facet range, this is the center point of the range
+     * @return An array containing [latitude,longitude] of the center point
+     */
     @JsonGetter
     public BigDecimal[] center() {
         return center == null ? null : center.getCenter();

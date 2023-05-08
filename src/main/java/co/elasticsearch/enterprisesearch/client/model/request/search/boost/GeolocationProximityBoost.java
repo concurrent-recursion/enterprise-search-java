@@ -9,6 +9,9 @@ import lombok.experimental.Accessors;
 
 import java.math.BigDecimal;
 
+/**
+ * Represents a boost based on the geographic proximity to a central point
+ */
 @Getter
 @Setter
 @Accessors(chain = true)

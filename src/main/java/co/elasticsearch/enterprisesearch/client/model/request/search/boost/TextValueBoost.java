@@ -12,6 +12,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+/**
+ * Represents a boost based on the value of a text field
+ */
 @Getter
 @Setter
 @Accessors(chain = true)

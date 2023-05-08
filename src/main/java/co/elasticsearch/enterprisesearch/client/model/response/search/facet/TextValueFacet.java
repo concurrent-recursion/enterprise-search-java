@@ -11,10 +11,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 
+/**
+ * Represents a text value facet
+ */
 @Setter
 @Getter
 @Accessors(chain = true)
 public class TextValueFacet implements Facet{
+    /**
+     * The facet name
+     * @param name the name of the facet
+     */
     private String name;
     private List<FacetValue> data = new ArrayList<>();
 

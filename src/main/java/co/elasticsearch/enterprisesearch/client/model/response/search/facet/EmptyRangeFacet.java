@@ -9,10 +9,18 @@ import lombok.experimental.Accessors;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * Represents an empty range facet, this exists because we cannot tell the type of a facet with no ranges
+ */
 @Getter
 @Setter
 @Accessors(chain = true)
 public class EmptyRangeFacet  implements Facet{
+    /**
+     * The name of the facet
+     * @param name the name of the facet
+     * @return the name of the facet
+     */
     private String name;
 
     @Override

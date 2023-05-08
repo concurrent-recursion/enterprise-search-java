@@ -13,7 +13,10 @@ import java.util.Arrays;
 @Getter
 @RequiredArgsConstructor
 public enum FacetType {
-    VALUE("value"),RANGE("range");
+    /** a facet on a single value **/
+    VALUE("value"),
+    /** a facet on a range of values **/
+    RANGE("range");
 
     /**
      * The text representation of the FacetType

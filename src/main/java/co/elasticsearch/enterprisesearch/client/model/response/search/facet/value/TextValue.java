@@ -13,12 +13,14 @@ import lombok.experimental.Accessors;
 public class TextValue implements FacetValueValue<String> {
     /**
      * The facet value
+     * @param value the value of the facet
      * @return the value of the facet
      */
     private String value;
     /**
      * The count of the facet value
-     * @return the count of the facet value in the engine
+     * @param count the count of the documents matching the value
+     * @return he count of the documents matching the value
      */
     private Long count;
 }

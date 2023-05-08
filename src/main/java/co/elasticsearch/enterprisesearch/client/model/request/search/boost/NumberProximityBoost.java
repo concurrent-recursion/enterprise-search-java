@@ -8,6 +8,9 @@ import lombok.experimental.Accessors;
 
 import java.math.BigDecimal;
 
+/**
+ * Represents a boost based on the numeric proximity to a central value
+ */
 @Getter
 @Setter
 @Accessors(chain = true)

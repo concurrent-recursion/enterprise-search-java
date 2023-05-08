@@ -15,7 +15,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FacetDeserializer extends StdDeserializer<Facet> {
+class FacetDeserializer extends StdDeserializer<Facet> {
     protected FacetDeserializer() {
         super(Facet.class);
     }
