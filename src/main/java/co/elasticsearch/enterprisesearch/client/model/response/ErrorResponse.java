@@ -1,6 +1,5 @@
 package co.elasticsearch.enterprisesearch.client.model.response;
 
-import co.elasticsearch.enterprisesearch.client.model.response.documents.Meta;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;

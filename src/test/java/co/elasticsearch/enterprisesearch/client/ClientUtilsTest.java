@@ -26,7 +26,7 @@ class ClientUtilsTest {
         String serverUrl = server.url("").url().toString();
         return AppSearchClient
                 .builder(serverUrl.substring(0,serverUrl.length()-1))
-                .clientAuthentication(ClientAuthentication.withBearerAuth("nope"))
+                .clientAuthentication(ClientAuthentication.withBasicAuth("user","password"))
                 .clientBuilder( new OkHttpClient.Builder().connectTimeout(Duration.ofSeconds(5)).readTimeout(Duration.ofSeconds(5)))
                 .build();
     }
@@ -53,9 +53,9 @@ class ClientUtilsTest {
     }
 
     @Test
-    void testFailure(){
+    void testBadRequest(){
         String mockResponse = "{\"errors\":[\"Invalid page size\"]}";
-        mockWebServer.enqueue(new MockResponse().setResponseCode(200).setBody(mockResponse));
+        mockWebServer.enqueue(new MockResponse().setResponseCode(400).setBody(mockResponse));
 
         SearchApi<TestSearchDocument> search = asp.search(TestSearchDocument.class);
         SearchRequest r = new SearchRequest();
@@ -63,4 +63,24 @@ class ClientUtilsTest {
         SearchApiResponse<TestSearchDocument> results = search.search(ENGINE_NAME,r);
         Assertions.assertTrue(results.isError());
     }
+
+    @Test
+    void testClientAuthFailure(){
+        String mockResponse = "{\"error\": \"Invalid credentials\"}";
+        mockWebServer.enqueue(new MockResponse().setResponseCode(401).setBody(mockResponse));
+        SearchApi<TestSearchDocument> search = asp.search(TestSearchDocument.class);
+        SearchRequest r = new SearchRequest();
+        Assertions.assertThrows(ElasticServerException.class,() -> search.search(ENGINE_NAME,r));
+    }
+
+    @Test
+    void testClientUnauthorized(){
+        String mockResponse = "{\"errors\":  [\"Unauthorized action.\"]}";
+        mockWebServer.enqueue(new MockResponse().setResponseCode(401).setBody(mockResponse));
+        SearchApi<TestSearchDocument> search = asp.search(TestSearchDocument.class);
+        SearchRequest r = new SearchRequest();
+        Assertions.assertThrows(ElasticServerException.class,() -> search.search(ENGINE_NAME,r));
+    }
+
+
 }

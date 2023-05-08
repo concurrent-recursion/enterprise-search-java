@@ -50,12 +50,17 @@ class ClientUtils {
                 .with(RetryPolicy.ofDefaults())
                 .compose(client.newCall(request));
         try(Response response = failsafeCall.execute()){
+
             if(response.body() == null){
                 if(responseType == null){
                     return null;
                 }else {
                     throw new ElasticServerException("Server Response is empty, Expecting " + responseType);
                 }
+            }
+            if(response.code() == 401){
+                ErrorResponse errorResponse = marshal(mapper,response, ErrorResponse.class);
+                throw new ElasticServerException(errorResponse.getError());
             }
             return marshal(mapper,response,responseType);
         }catch(IOException e){
