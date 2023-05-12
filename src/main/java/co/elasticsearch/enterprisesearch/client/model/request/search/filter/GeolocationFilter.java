@@ -1,6 +1,6 @@
 package co.elasticsearch.enterprisesearch.client.model.request.search.filter;
 
-import co.elasticsearch.enterprisesearch.client.model.GeoLocation;
+import co.elasticsearch.enterprisesearch.client.model.Geolocation;
 import co.elasticsearch.enterprisesearch.client.model.GeolocationRange;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Getter;
@@ -33,7 +33,7 @@ public class GeolocationFilter implements Filter {
      * @param center the center
      * @return the center
      */
-    private GeoLocation center;
+    private Geolocation center;
     /**
      * A number representing the distance unit. Is required if from or to is not given.
      * @param distance the distance
@@ -45,7 +45,7 @@ public class GeolocationFilter implements Filter {
      * @param unit the unit
      * @return the unit
      */
-    private GeoLocation.Unit unit;
+    private Geolocation.Unit unit;
 
     /**
      * Inclusive lower bound of the range. Is required if to is not given.

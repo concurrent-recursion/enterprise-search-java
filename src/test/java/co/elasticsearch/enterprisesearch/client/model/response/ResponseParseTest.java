@@ -3,6 +3,7 @@ package co.elasticsearch.enterprisesearch.client.model.response;
 import co.elasticsearch.enterprisesearch.TestUtil;
 import co.elasticsearch.enterprisesearch.client.model.response.documents.IndexResponse;
 import co.elasticsearch.enterprisesearch.client.model.response.documents.IndexResult;
+import co.elasticsearch.enterprisesearch.client.model.response.search.MultiSearchApiResponse;
 import co.elasticsearch.enterprisesearch.client.model.response.search.SearchApiResponse;
 import co.elasticsearch.enterprisesearch.client.model.response.search.facet.Facet;
 import co.elasticsearch.enterprisesearch.client.model.response.search.facet.value.*;
@@ -35,6 +36,17 @@ class ResponseParseTest {
         JavaType type = objectMapper.getTypeFactory().constructParametricType(SearchApiResponse.class, NationalParkDocument.class);
         SearchApiResponse<NationalParkDocument> response = objectMapper.readValue(json, type);
         assertEquals(1,response.getResults().size());
+    }
+
+    @Test
+    void deserializeMultiResponse() throws JsonProcessingException {
+        String json = TestUtil.readResourceFile("examples/responses/multiresponse.json");
+        JavaType type = objectMapper.getTypeFactory().constructParametricType(SearchApiResponse.class, NationalParkDocument.class);
+        type = objectMapper.getTypeFactory().constructParametricType(MultiSearchApiResponse.class,type);
+
+        MultiSearchApiResponse<NationalParkDocument> response = objectMapper.readValue(json, type);
+        assertEquals(2,response.getResults().size());
+        assertEquals(2,response.getResults().get(0).getResults().size());
     }
 
     @Test

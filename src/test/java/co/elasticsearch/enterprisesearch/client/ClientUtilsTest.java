@@ -1,6 +1,7 @@
 package co.elasticsearch.enterprisesearch.client;
 
 import co.elasticsearch.enterprisesearch.TestUtil;
+import co.elasticsearch.enterprisesearch.client.model.AppSearchErrorResponseException;
 import co.elasticsearch.enterprisesearch.client.model.request.search.SearchRequest;
 import co.elasticsearch.enterprisesearch.client.model.response.TestSearchDocument;
 import co.elasticsearch.enterprisesearch.client.model.response.search.SearchApiResponse;
@@ -70,7 +71,7 @@ class ClientUtilsTest {
         mockWebServer.enqueue(new MockResponse().setResponseCode(401).setBody(mockResponse));
         SearchApi<TestSearchDocument> search = asp.search(TestSearchDocument.class);
         SearchRequest r = new SearchRequest();
-        Assertions.assertThrows(ElasticServerException.class,() -> search.search(ENGINE_NAME,r));
+        Assertions.assertThrows(AppSearchErrorResponseException.class,() -> search.search(ENGINE_NAME,r));
     }
 
     @Test
@@ -79,7 +80,7 @@ class ClientUtilsTest {
         mockWebServer.enqueue(new MockResponse().setResponseCode(401).setBody(mockResponse));
         SearchApi<TestSearchDocument> search = asp.search(TestSearchDocument.class);
         SearchRequest r = new SearchRequest();
-        Assertions.assertThrows(ElasticServerException.class,() -> search.search(ENGINE_NAME,r));
+        Assertions.assertThrows(AppSearchErrorResponseException.class,() -> search.search(ENGINE_NAME,r));
     }
 
 

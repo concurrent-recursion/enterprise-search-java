@@ -1,6 +1,6 @@
-# Elasticsearch Enterprise Search Java Client (unofficial)
+# Elasticsearch Enterprise Search Java Client
 
-An unofficial Java client for the Elasticsearch Enterprise Search platform.
+A Java client for the Elasticsearch Enterprise Search platform.
 
 The App Search client provides methods for interacting with the App Search APIs, such as searching, ingesting, managing engines, etc. 
 
@@ -53,7 +53,7 @@ AppSearch has 4 field types, which are mapped to the following types in this lib
 1. **Text** `TextField` or `TextArrayField`
 2. **Number** `NumberField` or `NumberArrayField`
 3. **Date** `DateField` or `DateArrayField`
-4. **Geolocation** `GeolocationField`
+4. **Geolocation** `GeolocationField` or `GeolocaitonArrayField`
 
 Each type has a subfield named `raw` that contain the raw value(s) of the field. The Text type also may contain a single `snippet` field that contains a text snippet.
 
@@ -95,7 +95,7 @@ The client supports working with typed documents to ingest content into an engin
 1. Text `String`
 2. Number `BigDecimal`, `Integer`, `Long`
 3. Date `OffsetDateTime`, `ZonedDateTime`, `LocalDateTime`
-4. Geolocation `String`, `BigDecimal[]` (using \[lat, long\] )
+4. Geolocation `String`, `BigDecimal[]` (using \[lon, lat\] )
 
 Example POJO for ingesting into AppSearch
 ```java
@@ -124,6 +124,14 @@ List<IndexResult> ingestDocs(List<NationalPark> parkList){
     }
     return indexResponse.getDocuments();            
 }
+```
+
+
+### Logging
+In order to add logging to your appsearch client, you will need to add an OKHttp3 HttpInterceptor 
+```java
+HttpLoggingInterceptor logging = new HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BASIC);
+final AppSearchClient client = AppSearchClient.builder("http://localhost:3002").clientBuilder(new OkHttpClient.Builder().addInterceptor(logging)).clientAuthentication(ClientAuthentication.withBearerAuth("private-priVateToKEnFrOMAppseArCh")).build();
 ```
 
 ## Supported APIs

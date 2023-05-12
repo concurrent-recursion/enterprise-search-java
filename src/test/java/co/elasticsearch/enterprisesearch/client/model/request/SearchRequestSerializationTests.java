@@ -1,6 +1,6 @@
 package co.elasticsearch.enterprisesearch.client.model.request;
 
-import co.elasticsearch.enterprisesearch.client.model.GeoLocation;
+import co.elasticsearch.enterprisesearch.client.model.Geolocation;
 import co.elasticsearch.enterprisesearch.client.model.GeolocationRange;
 import co.elasticsearch.enterprisesearch.client.model.Sort;
 import co.elasticsearch.enterprisesearch.client.model.request.search.*;
@@ -71,7 +71,7 @@ class SearchRequestSerializationTests {
 
         SearchRequest geoSort = new SearchRequest();
         List<Sort> sorts = geoSort.getSort();
-        sorts.add(new Sort("location", new GeoLocationSort(new GeoLocation("-77.08","38.89")).setMode(GeoLocationSort.Mode.MIN).setOrder(Sort.Order.ASCENDING)));
+        sorts.add(new Sort("location", new GeolocationSort(new Geolocation("-77.08","38.89")).setMode(GeolocationSort.Mode.MIN).setOrder(Sort.Order.ASCENDING)));
         sorts.add(new Sort("title", Sort.Order.ASCENDING));
         json = writeValueAsString(geoSort);
         Assertions.assertEquals("{\"query\":\"\",\"sort\":[{\"location\":{\"center\":[38.89,-77.08],\"mode\":\"min\",\"order\":\"asc\"}},{\"title\":\"asc\"}]}",json);
@@ -125,7 +125,7 @@ class SearchRequestSerializationTests {
 
         //Range on Geolocation
         request = new SearchRequest();
-        request.withFacets(new SearchRangeFacet("location").setName("geo-range-from-san-francisco").setCenter(new GeoLocation(new BigDecimal("37.386483"),new BigDecimal("-122.083842"))).setUnit(GeoLocation.Unit.METERS).setRanges(List.of(
+        request.withFacets(new SearchRangeFacet("location").setName("geo-range-from-san-francisco").setCenter(new Geolocation(new BigDecimal("37.386483"),new BigDecimal("-122.083842"))).setUnit(Geolocation.Unit.METERS).setRanges(List.of(
                 new NumberRange().setFrom(BigDecimal.ZERO).setTo(new BigDecimal("100000")).setName("Nearby"),
                 new NumberRange().setFrom(new BigDecimal("100000")).setTo(new BigDecimal("300000")).setName("A longer drive."),
                 new NumberRange().setFrom(new BigDecimal("300000")).setName("Perhaps fly?")
@@ -165,12 +165,12 @@ class SearchRequestSerializationTests {
         Assertions.assertEquals("{\"query\":\"\",\"filters\":{\"date_established\":{\"from\":\"1900-01-01T12:00:00.00Z\",\"to\":\"1950-01-01T00:00:00.00Z\"}}}",json);
 
         request = new SearchRequest();
-        request.setFilters(new GeolocationFilter("location").setRange(new GeolocationRange().setCenter(new GeoLocation("37.386483,-122.083842")).setDistance(new BigDecimal(300)).setUnit(GeoLocation.Unit.KILOMETERS)));
+        request.setFilters(new GeolocationFilter("location").setRange(new GeolocationRange().setCenter(new Geolocation("37.386483,-122.083842")).setDistance(new BigDecimal(300)).setUnit(Geolocation.Unit.KILOMETERS)));
         json = writeValueAsString(request);
         Assertions.assertEquals("{\"query\":\"\",\"filters\":{\"location\":{\"center\":[-122.083842,37.386483],\"distance\":300,\"unit\":\"km\"}}}",json);
 
         request = new SearchRequest();
-        request.setFilters(new GeolocationFilter("location").setRange(new GeolocationRange().setCenter(new GeoLocation("37.386483,-122.083842")).setFrom(new BigDecimal(0)).setTo(new BigDecimal(1000)).setUnit(GeoLocation.Unit.METERS)));
+        request.setFilters(new GeolocationFilter("location").setRange(new GeolocationRange().setCenter(new Geolocation("37.386483,-122.083842")).setFrom(new BigDecimal(0)).setTo(new BigDecimal(1000)).setUnit(Geolocation.Unit.METERS)));
         json = writeValueAsString(request);
         Assertions.assertEquals("{\"query\":\"\",\"filters\":{\"location\":{\"center\":[-122.083842,37.386483],\"unit\":\"m\",\"from\":0,\"to\":1000}}}",json);
 
@@ -218,7 +218,7 @@ class SearchRequestSerializationTests {
         Boost geoBoost = new GeolocationProximityBoost()
                 .setName("location")
                 .setFactor(new BigDecimal(8))
-                .setCenter(new GeoLocation("-80.93","25.32"))
+                .setCenter(new Geolocation("-80.93","25.32"))
                 .setFunction(Boost.Function.LINEAR);
         request.withBoosts(geoBoost);
         String proximityJson = writeValueAsString(request);

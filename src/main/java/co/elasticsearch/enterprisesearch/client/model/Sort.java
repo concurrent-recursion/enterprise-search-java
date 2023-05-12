@@ -1,6 +1,6 @@
 package co.elasticsearch.enterprisesearch.client.model;
 
-import co.elasticsearch.enterprisesearch.client.model.request.search.GeoLocationSort;
+import co.elasticsearch.enterprisesearch.client.model.request.search.GeolocationSort;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonKey;
@@ -110,7 +110,7 @@ public class Sort {
      * @param field The field name to sort on
      * @param location The location to sort on;
      */
-    public Sort(String field, GeoLocationSort location) {
+    public Sort(String field, GeolocationSort location) {
         this.name = field;
         this.direction = location;
     }
@@ -129,13 +129,13 @@ public class Sort {
             JsonNode centerNode = field.getValue().get("center");
             JsonNode modeNode = field.getValue().get("mode");
             JsonNode orderNode = field.getValue().get("order");
-            final GeoLocationSort geoLocationSort;
+            final GeolocationSort geoLocationSort;
             if (centerNode.isArray()) {
-                geoLocationSort = new GeoLocationSort(new GeoLocation(centerNode.get(0).asText(), centerNode.get(1).asText()));
+                geoLocationSort = new GeolocationSort(new Geolocation(centerNode.get(0).asText(), centerNode.get(1).asText()));
             } else {
-                geoLocationSort = new GeoLocationSort(new GeoLocation(centerNode.asText()));
+                geoLocationSort = new GeolocationSort(new Geolocation(centerNode.asText()));
             }
-            geoLocationSort.setMode(GeoLocationSort.Mode.fromValue(modeNode.textValue()));
+            geoLocationSort.setMode(GeolocationSort.Mode.fromValue(modeNode.textValue()));
             geoLocationSort.setOrder(Order.fromValue(orderNode.textValue()));
             return new Sort(field.getKey(), geoLocationSort);
         }

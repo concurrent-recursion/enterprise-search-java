@@ -22,7 +22,7 @@ public class GeolocationRange {
      * @param center The center of the distribution
      * @return the center
      */
-    private GeoLocation center;
+    private Geolocation center;
     /**
      * A number representing the distance unit. Is required if from or to is not given.
      * @param distance the distance
@@ -34,7 +34,7 @@ public class GeolocationRange {
      * @param unit the unit
      * @return the unit
      */
-    private GeoLocation.Unit unit;
+    private Geolocation.Unit unit;
 
 
     /**

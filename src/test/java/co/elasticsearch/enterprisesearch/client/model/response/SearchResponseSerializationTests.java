@@ -3,6 +3,7 @@ package co.elasticsearch.enterprisesearch.client.model.response;
 import co.elasticsearch.enterprisesearch.client.model.Engine;
 import co.elasticsearch.enterprisesearch.client.model.request.search.SearchRequest;
 import co.elasticsearch.enterprisesearch.client.model.response.search.Meta;
+import co.elasticsearch.enterprisesearch.client.model.response.search.MultiSearchApiResponse;
 import co.elasticsearch.enterprisesearch.client.model.response.search.SearchApiResponse;
 import co.elasticsearch.enterprisesearch.client.model.response.search.facet.Facet;
 import co.elasticsearch.enterprisesearch.client.model.response.search.facet.TextValueFacet;
@@ -26,6 +27,20 @@ class SearchResponseSerializationTests {
     @SneakyThrows
     String writeValueAsString(Object o){
         return objectMapper.writeValueAsString(o);
+    }
+
+    @Test
+    void serializeMultiResponse(){
+        List<SearchApiResponse<NationalParkDocument>> results = new ArrayList<>();
+        MultiSearchApiResponse<NationalParkDocument> multi = new MultiSearchApiResponse<>(results);
+        SearchApiResponse<NationalParkDocument> response = new SearchApiResponse<>();
+        ResponsePage page = new ResponsePage().setTotalPages(0).setTotalResults(0);
+        page.setCurrent(1).setSize(10);
+        Meta meta = new Meta().setPrecision(3).setRequestId("ABC123").setPage(page).setEngine(new Engine().setName("TestEngine"));
+        response.setMeta(meta);
+        results.add(response);
+        results.add(response);
+        System.out.println(writeValueAsString(multi));
     }
 
     @Test

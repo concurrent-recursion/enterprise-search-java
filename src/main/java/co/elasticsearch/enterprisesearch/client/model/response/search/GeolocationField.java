@@ -9,20 +9,20 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * Represents a GeoLocation field
+ * Represents a Geolocation field
  */
 @Getter
 @Setter
 @Accessors(chain = true)
 public class GeolocationField implements Field {
-    private static final Pattern LATITUDE_LONGITUDE = Pattern.compile("^[+-]?\\d{1,3}(\\.\\d+),[+-]?\\d{1,3}(\\.\\d+)$");
-    private static final Pattern WELL_KNOWN_TEXT_POINT = Pattern.compile("^POINT \\(([+-]?\\d{1,3}(\\.\\d+)) ([+-]?\\d{1,3}(\\.\\d+))\\)");
+    static final Pattern LATITUDE_LONGITUDE = Pattern.compile("^[+-]?\\d{1,3}(\\.\\d+),[+-]?\\d{1,3}(\\.\\d+)$");
+    static final Pattern WELL_KNOWN_TEXT_POINT = Pattern.compile("^POINT \\(([+-]?\\d{1,3}(\\.\\d+)) ([+-]?\\d{1,3}(\\.\\d+))\\)");
     private BigDecimal[] raw = new BigDecimal[2];
 
     /**
      * Set the Geolocation data
-     * @param geoString The string representation of the GeoLocation
-     * @return the GeoLocation field
+     * @param geoString The string representation of the Geolocation
+     * @return the Geolocation field
      */
     public GeolocationField setRaw(String geoString) {
         Matcher latitudeLongitude = LATITUDE_LONGITUDE.matcher(geoString);

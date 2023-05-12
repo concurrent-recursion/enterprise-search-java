@@ -1,7 +1,7 @@
 package co.elasticsearch.enterprisesearch.client.model.request.search.boost;
 
 import co.elasticsearch.enterprisesearch.client.model.DeserializationUtil;
-import co.elasticsearch.enterprisesearch.client.model.GeoLocation;
+import co.elasticsearch.enterprisesearch.client.model.Geolocation;
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.TreeNode;
@@ -69,7 +69,7 @@ class BoostDeserializer extends StdDeserializer<Boost> {
                 }
                 return recencyBoost;
             } else {
-                GeoLocation geoCenter = jsonParser.getCodec().treeToValue(center, GeoLocation.class);
+                Geolocation geoCenter = jsonParser.getCodec().treeToValue(center, Geolocation.class);
                 return new GeolocationProximityBoost().setFactor(factor).setFunction(function).setCenter(geoCenter);
             }
         } else if (center instanceof NumericNode) {

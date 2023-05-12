@@ -1,6 +1,6 @@
 package co.elasticsearch.enterprisesearch.client.model.request.search;
 
-import co.elasticsearch.enterprisesearch.client.model.GeoLocation;
+import co.elasticsearch.enterprisesearch.client.model.Geolocation;
 import co.elasticsearch.enterprisesearch.client.model.Sort;
 import co.elasticsearch.enterprisesearch.client.model.SortOrder;
 import com.fasterxml.jackson.annotation.JsonCreator;
@@ -20,7 +20,7 @@ import java.util.Arrays;
 @Getter
 @Setter
 @Accessors(chain = true)
-public class GeoLocationSort implements SortOrder {
+public class GeolocationSort implements SortOrder {
 
     /**
      * Center point will be used to calculate the distance from that point to the field in each document, and return the
@@ -29,7 +29,7 @@ public class GeoLocationSort implements SortOrder {
      * @param center the center
      * @return the center
      */
-    private final GeoLocation center;
+    private final Geolocation center;
     /**
      * How to calculate distance in case a field has several geo points. By default, the shortest distance is taken into account when sorting in ascending order and the longest distance when sorting in descending order.
      * @param mode the sort mode
@@ -45,10 +45,10 @@ public class GeoLocationSort implements SortOrder {
 
 
     /**
-     * Build a GeoLocationSort from a central point
+     * Build a GeolocationSort from a central point
      * @param geoLocation the centeral geolocation point
      */
-    public GeoLocationSort(GeoLocation geoLocation) {
+    public GeolocationSort(Geolocation geoLocation) {
         center = geoLocation;
     }
 

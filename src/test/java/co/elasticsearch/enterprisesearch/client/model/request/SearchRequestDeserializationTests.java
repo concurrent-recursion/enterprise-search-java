@@ -1,7 +1,7 @@
 package co.elasticsearch.enterprisesearch.client.model.request;
 
 import co.elasticsearch.enterprisesearch.TestUtil;
-import co.elasticsearch.enterprisesearch.client.model.GeoLocation;
+import co.elasticsearch.enterprisesearch.client.model.Geolocation;
 import co.elasticsearch.enterprisesearch.client.model.Sort;
 import co.elasticsearch.enterprisesearch.client.model.request.search.*;
 import co.elasticsearch.enterprisesearch.client.model.request.search.boost.*;
@@ -63,7 +63,7 @@ class SearchRequestDeserializationTests {
 
         Sort geo = request.getSort().get(2);
         assertEquals("location",geo.getName());
-        GeoLocationSort geoSort= (GeoLocationSort) geo.getDirection();
+        GeolocationSort geoSort= (GeolocationSort) geo.getDirection();
         assertEquals(Sort.Order.DESCENDING,geoSort.getOrder());
 
     }
@@ -120,9 +120,9 @@ class SearchRequestDeserializationTests {
         assertInstanceOf(GeolocationFilter.class,abstractFilter);
         GeolocationFilter geolocationFilter = (GeolocationFilter) abstractFilter;
         assertEquals("location",geolocationFilter.getName());
-        assertEquals(new GeoLocation("37.386483","-122.083842"),geolocationFilter.getCenter());
+        assertEquals(new Geolocation("37.386483","-122.083842"),geolocationFilter.getCenter());
         assertEquals(new BigDecimal(300),geolocationFilter.getDistance());
-        assertEquals(GeoLocation.Unit.KILOMETERS,geolocationFilter.getUnit());
+        assertEquals(Geolocation.Unit.KILOMETERS,geolocationFilter.getUnit());
     }
     @Test
     void filterBoolean() throws JsonProcessingException {
@@ -243,7 +243,7 @@ class SearchRequestDeserializationTests {
         Boost boost = oBoost.get();
         assertInstanceOf(GeolocationProximityBoost.class,boost);
         GeolocationProximityBoost geoBoost = (GeolocationProximityBoost) boost;
-        assertEquals(new GeoLocation(new BigDecimal("25.32"),new BigDecimal("-80.93")),geoBoost.getCenter());
+        assertEquals(new Geolocation(new BigDecimal("25.32"),new BigDecimal("-80.93")),geoBoost.getCenter());
         assertEquals(new BigDecimal(8),geoBoost.getFactor());
         assertEquals(Boost.Function.LINEAR,geoBoost.getFunction());
         assertEquals(Boost.BoostType.PROXIMITY,geoBoost.getType());

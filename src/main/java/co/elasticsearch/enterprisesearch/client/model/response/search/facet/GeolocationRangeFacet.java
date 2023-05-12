@@ -10,12 +10,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Represents an GeoLocation range facet
+ * Represents an Geolocation range facet
  */
 @Getter
 @Setter
 @Accessors(chain = true)
-public class GeoLocationRangeFacet implements Facet{
+public class GeolocationRangeFacet implements Facet{
     /**
      * The facet name
      * @param name the name of the facet

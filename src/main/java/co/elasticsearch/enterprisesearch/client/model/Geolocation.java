@@ -18,13 +18,13 @@ import java.util.regex.Pattern;
 //TODO: See https://www.elastic.co/guide/en/app-search/current/api-reference.html#overview-api-references-geolocation
 
 /**
- * Represents a GeoLocation
+ * Represents a Geolocation
  */
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
 @Getter
 @JsonDeserialize(using = GeolocationDeserializer.class)
 @ToString
-public class GeoLocation {
+public class Geolocation {
     static final Pattern LATITUDE_LONGITUDE = Pattern.compile("^([+-]?\\d{1,3}(\\.\\d+)?),\\s?([+-]?\\d{1,3}(\\.\\d+)?)$");
     static final Pattern WELL_KNOWN_TEXT_POINT = Pattern.compile("^POINT \\(([+-]?\\d{1,3}(\\.\\d+)) ([+-]?\\d{1,3}(\\.\\d+))\\)");
 
@@ -86,21 +86,21 @@ public class GeoLocation {
     }
 
     /**
-     * The latitude of the GeoLocation
+     * The latitude of the Geolocation
      * @return The latitude
      */
     @JsonIgnore
     private final BigDecimal latitude;
     /**
-     * The longitude of the GeoLocation
+     * The longitude of the Geolocation
      * @return The longitude
      */
     @JsonIgnore
     private final BigDecimal longitude;
 
     /**
-     * The center point of the GeoLocation object
-     * @return An array of [latitude, longitude]
+     * The center point of the Geolocation object
+     * @return An array of [longitude, latitude]
      */
     @JsonValue
     public BigDecimal[] getCenter() {
@@ -108,22 +108,22 @@ public class GeoLocation {
     }
 
     /**
-     * Create a GeoLocation
+     * Create a Geolocation
      * @param latitude The latitude of the geolocation
      * @param longitude The longitude of the geolocation
      */
-    public GeoLocation(BigDecimal latitude, BigDecimal longitude) {
+    public Geolocation(BigDecimal latitude, BigDecimal longitude) {
         validate(latitude, longitude);
         this.longitude = longitude;
         this.latitude = latitude;
     }
 
     /**
-     * Create a GeoLocation
+     * Create a Geolocation
      * @param latitude The latitude of the geolocation
      * @param longitude The longitude of the geolocation
      */
-    public GeoLocation(String latitude, String longitude) {
+    public Geolocation(String latitude, String longitude) {
         BigDecimal lat = new BigDecimal(latitude);
         BigDecimal lon = new BigDecimal(longitude);
         validate(lat, lon);
@@ -132,10 +132,10 @@ public class GeoLocation {
     }
 
     /**
-     * Create a GeoLocation
-     * @param center The string representation of the GeoLocation. It must be either latitude, longitude or wellknown format
+     * Create a Geolocation
+     * @param center The string representation of the Geolocation. It must be either latitude, longitude or wellknown format
      */
-    public GeoLocation(String center) {
+    public Geolocation(String center) {
         Matcher latitudeLongitude = LATITUDE_LONGITUDE.matcher(center);
         Matcher wellKnown = WELL_KNOWN_TEXT_POINT.matcher(center);
         final String latitudeString;
@@ -172,8 +172,8 @@ public class GeoLocation {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof GeoLocation)) return false;
-        GeoLocation that = (GeoLocation) o;
+        if (!(o instanceof Geolocation)) return false;
+        Geolocation that = (Geolocation) o;
         return latitude.equals(that.latitude) && longitude.equals(that.longitude);
     }
 

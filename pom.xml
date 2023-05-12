@@ -5,11 +5,11 @@
 
     <groupId>io.github.concurrent-recursion</groupId>
     <artifactId>enterprisesearch-java-client</artifactId>
-    <version>0.2.0</version>
+    <version>0.3.0</version>
     <packaging>jar</packaging>
 
     <name>Enterprise Search Java Client</name>
-    <description>Unofficial Java client for Elasticsearch Enterprise Search Application</description>
+    <description>Java client for Elasticsearch Enterprise Search Application</description>
     <url>https://github.com/concurrent-recursion/enterprise-search-java</url>
 
     <licenses>
@@ -39,18 +39,19 @@
         <maven.compiler.target>11</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven-lombok-plugin.version>1.18.20.0</maven-lombok-plugin.version>
-        <maven-surefire-plugin.version>2.22.2</maven-surefire-plugin.version>
-        <maven-javadoc-plugin.version>3.4.1</maven-javadoc-plugin.version>
+        <maven-surefire-plugin.version>3.1.0</maven-surefire-plugin.version>
+        <maven-javadoc-plugin.version>3.5.0</maven-javadoc-plugin.version>
         <maven-source-plugin.version>3.2.1</maven-source-plugin.version>
         <nexus-staging-maven-plugin.version>1.6.13</nexus-staging-maven-plugin.version>
-        <maven-gpg-plugin.version>3.0.1</maven-gpg-plugin.version>
+        <maven-gpg-plugin.version>3.1.0</maven-gpg-plugin.version>
 
-        <jackson.version>2.14.2</jackson.version>
+        <jackson.version>2.15.0</jackson.version>
         <slf4j.version>2.0.7</slf4j.version>
+        <logback.version>1.4.7</logback.version>
         <lombok.version>1.18.26</lombok.version>
-        <junit.version>5.9.1</junit.version>
+        <junit.version>5.9.3</junit.version>
         <jakarta-validation.version>3.0.2</jakarta-validation.version>
-        <okhttp.version>4.10.0</okhttp.version>
+        <okhttp.version>4.11.0</okhttp.version>
         <failsafe.version>3.3.1</failsafe.version>
         <apache-commons-collections4.version>4.4</apache-commons-collections4.version>
     </properties>
@@ -117,7 +118,7 @@
         <dependency>
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-classic</artifactId>
-            <version>1.4.6</version>
+            <version>${logback.version}</version>
             <scope>test</scope>
         </dependency>
 

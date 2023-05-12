@@ -1,7 +1,7 @@
 package co.elasticsearch.enterprisesearch.client.model.request.search.facet;
 
 import co.elasticsearch.enterprisesearch.client.model.FacetType;
-import co.elasticsearch.enterprisesearch.client.model.GeoLocation;
+import co.elasticsearch.enterprisesearch.client.model.Geolocation;
 import co.elasticsearch.enterprisesearch.client.model.request.search.range.Range;
 import com.fasterxml.jackson.annotation.JsonGetter;
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -61,13 +61,13 @@ public class SearchRangeFacet implements Facet {
      * @param center the center
      * @return the center
      */
-    private GeoLocation center;
+    private Geolocation center;
     /**
      * The base unit of measurement
      * @param unit The unit
      * @return the unit
      */
-    private GeoLocation.Unit unit;
+    private Geolocation.Unit unit;
     /**
      * An array of range objects
      * @param ranges The ranges
@@ -77,8 +77,8 @@ public class SearchRangeFacet implements Facet {
 
 
     /**
-     * In the case of a GeoLocation facet range, this is the center point of the range
-     * @return An array containing [latitude,longitude] of the center point
+     * In the case of a Geolocation facet range, this is the center point of the range
+     * @return An array containing [longitude,latitude] of the center point
      */
     @JsonGetter
     public BigDecimal[] center() {

@@ -60,7 +60,7 @@ class ClientUtils {
             }
             if(response.code() == 401){
                 ErrorResponse errorResponse = marshal(mapper,response, ErrorResponse.class);
-                throw new ElasticServerException(errorResponse.getError());
+                throw new AppSearchErrorResponseException(errorResponse,response.code());
             }
             return marshal(mapper,response,responseType);
         }catch(IOException e){
