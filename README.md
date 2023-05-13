@@ -18,14 +18,14 @@ Add the following to your pom.xml
 <dependency>
     <groupId>io.github.concurrent-recursion</groupId>
     <artifactId>enterprisesearch-java-client</artifactId>
-    <version>0.2.0</version>
+    <version>0.3.0</version>
 </dependency>
 ```
 ### Gradle
 Add the following dependency
 ```groovy
 dependencies {
-  implementation 'io.github.concurrent-recursion:enterprisesearch-java-client:0.2.0'
+  implementation 'io.github.concurrent-recursion:enterprisesearch-java-client:0.3.0'
 }
 ```
 
@@ -34,14 +34,27 @@ dependencies {
 ### Token Based Authentication
 ```java
 //Token based authentication, App Search API Key, Elasticsearch Token, etc
-final AppSearchClient client = AppSearchClient.builder("http://localhost:3002").clientAuthentication(ClientAuthentication.withBearerAuth("private-priVateToKEnFrOMAppseArCh")).build();
+final AppSearchClient client = AppSearchClient.builder("http://localhost:3002")
+    .clientAuthentication(ClientAuthentication.withBearerAuth("private-priVateToKEnFrOMAppseArCh")).build();
 ```
 ### Username + Password Authentication
 ```java
 //Username + Password authentication
-final AppSearchClient client = AppSearchClient.builder("http://localhost:3002").clientAuthentication(ClientAuthentication.withBasicAuth("myusername","mypassword")).build();
+final AppSearchClient client = AppSearchClient.builder("http://localhost:3002")
+    .clientAuthentication(ClientAuthentication.withBasicAuth("myusername","mypassword")).build();
 ```
+### Adding Logging
+In order to add logging to your Appsearch client, you will need to add an OKHttp3 HttpLoggingInterceptor.
 
+You can also customize the OkHttpClient by passing in your own OkHttpClientBuilder as shown in the logging example below
+```java
+HttpLoggingInterceptor logging = new HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY);
+
+final AppSearchClient client = AppSearchClient.builder("http://localhost:3002")
+    //Pass in a custom builder with the logging interceptor added
+    .clientBuilder(new OkHttpClient.Builder().addInterceptor(logging))
+    .clientAuthentication(ClientAuthentication.withBearerAuth("private-priVateToKEnFrOMAppseArCh")).build();
+```
 
 
 
@@ -57,7 +70,7 @@ AppSearch has 4 field types, which are mapped to the following types in this lib
 
 Each type has a subfield named `raw` that contain the raw value(s) of the field. The Text type also may contain a single `snippet` field that contains a text snippet.
 
-Text, Number, and Date may contain multiple values. If your database may contain multiple, use the corresponding Array type to map the field
+Any of the data types may contain multiple values. If your database may contain multiple, use the corresponding `*Array` type to map the field
 
 For Searching, Create a POJO class that extends `ResponseDocument` using 4 Field types (Text,Number,Date,Geolocation)
 #### Example Search Document mapping
@@ -109,7 +122,7 @@ public class NationalPark {
 }
 ```
 
-Using this document, we can ingest teh documents using this example:
+Using this document, we can ingest the documents using this example:
 ```java
 AppSearchClient client = //...
         
@@ -127,12 +140,7 @@ List<IndexResult> ingestDocs(List<NationalPark> parkList){
 ```
 
 
-### Logging
-In order to add logging to your appsearch client, you will need to add an OKHttp3 HttpInterceptor 
-```java
-HttpLoggingInterceptor logging = new HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BASIC);
-final AppSearchClient client = AppSearchClient.builder("http://localhost:3002").clientBuilder(new OkHttpClient.Builder().addInterceptor(logging)).clientAuthentication(ClientAuthentication.withBearerAuth("private-priVateToKEnFrOMAppseArCh")).build();
-```
+
 
 ## Supported APIs
 * Documents API (excluding PATCH)
@@ -140,6 +148,7 @@ final AppSearchClient client = AppSearchClient.builder("http://localhost:3002").
 * Query Suggestions API
 * Schema API
 * Search API
+* Multi Search API
 * Search Settings API
 * Source Engines API
 
@@ -149,7 +158,6 @@ final AppSearchClient client = AppSearchClient.builder("http://localhost:3002").
 * Credentials API
 * Log Settings API
 * Synonyms API
-* Multi Search API
 * Adaptive Relevance API
 
 ## Not Planned
