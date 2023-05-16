@@ -22,8 +22,8 @@ public interface SearchApi<T extends ResponseDocument> {
     /**
      * Executes a multi-search request
      * @param engineName The name of the engine to execute the search against
-     * @paam request The multi-search request, containing one or more search requests
-     * @return
+     * @param request The multi-search request, containing one or more search requests
+     * @return The MultiSearch Response
      */
      MultiSearchApiResponse<T> search(String engineName, MultiSearchRequest request);
 }
