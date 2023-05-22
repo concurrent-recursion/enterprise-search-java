@@ -3,10 +3,7 @@ package co.elasticsearch.enterprisesearch.client.model.request.engines;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.AccessLevel;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 import lombok.experimental.Accessors;
 
 import java.util.LinkedHashMap;
@@ -22,13 +19,14 @@ import java.util.Set;
 @Accessors(chain = true)
 @ToString
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
+@RequiredArgsConstructor
 public class CreateEngine {
     /**
      * Name of the Engine. Can only contain lowercase letters, numbers, and hyphens.
      * @param name name of the engine
      * @return name of the engine
      */
-    private String name;
+    private final String name;
     /**
      * Type of the Engine.
      * @param type type of the engine

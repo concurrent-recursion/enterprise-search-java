@@ -16,24 +16,28 @@ import java.math.BigDecimal;
 public class NumberRange implements FacetRangeValue<BigDecimal> {
     /**
      * The start of the range, optional
+     *
      * @param from the start of the range
      * @return the start of the range, or null if no start is defined
      */
     private BigDecimal from;
     /**
      * The end of the range, optional
+     *
      * @param to the end of the range
      * @return the end of the range, or null if no end is defined
      */
     private BigDecimal to;
     /**
      * The count of documents matching this number range
+     *
      * @param count the count of documents
      * @return the count of documents
      */
     private Long count;
     /**
      * The range name
+     *
      * @param name the name of the range
      * @return the name of the range
      */
@@ -41,6 +45,7 @@ public class NumberRange implements FacetRangeValue<BigDecimal> {
 
     /**
      * The raw Long representation of the facet value
+     *
      * @return The Long value
      * @throws ArithmeticException if this has a nonzero fractional part, or will not fit in a long
      */
@@ -51,6 +56,7 @@ public class NumberRange implements FacetRangeValue<BigDecimal> {
 
     /**
      * The raw Integer representation of the facet value
+     *
      * @return The Integer value
      * @throws ArithmeticException if this has a nonzero fractional part, or will not fit in an int
      */
@@ -61,6 +67,7 @@ public class NumberRange implements FacetRangeValue<BigDecimal> {
 
     /**
      * The raw Long representation of the facet value
+     *
      * @return The Long value
      * @throws ArithmeticException if this has a nonzero fractional part, or will not fit in a long
      */
@@ -71,6 +78,7 @@ public class NumberRange implements FacetRangeValue<BigDecimal> {
 
     /**
      * The raw Integer representation of the facet value
+     *
      * @return The Integer value
      * @throws ArithmeticException if this has a nonzero fractional part, or will not fit in an int
      */

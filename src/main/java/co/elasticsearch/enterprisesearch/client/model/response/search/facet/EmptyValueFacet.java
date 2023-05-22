@@ -10,7 +10,7 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * Represents an empty range facet, this exists because we cannot tell the type of a facet with no values
+ * Represents an empty value facet, this exists because we cannot tell the type of a facet with no values
  */
 @Getter
 @Setter

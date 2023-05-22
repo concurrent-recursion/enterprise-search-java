@@ -16,23 +16,19 @@ import java.util.List;
 @Getter
 @Setter
 @Accessors(chain = true)
-public class NumberRangeFacet implements Facet{
+public class NumberRangeFacet implements Facet {
     /**
      * The facet name
+     *
      * @param name the name of the facet
      */
     private String name;
-    private List<FacetValue> data = new ArrayList<>();
+    private List<NumberRange> data = new ArrayList<>();
 
     @Override
     public FacetType getType() {
         return FacetType.RANGE;
     }
 
-    NumberRangeFacet setData(List<NumberRange> data){
-        this.data = new ArrayList<>();
-        this.data.addAll(data);
-        return this;
-    }
 
 }

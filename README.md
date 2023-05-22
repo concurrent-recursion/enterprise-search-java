@@ -56,10 +56,17 @@ final AppSearchClient client = AppSearchClient.builder("http://localhost:3002")
     .clientAuthentication(ClientAuthentication.withBearerAuth("private-priVateToKEnFrOMAppseArCh")).build();
 ```
 
+## Engines API
+
+Get Engine by name
+```java
+EnginesApi someEngine = client.engines().getEngineByName("some-engine");
+
+```
 
 
 
-## Search
+## Search API
 
 ### Data Types
 AppSearch has 4 field types, which are mapped to the following types in this library
@@ -101,6 +108,10 @@ for(NationalParkSearch park : results){
 }
 ```
 
+### Facets
+```java
+
+```
 
 
 ## Documents API

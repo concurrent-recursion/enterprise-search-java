@@ -16,12 +16,14 @@ import java.math.BigDecimal;
 public class NumberValue implements FacetValueValue<BigDecimal> {
     /**
      * The facet value
+     *
      * @param value the value of the facet
      * @return the value of the facet
      */
     private BigDecimal value;
     /**
      * The count of the facet value
+     *
      * @param count the count of documents matching the value
      * @return the count of documents matching the value
      */
@@ -29,6 +31,7 @@ public class NumberValue implements FacetValueValue<BigDecimal> {
 
     /**
      * The raw Long representation of the facet value
+     *
      * @return The Long value
      * @throws ArithmeticException if this has a nonzero fractional part, or will not fit in a long
      */
@@ -39,6 +42,7 @@ public class NumberValue implements FacetValueValue<BigDecimal> {
 
     /**
      * The raw Integer representation of the facet value
+     *
      * @return The Integer value
      * @throws ArithmeticException if this has a nonzero fractional part, or will not fit in an int
      */

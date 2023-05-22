@@ -22,16 +22,11 @@ public class DateRangeFacet implements Facet{
      * @param name the name of the facet
      */
     private String name;
-    private List<FacetValue> data = new ArrayList<>();
+    private List<DateRange> data = new ArrayList<>();
 
     @Override
     public FacetType getType() {
         return FacetType.RANGE;
     }
 
-    DateRangeFacet setData(List<DateRange> data){
-        this.data = new ArrayList<>();
-        this.data.addAll(data);
-        return this;
-    }
 }

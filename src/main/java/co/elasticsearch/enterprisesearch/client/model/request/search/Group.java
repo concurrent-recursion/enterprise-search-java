@@ -7,6 +7,7 @@ import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
+import lombok.RequiredArgsConstructor;
 import lombok.experimental.Accessors;
 
 /**
@@ -16,6 +17,7 @@ import lombok.experimental.Accessors;
 @Accessors(chain = true)
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
 @JsonPropertyOrder({"field", "size", "sort", "collapse"})
+@RequiredArgsConstructor
 public class Group {
     /**
      * Field name to group results on.
@@ -23,7 +25,7 @@ public class Group {
      * @return The field
      */
     @NotNull
-    private String field;
+    private final String field;
     /**
      * Number of results to be included in the _group key of the returned document. Can be between 1 and 10. Defaults to 10.
      * @param size number of results to be included in the _group key

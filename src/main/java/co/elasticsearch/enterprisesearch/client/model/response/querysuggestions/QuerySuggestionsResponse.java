@@ -1,11 +1,15 @@
 package co.elasticsearch.enterprisesearch.client.model.response.querysuggestions;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 import lombok.experimental.Accessors;
 
+import java.util.Iterator;
+import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 /**
  * Represents a response from the query suggestions operation
@@ -27,6 +31,15 @@ public class QuerySuggestionsResponse {
      * @return the results
      */
     private QuerySuggestionResults results = new QuerySuggestionResults();
+
+    /**
+     * Get the query suggestions as a List of Strings
+     * @return The list of query suggestions as string
+     */
+    @JsonIgnore
+    public List<String> getResultsList(){
+        return results.getSuggestions().stream().map(QuerySuggestion::getSuggestion).collect(Collectors.toList());
+    }
 
     @Override
     public boolean equals(Object o) {

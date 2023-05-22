@@ -66,6 +66,20 @@ public class SearchApiResponse<T extends ResponseDocument> implements Iterable<T
         return facetMap.values().stream().flatMap(Collection::stream).collect(Collectors.toList());
     }
 
+    public List<Facet> getFacetsByField(String fieldName){
+        return facetMap.getOrDefault(fieldName,Collections.emptyList());
+    }
+
+    public <F extends Facet> Optional<F> getFacetByFieldAndName(String fieldName,String facetName,Class<F> facetType){
+        List<F> facetList = facetMap.getOrDefault(fieldName,Collections.emptyList()).stream().filter(facetType::isInstance).map(facetType::cast).collect(Collectors.toList());
+        return facetList.stream().filter(f -> f.getName().equals(facetName)).findFirst();
+    }
+
+    public <F extends Facet> Optional<F> getFacetByName(String facetName,Class<F> facetType){
+        List<F> facetList = facetMap.values().stream().filter(facetType::isInstance).map(facetType::cast).collect(Collectors.toList());
+        return facetList.stream().filter(f -> f.getName().equals(facetName)).findFirst();
+    }
+
     @JsonIgnore
     @NotNull
     @Override

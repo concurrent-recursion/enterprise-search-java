@@ -15,9 +15,10 @@ import java.util.List;
 @Getter
 @Setter
 @Accessors(chain = true)
-public class EmptyRangeFacet  implements Facet{
+public class EmptyRangeFacet implements Facet {
     /**
      * The name of the facet
+     *
      * @param name the name of the facet
      * @return the name of the facet
      */
