@@ -15,8 +15,8 @@ import java.util.regex.Pattern;
 @Setter
 @Accessors(chain = true)
 public class GeolocationField implements Field {
-    static final Pattern LATITUDE_LONGITUDE = Pattern.compile("^[+-]?\\d{1,3}(\\.\\d+),[+-]?\\d{1,3}(\\.\\d+)$");
-    static final Pattern WELL_KNOWN_TEXT_POINT = Pattern.compile("^POINT \\(([+-]?\\d{1,3}(\\.\\d+)) ([+-]?\\d{1,3}(\\.\\d+))\\)");
+    static final Pattern LATITUDE_LONGITUDE = Pattern.compile("^[+-]?\\d{1,3}(\\.\\d+)?,[+-]?\\d{1,3}(\\.\\d+)?$");
+    static final Pattern WELL_KNOWN_TEXT_POINT = Pattern.compile("^POINT \\(([+-]?\\d{1,3}(\\.\\d+)?) ([+-]?\\d{1,3}(\\.\\d+)?)\\)");
     private BigDecimal[] raw = new BigDecimal[2];
 
     /**
