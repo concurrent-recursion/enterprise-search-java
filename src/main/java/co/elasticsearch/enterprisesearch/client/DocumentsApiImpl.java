@@ -105,7 +105,7 @@ class DocumentsApiImpl<T> implements DocumentsApi<T>{
 
     @Override
     public ListResponse<T> listDocuments(String engineName, Page page){
-        HttpUrl.Builder urlBuilder = Objects.requireNonNull(HttpUrl.parse(baseUrl + DOCUMENTS_PATH)).newBuilder();
+        HttpUrl.Builder urlBuilder = Objects.requireNonNull(HttpUrl.parse(baseUrl + DOCUMENTS_PATH + "/list")).newBuilder();
         urlBuilder.setPathSegment(4, engineName);
         ClientUtils.addPagination(urlBuilder,page);
         HttpUrl url = urlBuilder.build();
