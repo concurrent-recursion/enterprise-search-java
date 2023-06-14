@@ -11,7 +11,7 @@ class EnginesTest {
     private final ObjectMapper objectMapper = new ObjectMapper();
     @Test
     void serializeCreateRequest() throws JsonProcessingException{
-        CreateEngine createEngine = new CreateEngine().setName("my-large-engine").setLanguage("en").setIndexSettingOverride("number_of_shards",10);
+        CreateEngine createEngine = new CreateEngine("my-large-engine").setLanguage("en").setIndexSettingOverride("number_of_shards",10);
         assertEquals("{\"name\":\"my-large-engine\",\"language\":\"en\",\"index_create_settings_override\":{\"number_of_shards\":10}}",objectMapper.writeValueAsString(createEngine));
     }
 

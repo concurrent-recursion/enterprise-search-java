@@ -67,8 +67,7 @@ public class SearchRequest {
      * @param group The group parameters
      * @return the groups
      */
-    @JsonInclude(value = JsonInclude.Include.CUSTOM, valueFilter = Group.class)
-    private Group group = new Group();
+    private Group group = null;
 
     /**
      * Value and Range facets for the query

@@ -23,7 +23,7 @@ class QuerySuggestionsApiImpl implements QuerySuggestionsApi{
     public QuerySuggestionsResponse getQuerySuggestion(String engine, QuerySuggestionsRequest request) {
         HttpUrl url = Objects.requireNonNull(HttpUrl.parse(baseUrl + QUERY_SUGGESTIONS_PATH)).newBuilder().setPathSegment(4, engine).build();
 
-        log.debug("Adding meta engines {} , request:{}",url, request);
+        log.debug("Getting QuerySuggestions for {} , request:{}",url, request);
         Request okRequest = new Request.Builder()
                 .url(url)
                 .post(ClientUtils.marshalPayload(objectMapper,request))

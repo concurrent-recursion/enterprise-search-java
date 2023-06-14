@@ -145,4 +145,12 @@ public class AppSearchClient {
     public SourceEnginesApi sourceEngines(){
         return new SourceEnginesApiImpl(objectMapper,baseUrl,client);
     }
+
+    /**
+     * Create an instance of the AppSearch QuerySuggestions API
+     * @return The QuerySuggestionsApi
+     */
+    public QuerySuggestionsApi querySuggestions(){
+        return new QuerySuggestionsApiImpl(objectMapper,baseUrl,client);
+    }
 }

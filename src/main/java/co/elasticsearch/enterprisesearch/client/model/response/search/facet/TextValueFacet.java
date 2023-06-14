@@ -1,6 +1,8 @@
 package co.elasticsearch.enterprisesearch.client.model.response.search.facet;
 
 import co.elasticsearch.enterprisesearch.client.model.FacetType;
+import co.elasticsearch.enterprisesearch.client.model.request.search.facet.ValueFacet;
+import co.elasticsearch.enterprisesearch.client.model.response.search.facet.value.FacetValue;
 import co.elasticsearch.enterprisesearch.client.model.response.search.facet.value.TextValue;
 import lombok.Getter;
 import lombok.Setter;
@@ -20,7 +22,7 @@ import java.util.function.Consumer;
 @Setter
 @Getter
 @Accessors(chain = true)
-public class TextValueFacet implements Facet, Iterable<TextValue> {
+public class TextValueFacet implements Facet {
     /**
      * The facet name
      *
@@ -28,26 +30,14 @@ public class TextValueFacet implements Facet, Iterable<TextValue> {
      */
     private String name;
 
-    private List<TextValue> data = new ArrayList<>();
+    private List<FacetValue> data = new ArrayList<>();
 
     @Override
     public FacetType getType() {
         return FacetType.VALUE;
     }
-
-    @NotNull
-    @Override
-    public Iterator<TextValue> iterator() {
-        return this.data.iterator();
-    }
-
-    @Override
-    public void forEach(Consumer<? super TextValue> action) {
-        this.data.forEach(action);
-    }
-
-    @Override
-    public Spliterator<TextValue> spliterator() {
-        return this.data.spliterator();
+    public TextValueFacet setData(List<TextValue> data){
+        this.data.addAll(data);
+        return this;
     }
 }

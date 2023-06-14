@@ -2,6 +2,7 @@ package co.elasticsearch.enterprisesearch.client.model.response.search.facet;
 
 import co.elasticsearch.enterprisesearch.client.model.FacetType;
 import co.elasticsearch.enterprisesearch.client.model.GeolocationRange;
+import co.elasticsearch.enterprisesearch.client.model.response.search.facet.value.FacetValue;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
@@ -29,11 +30,16 @@ public class GeolocationRangeFacet implements Facet {
      * @param data the values
      * @return the values
      */
-    private List<GeolocationRange> data = new ArrayList<>();
+    private List<FacetValue> data = new ArrayList<>();
 
     @Override
     public FacetType getType() {
         return FacetType.RANGE;
+    }
+
+    public GeolocationRangeFacet setData(List<GeolocationRange> data){
+        //this.data.addAll(data);
+        return this;
     }
 
 }

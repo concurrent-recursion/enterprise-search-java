@@ -5,7 +5,7 @@
 
     <groupId>io.github.concurrent-recursion</groupId>
     <artifactId>enterprisesearch-java-client</artifactId>
-    <version>0.3.2</version>
+    <version>0.4.0</version>
     <packaging>jar</packaging>
 
     <name>Enterprise Search Java Client</name>
@@ -39,16 +39,16 @@
         <maven.compiler.target>11</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven-lombok-plugin.version>1.18.20.0</maven-lombok-plugin.version>
-        <maven-surefire-plugin.version>3.1.0</maven-surefire-plugin.version>
+        <maven-surefire-plugin.version>3.1.2</maven-surefire-plugin.version>
         <maven-javadoc-plugin.version>3.5.0</maven-javadoc-plugin.version>
         <maven-source-plugin.version>3.2.1</maven-source-plugin.version>
         <nexus-staging-maven-plugin.version>1.6.13</nexus-staging-maven-plugin.version>
         <maven-gpg-plugin.version>3.1.0</maven-gpg-plugin.version>
 
-        <jackson.version>2.15.0</jackson.version>
+        <jackson.version>2.15.2</jackson.version>
         <slf4j.version>2.0.7</slf4j.version>
         <logback.version>1.4.7</logback.version>
-        <lombok.version>1.18.26</lombok.version>
+        <lombok.version>1.18.28</lombok.version>
         <junit.version>5.9.3</junit.version>
         <jakarta-validation.version>3.0.2</jakarta-validation.version>
         <okhttp.version>4.11.0</okhttp.version>

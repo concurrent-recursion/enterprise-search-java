@@ -81,16 +81,14 @@ class SearchRequestSerializationTests {
     @Test
     void serializeGroup(){
         SearchRequest request = new SearchRequest().setGroup(
-                new Group()
-                        .setSort(new Sort(Sort.SCORE, Sort.Order.ASCENDING))
-                        .setField("states")
+                new Group("states").setSort(new Sort(Sort.SCORE,Sort.Order.ASCENDING))
                         .setCollapse(true)
                         .setSize(20)
         );
         String json = writeValueAsString(request);
         Assertions.assertEquals("{\"query\":\"\",\"group\":{\"field\":\"states\",\"size\":20,\"sort\":{\"_score\":\"asc\"},\"collapse\":true}}",json);
 
-        SearchRequest request1 = new SearchRequest().setGroup(new Group().setField("states"));
+        SearchRequest request1 = new SearchRequest().setGroup(new Group("states"));
         json = writeValueAsString(request1);
         Assertions.assertEquals("{\"query\":\"\",\"group\":{\"field\":\"states\"}}",json);
     }

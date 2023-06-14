@@ -1,12 +1,15 @@
 package co.elasticsearch.enterprisesearch.client.model.request.search;
 
 import co.elasticsearch.enterprisesearch.client.model.Sort;
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.Accessors;
 
@@ -17,15 +20,20 @@ import lombok.experimental.Accessors;
 @Accessors(chain = true)
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
 @JsonPropertyOrder({"field", "size", "sort", "collapse"})
-@RequiredArgsConstructor
+@AllArgsConstructor
+@NoArgsConstructor
 public class Group {
+    public Group(String field){
+        this.field = field;
+    }
+
     /**
      * Field name to group results on.
      * @param field Field name to group results on.
      * @return The field
      */
     @NotNull
-    private final String field;
+    private String field;
     /**
      * Number of results to be included in the _group key of the returned document. Can be between 1 and 10. Defaults to 10.
      * @param size number of results to be included in the _group key

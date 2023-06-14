@@ -23,11 +23,15 @@ public class NumberValueFacet implements Facet {
      * @param name the name of the facet
      */
     private String name;
-    private List<NumberValue> data = new ArrayList<>();
+    private List<FacetValue> data = new ArrayList<>();
 
     @Override
     public FacetType getType() {
         return FacetType.VALUE;
     }
 
+    public NumberValueFacet setData(List<NumberValue> data){
+        this.data.addAll(data);
+        return this;
+    }
 }
