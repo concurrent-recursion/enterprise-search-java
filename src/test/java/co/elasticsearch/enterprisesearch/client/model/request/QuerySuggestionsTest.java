@@ -14,6 +14,13 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class QuerySuggestionsTest {
     private final ObjectMapper objectMapper = new ObjectMapper();
+
+    @Test
+    void serializeSimpleRequest() throws JsonProcessingException {
+        QuerySuggestionsRequest request = new QuerySuggestionsRequest().setQuery("tree");
+        String json = objectMapper.writeValueAsString(request);
+        assertEquals("{\"query\":\"tree\"}",json);
+    }
     @Test
     void serializeRequest() throws JsonProcessingException {
         QuerySuggestionsRequest request = new QuerySuggestionsRequest().setQuery("car").setSize(4);

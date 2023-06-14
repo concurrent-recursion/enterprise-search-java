@@ -24,6 +24,7 @@ public class QuerySuggestionsRequest {
      * @param types the suggestion types
      * @return the suggestion types
      */
+    @JsonInclude(value = JsonInclude.Include.CUSTOM, valueFilter = SuggestionTypes.class)
     private SuggestionTypes types = new SuggestionTypes();
     /**
      * The number of suggestions to return

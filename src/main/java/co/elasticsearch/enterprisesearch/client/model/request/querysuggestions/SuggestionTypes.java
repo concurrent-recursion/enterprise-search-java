@@ -5,19 +5,32 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
 
+import java.util.Objects;
+
 /**
  * Represents a suggestion type
  */
 @Getter
 @Setter
 @Accessors(chain = true)
-@JsonInclude(JsonInclude.Include.NON_EMPTY)
 public class SuggestionTypes {
     /**
      * Represents a document in the results
      * @param documents the documents
      * @return the documents
      */
-    @JsonInclude(value = JsonInclude.Include.CUSTOM, valueFilter = Document.class)
     private Document documents = new Document();
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        SuggestionTypes that = (SuggestionTypes) o;
+        return Objects.equals(documents, that.documents);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(documents);
+    }
 }
