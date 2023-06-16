@@ -23,7 +23,7 @@ public class DeserializationUtil {
      * @return The JsonNode or the first element in the array
      */
     public JsonNode getFirstValue(TreeNode filterNode) {
-        if (filterNode instanceof ArrayNode) {
+        if (filterNode instanceof ArrayNode && !((ArrayNode) filterNode).isEmpty()) {
             return ((ArrayNode) filterNode).elements().next();
         } else {
             return (JsonNode) filterNode;

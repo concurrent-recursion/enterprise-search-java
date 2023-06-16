@@ -15,7 +15,7 @@ import java.util.List;
 @Getter
 @Setter
 @Accessors(chain = true)
-public class EmptyValueFacet implements Facet{
+public class EmptyValueFacet implements Facet {
     /**
      * The name of the facet
      * @param name the facet name

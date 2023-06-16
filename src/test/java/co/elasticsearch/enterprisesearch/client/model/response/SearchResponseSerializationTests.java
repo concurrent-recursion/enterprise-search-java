@@ -1,5 +1,6 @@
 package co.elasticsearch.enterprisesearch.client.model.response;
 
+import co.elasticsearch.enterprisesearch.TestUtil;
 import co.elasticsearch.enterprisesearch.client.model.Engine;
 import co.elasticsearch.enterprisesearch.client.model.request.search.SearchRequest;
 import co.elasticsearch.enterprisesearch.client.model.response.search.Meta;
@@ -8,6 +9,7 @@ import co.elasticsearch.enterprisesearch.client.model.response.search.SearchApiR
 import co.elasticsearch.enterprisesearch.client.model.response.search.facet.Facet;
 import co.elasticsearch.enterprisesearch.client.model.response.search.facet.TextValueFacet;
 import co.elasticsearch.enterprisesearch.client.model.response.search.facet.value.TextValue;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;

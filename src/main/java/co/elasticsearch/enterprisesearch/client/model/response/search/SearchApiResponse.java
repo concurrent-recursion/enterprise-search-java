@@ -1,14 +1,16 @@
 package co.elasticsearch.enterprisesearch.client.model.response.search;
 
 import co.elasticsearch.enterprisesearch.client.model.response.ErrorableResponse;
-import co.elasticsearch.enterprisesearch.client.model.response.search.facet.Facet;
+import co.elasticsearch.enterprisesearch.client.model.response.search.facet.*;
 import com.fasterxml.jackson.annotation.*;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import lombok.AccessLevel;
 import lombok.Data;
 import lombok.Getter;
 import lombok.experimental.Accessors;
+import lombok.extern.slf4j.Slf4j;
 import org.jetbrains.annotations.NotNull;
+import org.w3c.dom.Text;
 
 import java.util.*;
 import java.util.function.Consumer;
@@ -20,6 +22,7 @@ import java.util.stream.Collectors;
  */
 @Data
 @Accessors(chain = true)
+@Slf4j
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
 public class SearchApiResponse<T extends ResponseDocument> implements Iterable<T>, ErrorableResponse {
     /**
@@ -66,19 +69,79 @@ public class SearchApiResponse<T extends ResponseDocument> implements Iterable<T
         return facetMap.values().stream().flatMap(Collection::stream).collect(Collectors.toList());
     }
 
+    /**
+     * Get a list of Facets that are mapped to a specific field
+     * @param fieldName The name of the field in the search document
+     * @return A list of facets
+     */
     public List<Facet> getFacetsByField(String fieldName){
         return facetMap.getOrDefault(fieldName,Collections.emptyList());
     }
 
-    public <F extends Facet> Optional<F> getFacetByFieldAndName(String fieldName,String facetName,Class<F> facetType){
-        List<F> facetList = facetMap.getOrDefault(fieldName,Collections.emptyList()).stream().filter(facetType::isInstance).map(facetType::cast).collect(Collectors.toList());
-        return facetList.stream().filter(f -> f.getName().equals(facetName)).findFirst();
+    /**
+     * Get the Facet on the specified field, with the specified name, and type. The facet
+     * @param facetName The name of the facet
+     * @param facetType the type of the facet
+     * @return The facet if one is found, and is the correct class, or an empty Optional
+     * @param <F> The type of facet expected. If the type does not match, it will return an empty Optional
+     */
+    public <F extends Facet> Optional<F> getFacetByName(String facetName,Class<F> facetType){
+        return facetMap.values().stream()
+                .flatMap(Collection::stream)
+                .filter(f -> facetName.equals(f.getName()))
+                .map(f -> castFacet(f,facetType))
+                .filter(Objects::nonNull)
+                .findFirst();
     }
 
-    public <F extends Facet> Optional<F> getFacetByName(String facetName,Class<F> facetType){
-        List<F> facetList = facetMap.values().stream().filter(facetType::isInstance).map(facetType::cast).collect(Collectors.toList());
-        return facetList.stream().filter(f -> f.getName().equals(facetName)).findFirst();
+    /**
+     * Get the Facet on the specified field, with the specified name, and type. The facet
+     * @param fieldName The name of the field in the search document
+     * @param facetName The name of the facet
+     * @param facetType The type of the facet
+     * @return The facet if one is found, and is the correct class, or an empty Optional
+     * @param <F> The type of facet expected. If the type does not match, it will return an empty Optional
+     */
+
+    public <F extends Facet> Optional<F> getFacetByFieldAndName(String fieldName,String facetName,Class<F> facetType){
+        return getFacetsByField(fieldName).stream()
+                .filter(f -> facetName.equals(f.getName()))
+                .map(f -> castFacet(f,facetType))
+                .filter(Objects::nonNull)
+                .findFirst();
     }
+
+    @SuppressWarnings("unchecked")
+    private static <F extends Facet> F castFacet(Facet f, Class<F> facetType){
+        if(f.getClass().equals(facetType)){
+            return facetType.cast(f);
+        }else if(f.getClass().equals(EmptyValueFacet.class)){
+            if(facetType.equals(TextValueFacet.class)){
+                return (F) new TextValueFacet().setName(f.getName());
+            } else if(facetType.equals(NumberValueFacet.class)){
+                return (F) new NumberValueFacet().setName(f.getName());
+            } else if(facetType.equals(DateValueFacet.class)){
+                return (F) new DateValueFacet().setName(f.getName());
+            }else{
+                log.warn("Requested Facet Type {} but was {}",facetType, f.getClass());
+                return null;
+            }
+        } else if (f.getClass().equals(EmptyRangeFacet.class)) {
+            if(facetType.equals(NumberRangeFacet.class)){
+                return (F) new NumberRangeFacet().setName(f.getName());
+            } else if(facetType.equals(DateRangeFacet.class)){
+                return (F) new DateRangeFacet().setName(f.getName());
+            } else if(facetType.equals(GeolocationRangeFacet.class)){
+                return (F) new GeolocationRangeFacet().setName(f.getName());
+            }else{
+                log.warn("Requested Facet Type {} but was {}",facetType, f.getClass());
+                return null;
+            }
+        }
+        return null;
+    }
+
+
 
     @JsonIgnore
     @NotNull

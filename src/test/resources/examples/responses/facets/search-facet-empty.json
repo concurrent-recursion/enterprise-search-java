@@ -1,0 +1,35 @@
+{
+  "meta": {
+    "alerts": [],
+    "warnings": [],
+    "precision": 2,
+    "engine": {
+      "name": "national-parks-demo",
+      "type": "default"
+    },
+    "page": {
+      "current": 1,
+      "total_pages": 0,
+      "total_results": 0,
+      "size": 10
+    },
+    "request_id": "6tQl8qIFR_eaAm-YkjcLwQ"
+  },
+  "results": [],
+  "facets": {
+    "states": [
+      {
+        "type": "value",
+        "name": "states_name",
+        "data": []
+      }
+    ],
+    "acres": [
+      {
+        "type": "range",
+        "name" : "acres_name",
+        "data": []
+      }
+    ]
+  }
+}

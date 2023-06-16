@@ -1,11 +1,12 @@
 package co.elasticsearch.enterprisesearch.client.model.response;
 
 import co.elasticsearch.enterprisesearch.TestUtil;
+import co.elasticsearch.enterprisesearch.client.model.request.search.facet.ValueFacet;
 import co.elasticsearch.enterprisesearch.client.model.response.documents.IndexResponse;
 import co.elasticsearch.enterprisesearch.client.model.response.documents.IndexResult;
 import co.elasticsearch.enterprisesearch.client.model.response.search.MultiSearchApiResponse;
 import co.elasticsearch.enterprisesearch.client.model.response.search.SearchApiResponse;
-import co.elasticsearch.enterprisesearch.client.model.response.search.facet.Facet;
+import co.elasticsearch.enterprisesearch.client.model.response.search.facet.*;
 import co.elasticsearch.enterprisesearch.client.model.response.search.facet.value.*;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JavaType;
@@ -18,6 +19,7 @@ import org.junit.jupiter.api.Test;
 import java.math.BigDecimal;
 import java.time.OffsetDateTime;
 import java.util.List;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -102,7 +104,7 @@ class ResponseParseTest {
     }
 
     @Test
-    void searchResponse_DateRange_Facet() throws JsonProcessingException {
+    void searchResponse_DateRange_Facet_Direct() throws JsonProcessingException {
         String json = TestUtil.readResourceFile("examples/responses/facets/search-facet-date-range.json");
         JavaType type = objectMapper.getTypeFactory().constructParametricType(SearchApiResponse.class, NationalParkDocument.class);
         SearchApiResponse<NationalParkDocument> response = objectMapper.readValue(json, type);
@@ -116,6 +118,59 @@ class ResponseParseTest {
         assertEquals(OffsetDateTime.parse("1950-01-01T00:00:00.000Z"), dateRangeValue.getTo());
         assertEquals(OffsetDateTime.parse("1900-01-01T12:00:00.000Z"),dateRangeValue.getFrom());
         assertEquals(15L, dateRangeValue.getCount());
+
+    }
+
+    @Test
+    void searchResponse_DateRange_Facet() throws JsonProcessingException {
+        String json = TestUtil.readResourceFile("examples/responses/facets/search-facet-date-range.json");
+        JavaType type = objectMapper.getTypeFactory().constructParametricType(SearchApiResponse.class, NationalParkDocument.class);
+        SearchApiResponse<NationalParkDocument> response = objectMapper.readValue(json, type);
+        Optional<DateRangeFacet> halfCentury = response.getFacetByFieldAndName("date_established","half-century",DateRangeFacet.class);
+        assertTrue(halfCentury.isPresent());
+        assertEquals(1,halfCentury.get().getData().size());
+        assertEquals("half-century",halfCentury.get().getName());
+        DateRange dateRangeValue = halfCentury.get().getDateRanges().get(0);
+        assertEquals(OffsetDateTime.parse("1950-01-01T00:00:00.000Z"), dateRangeValue.getTo());
+        assertEquals(OffsetDateTime.parse("1900-01-01T12:00:00.000Z"),dateRangeValue.getFrom());
+        assertEquals(15L, dateRangeValue.getCount());
+
+    }
+
+    @Test
+    void searchResponse_Empty_Facet() throws JsonProcessingException {
+        String json = TestUtil.readResourceFile("examples/responses/facets/search-facet-empty.json");
+        JavaType type = objectMapper.getTypeFactory().constructParametricType(SearchApiResponse.class, NationalParkDocument.class);
+        SearchApiResponse<NationalParkDocument> response = objectMapper.readValue(json, type);
+        
+        final String valueFieldName = "states";
+        final String valueFacetName = "states_name";
+        final String rangeFieldName = "acres";
+        final String rangeFacetName = "acres_name";
+
+        Optional<TextValueFacet> textValueFacet = response.getFacetByFieldAndName( valueFieldName, valueFacetName, TextValueFacet.class);
+        assertTrue(textValueFacet.isPresent());
+        assertEquals( valueFacetName,textValueFacet.get().getName());
+
+        Optional<NumberValueFacet> numberValueFacet = response.getFacetByFieldAndName( valueFieldName, valueFacetName, NumberValueFacet.class);
+        assertTrue(numberValueFacet.isPresent());
+        assertEquals( valueFacetName,numberValueFacet.get().getName());
+
+        Optional<DateValueFacet> dateValueFacet = response.getFacetByFieldAndName( valueFieldName, valueFacetName, DateValueFacet.class);
+        assertTrue(dateValueFacet.isPresent());
+        assertEquals( valueFacetName,dateValueFacet.get().getName());
+
+        Optional<DateRangeFacet> dateRangeFacet = response.getFacetByFieldAndName( rangeFieldName, rangeFacetName, DateRangeFacet.class);
+        assertTrue(dateRangeFacet.isPresent());
+        assertEquals( rangeFacetName,dateRangeFacet.get().getName());
+
+        Optional<GeolocationRangeFacet> geoRangeFacet = response.getFacetByFieldAndName( rangeFieldName, rangeFacetName, GeolocationRangeFacet.class);
+        assertTrue(geoRangeFacet.isPresent());
+        assertEquals( rangeFacetName,geoRangeFacet.get().getName());
+
+        Optional<NumberRangeFacet> numberRangeFacet = response.getFacetByFieldAndName( rangeFieldName, rangeFacetName, NumberRangeFacet.class);
+        assertTrue(numberRangeFacet.isPresent());
+        assertEquals( rangeFacetName,numberRangeFacet.get().getName());
 
     }
 
