@@ -6,10 +6,7 @@ import co.elasticsearch.enterprisesearch.client.model.request.search.boost.Boost
 import co.elasticsearch.enterprisesearch.client.model.request.search.facet.Facet;
 import co.elasticsearch.enterprisesearch.client.model.request.search.filter.Filter;
 import co.elasticsearch.enterprisesearch.client.model.request.search.filter.Filters;
-import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.*;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import lombok.AccessLevel;
@@ -86,10 +83,20 @@ public class SearchRequest {
      * @param filters The filters to apply to the search
      * @return the filters
      */
-    @JsonProperty("filters")
-    @Getter(AccessLevel.PACKAGE)
-    @Setter(AccessLevel.PACKAGE)
+    @Getter(AccessLevel.NONE)
+    @Setter(AccessLevel.NONE)
     private Filter internalFilter;
+
+
+    @JsonSetter("filters")
+    void setFilter(Filter filter){
+        setFilters(filter);
+    }
+
+    @JsonGetter("filters")
+    Filter getFilter(){
+        return internalFilter;
+    }
 
 
     @JsonIgnore
