@@ -24,7 +24,7 @@ import java.util.stream.Collectors;
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
 @RequiredArgsConstructor
 @ToString
-public class NumberValueFilter implements Filter {
+public class NumberValueFilter implements Filter, FieldFilter {
     /**
      * The field from your schema upon which to apply your filter
      * @param name the field name

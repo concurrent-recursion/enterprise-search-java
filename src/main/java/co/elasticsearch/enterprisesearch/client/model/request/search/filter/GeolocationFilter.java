@@ -21,7 +21,7 @@ import java.util.Objects;
 @Accessors(chain = true)
 @RequiredArgsConstructor
 @ToString
-public class GeolocationFilter implements Filter {
+public class GeolocationFilter implements Filter, FieldFilter {
     /**
      * The field from your schema upon which to apply your filter
      * @param name the field name

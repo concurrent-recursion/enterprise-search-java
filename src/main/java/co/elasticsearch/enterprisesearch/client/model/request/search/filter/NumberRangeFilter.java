@@ -20,7 +20,7 @@ import java.util.Objects;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @RequiredArgsConstructor
 @ToString
-public class NumberRangeFilter implements Filter {
+public class NumberRangeFilter implements Filter, FieldFilter {
     /**
      * The field from your schema upon which to apply your filter
      * @param name the field name

@@ -17,7 +17,7 @@ import java.util.*;
 @ToString
 public class BooleanFilter implements Filter {
     /**
-     * All of the filters must match. This functions as an <em>AND</em> condition.
+     * All the filters must match. This functions as an <em>AND</em> condition.
      * @param all The filers to match on
      * @return The filters
      */

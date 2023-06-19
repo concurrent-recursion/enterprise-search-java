@@ -79,6 +79,60 @@ class SearchRequestSerializationTests {
     }
 
     @Test
+    void serializeFilters(){
+        SearchRequest request = new SearchRequest();
+
+        request.setFilters(new TextValueFilter("world_heritage_site").setValues(List.of("true")));
+        String json = writeValueAsString(request);
+        Assertions.assertEquals("{\"query\":\"\",\"filters\":{\"world_heritage_site\":\"true\"}}",json);
+
+        request = new SearchRequest();
+        request.setFilters(new NumberValueFilter("acres",20,30));
+        json = writeValueAsString(request);
+        Assertions.assertEquals("{\"query\":\"\",\"filters\":{\"acres\":[20,30]}}",json);
+
+        request = new SearchRequest();
+        request.setFilters(new DateValueFilter("date_established", OffsetDateTime.parse("1900-01-01T12:00:00.00Z",DateValueFilter.RFC_3339)));
+        json = writeValueAsString(request);
+        Assertions.assertEquals("{\"query\":\"\",\"filters\":{\"date_established\":\"1900-01-01T12:00:00Z\"}}",json);
+
+        request = new SearchRequest();
+        request.setFilters(new NumberRangeFilter("acres").setRange(new NumberRange(30,300)));
+        json = writeValueAsString(request);
+        Assertions.assertEquals("{\"query\":\"\",\"filters\":{\"acres\":{\"from\":30,\"to\":300}}}",json);
+
+        request = new SearchRequest();
+        request.setFilters(new DateRangeFilter("date_established").setRange(new DateRange().setFrom(OffsetDateTime.parse("1900-01-01T12:00:00+00:00")).setTo(OffsetDateTime.parse("1950-01-01T00:00:00+00:00"))));
+        json = writeValueAsString(request);
+        Assertions.assertEquals("{\"query\":\"\",\"filters\":{\"date_established\":{\"from\":\"1900-01-01T12:00:00.00Z\",\"to\":\"1950-01-01T00:00:00.00Z\"}}}",json);
+
+        request = new SearchRequest();
+        request.setFilters(new GeolocationFilter("location").setRange(new GeolocationRange().setCenter(new Geolocation("37.386483,-122.083842")).setDistance(new BigDecimal(300)).setUnit(Geolocation.Unit.KILOMETERS)));
+        json = writeValueAsString(request);
+        Assertions.assertEquals("{\"query\":\"\",\"filters\":{\"location\":{\"center\":[-122.083842,37.386483],\"distance\":300,\"unit\":\"km\"}}}",json);
+
+        request = new SearchRequest();
+        request.setFilters(new GeolocationFilter("location").setRange(new GeolocationRange().setCenter(new Geolocation("37.386483,-122.083842")).setFrom(new BigDecimal(0)).setTo(new BigDecimal(1000)).setUnit(Geolocation.Unit.METERS)));
+        json = writeValueAsString(request);
+        Assertions.assertEquals("{\"query\":\"\",\"filters\":{\"location\":{\"center\":[-122.083842,37.386483],\"unit\":\"m\",\"from\":0,\"to\":1000}}}",json);
+
+        request = new SearchRequest();
+        request.setFilters(new BooleanFilter()
+                .allOf(
+                        new TextValueFilter("states").setValues(List.of("California")),
+                        new TextValueFilter("world_heritage_site").setValues(List.of("true"))
+                ).anyOf(
+                        new NumberRangeFilter("acres").setRange(new NumberRange(40_000,null)),
+                        new NumberRangeFilter("square_km").setRange(new NumberRange(500,null))
+                ).noneOf(
+                        new TextValueFilter("title").setValues(List.of("Yosemite"))
+                )
+        );
+        json = writeValueAsString(request);
+        Assertions.assertEquals("{\"query\":\"\",\"filters\":{\"all\":[{\"states\":\"California\"},{\"world_heritage_site\":\"true\"}],\"any\":[{\"acres\":{\"from\":40000}},{\"square_km\":{\"from\":500}}],\"none\":{\"title\":\"Yosemite\"}}}",json);
+    }
+
+    @Test
     void serializeGroup(){
         SearchRequest request = new SearchRequest().setGroup(
                 new Group("states").setSort(new Sort(Sort.SCORE,Sort.Order.ASCENDING))
@@ -134,59 +188,7 @@ class SearchRequestSerializationTests {
 
     }
 
-    @Test
-    void serializeFilters(){
-        SearchRequest request = new SearchRequest();
 
-        request.setFilters(new TextValueFilter("world_heritage_site").setValues(List.of("true")));
-        String json = writeValueAsString(request);
-        Assertions.assertEquals("{\"query\":\"\",\"filters\":{\"world_heritage_site\":\"true\"}}",json);
-
-        request = new SearchRequest();
-        request.setFilters(new NumberValueFilter("acres",20,30));
-        json = writeValueAsString(request);
-        Assertions.assertEquals("{\"query\":\"\",\"filters\":{\"acres\":[20,30]}}",json);
-
-        request = new SearchRequest();
-        request.setFilters(new DateValueFilter("date_established",OffsetDateTime.parse("1900-01-01T12:00:00.00Z",DateValueFilter.RFC_3339)));
-        json = writeValueAsString(request);
-        Assertions.assertEquals("{\"query\":\"\",\"filters\":{\"date_established\":\"1900-01-01T12:00:00Z\"}}",json);
-
-        request = new SearchRequest();
-        request.setFilters(new NumberRangeFilter("acres").setRange(new NumberRange(30,300)));
-        json = writeValueAsString(request);
-        Assertions.assertEquals("{\"query\":\"\",\"filters\":{\"acres\":{\"from\":30,\"to\":300}}}",json);
-
-        request = new SearchRequest();
-        request.setFilters(new DateRangeFilter("date_established").setRange(new DateRange().setFrom(OffsetDateTime.parse("1900-01-01T12:00:00+00:00")).setTo(OffsetDateTime.parse("1950-01-01T00:00:00+00:00"))));
-        json = writeValueAsString(request);
-        Assertions.assertEquals("{\"query\":\"\",\"filters\":{\"date_established\":{\"from\":\"1900-01-01T12:00:00.00Z\",\"to\":\"1950-01-01T00:00:00.00Z\"}}}",json);
-
-        request = new SearchRequest();
-        request.setFilters(new GeolocationFilter("location").setRange(new GeolocationRange().setCenter(new Geolocation("37.386483,-122.083842")).setDistance(new BigDecimal(300)).setUnit(Geolocation.Unit.KILOMETERS)));
-        json = writeValueAsString(request);
-        Assertions.assertEquals("{\"query\":\"\",\"filters\":{\"location\":{\"center\":[-122.083842,37.386483],\"distance\":300,\"unit\":\"km\"}}}",json);
-
-        request = new SearchRequest();
-        request.setFilters(new GeolocationFilter("location").setRange(new GeolocationRange().setCenter(new Geolocation("37.386483,-122.083842")).setFrom(new BigDecimal(0)).setTo(new BigDecimal(1000)).setUnit(Geolocation.Unit.METERS)));
-        json = writeValueAsString(request);
-        Assertions.assertEquals("{\"query\":\"\",\"filters\":{\"location\":{\"center\":[-122.083842,37.386483],\"unit\":\"m\",\"from\":0,\"to\":1000}}}",json);
-
-        request = new SearchRequest();
-        request.setFilters(new BooleanFilter()
-                .allOf(
-                        new TextValueFilter("states").setValues(List.of("California")),
-                        new TextValueFilter("world_heritage_site").setValues(List.of("true"))
-                ).anyOf(
-                        new NumberRangeFilter("acres").setRange(new NumberRange(40_000,null)),
-                        new NumberRangeFilter("square_km").setRange(new NumberRange(500,null))
-                ).noneOf(
-                        new TextValueFilter("title").setValues(List.of("Yosemite"))
-                )
-        );
-        json = writeValueAsString(request);
-        Assertions.assertEquals("{\"query\":\"\",\"filters\":{\"all\":[{\"states\":\"California\"},{\"world_heritage_site\":\"true\"}],\"any\":[{\"acres\":{\"from\":40000}},{\"square_km\":{\"from\":500}}],\"none\":{\"title\":\"Yosemite\"}}}",json);
-    }
 
     @Test
     void serializePrecision(){

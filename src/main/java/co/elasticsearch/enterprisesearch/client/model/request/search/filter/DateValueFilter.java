@@ -24,7 +24,7 @@ import java.util.Objects;
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
 @RequiredArgsConstructor
 @ToString
-public class DateValueFilter implements Filter {
+public class DateValueFilter implements Filter, FieldFilter {
     /**
      * A shared Date pattern for de/serializing dates according to the RFC 3339 spec
      */

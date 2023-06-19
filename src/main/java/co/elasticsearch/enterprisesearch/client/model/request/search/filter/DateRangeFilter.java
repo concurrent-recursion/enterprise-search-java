@@ -23,7 +23,7 @@ import static co.elasticsearch.enterprisesearch.client.model.request.search.filt
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @RequiredArgsConstructor
 @ToString
-public class DateRangeFilter implements Filter {
+public class DateRangeFilter implements Filter, FieldFilter {
     /**
      * The field from your schema upon which to apply your filter
      * @return The field name

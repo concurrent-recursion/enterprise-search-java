@@ -83,63 +83,60 @@ class SearchRequestDeserializationTests {
     void filterSimple() throws JsonProcessingException {
         String simpleFilter = TestUtil.readResourceFile("examples/requests/filterSimple.json");
         SearchRequest simpleFilterRequest = objectMapper.readValue(simpleFilter, SearchRequest.class);
-        Filter whcFilter = simpleFilterRequest.getFilters();
-        assertInstanceOf(TextValueFilter.class,whcFilter);
-        TextValueFilter whcTextFilter = (TextValueFilter) whcFilter;
-        assertEquals("world_heritage_site", whcTextFilter.getName());
-        assertEquals("true", whcTextFilter.getValues().get(0));
+        Filters whcFilter = simpleFilterRequest.getFilters();
+        Optional<TextValueFilter> whcTextFilter = whcFilter.getFieldFilter(TextValueFilter.class);
+        assertTrue(whcTextFilter.isPresent());
+        assertEquals("world_heritage_site", whcTextFilter.get().getName());
+        assertEquals("true", whcTextFilter.get().getValues().get(0));
     }
     @Test
     void filterArray() throws JsonProcessingException {
-
         String arrayFilter = TestUtil.readResourceFile("examples/requests/filterArray.json");
         SearchRequest request = objectMapper.readValue(arrayFilter, SearchRequest.class);
-        Filter filter = request.getFilters();
-        assertInstanceOf(TextValueFilter.class,filter);
-        TextValueFilter f = (TextValueFilter) filter;
-        assertEquals("states", f.getName());
-        assertIterableEquals(List.of("California", "Alaska"), f.getValues());
+        Filters whcFilter = request.getFilters();
+        Optional<TextValueFilter> whcTextFilter = whcFilter.getFieldFilter(TextValueFilter.class);
+        assertTrue(whcTextFilter.isPresent());
+        assertEquals("states", whcTextFilter.get().getName());
+        assertIterableEquals(List.of("California", "Alaska"), whcTextFilter.get().getValues());
     }
     @Test
     void filterDateRange() throws JsonProcessingException {
         String dateRangeFilter = TestUtil.readResourceFile("examples/requests/filterDateRange.json");
         SearchRequest dateRangeRequest = objectMapper.readValue(dateRangeFilter, SearchRequest.class);
-        Filter dateEstablishedFilter = dateRangeRequest.getFilters();
-        assertInstanceOf(DateRangeFilter.class,dateEstablishedFilter);
-        DateRangeFilter dateRange = (DateRangeFilter) dateEstablishedFilter;
-        assertEquals("date_established",dateRange.getName());
-        assertEquals(OffsetDateTime.parse("1900-01-01T12:00:00+00:00", RFC_3339),dateRange.getFrom());
-        assertEquals(OffsetDateTime.parse("1950-01-01T00:00:00+00:00", RFC_3339),dateRange.getTo());
+        Filters dateEstablishedFilter = dateRangeRequest.getFilters();
+        Optional<DateRangeFilter> dateRange = dateEstablishedFilter.getFieldFilter(DateRangeFilter.class);
+        assertTrue(dateRange.isPresent());
+        assertEquals("date_established",dateRange.get().getName());
+        assertEquals(OffsetDateTime.parse("1900-01-01T12:00:00+00:00", RFC_3339),dateRange.get().getFrom());
+        assertEquals(OffsetDateTime.parse("1950-01-01T00:00:00+00:00", RFC_3339),dateRange.get().getTo());
     }
 
     @Test
     void filterGeolocation() throws JsonProcessingException {
         String filterJson = TestUtil.readResourceFile("examples/requests/filterGeoLocation.json");
         SearchRequest request = objectMapper.readValue(filterJson, SearchRequest.class);
-        Filter abstractFilter = request.getFilters();
-        assertInstanceOf(GeolocationFilter.class,abstractFilter);
-        GeolocationFilter geolocationFilter = (GeolocationFilter) abstractFilter;
-        assertEquals("location",geolocationFilter.getName());
-        assertEquals(new Geolocation("37.386483","-122.083842"),geolocationFilter.getCenter());
-        assertEquals(new BigDecimal(300),geolocationFilter.getDistance());
-        assertEquals(Geolocation.Unit.KILOMETERS,geolocationFilter.getUnit());
+        Optional<GeolocationFilter> geolocationFilter = request.getFilters().getFieldFilter(GeolocationFilter.class);
+        assertTrue(geolocationFilter.isPresent());
+        assertEquals("location",geolocationFilter.get().getName());
+        assertEquals(new Geolocation("37.386483","-122.083842"),geolocationFilter.get().getCenter());
+        assertEquals(new BigDecimal(300),geolocationFilter.get().getDistance());
+        assertEquals(Geolocation.Unit.KILOMETERS,geolocationFilter.get().getUnit());
     }
     @Test
     void filterBoolean() throws JsonProcessingException {
         String dateRangeFilter = TestUtil.readResourceFile("examples/requests/filterBoolean.json");
         SearchRequest dateRangeRequest = objectMapper.readValue(dateRangeFilter, SearchRequest.class);
-        Filter rootFilter = dateRangeRequest.getFilters();
-        assertInstanceOf(BooleanFilter.class,rootFilter);
-        BooleanFilter booleanFilter = (BooleanFilter) rootFilter;
-        List<Filter> all = booleanFilter.getAll();
+        Optional<BooleanFilter> booleanFilter = dateRangeRequest.getFilters().getBooleanFilter();
+        assertTrue(booleanFilter.isPresent());
+        List<Filter> all = booleanFilter.get().getAll();
         assertEquals(new TextValueFilter("states","California"),all.get(0));
         assertEquals(new TextValueFilter("world_heritage_site","true"),all.get(1));
 
-        List<Filter> any = booleanFilter.getAny();
+        List<Filter> any = booleanFilter.get().getAny();
         assertEquals(new NumberRangeFilter("acres",40000,null),any.get(0));
         assertEquals(new NumberRangeFilter("square_km",500, null),any.get(1));
 
-        List<Filter> none = booleanFilter.getNone();
+        List<Filter> none = booleanFilter.get().getNone();
         assertEquals(new TextValueFilter("title","Yosemite"),none.get(0));
 
     }
@@ -148,11 +145,10 @@ class SearchRequestDeserializationTests {
     void filterNested() throws JsonProcessingException {
         String filterString = TestUtil.readResourceFile("examples/requests/filterNested.json");
         SearchRequest nestedRequest = objectMapper.readValue(filterString, SearchRequest.class);
-        Filter rootFilter = nestedRequest.getFilters();
-        assertInstanceOf(BooleanFilter.class,rootFilter);
-        BooleanFilter booleanFilter = (BooleanFilter) rootFilter;
+        Optional<BooleanFilter> booleanFilter = nestedRequest.getFilters().getBooleanFilter();
+        assertTrue(booleanFilter.isPresent());
 
-        Filter nested = booleanFilter.getAny().get(0);
+        Filter nested = booleanFilter.get().getAny().get(0);
         assertInstanceOf(BooleanFilter.class,nested);
         BooleanFilter nestedFilter = (BooleanFilter) nested;
         assertEquals(new TextValueFilter("states",List.of("California")),nestedFilter.getAll().get(0));

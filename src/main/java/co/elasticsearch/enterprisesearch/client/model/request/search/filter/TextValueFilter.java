@@ -22,7 +22,7 @@ import java.util.Objects;
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
 @RequiredArgsConstructor
 @ToString
-public class TextValueFilter implements Filter {
+public class TextValueFilter implements Filter, FieldFilter {
     /**
      * The field from your schema upon which to apply your filter
      * @param name the field name

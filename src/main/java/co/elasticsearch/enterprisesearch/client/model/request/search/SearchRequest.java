@@ -5,6 +5,7 @@ import co.elasticsearch.enterprisesearch.client.model.request.Page;
 import co.elasticsearch.enterprisesearch.client.model.request.search.boost.Boost;
 import co.elasticsearch.enterprisesearch.client.model.request.search.facet.Facet;
 import co.elasticsearch.enterprisesearch.client.model.request.search.filter.Filter;
+import co.elasticsearch.enterprisesearch.client.model.request.search.filter.Filters;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -14,6 +15,7 @@ import jakarta.validation.constraints.Min;
 import lombok.AccessLevel;
 import lombok.Data;
 import lombok.Getter;
+import lombok.Setter;
 import lombok.experimental.Accessors;
 
 import java.util.*;
@@ -84,7 +86,35 @@ public class SearchRequest {
      * @param filters The filters to apply to the search
      * @return the filters
      */
-    private Filter filters;
+    @JsonProperty("filters")
+    @Getter(AccessLevel.PACKAGE)
+    @Setter(AccessLevel.PACKAGE)
+    private Filter internalFilter;
+
+
+    @JsonIgnore
+    private Filters filters;
+
+    /**
+     * Get the search filter from the search
+     * @return The Filters object
+     */
+    @JsonIgnore
+    public Filters getFilters(){
+        return filters;
+    }
+
+    /**
+     * Set the filter for this search request
+     * @param filter The filter to use for the search
+     * @return The search request
+     */
+    @JsonIgnore
+    public SearchRequest setFilters(Filter filter){
+        this.internalFilter = filter;
+        this.filters = new Filters(filter);
+        return this;
+    }
 
     /**
      * Use the precision parameter of the search API to tune precision and recall for a query. Learn more in Precision tuning (beta).<br>
