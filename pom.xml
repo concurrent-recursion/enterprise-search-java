@@ -52,7 +52,7 @@
         <junit.version>5.9.3</junit.version>
         <jakarta-validation.version>3.0.2</jakarta-validation.version>
         <okhttp.version>4.11.0</okhttp.version>
-        <failsafe.version>3.3.1</failsafe.version>
+        <failsafe.version>3.3.2</failsafe.version>
         <apache-commons-collections4.version>4.4</apache-commons-collections4.version>
     </properties>
     <dependencies>
