@@ -30,7 +30,7 @@ class FilterDeserializer extends StdDeserializer<Filter> {
         super(Filter.class);
     }
 
-    private List<Filter> parseFilters(JsonParser jsonParser, ArrayNode filterValues) throws JsonProcessingException {
+    private static List<Filter> parseFilters(JsonParser jsonParser, ArrayNode filterValues) throws JsonProcessingException {
         if (filterValues == null) {
             return Collections.emptyList();
         }
@@ -41,7 +41,7 @@ class FilterDeserializer extends StdDeserializer<Filter> {
         return filters;
     }
 
-    private BooleanFilter deserializeNestedFilter(JsonParser jsonParser, TreeNode node) throws JsonProcessingException {
+    private static BooleanFilter deserializeNestedFilter(JsonParser jsonParser, TreeNode node) throws JsonProcessingException {
         BooleanFilter filter = new BooleanFilter();
 
         ArrayNode allNode = (ArrayNode) node.get("all");
@@ -56,7 +56,7 @@ class FilterDeserializer extends StdDeserializer<Filter> {
         return filter;
     }
 
-    private boolean isNestedFilter(TreeNode node) {
+    private static boolean isNestedFilter(TreeNode node) {
         for (Iterator<String> it = node.fieldNames(); it.hasNext(); ) {
             String fieldName = it.next();
             if (NESTED_KEYS.contains(fieldName)) {

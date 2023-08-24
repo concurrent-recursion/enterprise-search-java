@@ -116,6 +116,12 @@ class SearchRequestSerializationTests {
         json = writeValueAsString(request);
         Assertions.assertEquals("{\"query\":\"\",\"filters\":{\"location\":{\"center\":[-122.083842,37.386483],\"unit\":\"m\",\"from\":0,\"to\":1000}}}",json);
 
+
+        request = new SearchRequest();
+        request.setFilters(new BooleanFilter().allOf());
+        json = writeValueAsString(request);
+        Assertions.assertEquals("{\"query\":\"\",\"filters\":{}}",json);
+
         request = new SearchRequest();
         request.setFilters(new BooleanFilter()
                 .allOf(

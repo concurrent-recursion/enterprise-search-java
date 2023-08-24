@@ -45,21 +45,25 @@ class FilterSerializer extends StdSerializer<Filter> {
             jgen.writeObjectField(glf.getName(), glf.getRange());
             jgen.writeEndObject();
         } else if (filter instanceof BooleanFilter) {
-            BooleanFilter bf = (BooleanFilter) filter;
-            jgen.writeStartObject();
-            if (isNotEmpty(bf.getAll())) {
-                jgen.writeObjectField("all", bf.getAll());
-            }
-            if (isNotEmpty(bf.getAny())) {
-                jgen.writeObjectField("any", bf.getAny());
-            }
-            if (isNotEmpty(bf.getNone())) {
-                jgen.writeObjectField("none", bf.getNone());
-            }
+            writeBooleanFilter((BooleanFilter) filter,jgen);
         }
     }
 
-    private boolean isNotEmpty(List<?> list){
+    private static void writeBooleanFilter(BooleanFilter bf, JsonGenerator jgen) throws IOException {
+        jgen.writeStartObject();
+        if (isNotEmpty(bf.getAll())) {
+            jgen.writeObjectField("all", bf.getAll());
+        }
+        if (isNotEmpty(bf.getAny())) {
+            jgen.writeObjectField("any", bf.getAny());
+        }
+        if (isNotEmpty(bf.getNone())) {
+            jgen.writeObjectField("none", bf.getNone());
+        }
+        jgen.writeEndObject();
+    }
+
+    private static boolean isNotEmpty(List<?> list){
         return list != null && !list.isEmpty();
     }
 }

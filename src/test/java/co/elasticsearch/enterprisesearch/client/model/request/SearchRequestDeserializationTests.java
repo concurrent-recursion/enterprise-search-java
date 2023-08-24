@@ -31,6 +31,13 @@ class SearchRequestDeserializationTests {
     }
 
     @Test
+    void test1() throws JsonProcessingException{
+        String requestExample = TestUtil.readResourceFile("examples/requests/testRequest.json");
+        SearchRequest request = objectMapper.readValue(requestExample,SearchRequest.class);
+        assertEquals("test",request.getQuery());
+    }
+
+    @Test
     void basicProperties() throws JsonProcessingException {
         String requestExample = TestUtil.readResourceFile("examples/requests/basicProperties.json");
         SearchRequest request = objectMapper.readValue(requestExample, SearchRequest.class);
