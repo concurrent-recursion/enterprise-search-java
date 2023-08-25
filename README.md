@@ -18,14 +18,14 @@ Add the following to your pom.xml
 <dependency>
     <groupId>io.github.concurrent-recursion</groupId>
     <artifactId>enterprisesearch-java-client</artifactId>
-    <version>0.5.1</version>
+    <version>0.5.2</version>
 </dependency>
 ```
 ### Gradle
 Add the following dependency
 ```groovy
 dependencies {
-  implementation 'io.github.concurrent-recursion:enterprisesearch-java-client:0.5.1'
+  implementation 'io.github.concurrent-recursion:enterprisesearch-java-client:0.5.2'
 }
 ```
 

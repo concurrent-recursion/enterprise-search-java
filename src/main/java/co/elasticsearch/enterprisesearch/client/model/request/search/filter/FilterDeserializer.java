@@ -57,8 +57,12 @@ class FilterDeserializer extends StdDeserializer<Filter> {
     }
 
     private static boolean isNestedFilter(TreeNode node) {
-        for (Iterator<String> it = node.fieldNames(); it.hasNext(); ) {
-            String fieldName = it.next();
+        Iterator<String> fieldNames = node.fieldNames();
+        if(!fieldNames.hasNext()){
+            return true;//If it's an empty "filters" : {}  , then return BooleanFilter
+        }
+        while (fieldNames.hasNext()) {
+            String fieldName = fieldNames.next();
             if (NESTED_KEYS.contains(fieldName)) {
                 return true;
             }
@@ -73,7 +77,8 @@ class FilterDeserializer extends StdDeserializer<Filter> {
         if (isNestedFilter(node)) {
             return deserializeNestedFilter(jsonParser, node);
         } else {
-            String filterName = node.fieldNames().next();
+            Iterator<String> fieldNames = node.fieldNames();
+            String filterName = fieldNames.next();
             TreeNode filterNode = node.get(filterName);
 
             TreeNode to = filterNode.get("to");
