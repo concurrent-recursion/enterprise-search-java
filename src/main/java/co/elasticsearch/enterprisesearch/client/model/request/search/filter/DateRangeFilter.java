@@ -21,14 +21,13 @@ import static co.elasticsearch.enterprisesearch.client.model.request.search.filt
 @Setter
 @Accessors(chain = true)
 @JsonInclude(JsonInclude.Include.NON_NULL)
-@RequiredArgsConstructor
 @ToString
 public class DateRangeFilter implements Filter, FieldFilter {
     /**
      * The field from your schema upon which to apply your filter
      * @return The field name
      */
-    private final String name;
+    private String name;
     /**
      * Inclusive lower bound of the range. Is required if to is not given.
      * @param from the lower bound
@@ -43,6 +42,17 @@ public class DateRangeFilter implements Filter, FieldFilter {
      */
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = DATE_PATTERN)
     private OffsetDateTime to;
+
+    //Persistence Constructor
+    private DateRangeFilter(){}
+
+    /**
+     * Create a DateRangeFilter with the given name
+     * @param name the filter name
+     */
+    public DateRangeFilter(String name){
+        this.name = name;
+    }
 
     /**
      * Set the range, upper bound exclusive, lower bound inclusive

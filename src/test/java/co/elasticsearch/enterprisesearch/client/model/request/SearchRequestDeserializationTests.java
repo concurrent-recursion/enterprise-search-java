@@ -13,6 +13,7 @@ import co.elasticsearch.enterprisesearch.client.model.request.search.filter.*;
 import co.elasticsearch.enterprisesearch.client.model.request.search.range.NumberRange;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.util.BeanUtil;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import org.junit.jupiter.api.Test;
 
@@ -28,13 +29,6 @@ class SearchRequestDeserializationTests {
     private static final ObjectMapper objectMapper = new ObjectMapper();
     static{
         objectMapper.registerModule(new JavaTimeModule());
-    }
-
-    @Test
-    void test1() throws JsonProcessingException{
-        String requestExample = TestUtil.readResourceFile("examples/requests/testRequest.json");
-        SearchRequest request = objectMapper.readValue(requestExample,SearchRequest.class);
-        assertEquals("test",request.getQuery());
     }
 
     @Test

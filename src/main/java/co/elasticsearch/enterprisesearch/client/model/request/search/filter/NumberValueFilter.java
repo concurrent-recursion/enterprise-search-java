@@ -22,7 +22,6 @@ import java.util.stream.Collectors;
 @Setter
 @Accessors(chain = true)
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
-@RequiredArgsConstructor
 @ToString
 public class NumberValueFilter implements Filter, FieldFilter {
     /**
@@ -30,7 +29,7 @@ public class NumberValueFilter implements Filter, FieldFilter {
      * @param name the field name
      * @return the field name
      */
-    private final String name;
+    private String name;
 
     /**
      * The value upon which to filter. The value must be an exact match
@@ -39,6 +38,17 @@ public class NumberValueFilter implements Filter, FieldFilter {
      */
     @JsonFormat(with = {JsonFormat.Feature.ACCEPT_SINGLE_VALUE_AS_ARRAY, JsonFormat.Feature.WRITE_SINGLE_ELEM_ARRAYS_UNWRAPPED})
     private List<BigDecimal> values = new ArrayList<>();
+
+    //Used for persistence constructor
+    private NumberValueFilter(){ }
+
+    /**
+     * Create a Number Value Filter with the given name and value(s)
+     * @param name The filter name
+     */
+    public NumberValueFilter(String name){
+        this.name = name;
+    }
 
     /**
      * Create a Number Value Filter with the given name and value(s)

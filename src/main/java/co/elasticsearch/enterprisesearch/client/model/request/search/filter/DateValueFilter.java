@@ -22,7 +22,6 @@ import java.util.Objects;
 @Setter
 @Accessors(chain = true)
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
-@RequiredArgsConstructor
 @ToString
 public class DateValueFilter implements Filter, FieldFilter {
     /**
@@ -40,13 +39,24 @@ public class DateValueFilter implements Filter, FieldFilter {
      * @return the field name
      */
     @JsonIgnore
-    private final String name;
+    private String name;
     /**
      * The value upon which to filter. The value must be an exact match
      * @param values The Date(s) to match on
      * @return The values
      */
     private List<OffsetDateTime> values = new ArrayList<>();
+
+    //Used for persistence constructor
+    private DateValueFilter(){}
+
+    /**
+     * Creates a DateValueFilter with the given name
+     * @param name The name of the filter
+     */
+    public DateValueFilter(String name){
+        this.name = name;
+    }
 
     /**
      * Creates a DateValueFilter with the given name and values

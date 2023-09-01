@@ -110,6 +110,7 @@ class DocumentsApiImpl<T> implements DocumentsApi<T>{
         ClientUtils.addPagination(urlBuilder,page);
         HttpUrl url = urlBuilder.build();
         Request okRequest = new Request.Builder().url(url).get().build();
+
         JavaType listType = TypeFactory.defaultInstance().constructParametricType(List.class, resultType);
         return Failsafe.with(retryPolicy).get(() -> ClientUtils.marshalResponse(client,okRequest,objectMapper,listType));
     }

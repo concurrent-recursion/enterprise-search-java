@@ -5,7 +5,7 @@
 
     <groupId>io.github.concurrent-recursion</groupId>
     <artifactId>enterprisesearch-java-client</artifactId>
-    <version>0.5.2</version>
+    <version>0.5.3</version>
     <packaging>jar</packaging>
 
     <name>Enterprise Search Java Client</name>

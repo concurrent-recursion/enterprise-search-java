@@ -18,7 +18,6 @@ import java.util.Objects;
 @Setter
 @Accessors(chain = true)
 @JsonInclude(JsonInclude.Include.NON_NULL)
-@RequiredArgsConstructor
 @ToString
 public class NumberRangeFilter implements Filter, FieldFilter {
     /**
@@ -26,7 +25,7 @@ public class NumberRangeFilter implements Filter, FieldFilter {
      * @param name the field name
      * @return the field name
      */
-    private final String name;
+    private String name;
     /**
      * Inclusive lower bound of the range. Is required if to is not given.
      * @param from the lower bound
@@ -40,6 +39,16 @@ public class NumberRangeFilter implements Filter, FieldFilter {
      */
     private BigDecimal to;
 
+    //Persistence Constructor
+    private NumberRangeFilter(){}
+
+    /**
+     * Create a NumberRangeFilter with the given name
+     * @param name the filter name
+     */
+    public NumberRangeFilter(String name){
+        this.name = name;
+    }
     /**
      * Create a NumberRangeFilter with the given name, start, and end
      * @param name the filter name

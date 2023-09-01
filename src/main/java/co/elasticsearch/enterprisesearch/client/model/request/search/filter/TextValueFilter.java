@@ -1,11 +1,9 @@
 package co.elasticsearch.enterprisesearch.client.model.request.search.filter;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonInclude;
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 import lombok.experimental.Accessors;
 
 import java.util.ArrayList;
@@ -20,7 +18,6 @@ import java.util.Objects;
 @Setter
 @Accessors(chain = true)
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
-@RequiredArgsConstructor
 @ToString
 public class TextValueFilter implements Filter, FieldFilter {
     /**
@@ -28,7 +25,7 @@ public class TextValueFilter implements Filter, FieldFilter {
      * @param name the field name
      * @return the field name
      */
-    private final String name;
+    private String name;
 
     /**
      * The value upon which to filter. The value must be an exact match, even casing: True will not match on true.
@@ -38,7 +35,17 @@ public class TextValueFilter implements Filter, FieldFilter {
     @JsonFormat(with = {JsonFormat.Feature.ACCEPT_SINGLE_VALUE_AS_ARRAY, JsonFormat.Feature.WRITE_SINGLE_ELEM_ARRAYS_UNWRAPPED})
     private List<String> values = new ArrayList<>();
 
+    //Constructor for persistence
+    private TextValueFilter(){}
 
+    /**
+     * Create a text value filter with the given name
+     * @param name The field name this filter applies to
+     */
+    public TextValueFilter(String name){
+        this.name = name;
+        this.values = new ArrayList<>();
+    }
     /**
      * Create a text value filter with the given values
      * @param name The field name this filter applies to

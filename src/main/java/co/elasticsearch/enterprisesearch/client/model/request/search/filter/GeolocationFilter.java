@@ -19,7 +19,6 @@ import java.util.Objects;
 @Getter
 @Setter
 @Accessors(chain = true)
-@RequiredArgsConstructor
 @ToString
 public class GeolocationFilter implements Filter, FieldFilter {
     /**
@@ -27,7 +26,7 @@ public class GeolocationFilter implements Filter, FieldFilter {
      * @param name the field name
      * @return the field name
      */
-    private final String name;
+    private String name;
     /**
      * The mode of the distribution, specified as a latitude-longitude pair
      * @param center the center
@@ -60,7 +59,16 @@ public class GeolocationFilter implements Filter, FieldFilter {
      */
     private BigDecimal to;
 
+    //Persistence Constructor
+    private GeolocationFilter(){}
 
+    /**
+     * Create a GeolocationFilter with the given name
+     * @param name the filter name
+     */
+    public GeolocationFilter(String name){
+        this.name = name;
+    }
     /**
      * Set the range
      * @param range The range for this filter
