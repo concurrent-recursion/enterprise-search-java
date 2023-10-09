@@ -10,6 +10,7 @@ import co.elasticsearch.enterprisesearch.client.model.request.search.facet.Facet
 import co.elasticsearch.enterprisesearch.client.model.request.search.facet.SearchRangeFacet;
 import co.elasticsearch.enterprisesearch.client.model.request.search.facet.ValueFacet;
 import co.elasticsearch.enterprisesearch.client.model.request.search.filter.*;
+import co.elasticsearch.enterprisesearch.client.model.request.search.range.DateRange;
 import co.elasticsearch.enterprisesearch.client.model.request.search.range.NumberRange;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -47,6 +48,14 @@ class SearchRequestDeserializationTests {
         assertEquals("This is a test",request.getQuery());
         assertEquals(200,request.getPage().getSize());
         assertEquals(100,request.getPage().getCurrent());
+    }
+    @Test
+    void queryWithPartialDateRange() throws JsonProcessingException{
+        String requestExample = TestUtil.readResourceFile("examples/requests/filterDateRangePartial.json");
+        SearchRequest request = objectMapper.readValue(requestExample, SearchRequest.class);
+        DateRange range = request.getFilters().getFieldFilter(DateRangeFilter.class).get().getRange();
+        assertNull(range.getFrom());
+        assertTrue(OffsetDateTime.parse("2023-07-25T00:00:00.00Z").isEqual(range.getTo()));
     }
 
     @Test

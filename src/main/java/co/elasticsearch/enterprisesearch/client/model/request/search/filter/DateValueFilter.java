@@ -27,6 +27,7 @@ public class DateValueFilter implements Filter, FieldFilter {
     /**
      * A shared Date pattern for de/serializing dates according to the RFC 3339 spec
      */
+
     public static final String DATE_PATTERN = "yyyy-MM-dd'T'HH:mm:ss[.SS]XXX";
     /**
      * A shared Date formatter for RFC 3339 dates

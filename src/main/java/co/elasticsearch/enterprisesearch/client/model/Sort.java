@@ -41,14 +41,14 @@ public class Sort {
      * @return the sort name
      */
     @JsonKey
-    private final String name;
+    private String name;
     /**
      * The sort order
      * @param direction the sort order
      * @return the sort order
      */
     @JsonValue
-    private final SortOrder direction;
+    private SortOrder direction;
 
 
     /**
@@ -92,6 +92,12 @@ public class Sort {
         public Order getOrder() {
             return this;
         }
+    }
+
+    /**
+     * Create a sort without name or direction. Used for reflection libraries
+     */
+    public Sort(){
     }
 
 

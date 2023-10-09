@@ -18,14 +18,14 @@ Add the following to your pom.xml
 <dependency>
     <groupId>io.github.concurrent-recursion</groupId>
     <artifactId>enterprisesearch-java-client</artifactId>
-    <version>0.5.2</version>
+    <version>0.5.4</version>
 </dependency>
 ```
 ### Gradle
 Add the following dependency
 ```groovy
 dependencies {
-  implementation 'io.github.concurrent-recursion:enterprisesearch-java-client:0.5.2'
+  implementation 'io.github.concurrent-recursion:enterprisesearch-java-client:0.5.4'
 }
 ```
 
@@ -43,6 +43,8 @@ final AppSearchClient client = AppSearchClient.builder("http://localhost:3002")
 final AppSearchClient client = AppSearchClient.builder("http://localhost:3002")
     .clientAuthentication(ClientAuthentication.withBasicAuth("myusername","mypassword")).build();
 ```
+
+
 ### Adding Logging
 In order to add logging to your Appsearch client, you will need to add an OKHttp3 HttpLoggingInterceptor.
 
@@ -109,10 +111,12 @@ for(NationalParkSearch park : results){
 ```
 
 ### Facets
+To read a facet of a particular type, you can use one of the convience methods
 ```java
-
+SearchApiResponse response = ...;
+Optional<TextValueFacet> myTextFacet = response.getFacetByFieldAndName("title","my_title_facet",TextValueFacet.class);
 ```
-
+If the facet exists, it will be present in the optional, if it doesn't exist it will not be present.
 
 ## Documents API
 The client supports working with typed documents to ingest content into an engine. The AppSearch schema supports 4 types:
