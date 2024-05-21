@@ -25,14 +25,26 @@ import java.util.Map;
 @JsonDeserialize
 public class ValueFacet implements Facet {
 
+    /**
+     * Create a ValueFacet
+     */
     public ValueFacet() {
     }
 
+    /**
+     * Create a ValueFacet with the given field name
+     * @param fieldName the name of the facet field
+     */
     public ValueFacet(String fieldName) {
         this.fieldName = fieldName;
     }
 
 
+    /**
+     * The field name
+     * @param fieldName the name of the field this value facet is on
+     * @return the field name
+     */
     private String fieldName;
 
     @Override

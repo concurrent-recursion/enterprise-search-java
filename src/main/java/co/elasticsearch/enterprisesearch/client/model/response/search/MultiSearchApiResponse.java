@@ -21,6 +21,10 @@ import java.util.function.Consumer;
 @Accessors(chain = true)
 public class MultiSearchApiResponse<T extends ResponseDocument> implements Iterable<SearchApiResponse<T>>, ErrorableResponse {
 
+    /**
+     * Create MultiSearchApiResponse object
+     * @param results The list of Search Results from the response
+     */
     @JsonCreator
     public MultiSearchApiResponse(List<SearchApiResponse<T>> results){
         this.results = results;

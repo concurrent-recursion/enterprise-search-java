@@ -16,6 +16,8 @@ import org.junit.jupiter.api.Test;
 import java.io.IOException;
 import java.time.Duration;
 
+import static org.junit.Assert.assertEquals;
+
 class ClientUtilsTest {
 
     private AppSearchClient asp;
@@ -63,6 +65,17 @@ class ClientUtilsTest {
         r.getPage().setSize(-1);
         SearchApiResponse<TestSearchDocument> results = search.search(ENGINE_NAME,r);
         Assertions.assertTrue(results.isError());
+    }
+
+    @Test
+    void testProxyError(){
+        String mockResponse = "{\"ok\":false,\"message\":\"backend closed connection\"}";
+        mockWebServer.enqueue(new MockResponse().setResponseCode(502).setBody(mockResponse));
+        SearchApi<TestSearchDocument> search = asp.search(TestSearchDocument.class);
+        SearchRequest r = new SearchRequest();
+        AppSearchErrorResponseException error = Assertions.assertThrows(AppSearchErrorResponseException.class,() -> search.search(ENGINE_NAME,r));
+        Assertions.assertEquals(Boolean.FALSE, error.getErrorResponse().getOk());
+        Assertions.assertEquals("backend closed connection", error.getErrorResponse().getMessage());
     }
 
     @Test

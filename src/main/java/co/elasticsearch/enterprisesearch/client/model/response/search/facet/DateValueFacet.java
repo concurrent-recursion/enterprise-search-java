@@ -20,8 +20,14 @@ public class DateValueFacet implements Facet{
     /**
      * The facet name
      * @param name the name of the facet
+     * @return The name of the facet
      */
     private String name;
+    /**
+     * The DateValueFacet values that represent this facet
+     * @param data a list of DateValueFacets
+     * @return a list of DateValueFacets
+     */
     private List<FacetValue> data = new ArrayList<>();
 
     @Override
@@ -29,6 +35,11 @@ public class DateValueFacet implements Facet{
         return FacetType.VALUE;
     }
 
+    /**
+     * Set the DateValueFacets for this facet
+     * @param dateValues The date values that represent the values of this facet
+     * @return This facet
+     */
     public DateValueFacet setData(List<DateValue> dateValues){
         data.addAll(dateValues);
         return this;

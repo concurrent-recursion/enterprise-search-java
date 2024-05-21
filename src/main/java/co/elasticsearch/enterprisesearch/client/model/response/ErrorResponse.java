@@ -31,5 +31,19 @@ public class ErrorResponse implements Serializable {
      */
     private String error;
 
+    /**
+     * Whether the request is ok
+     * @param ok The status of the request
+     * @return The status
+     */
+    private Boolean ok;
+
+    /**
+     * The error message
+     * @param message The error message
+     * @return the message
+     */
+    private String message;
+
 
 }

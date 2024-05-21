@@ -25,6 +25,10 @@ public class DateRangeFacet implements Facet{
      * @param name the name of the facet
      */
     private String name;
+    /**
+     * The date ranges
+     * @param data the date ranges
+     */
     private List<DateRange> data = new ArrayList<>();
 
     @Override
@@ -32,10 +36,18 @@ public class DateRangeFacet implements Facet{
         return FacetType.RANGE;
     }
 
+    /**
+     * Get the raw FacetValues associated with this DateRangeFacet
+     * @return A List of FacetValues representing the date ranges
+     */
     public List<FacetValue> getData(){
         return data.stream().map(r -> (FacetRangeValue<OffsetDateTime>) r).collect(Collectors.toList());
     }
 
+    /**
+     * Get the date range values from this facet
+     * @return The list of Date Ranges
+     */
     public List<DateRange> getDateRanges(){
         return data;
     }

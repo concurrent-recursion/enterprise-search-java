@@ -19,10 +19,15 @@ import java.util.List;
 public class NumberValueFacet implements Facet {
     /**
      * The facet name
-     *
      * @param name the name of the facet
+     * @return the name of the facet
      */
     private String name;
+    /**
+     * The facet values
+     * @param data the number values
+     * @return the number values for this facet
+     */
     private List<FacetValue> data = new ArrayList<>();
 
     @Override
@@ -30,6 +35,11 @@ public class NumberValueFacet implements Facet {
         return FacetType.VALUE;
     }
 
+    /**
+     * The list of facet values for this facet
+     * @param data the facet values
+     * @return this facet
+     */
     public NumberValueFacet setData(List<NumberValue> data){
         this.data.addAll(data);
         return this;

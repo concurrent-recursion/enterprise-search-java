@@ -23,6 +23,10 @@ import lombok.experimental.Accessors;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Group {
+    /**
+     * Create a group on the given field
+     * @param field the name of the field
+     */
     public Group(String field){
         this.field = field;
     }

@@ -37,6 +37,7 @@ public class GeolocationRangeFacet implements Facet {
         return FacetType.RANGE;
     }
 
+
     public GeolocationRangeFacet setData(List<GeolocationRange> data){
         //this.data.addAll(data);
         return this;

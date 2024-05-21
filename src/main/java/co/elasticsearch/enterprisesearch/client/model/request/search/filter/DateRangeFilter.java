@@ -25,6 +25,7 @@ import static co.elasticsearch.enterprisesearch.client.model.request.search.filt
 public class DateRangeFilter implements Filter, FieldFilter {
     /**
      * The field from your schema upon which to apply your filter
+     * @param name The name of the field to filter
      * @return The field name
      */
     private String name;
